@@ -673,6 +673,10 @@ textarea {
 </div>
 
 <script>
+// === AUTO-IMPORT CONFIGURATION ===
+const AUTO_IMPORT_ON_FIRST_LOAD = true;           // ← change to false to disable
+const AUTO_IMPORT_URL = 'https://torrq.github.io/osro-quest-helper/osromr_quests.json';
+
 let DATA = {
   meta: { 
     creditValueZeny: 10000000, 
@@ -697,16 +701,40 @@ let state = {
   itemSearchFilter: ''
 };
 
-// Initialize with test data if empty
+// Initialize data — auto-import remote file on first load if enabled
 if (DATA.groups.length === 0) {
-  fetch('ro_quests(25).json')
-    .then(r => r.json())
-    .then(data => {
-      // Convert old format to new format
-      DATA = convertLegacyFormat(data);
-      render();
-    })
-    .catch(() => render());
+  if (AUTO_IMPORT_ON_FIRST_LOAD) {
+    fetch(AUTO_IMPORT_URL)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        // Handle both legacy and new format
+        const isLegacy = data.groups?.[0]?.subgroups?.[0]?.quests?.[0]?.produces?.name !== undefined;
+        DATA = isLegacy ? convertLegacyFormat(data) : {
+          meta: {
+            creditValueZeny: data.meta?.creditValueZeny ?? 10000000,
+            creditItemId: data.meta?.creditItemId ?? 40001,
+            goldValueZeny: data.meta?.goldValueZeny ?? 124000,
+            goldItemId: data.meta?.goldItemId ?? 969
+          },
+          items: data.items || {},
+          groups: data.groups || []
+        };
+        render();
+      })
+      .catch(err => {
+        console.error('Auto-import failed:', err);
+        alert('Failed to auto-import quests from remote URL.\n\nCheck console for details.');
+        render(); // still show empty state
+      });
+  } else {
+    // Optional: you can leave empty or load something else
+    render();
+  }
+} else {
+  render();
 }
 
 function convertLegacyFormat(oldData) {
