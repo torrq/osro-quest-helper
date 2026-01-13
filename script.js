@@ -376,9 +376,9 @@ function renderItemContent() {
                 <li>
                   <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
                     ${u.quest.name}
-                    <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
-                    <span class="quest-meta-info">[${u.quest.successRate}% Success]</span>
                   </a>
+                  <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
+                  <span class="quest-meta-info">[${u.quest.successRate}% Success]</span>
                 </li>
               `).join('')}
             </ul>
@@ -391,12 +391,12 @@ function renderItemContent() {
       <li>
         <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
           ${u.quest.name}
-          <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
-          ${u.amount
-            ? `<span class="quest-meta-info">[Needs ${u.amount}]</span>`
-            : ''
-          }
         </a>
+        <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
+        ${u.amount
+          ? `<span class="quest-meta-info">[Needs ${u.amount}]</span>`
+          : ''
+        }
       </li>
     `).join('')}
   </ul>
