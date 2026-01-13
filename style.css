@@ -74,7 +74,23 @@ body {
   margin-bottom: 12px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
   color: #ffffff;
-  margin-top: 0; 
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.github-link {
+  display: flex;
+  transition: opacity 0.2s;
+}
+
+.github-link:hover {
+  opacity: 0.8;
+}
+
+.github-link img {
+  display: block;
 }
 
 .toolbar {
