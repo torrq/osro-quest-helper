@@ -665,7 +665,7 @@ textarea {
 	color: var(--accent);
 	text-decoration: none;
 	cursor: pointer;
-	font-size: 20px;
+	font-size: 16px;
 }
 
 .usage-section {
@@ -746,7 +746,7 @@ textarea {
 
 .usage-list li {
   padding: 4px 0;
-  font-size: 13px;
+  font-size: 12px;
   display: flex;
   align-items: center;
 }
@@ -773,12 +773,12 @@ textarea {
 .quest-path-info {
   color: var(--text-muted);
   font-size: 14px;
-  margin: 3px 0 0 10px;
+  margin: 3px 0 0 6px;
 }
 
 .quest-meta-info {
   color: var(--warning);
   font-size: 14px;
-  margin: 3px 0 0 10px;
+  margin: 3px 0 0 6px;
   font-weight: normal;
 }
