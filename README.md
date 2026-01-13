@@ -156,7 +156,3 @@ Found a bug or have a feature idea? Feel free to open an issue or submit a pull 
 ## 📧 Support
 
 For questions or issues, please open a GitHub issue or contact the maintainers.
-
----
-
-**Made for the Old School Ragnarok Online community** ✨
