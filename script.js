@@ -176,6 +176,35 @@ function switchTab(tab) {
   render();
 }
 
+function findQuestsByItemId(itemId) {
+  const results = { produces: [], requires: [] };
+  DATA.groups.forEach((group, gi) => {
+    group.subgroups.forEach((subgroup, si) => {
+      subgroup.quests.forEach((quest, qi) => {
+        // Check if quest produces this item
+        if (quest.producesId === itemId) {
+          results.produces.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
+        }
+        
+        // Check if quest requires this item
+        const req = quest.requirements.find(r => r.type === 'item' && r.id === itemId);
+        if (req) {
+          results.requires.push({ 
+            quest, 
+            groupIdx: gi, 
+            subIdx: si, 
+            questIdx: qi, 
+            group, 
+            subgroup,
+            amount: req.amount // Store amount for display
+          });
+        }
+      });
+    });
+  });
+  return results;
+}
+
 function filterItems(value) {
   state.itemSearchFilter = value.toLowerCase();
   renderItems();
@@ -322,6 +351,7 @@ function renderItemContent() {
   }
   
   const item = state.selectedItem;
+  const usage = findQuestsByItemId(item.id);
   
   container.innerHTML = `
     <div class="editor">
@@ -336,6 +366,46 @@ function renderItemContent() {
       </div>
       
       <button class="btn btn-danger" onclick="deleteItem()">Delete Item</button>
+
+      ${usage.produces.length > 0 || usage.requires.length > 0 ? `
+        <div class="usage-section">
+          ${usage.produces.length > 0 ? `
+            <h3>Produced By:</h3>
+            <ul class="usage-list">
+              ${usage.produces.map(u => `
+                <li>
+                  <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
+                    ${u.quest.name}
+                    <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
+                    <span class="quest-meta-info">[${u.quest.successRate}% Success]</span>
+                  </a>
+                </li>
+              `).join('')}
+            </ul>
+          ` : ''}
+          
+          ${usage.requires.length > 0 ? `
+            <h3>Required By:</h3>
+            <ul class="usage-list">
+              ${usage.requires.map(u => `
+                <li>
+                  <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
+                    ${u.quest.name}
+                    <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
+                    <span class="quest-meta-info">[Needs ${u.amount}]</span>
+                  </a>
+                </li>
+              `).join('')}
+            </ul>
+          ` : ''}
+        </div>
+      ` : `
+        <div class="usage-section">
+          <p style="color: var(--text-muted); font-style: italic; text-align: center; padding: 20px;">
+            This item is not used in any quests.
+          </p>
+        </div>
+      `}
     </div>
   `;
 }

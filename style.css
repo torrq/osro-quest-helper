@@ -629,78 +629,138 @@ textarea {
   }
 }
 
-  .item-link {
-    color: var(--accent);
-    text-decoration: none;
-    cursor: pointer;
-  }
+.item-link {
+	color: var(--accent);
+	text-decoration: none;
+	cursor: pointer;
+}
 
-  .item-link:hover {
-    text-decoration: underline;
-  }
+.item-link:hover {
+	
+}
 
-  .quest-link {
-    color: var(--accent);
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 12px;
-  }
+.quest-link {
+	color: var(--accent);
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 12px;
+}
 
-  .quest-link:hover {
-    text-decoration: underline;
-  }
+.quest-link:hover {
+	
+}
 
-  .usage-section {
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
+.usage-section {
+	margin-top: 24px;
+	padding-top: 24px;
+	border-top: 1px solid var(--border);
+}
 
-  .usage-section h3 {
-    font-size: 16px;
-    margin-bottom: 12px;
-    color: var(--text-muted);
-  }
+.usage-section h3 {
+	font-size: 16px;
+	margin-bottom: 12px;
+	color: var(--text-muted);
+}
 
-  .usage-list {
-    list-style: none;
-    padding: 0;
-  }
+.usage-list {
+	list-style: none;
+	padding: 0;
+}
 
-  .usage-list li {
-    padding: 6px 0;
-    font-size: 13px;
-  }
+.usage-list li {
+	padding: 6px 0;
+	font-size: 13px;
+}
 
-  .quest-name-header {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--border);
-  }
+.quest-name-header {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid var(--border);
+}
 
-  .materials-header {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 30px 0 15px 0;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--border);
-  }
+.materials-header {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 30px 0 15px 0;
+	padding-bottom: 5px;
+	border-bottom: 1px solid var(--border);
+}
 
-  .total-summary-header {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 30px 0 15px 0;
-    padding: 10px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-  }
+.total-summary-header {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 30px 0 15px 0;
+	padding: 10px;
+	background: var(--panel);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
 
-  .immune-badge {
-    color: var(--danger);
-    font-size: 11px;
-    margin-left: 8px;
-    font-weight: bold;
-  }
+.immune-badge {
+	color: var(--danger);
+	font-size: 11px;
+	margin-left: 8px;
+	font-weight: bold;
+}
+
+.usage-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.usage-section h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.usage-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.usage-list li {
+  padding: 4px 0;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.usage-list li::before {
+  content: "›";
+  color: var(--accent);
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.quest-link {
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.quest-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.quest-path-info {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+.quest-meta-info {
+  color: var(--warning);
+  font-size: 11px;
+  margin-left: 6px;
+  font-weight: normal;
+}
