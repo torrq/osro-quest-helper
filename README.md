@@ -6,6 +6,8 @@ A web-based quest management and material tracking tool for **OSRO Midrate**. Or
 
 **[Try it now](https://torrq.github.io/osro-quest-helper/)**
 
+<img width="1564" height="660" alt="image" src="https://github.com/user-attachments/assets/f6ac6d25-054a-434a-82a5-eaf90077a193" />
+
 ## ✨ Features
 
 - **Quest Organization**: Organize quests into groups and subgroups for easy navigation
