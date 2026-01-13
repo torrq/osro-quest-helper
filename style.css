@@ -666,6 +666,7 @@ textarea {
 	text-decoration: none;
 	cursor: pointer;
 	font-size: 16px;
+  font-weight: bold;
 }
 
 .usage-section {
