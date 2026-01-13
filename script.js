@@ -385,19 +385,23 @@ function renderItemContent() {
           ` : ''}
           
           ${usage.requires.length > 0 ? `
-            <h3>Required By:</h3>
-            <ul class="usage-list">
-              ${usage.requires.map(u => `
-                <li>
-                  <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
-                    ${u.quest.name}
-                    <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
-                    <span class="quest-meta-info">[Needs ${u.amount}]</span>
-                  </a>
-                </li>
-              `).join('')}
-            </ul>
-          ` : ''}
+  <h3>Required By:</h3>
+  <ul class="usage-list">
+    ${usage.requires.map(u => `
+      <li>
+        <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
+          ${u.quest.name}
+          <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
+          ${u.amount
+            ? `<span class="quest-meta-info">[Needs ${u.amount}]</span>`
+            : ''
+          }
+        </a>
+      </li>
+    `).join('')}
+  </ul>
+` : ''}
+
         </div>
       ` : `
         <div class="usage-section">
