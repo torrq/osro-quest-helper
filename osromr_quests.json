@@ -6922,7 +6922,7 @@
               ]
             },
             {
-              "name": "Ayam",
+              "name": "Ayam [1]",
               "producesId": 5174,
               "successRate": 100,
               "description": "",
@@ -7154,7 +7154,7 @@
               ]
             },
             {
-              "name": "Bride Mask",
+              "name": "Bride Mask [1]",
               "producesId": 5169,
               "successRate": 100,
               "accountBound": false,
@@ -7199,32 +7199,6 @@
                   "type": "item",
                   "id": 1024,
                   "amount": 100,
-                  "immune": false
-                }
-              ]
-            },
-            {
-              "name": "Feather Beret",
-              "producesId": 5170,
-              "successRate": 100,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 5172,
-                  "amount": 1,
-                  "immune": false
-                },
-                {
-                  "type": "item",
-                  "id": 7063,
-                  "amount": 100,
-                  "immune": false
-                },
-                {
-                  "type": "item",
-                  "id": 982,
-                  "amount": 1,
                   "immune": false
                 }
               ]
@@ -7359,8 +7333,1780 @@
                 },
                 {
                   "type": "item",
-                  "id": null,
+                  "id": 1036,
+                  "amount": 450,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 982,
                   "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 949,
+                  "amount": 330,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cowboy Hat",
+              "producesId": 5075,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2248,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7030,
+                  "amount": 108,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7194,
+                  "amount": 108,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7120,
+                  "amount": 4,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cresent Hairpin",
+              "producesId": 5048,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5041,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cross Hat",
+              "producesId": 5036,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2608,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7069,
+                  "amount": 500,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Crown of Ancient Queen",
+              "producesId": 5080,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 10006,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 714,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Crown of Mistress",
+              "producesId": 5081,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 40000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2249,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 714,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Decorative Golden Bell",
+              "producesId": 5091,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2843,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 714,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Decorative Mushroom",
+              "producesId": 5082,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 921,
+                  "amount": 300,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Deviruchi Hat",
+              "producesId": 5038,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1038,
+                  "amount": 600,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7048,
+                  "amount": 40,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Doctor Band",
+              "producesId": 2273,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2275,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 998,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 733,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Drooping Cat",
+              "producesId": 5058,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7030,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2233,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7206,
+                  "amount": 300,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ear Muffs",
+              "producesId": 2283,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 724,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5001,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 949,
+                  "amount": 200,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Fairy Flower [1]",
+              "producesId": 5437,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7165,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7166,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 745,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 981,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2211,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Fashionable Glasses",
+              "producesId": 5047,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2271,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 975,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Feather Beret",
+              "producesId": 5170,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5172,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7063,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 982,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Feather Bonnet",
+              "producesId": 5018,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2247,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 916,
+                  "amount": 300,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Flower Hairpin",
+              "producesId": 5061,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2269,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Frog Hat",
+              "producesId": 5447,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 908,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 937,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 936,
+                  "amount": 50,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Bandage",
+              "producesId": 5063,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 930,
+                  "amount": 500,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Bankruptcy of Heart",
+              "producesId": 5021,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2233,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 949,
+                  "amount": 80,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 938,
+                  "amount": 800,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Hair Brush",
+              "producesId": 5444,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 974,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 975,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 943,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1302,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Helm of Angel",
+              "producesId": 5025,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2254,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2229,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7036,
+                  "amount": 5,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Helmet of Orc Hero",
+              "producesId": 5094,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 909,
+                  "amount": 10000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 931,
+                  "amount": 11000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 968,
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Hot-blooded Headband",
+              "producesId": 5070,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7216,
+                  "amount": 300,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7097,
+                  "amount": 300,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 982,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2211,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Indian Headband",
+              "producesId": 5071,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5010,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5049,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7101,
+                  "amount": 10,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Kitsune Mask",
+              "producesId": 5069,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1022,
+                  "amount": 999,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Lazy Smokie",
+              "producesId": 5084,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1026,
+                  "amount": 1000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7065,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 945,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7030,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Mage Hat",
+              "producesId": 5027,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2252,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1036,
+                  "amount": 400,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7001,
+                  "amount": 50,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Magician Hat",
+              "producesId": 5045,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2252,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 943,
+                  "amount": 1200,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1054,
+                  "amount": 450,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 503,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Magistrate Hat [1]",
+              "producesId": 5173,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7447,
+                  "amount": 7,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7445,
+                  "amount": 7,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7446,
+                  "amount": 7,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7448,
+                  "amount": 7,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 954,
+                  "amount": 300,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 733,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2221,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Mine Helmet",
+              "producesId": 5031,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5009,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5028,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 747,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 25,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Model Training Hat",
+              "producesId": 5073,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1550,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2285,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Mystic Rose",
+              "producesId": 5117,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 731,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 748,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 982,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Mythical Lion Mask [1]",
+              "producesId": 5177,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 706,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7201,
+                  "amount": 500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7200,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1048,
+                  "amount": 500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1053,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 980,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Necktie [1]",
+              "producesId": 5442,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 978,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7151,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1059,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7217,
+                  "amount": 20,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Parcel Hat",
+              "producesId": 5023,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1059,
+                  "amount": 150,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 978,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 907,
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Party Hat",
+              "producesId": 5060,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2236,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7111,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7151,
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ph.D Hat",
+              "producesId": 5012,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 703,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 704,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 710,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 708,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Pretend Murdered",
+              "producesId": 2293,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1049,
+                  "amount": 4,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Raccoon Hat",
+              "producesId": 5033,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2213,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1036,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7012,
+                  "amount": 200,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7065,
+                  "amount": 300,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Rainbow Eggshell",
+              "producesId": 5039,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5015,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 978,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7030,
+                  "amount": 50,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Red Bonnet",
+              "producesId": 5109,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 10015,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 975,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 10007,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5032,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Red Ribbon",
+              "producesId": 5083,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2244,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2209,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 10007,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Renown Detective's Cap [1]",
+              "producesId": 5108,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1887,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 611,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7301,
+                  "amount": 1887,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5120,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Sakkat",
+              "producesId": 2280,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1019,
+                  "amount": 120,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Sea-Otter Hat",
+              "producesId": 5078,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5033,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5064,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Shafka [1]",
+              "producesId": 5243,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1022,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7038,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7166,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7065,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7217,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Smokie Leaf",
+              "producesId": 5064,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 945,
+                  "amount": 600,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7030,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Sombrero",
+              "producesId": 5067,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5062,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 952,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1908,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Spore Hat",
+              "producesId": 5029,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7033,
+                  "amount": 850,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7068,
+                  "amount": 300,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1015,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Statue of Baby Angel [1]",
+              "producesId": 5443,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 916,
+                  "amount": 500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 523,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7292,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2282,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 640,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Stop Post",
+              "producesId": 2272,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 91100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1019,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Straw Hat",
+              "producesId": 5062,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2280,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7197,
+                  "amount": 300,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7150,
+                  "amount": 300,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Striped Hairband",
+              "producesId": 5049,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1099,
+                  "amount": 1500,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Sunday Hat",
+              "producesId": 5032,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2221,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2227,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1059,
+                  "amount": 250,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7063,
+                  "amount": 600,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 503,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Teddybear Hat",
+              "producesId": 5059,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5030,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7213,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7217,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7161,
+                  "amount": 300,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Tulip Hairpin",
+              "producesId": 5077,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2278,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 975,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Randgris Helm [1]",
+              "producesId": 5171,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4219,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4114,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4177,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4259,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4212,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4073,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4112,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4081,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4251,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 4166,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7511,
+                  "amount": 1000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7563,
+                  "amount": 1000,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Winter Hat",
+              "producesId": 5115,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7267,
+                  "amount": 999,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 749,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Wonder Nutshell",
+              "producesId": 5050,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 5037,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7064,
+                  "amount": 500,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "X Hairpin",
+              "producesId": 5079,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2294,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7220,
+                  "amount": 400,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Zealotus Mask",
+              "producesId": 5121,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7315,
+                  "amount": 369,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 660,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7263,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7099,
+                  "amount": 30,
                   "immune": false
                 }
               ]
@@ -8492,6 +10238,347 @@
                 {
                   "type": "monster_arena_points",
                   "amount": 30,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dye Making",
+      "subgroups": [
+        {
+          "name": "Dye Ingredients",
+          "quests": [
+            {
+              "name": "Counteragent",
+              "producesId": 973,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 971,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Mixture",
+              "producesId": 974,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 972,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dyestuffs",
+          "quests": [
+            {
+              "name": "Scarlet Dyestuffs",
+              "producesId": 975,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 507,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Lemon Dyestuffs",
+              "producesId": 976,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 508,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cobaltblue Dyestuffs",
+              "producesId": 978,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 510,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Darkgreen Dyestuffs",
+              "producesId": 979,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 510,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 511,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 508,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 974,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Orange Dyestuffs",
+              "producesId": 980,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 507,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 508,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 974,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Violet Dyestuffs",
+              "producesId": 981,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 510,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 507,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 974,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "White Dyestuffs",
+              "producesId": 982,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 509,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Black Dyestuffs",
+              "producesId": 983,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 507,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 508,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 511,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 510,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 973,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 974,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1,
                   "immune": false
                 }
               ]
