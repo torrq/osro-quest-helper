@@ -5204,7 +5204,36 @@
     },
     {
       "name": "Classic Headgear",
-      "subgroups": []
+      "subgroups": [
+        {
+          "name": "Upper Headgears",
+          "quests": [
+            {
+              "name": "Antlers",
+              "producesId": 2284,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 923,
+                  "amount": 20,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ayam",
+              "producesId": 5174,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Donation Ticket Shop",
