@@ -2171,7 +2171,232 @@
         },
         {
           "name": "Weapons",
-          "quests": []
+          "quests": [
+            {
+              "name": "Skewer [3]",
+              "producesId": 41003,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42006,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7109,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7018,
+                  "amount": 15,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Fist of Fury [3]",
+              "producesId": 41002,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42001,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7020,
+                  "amount": 15,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Sword [3]",
+              "producesId": 41004,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1125,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Bow [3]",
+              "producesId": 41005,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1711,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Staff [3]",
+              "producesId": 41006,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": null,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
         }
       ]
     },
