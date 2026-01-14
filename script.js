@@ -684,17 +684,18 @@ ${descriptionHtml ? `
       </div>
     </div>
   `;
-  
-  const producesInput = document.getElementById('produces-search');
-  if (producesInput) {
-    producesInput.addEventListener('input', () => setupProducesSearch(producesInput));
-  }
 
-  // NEW: Initialize listeners for all requirement search inputs
+  // Initialize listeners for all requirement search inputs
   document.querySelectorAll('.req-search-input').forEach(input => {
     const idx = parseInt(input.getAttribute('data-idx'));
     setupAutocomplete(input, idx);
   });
+  
+  // Keep existing produces-search logic
+  const producesInput = document.getElementById('produces-search');
+  if (producesInput) {
+    producesInput.addEventListener('input', () => setupProducesSearch(producesInput));
+  }
 
 }
 
@@ -758,7 +759,7 @@ function renderRequirement(req, idx) {
 
   return `
     <div class="requirement-card">
-      <button class="remove-btn" onclick="deleteRequirement(${idx})" title="Remove Requirement">×</button>
+      <button class="remove-btn" onclick="deleteRequirement(${idx})" title="Remove">×</button>
       
       <div class="req-top-row">
         <select onchange="updateReqType(${idx}, this.value)">
@@ -766,24 +767,24 @@ function renderRequirement(req, idx) {
           <option value="zeny" ${req.type === 'zeny' ? 'selected' : ''}>Zeny</option>
           <option value="gold" ${req.type === 'gold' ? 'selected' : ''}>Gold</option>
           <option value="credit" ${req.type === 'credit' ? 'selected' : ''}>Credit</option>
-          <option value="vote_points" ${req.type === 'vote_points' ? 'selected' : ''}>Vote Pts</option>
-          <option value="hourly_points" ${req.type === 'hourly_points' ? 'selected' : ''}>Hourly Pts</option>
-          <option value="activity_points" ${req.type === 'activity_points' ? 'selected' : ''}>Activity Pts</option>
-          <option value="monster_arena_points" ${req.type === 'monster_arena_points' ? 'selected' : ''}>Monster Arena Pts</option>
-          <option value="otherworld_points" ${req.type === 'otherworld_points' ? 'selected' : ''}>Otherworld Pts</option>
-          <option value="hall_of_heritage_points" ${req.type === 'hall_of_heritage_points' ? 'selected' : ''}>House of Heritage Pts</option>
+          <option value="vote_points" ${req.type === 'vote_points' ? 'selected' : ''}>Vote Points</option>
+          <option value="hourly_points" ${req.type === 'hourly_points' ? 'selected' : ''}>Hourly Points</option>
+          <option value="activity_points" ${req.type === 'activity_points' ? 'selected' : ''}>Activity Points</option>
+          <option value="monster_arena_points" ${req.type === 'monster_arena_points' ? 'selected' : ''}>Arena Points</option>
+          <option value="otherworld_points" ${req.type === 'otherworld_points' ? 'selected' : ''}>Otherworld</option>
+          <option value="hall_of_heritage_points" ${req.type === 'hall_of_heritage_points' ? 'selected' : ''}>Heritage</option>
         </select>
-        <input type="number" placeholder="Qty" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
+        <input type="number" placeholder="Amount" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
       </div>
 
       ${isItem ? `
-        <div class="req-name-row" style="margin-top: 8px;">
+        <div class="req-name-row">
           ${req.id ? `
-            <div class="item-selected-badge" style="font-size: 12px; padding: 4px 8px;">
-              <strong style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;">
+            <div class="item-selected-badge">
+              <strong style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
                 <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${item.name || 'Unknown'}</a>
               </strong>
-              <small style="font-size: 10px; opacity: 0.7;">(${req.id})</small>
+              <small>(${req.id})</small>
               <button class="clear-btn" onclick="updateReqId(${idx}, null)" style="margin-left: auto;">×</button>
             </div>
           ` : `
@@ -797,14 +798,14 @@ function renderRequirement(req, idx) {
             </div>
           `}
         </div>
-        
-        <div class="checkbox-group" style="margin-top: 8px;">
-          <label class="checkbox-label" style="font-size: 11px;">
-            <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)"> 
-            Immune
-          </label>
-        </div>
       ` : ''}
+
+      <div class="checkbox-group">
+        <label class="checkbox-label" style="font-size: 11px; opacity: 0.8;">
+          <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)"> 
+          Immune to Rate
+        </label>
+      </div>
     </div>
   `;
 }
