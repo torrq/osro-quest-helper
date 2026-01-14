@@ -708,10 +708,37 @@ function setupAutocomplete(input, idx) {
     }
     
     const items = getAllItems();
-    const matches = items.filter(item => 
-      item.name.toLowerCase().includes(value) || 
-      item.id.toString().includes(value)
-    ).slice(0, 10);
+    let matches = [];
+
+    // Check if input is purely numeric
+    const queryNum = parseInt(value, 10);
+    const isNumericQuery = !isNaN(queryNum) && value === queryNum.toString();
+
+    if (isNumericQuery) {
+      // Find exact ID match
+      const exactMatch = items.find(item => item.id === queryNum);
+      if (exactMatch) {
+        matches.push(exactMatch);
+        // Add other matches, excluding the exact one, up to 9 more
+        const otherMatches = items.filter(item => 
+          item.id !== queryNum &&
+          (item.name.toLowerCase().includes(value) || item.id.toString().includes(value))
+        ).slice(0, 9);
+        matches = matches.concat(otherMatches);
+      } else {
+        // Fallback to regular matches if no exact ID
+        matches = items.filter(item => 
+          item.name.toLowerCase().includes(value) || 
+          item.id.toString().includes(value)
+        ).slice(0, 10);
+      }
+    } else {
+      // Regular non-numeric search
+      matches = items.filter(item => 
+        item.name.toLowerCase().includes(value) || 
+        item.id.toString().includes(value)
+      ).slice(0, 10);
+    }
     
     if (matches.length > 0) {
       showAutocomplete(idx, matches);
