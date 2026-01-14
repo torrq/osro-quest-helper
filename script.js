@@ -327,9 +327,14 @@ function renderItemContent() {
       </div>
       
       <div class="panel-section">
-        <h3>Market Configuration</h3>
+        ${descriptionHtml ? `
+          <span class="item-label">Description:</span>
+          <div class="item-description-box">${descriptionHtml}</div>` : ''}
+      </div>
+
+      <div class="panel-section">
         <div class="form-group">
-          <label class="input-label">Zeny Value (Editable)</label>
+        <span class="item-label">Zeny Value:</span>
           <div class="form-row-1">
              <input type="number" 
                     placeholder="0" 
@@ -339,13 +344,6 @@ function renderItemContent() {
           </div>
           <p class="help-text">Set the estimated market value for this item. This is saved to 'osromr_item_values.json'.</p>
         </div>
-      </div>
-
-      <div class="panel-section">
-        <h3>Item Database Info</h3>
-        ${descriptionHtml ? `
-          <span class="item-label">Description:</span>
-          <div class="item-description-box">${descriptionHtml}</div>` : ''}
       </div>
 
       ${usage.produces.length > 0 || usage.requires.length > 0 ? `
@@ -618,6 +616,7 @@ function renderQuestContent() {
 
   const quest = state.selectedQuest;
   const item = getItem(quest.producesId);
+  const descriptionHtml = parseDescription(item.desc);
   
   container.innerHTML = `
     <div class="editor">
@@ -632,7 +631,7 @@ function renderQuestContent() {
           <div class="item-selector-wrapper">
             ${quest.producesId ? `
               <div class="item-selected-badge">
-                <strong>${item.name}</strong> <small>(${quest.producesId})</small>
+                <strong><a class="item-link tree-item-name" onclick="navigateToItem(${quest.producesId})">${item.name}</a></strong> <small>(${quest.producesId})</small>
                 <button class="clear-btn" onclick="updateProducesId(null)">×</button>
               </div>
             ` : `
@@ -652,9 +651,9 @@ function renderQuestContent() {
         </div>
       </div>
 
-      <div class="form-group">
-        <textarea placeholder="Description / Effects" onchange="updateDescription(this.value)">${quest.description || ''}</textarea>
-      </div>
+${descriptionHtml ? `
+          <span class="item-label">Description:</span>
+          <div class="item-description-box">${descriptionHtml}</div>` : ''}
 
       <div class="requirements-section">
         <h3>
@@ -1109,7 +1108,6 @@ function addQuest(groupIdx, subIdx) {
     name: 'New Quest',
     producesId: null,
     successRate: 100,
-    description: '',
     accountBound: false,
     requirements: []
   };
@@ -1143,11 +1141,6 @@ function updateProducesName(value) {
 
 function updateSuccessRate(value) {
   state.selectedQuest.successRate = Math.max(1, Math.min(100, parseInt(value) || 100));
-  render();
-}
-
-function updateDescription(value) {
-  state.selectedQuest.description = value;
   render();
 }
 

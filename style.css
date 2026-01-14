@@ -931,3 +931,10 @@ textarea {
   background: #1a1f2b;
   border: 1px solid var(--accent);
 }
+
+.help-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
