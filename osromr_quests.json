@@ -2390,8 +2390,581 @@
                 },
                 {
                   "type": "item",
-                  "id": null,
+                  "id": 1605,
                   "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Book [3]",
+              "producesId": 41007,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1550,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 969,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Dagger [3]",
+              "producesId": 41008,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1220,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Axe [3]",
+              "producesId": 41009,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1355,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Spear [3]",
+              "producesId": 41010,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1455,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Whip [3]",
+              "producesId": 41011,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1953,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Violin [3]",
+              "producesId": 41012,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1906,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Katar [3]",
+              "producesId": 41013,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1251,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Revolver [3]",
+              "producesId": 41014,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 13105,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Huuma [3]",
+              "producesId": 41015,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42501,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 42503,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 13302,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40052,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Balmung [3]",
+              "producesId": 1161,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7079,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7089,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7088,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000,
+                  "immune": false
+                },
+                {
+                  "type": "credit",
+                  "amount": 200,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cursed Long Bow [3]",
+              "producesId": 41139,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41005,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40123,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000,
+                  "immune": false
+                },
+                {
+                  "type": "credit",
+                  "amount": 200,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cursed Bone Wand [3]",
+              "producesId": 41141,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000,
+                  "immune": false
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41006,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40123,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 30,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000,
+                  "immune": false
+                },
+                {
+                  "type": "credit",
+                  "amount": 200,
                   "immune": false
                 }
               ]
