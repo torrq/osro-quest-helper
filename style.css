@@ -488,9 +488,22 @@ textarea {
 
 .req-top-row {
   display: grid;
-  grid-template-columns: 1fr 65px 65px;
-  gap: 5px;
-  margin-bottom: 5px;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.requirement-card input[type="number"] {
+  text-align: center;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.requirement-card .item-selected-badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
 }
 
 .req-top-row-wide {
@@ -501,7 +514,7 @@ textarea {
 }
 
 .req-name-row {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   position: relative;
 }
 

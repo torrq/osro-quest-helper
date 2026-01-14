@@ -690,6 +690,12 @@ ${descriptionHtml ? `
     producesInput.addEventListener('input', () => setupProducesSearch(producesInput));
   }
 
+  // NEW: Initialize listeners for all requirement search inputs
+  document.querySelectorAll('.req-search-input').forEach(input => {
+    const idx = parseInt(input.getAttribute('data-idx'));
+    setupAutocomplete(input, idx);
+  });
+
 }
 
 function setupAutocomplete(input, idx) {
@@ -737,75 +743,68 @@ function hideAutocomplete(idx) {
   }
 }
 
-function selectAutocomplete(idx, id) {
-  state.selectedQuest.requirements[idx].id = id;
-  render();
+function selectAutocomplete(idx, itemId) {
+  if (state.selectedQuest && state.selectedQuest.requirements[idx]) {
+    state.selectedQuest.requirements[idx].id = itemId;
+    // Auto-fill name logic if you have a name field in the requirement object, 
+    // otherwise the Badge will pull from DATA.items via getItem(req.id)
+    render(); 
+  }
 }
 
 function renderRequirement(req, idx) {
   const isItem = req.type === 'item';
-  const isWideAmount = req.type === 'zeny' || req.type === 'credit' || req.type === 'gold' || req.type === 'monster_arena_points' || req.type === 'otherworld_points' || req.type === 'hall_of_heritage_points';
   const item = isItem ? getItem(req.id) : null;
-  
+
   return `
     <div class="requirement-card">
-      <button class="remove-btn" onclick="deleteRequirement(${idx})">×</button>
+      <button class="remove-btn" onclick="deleteRequirement(${idx})" title="Remove Requirement">×</button>
+      
+      <div class="req-top-row">
+        <select onchange="updateReqType(${idx}, this.value)">
+          <option value="item" ${req.type === 'item' ? 'selected' : ''}>Item</option>
+          <option value="zeny" ${req.type === 'zeny' ? 'selected' : ''}>Zeny</option>
+          <option value="gold" ${req.type === 'gold' ? 'selected' : ''}>Gold</option>
+          <option value="credit" ${req.type === 'credit' ? 'selected' : ''}>Credit</option>
+          <option value="vote_points" ${req.type === 'vote_points' ? 'selected' : ''}>Vote Pts</option>
+          <option value="hourly_points" ${req.type === 'hourly_points' ? 'selected' : ''}>Hourly Pts</option>
+          <option value="activity_points" ${req.type === 'activity_points' ? 'selected' : ''}>Activity Pts</option>
+          <option value="monster_arena_points" ${req.type === 'monster_arena_points' ? 'selected' : ''}>Monster Arena Pts</option>
+          <option value="otherworld_points" ${req.type === 'otherworld_points' ? 'selected' : ''}>Otherworld Pts</option>
+          <option value="hall_of_heritage_points" ${req.type === 'hall_of_heritage_points' ? 'selected' : ''}>House of Heritage Pts</option>
+        </select>
+        <input type="number" placeholder="Qty" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
+      </div>
+
       ${isItem ? `
-        <div class="req-top-row">
-          <select onchange="updateReqType(${idx}, this.value)">
-            <option value="item" selected>Item</option>
-            <option value="zeny">Zeny</option>
-            <option value="gold">Gold</option>
-            <option value="credit">Credit</option>
-            <option value="vote_points">Vote Points</option>
-            <option value="hourly_points">Hourly Points</option>
-            <option value="activity_points">Activity Points</option>
-            <option value="monster_arena_points">Monster Arena Points</option>
-            <option value="otherworld_points">Otherworld Points</option>
-            <option value="hall_of_heritage_points">Hall of Heritage Points</option>
-            <option value="event_points">Event Points</option>
-          </select>
-          <input type="number" placeholder="ID" value="${req.id !== null && req.id !== undefined ? req.id : ''}" onchange="updateReqId(${idx}, this.value)">
-          <input type="number" placeholder="Amt" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
-        </div>
-        <div class="req-name-row">
-          <input id="item-name-${idx}" type="text" placeholder="Item Name" value="${item?.name || ''}" oninput="updateReqItemName(${idx}, this.value)">
-          <div id="autocomplete-${idx}" class="autocomplete-dropdown" style="display: none;"></div>
-        </div>
-        <div class="checkbox-group">
-          <label class="checkbox-label">
-            <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)">
-            Immune
-          </label>
-        </div>
-      ` : `
-        <div class="${isWideAmount ? 'req-top-row-wide' : 'req-top-row'}">
-          <select onchange="updateReqType(${idx}, this.value)">
-            <option value="item">Item</option>
-            <option value="zeny" ${req.type === 'zeny' ? 'selected' : ''}>Zeny</option>
-            <option value="gold" ${req.type === 'gold' ? 'selected' : ''}>Gold</option>
-            <option value="credit" ${req.type === 'credit' ? 'selected' : ''}>Credit</option>
-            <option value="vote_points" ${req.type === 'vote_points' ? 'selected' : ''}>Vote Points</option>
-            <option value="hourly_points" ${req.type === 'hourly_points' ? 'selected' : ''}>Hourly Points</option>
-            <option value="activity_points" ${req.type === 'activity_points' ? 'selected' : ''}>Activity Points</option>
-            <option value="monster_arena_points" ${req.type === 'monster_arena_points' ? 'selected' : ''}>Monster Arena Points</option>
-            <option value="otherworld_points" ${req.type === 'otherworld_points' ? 'selected' : ''}>Otherworld Points</option>
-            <option value="hall_of_heritage_points" ${req.type === 'hall_of_heritage_points' ? 'selected' : ''}>Hall of Heritage Points</option>
-          </select>
-          ${isWideAmount ? `
-            <input type="number" placeholder="Amount" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
+        <div class="req-name-row" style="margin-top: 8px;">
+          ${req.id ? `
+            <div class="item-selected-badge" style="font-size: 12px; padding: 4px 8px;">
+              <strong style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;">
+                <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${item.name || 'Unknown'}</a>
+              </strong>
+              <small style="font-size: 10px; opacity: 0.7;">(${req.id})</small>
+              <button class="clear-btn" onclick="updateReqId(${idx}, null)" style="margin-left: auto;">×</button>
+            </div>
           ` : `
-            <div></div>
-            <input type="number" placeholder="Amt" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
+            <div class="search-container">
+              <input type="text" 
+                     class="req-search-input" 
+                     data-idx="${idx}" 
+                     placeholder="Search item..." 
+                     style="width: 100%;">
+              <div id="autocomplete-${idx}" class="autocomplete-dropdown"></div>
+            </div>
           `}
         </div>
-        <div class="checkbox-group">
-          <label class="checkbox-label">
-            <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)">
+        
+        <div class="checkbox-group" style="margin-top: 8px;">
+          <label class="checkbox-label" style="font-size: 11px;">
+            <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)"> 
             Immune
           </label>
         </div>
-      `}
+      ` : ''}
     </div>
   `;
 }
@@ -1175,8 +1174,8 @@ function updateReqType(idx, value) {
 }
 
 function updateReqId(idx, value) {
-  const numValue = parseInt(value);
-  state.selectedQuest.requirements[idx].id = isNaN(numValue) ? null : numValue;
+  // If value is null (from clear button), id becomes null
+  state.selectedQuest.requirements[idx].id = value ? parseInt(value) : null;
   render();
 }
 
