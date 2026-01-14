@@ -1,6 +1,23 @@
 // === AUTO-IMPORT CONFIGURATION ===
-const AUTO_IMPORT_ON_FIRST_LOAD = true;           // ← change to false to disable
-const AUTO_IMPORT_URL = 'https://torrq.github.io/osro-quest-helper/osromr_quests.json';
+const AUTO_IMPORT_ON_FIRST_LOAD = true;
+const USE_LOCAL_SERVER = false; // Set to true for local files, false for GitHub URLs
+
+const REMOTE_URLS = {
+  meta: 'https://torrq.github.io/osro-quest-helper/osromr_meta.json',
+  items: 'https://torrq.github.io/osro-quest-helper/osromr_items.json',
+  values: 'https://torrq.github.io/osro-quest-helper/osromr_item_values.json',
+  quests: 'https://torrq.github.io/osro-quest-helper/osromr_quests.json'
+};
+
+const LOCAL_URLS = {
+  meta: 'http://localhost:8000//osromr_meta.json',
+  items: 'http://localhost:8000/osromr_items.json',
+  values: 'http://localhost:8000/osromr_item_values.json',
+  quests: 'http://localhost:8000/osromr_quests.json'
+};
+
+// Select the source based on the toggle
+const AUTO_IMPORT_URLS = USE_LOCAL_SERVER ? LOCAL_URLS : REMOTE_URLS;
 
 let DATA = {
   meta: { 
@@ -30,108 +47,54 @@ let state = {
 // Initialize data — auto-import remote file on first load if enabled
 if (DATA.groups.length === 0) {
   if (AUTO_IMPORT_ON_FIRST_LOAD) {
-    fetch(AUTO_IMPORT_URL)
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then(data => {
-        // Handle both legacy and new format
-        const isLegacy = data.groups?.[0]?.subgroups?.[0]?.quests?.[0]?.produces?.name !== undefined;
-        DATA = isLegacy ? convertLegacyFormat(data) : {
-          meta: {
-            creditValueZeny: data.meta?.creditValueZeny ?? 10000000,
-            creditItemId: data.meta?.creditItemId ?? 40001,
-            goldValueZeny: data.meta?.goldValueZeny ?? 124000,
-            goldItemId: data.meta?.goldItemId ?? 969
-          },
-          items: data.items || {},
-          groups: data.groups || []
-        };
+    Promise.all([
+      fetch(AUTO_IMPORT_URLS.meta).then(r => r.ok ? r.json() : null),
+      fetch(AUTO_IMPORT_URLS.items).then(r => r.ok ? r.json() : null),
+      fetch(AUTO_IMPORT_URLS.values).then(r => r.ok ? r.json() : null),
+      fetch(AUTO_IMPORT_URLS.quests).then(r => r.ok ? r.json() : null)
+    ])
+      .then(([meta, items, values, quests]) => {
+        // Merge meta
+        if (meta) {
+          DATA.meta = meta;
+        }
+        
+        // Merge items with values
+        if (items) {
+          DATA.items = items;
+          // Apply values to items
+          if (values) {
+            Object.keys(values).forEach(id => {
+              if (DATA.items[id]) {
+                DATA.items[id].value = values[id];
+              } else {
+                DATA.items[id] = {
+                  id: parseInt(id),
+                  name: '',
+                  value: values[id]
+                };
+              }
+            });
+          }
+        }
+        
+        // Load quests
+        if (quests && quests.groups) {
+          DATA.groups = quests.groups;
+        }
+        
         render();
       })
       .catch(err => {
         console.error('Auto-import failed:', err);
-        alert('Failed to auto-import quests from remote URL.\n\nCheck console for details.');
-        render(); // still show empty state
+        alert('Failed to auto-import data from remote URLs.\n\nCheck console for details.');
+        render();
       });
   } else {
-    // Optional: you can leave empty or load something else
     render();
   }
 } else {
   render();
-}
-
-function convertLegacyFormat(oldData) {
-  const items = {};
-  const groups = [];
-  
-  // Extract all items from quests
-  oldData.groups?.forEach(group => {
-    const newGroup = {
-      name: group.name,
-      subgroups: []
-    };
-    
-    group.subgroups?.forEach(subgroup => {
-      const newSubgroup = {
-        name: subgroup.name,
-        quests: []
-      };
-      
-      subgroup.quests?.forEach(quest => {
-        // Register produced item
-        if (quest.produces?.id && quest.produces?.name) {
-          if (!items[quest.produces.id]) {
-            items[quest.produces.id] = {
-              id: quest.produces.id,
-              name: quest.produces.name,
-              value: 0
-            };
-          }
-        }
-        
-        // Register requirement items
-        quest.requirements?.forEach(req => {
-          if (req.type === 'item' && req.id && req.name) {
-            if (!items[req.id]) {
-              items[req.id] = {
-                id: req.id,
-                name: req.name,
-                value: 0
-              };
-            }
-          }
-        });
-        
-        // Create new quest format
-        newSubgroup.quests.push({
-          name: quest.name,
-          producesId: quest.produces?.id || 0,
-          successRate: quest.successRate || 100,
-          description: quest.description || '',
-          accountBound: quest.accountBound || false,
-          requirements: quest.requirements?.map(req => ({
-            type: req.type,
-            id: req.id,
-            amount: req.amount,
-            immune: req.immune || false
-          })) || []
-        });
-      });
-      
-      newGroup.subgroups.push(newSubgroup);
-    });
-    
-    groups.push(newGroup);
-  });
-  
-  return {
-    meta: oldData.meta || DATA.meta,
-    items,
-    groups
-  };
 }
 
 function getItem(id) {
@@ -155,7 +118,12 @@ function ensureItem(id, name) {
 }
 
 function getAllItems() {
-  return Object.values(DATA.items).sort((a, b) => a.name.localeCompare(b.name));
+  return Object.values(DATA.items).sort((a, b) => {
+    // Safety: ensure we are comparing strings even if a name is missing in the local JSON
+    const nameA = a.name || "";
+    const nameB = b.name || "";
+    return nameA.localeCompare(nameB);
+  });
 }
 
 function switchTab(tab) {
@@ -282,8 +250,13 @@ function render() {
     document.getElementById('itemsList').style.display = 'none';
     document.getElementById('itemsSearch').style.display = 'none';
     document.getElementById('questsSearch').style.display = 'block';
-    document.getElementById('addBtn').textContent = '+ Group';
-    document.getElementById('addBtn').onclick = addGroup;
+
+    // SHOW button for Quests
+    const addBtn = document.getElementById('addBtn');
+    addBtn.style.display = 'block'; // Ensure it is visible
+    addBtn.textContent = '+ Group';
+    addBtn.onclick = addGroup;
+
     renderSidebar();
     renderQuestContent();
   } else {
@@ -291,8 +264,10 @@ function render() {
     document.getElementById('itemsList').style.display = 'block';
     document.getElementById('itemsSearch').style.display = 'block';
     document.getElementById('questsSearch').style.display = 'none';
-    document.getElementById('addBtn').textContent = '+ Item';
-    document.getElementById('addBtn').onclick = addItem;
+
+    // HIDE button for Items
+    document.getElementById('addBtn').style.display = 'none';
+
     renderItems();
     renderItemContent();
   }
@@ -325,18 +300,6 @@ function selectItem(id) {
   render();
 }
 
-function addItem() {
-  // Always use ID 0 for new items
-  const newId = 0;
-  DATA.items[newId] = {
-    id: newId,
-    name: 'New Item',
-    value: 0
-  };
-  state.selectedItem = DATA.items[newId];
-  render();
-}
-
 function renderItemContent() {
   const container = document.getElementById('mainContent');
   
@@ -344,7 +307,7 @@ function renderItemContent() {
     container.innerHTML = `
       <div class="empty-state">
         <h2>No Item Selected</h2>
-        <p>Select an item from the sidebar or create a new one</p>
+        <p>Select an item from the sidebar to view details and edit its value</p>
       </div>
     `;
     return;
@@ -352,20 +315,38 @@ function renderItemContent() {
   
   const item = state.selectedItem;
   const usage = findQuestsByItemId(item.id);
+  const descriptionHtml = parseDescription(item.desc);
   
   container.innerHTML = `
     <div class="editor">
-      <h2>Item Editor</h2>
-      
-      <div class="form-group">
-        <div class="form-row-3">
-          <input type="number" placeholder="Item ID" value="${item.id}" onchange="updateItemId(this.value)">
-          <input type="text" placeholder="Item Name" value="${item.name}" onchange="updateItemName(this.value)">
-          <input type="number" placeholder="Zeny Value" value="${item.value || 0}" onchange="updateItemValue(this.value)">
-        </div>
+      <div class="item-header">
+        <h2>
+        ${item.name}${Number(item.slot) > 0 ? ` [${item.slot}]` : ''}
+        <span class="item-id-badge">#${item.id}</span>
+      </h2>
       </div>
       
-      <button class="btn btn-danger" onclick="deleteItem()">Delete Item</button>
+      <div class="panel-section">
+        <h3>Market Configuration</h3>
+        <div class="form-group">
+          <label class="input-label">Zeny Value (Editable)</label>
+          <div class="form-row-1">
+             <input type="number" 
+                    placeholder="0" 
+                    value="${item.value || 0}" 
+                    onchange="updateItemValue(this.value)"
+                    style="font-size: 1.2em; font-weight: bold; color: var(--accent);">
+          </div>
+          <p class="help-text">Set the estimated market value for this item. This is saved to 'osromr_item_values.json'.</p>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <h3>Item Database Info</h3>
+        ${descriptionHtml ? `
+          <span class="item-label">Description:</span>
+          <div class="item-description-box">${descriptionHtml}</div>` : ''}
+      </div>
 
       ${usage.produces.length > 0 || usage.requires.length > 0 ? `
         <div class="usage-section">
@@ -385,23 +366,19 @@ function renderItemContent() {
           ` : ''}
           
           ${usage.requires.length > 0 ? `
-  <h3>Required By:</h3>
-  <ul class="usage-list">
-    ${usage.requires.map(u => `
-      <li>
-        <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
-          ${u.quest.name}
-        </a>
-        <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
-        ${u.amount
-          ? `<span class="quest-meta-info">[Needs ${u.amount}]</span>`
-          : ''
-        }
-      </li>
-    `).join('')}
-  </ul>
-` : ''}
-
+            <h3>Required By:</h3>
+            <ul class="usage-list">
+              ${usage.requires.map(u => `
+                <li>
+                  <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
+                    ${u.quest.name}
+                  </a>
+                  <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
+                  ${u.amount ? `<span class="quest-meta-info">[Needs ${u.amount}]</span>` : ''}
+                </li>
+              `).join('')}
+            </ul>
+          ` : ''}
         </div>
       ` : `
         <div class="usage-section">
@@ -414,35 +391,36 @@ function renderItemContent() {
   `;
 }
 
-function updateItemId(value) {
-  const newId = parseInt(value) || 0;
-  if (newId !== state.selectedItem.id && !DATA.items[newId]) {
-    const old = state.selectedItem.id;
-    DATA.items[newId] = state.selectedItem;
-    DATA.items[newId].id = newId;
-    delete DATA.items[old];
-    state.selectedItem = DATA.items[newId];
-    render();
-  }
-}
-
-function updateItemName(value) {
-  state.selectedItem.name = value;
-  render();
-}
-
 function updateItemValue(value) {
   state.selectedItem.value = parseFloat(value) || 0;
   render();
 }
 
-function deleteItem() {
-  if (confirm('Delete this item? This may break quests that use it.')) {
-    delete DATA.items[state.selectedItem.id];
-    state.selectedItem = null;
-    render();
+// Helper to parse RO color codes for HTML display
+function parseDescription(desc) {
+  if (!desc) return '';
+
+  let text;
+
+  // NEW: handle string descriptions (newline-separated)
+  if (typeof desc === 'string') {
+    text = desc.replace(/\n/g, '<br>');
   }
+  // OLD: array-based descriptions
+  else if (Array.isArray(desc)) {
+    text = desc.join('<br>');
+  }
+  else {
+    return '';
+  }
+
+  // RO color handling
+  text = text.replace(/\^000000/g, '</span>');
+  text = text.replace(/\^([0-9A-Fa-f]{6})/g, '<span style="color: #$1">');
+
+  return text;
 }
+
 
 function renderSidebar() {
   const container = document.getElementById('treeContainer');
@@ -651,9 +629,22 @@ function renderQuestContent() {
 
       <div class="form-group">
         <div class="quest-info-row">
-          <input type="text" placeholder="Item Name" value="${item.name}" oninput="updateProducesName(this.value)">
-          <input type="number" placeholder="Item ID" value="${quest.producesId !== null && quest.producesId !== undefined ? quest.producesId : ''}" onchange="updateProducesId(this.value)">
-          <input type="number" min="1" max="100" placeholder="Success %" value="${quest.successRate}" onchange="updateSuccessRate(this.value)">
+          <div class="item-selector-wrapper">
+            ${quest.producesId ? `
+              <div class="item-selected-badge">
+                <strong>${item.name}</strong> <small>(${quest.producesId})</small>
+                <button class="clear-btn" onclick="updateProducesId(null)">×</button>
+              </div>
+            ` : `
+              <div class="search-container">
+                <input type="text" id="produces-search" placeholder="Search item to produce..." oninput="setupProducesSearch(this)">
+                <div id="produces-dropdown" class="autocomplete-dropdown"></div>
+              </div>
+            `}
+          </div>
+          
+          <input type="number" min="1" max="100" placeholder="Success %" value="${quest.successRate}" onchange="updateSuccessRate(this.value)" style="width: 80px;">
+          
           <label class="quest-checkbox">
             <input type="checkbox" ${quest.accountBound ? 'checked' : ''} onchange="updateQuestAccountBound(this.checked)">
             Account Bound
@@ -695,15 +686,11 @@ function renderQuestContent() {
     </div>
   `;
   
-  // Setup autocomplete for item name fields
-  quest.requirements.forEach((req, idx) => {
-    if (req.type === 'item') {
-      const input = document.querySelector(`#item-name-${idx}`);
-      if (input) {
-        setupAutocomplete(input, idx);
-      }
-    }
-  });
+  const producesInput = document.getElementById('produces-search');
+  if (producesInput) {
+    producesInput.addEventListener('input', () => setupProducesSearch(producesInput));
+  }
+
 }
 
 function setupAutocomplete(input, idx) {
@@ -1035,7 +1022,6 @@ function renderSummary() {
       extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * DATA.meta.goldValueZeny).toLocaleString()} zeny)</span>`;
     } else if (entry.type === 'item' && entry.value > 0) {
       extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
-      itemName = `<a class="item-link" onclick="navigateToItem(${entry.id})">${entry.name}</a>`;
     }
     return `
       <div class="summary-item">
@@ -1136,10 +1122,16 @@ function updateQuestName(value) {
   render();
 }
 
-function updateProducesId(value) {
-  const numValue = parseInt(value);
-  state.selectedQuest.producesId = isNaN(numValue) ? null : numValue;
-  render();
+function updateProducesId(itemId) {
+    if (!state.selectedQuest) return;
+    state.selectedQuest.producesId = itemId;
+    
+    // Close the dropdown immediately
+    const dropdown = document.getElementById('produces-dropdown');
+    if (dropdown) dropdown.style.display = 'none';
+    
+    saveData();
+    renderQuestContent(); // Re-render to show the selected item name
 }
 
 function updateProducesName(value) {
@@ -1212,56 +1204,188 @@ function updateReqImmune(idx, checked) {
   render();
 }
 
-// Import/Export
-function exportData() {
-  const json = JSON.stringify(DATA, null, 2);
+function exportQuests() {
+  const json = JSON.stringify({ groups: DATA.groups }, null, 2);
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'ro_quests.json';
+  a.download = 'osromr_quests.json';
   a.click();
   URL.revokeObjectURL(url);
 }
 
-function importData(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const imported = JSON.parse(e.target.result);
-
-      // Check if it's old format (has groups with quests that have produces.name)
-      const isOldFormat = imported.groups?.[0]?.subgroups?.[0]?.quests?.[0]?.produces?.name !== undefined;
-      
-      if (isOldFormat) {
-        DATA = convertLegacyFormat(imported);
-      } else {
-        DATA = {
-          meta: {
-            creditValueZeny: imported.meta?.creditValueZeny ?? 10000000,
-            creditItemId: imported.meta?.creditItemId ?? 40001,
-            goldValueZeny: imported.meta?.goldValueZeny ?? 124000,
-            goldItemId: imported.meta?.goldItemId ?? 969
-          },
-          items: imported.items || {},
-          groups: imported.groups || []
-        };
-      }
-
-      state.selectedQuest = null;
-      state.selectedItem = null;
-      state.expandedGroups.clear();
-      state.expandedSubgroups.clear();
-      render();
-    } catch (err) {
-      alert('Error parsing JSON file: ' + err.message);
+function exportValues() {
+  const values = {};
+  Object.keys(DATA.items).forEach(id => {
+    if (DATA.items[id].value && DATA.items[id].value > 0) {
+      values[id] = DATA.items[id].value;
     }
-  };
-  reader.readAsText(file);
-  event.target.value = '';
+  });
+  const json = JSON.stringify(values, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'osromr_item_values.json';
+  a.click();
+  URL.revokeObjectURL(url);
 }
+
+function exportMeta() {
+  const json = JSON.stringify(DATA.meta, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'osromr_meta.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportAll() {
+  exportQuests();
+  setTimeout(() => exportValues(), 100);
+  setTimeout(() => exportMeta(), 200);
+}
+
+function createItemRow(item, quest, type) {
+    const row = document.createElement('div');
+    row.className = 'item-row editor-item-row'; // Added specific class for editor rows
+    
+    // Look up the item name from our items database
+    const itemData = DATA.items[item.id]; 
+    const hasItem = !!itemData;
+
+    row.innerHTML = `
+        <div class="item-selector-container">
+            ${hasItem ? `
+                <div class="item-selected-badge">
+                    <strong>${itemData.name}</strong> <small>(${item.id})</small>
+                    <button class="clear-btn" title="Clear">×</button>
+                </div>
+            ` : `
+                <div class="search-container">
+                    <input type="text" class="item-search-input" placeholder="Search item or ID...">
+                    <div class="autocomplete-dropdown"></div>
+                </div>
+            `}
+        </div>
+        <input type="number" class="item-amount" value="${item.amount || 1}" title="Quantity">
+        <div class="rate-container">
+            <input type="number" class="item-success" value="${item.success || 100}" min="0" max="100">%
+        </div>
+        <label class="quest-checkbox">
+            <input type="checkbox" class="item-bound" ${item.bound ? 'checked' : ''}> Bound
+        </label>
+        <button class="btn btn-sm btn-danger remove-btn">×</button>
+    `;
+
+    // Search logic for empty slots
+    const searchInput = row.querySelector('.item-search-input');
+    if (searchInput) {
+        const resultsDropdown = row.querySelector('.autocomplete-dropdown');
+        searchInput.oninput = (e) => {
+            const query = e.target.value.toLowerCase();
+            resultsDropdown.innerHTML = '';
+            if (query.length < 2) {
+                resultsDropdown.style.display = 'none';
+                return;
+            }
+
+            const matches = Object.values(DATA.items)
+                .filter(i => i.name.toLowerCase().includes(query) || i.id.toString().includes(query))
+                .slice(0, 10);
+
+            if (matches.length > 0) {
+                resultsDropdown.style.display = 'block';
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.className = 'autocomplete-item';
+                    div.innerHTML = `${match.name} <span class="autocomplete-item-id">[${match.id}]</span>`;
+                    div.onclick = () => {
+                        item.id = match.id;
+                        render(); 
+                        if (typeof saveData === 'function') saveData();
+                    };
+                    resultsDropdown.appendChild(div);
+                });
+            } else {
+                resultsDropdown.style.display = 'none';
+            }
+        };
+    }
+
+    // Clear button logic
+    const clearBtn = row.querySelector('.clear-btn');
+    if (clearBtn) {
+        clearBtn.onclick = () => {
+            item.id = null;
+            render();
+            if (typeof saveData === 'function') saveData();
+        };
+    }
+
+    // Update listeners
+    row.querySelector('.item-amount').onchange = (e) => { item.amount = parseInt(e.target.value) || 0; if (typeof saveData === 'function') saveData(); };
+    row.querySelector('.item-success').onchange = (e) => { item.success = parseInt(e.target.value) || 0; if (typeof saveData === 'function') saveData(); };
+    row.querySelector('.item-bound').onchange = (e) => { item.bound = e.target.checked; if (typeof saveData === 'function') saveData(); };
+    row.querySelector('.remove-btn').onclick = () => {
+        quest[type] = quest[type].filter(i => i !== item);
+        render();
+        if (typeof saveData === 'function') saveData();
+    };
+
+    return row;
+}
+
+function saveData() {
+    localStorage.setItem('osro_quest_data', JSON.stringify(DATA));
+    console.log("Data saved to local storage");
+}
+
+function setupProducesSearch(input) {
+    const dropdown = document.getElementById('produces-dropdown');
+    if (!dropdown) return;
+
+    const query = input.value.toLowerCase().trim();
+    dropdown.innerHTML = '';
+    
+    if (query.length < 2) {
+        dropdown.style.display = 'none';
+        return;
+    }
+
+    const matches = Object.values(DATA.items)
+        .filter(i => 
+            (i.name && i.name.toLowerCase().includes(query)) || 
+            (i.id && i.id.toString().includes(query))
+        )
+        .slice(0, 10);
+
+    if (matches.length > 0) {
+        dropdown.style.display = 'block';
+        matches.forEach(match => {
+            const div = document.createElement('div');
+            div.className = 'autocomplete-item';
+            div.innerHTML = `${match.name || 'Unknown'} <span class="autocomplete-item-id">[${match.id}]</span>`;
+            div.onclick = (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                updateProducesId(match.id);
+            };
+            dropdown.appendChild(div);
+        });
+    } else {
+        dropdown.style.display = 'none';
+    }
+}
+
+// Ensure the dropdown closes if you click elsewhere
+document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('produces-dropdown');
+    if (dropdown && !e.target.closest('.search-container')) {
+        dropdown.style.display = 'none';
+    }
+});
 
 render();

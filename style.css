@@ -99,6 +99,13 @@ body {
   margin-bottom: 8px;
 }
 
+.toolbar-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .tab-bar {
   display: flex;
   gap: 4px;
@@ -398,6 +405,7 @@ body {
   display: grid;
   grid-template-columns: 120px 1fr 120px;
   gap: 8px;
+  margin-bottom: 5px;
 }
 
 input, textarea, select {
@@ -787,4 +795,139 @@ textarea {
   margin-left: 0;
   font-weight: normal;
   white-space: nowrap;
+}
+
+.file-input-wrapper:hover .btn {
+  background: var(--panel-hover);
+  border-color: var(--accent);
+}
+
+.item-description-box {
+  background: #1b2130;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-top: 10px;
+
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.45;
+
+  white-space: pre-wrap;
+  color: var(--text);
+}
+
+.item-label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.item-selector-wrapper {
+  flex: 1;
+  min-width: 250px;
+}
+
+.item-selected-badge {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.item-selected-badge strong {
+  color: var(--accent);
+}
+.item-selected-badge small {
+  margin-left: 4px;
+  background: rgba(255,255,255,0.1);
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: var(--text-muted);
+}
+.clear-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.search-container {
+  position: relative;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Layout for the requirement/reward rows in the editor */
+.editor-item-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 100px 40px; /* Name, Qty, Success, Bound, Delete */
+  gap: 10px;
+  align-items: center;
+  background: var(--bg);
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  cursor: default !important;
+}
+
+.editor-item-row:hover {
+  border-color: var(--border);
+}
+
+.item-selector-container {
+  position: relative;
+}
+
+.item-amount, .item-success {
+  width: 100%;
+  padding: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 4px;
+}
+
+.rate-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.editor-item-row .search-container {
+  position: relative;
+}
+
+.editor-item-row .autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 9999; /* High z-index is critical here */
+  background: #1a1f2b;
+  border: 1px solid var(--accent);
 }

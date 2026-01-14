@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSRO Quest Helper</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Added a small style adjustment for the new export dropdown */
+  .dropdown { position: relative; display: inline-block; }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--panel-bg);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    right: 0;
+  }
+  .dropdown:hover .dropdown-content { display: block; }
+  .dropdown-content button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .dropdown-content button:hover { background-color: var(--panel-hover); }
+</style>
 </head>
 <body>
 
@@ -25,10 +51,17 @@
       </div>
       <div class="toolbar">
         <button class="btn btn-primary btn-sm" id="addBtn" onclick="addGroup()">+ Group</button>
-        <button class="btn btn-sm" onclick="exportData()">Export</button>
-        <div class="file-input-wrapper">
-          <button class="btn btn-sm">Import</button>
-          <input type="file" id="fileInput" accept=".json" onchange="importData(event)">
+        <div class="toolbar-actions">
+          <div class="dropdown">
+            <button class="btn btn-sm">Export ▾</button>
+            <div class="dropdown-content">
+              <button onclick="exportAll()">All (3 Files)</button>
+              <hr style="border: 0; border-top: 1px solid var(--border); margin: 0;">
+              <button onclick="exportQuests()">Quests JSON</button>
+              <button onclick="exportValues()">Values JSON</button>
+              <button onclick="exportMeta()">Meta JSON</button>
+            </div>
+          </div>
         </div>
       </div>
       
