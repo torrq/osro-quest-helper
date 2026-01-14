@@ -802,9 +802,7 @@ function renderRequirement(req, idx) {
 
       <div class="checkbox-group">
         <label class="checkbox-label" style="font-size: 11px; opacity: 0.8;">
-          <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)"> 
-          Immune to Rate
-        </label>
+          <input type="checkbox" ${req.immune ? 'checked' : ''} onchange="updateReqImmune(${idx}, this.checked)">Immune</label>
       </div>
     </div>
   `;
