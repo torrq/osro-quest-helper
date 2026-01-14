@@ -104,6 +104,19 @@ function getItem(id) {
   return DATA.items[id] || { id, name: '', value: 0 };
 }
 
+function getItemDisplayName(item) {
+  if (!item) return '';
+  const safeName = escapeHtml(item.name || '');
+  const slot = Number(item.slot) || 0;
+  return slot > 0 ? `${safeName} [${slot}]` : safeName;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function ensureItem(id, name) {
   if (id === null || id === undefined || id === '') return null;
   const numId = parseInt(id);
@@ -288,7 +301,7 @@ function renderItems() {
   container.innerHTML = items.map(item => `
     <div class="item-row ${state.selectedItem?.id === item.id ? 'active' : ''}" onclick="selectItem(${item.id})">
       <div class="item-row-header">
-        <span>${item.name || '<unnamed>'}</span>
+        <span>${getItemDisplayName(item) || '&lt;unnamed&gt;'}</span>
         <span class="item-row-id">#${item.id}</span>
       </div>
     </div>
@@ -321,9 +334,9 @@ function renderItemContent() {
     <div class="editor">
       <div class="item-header">
         <h2>
-        ${item.name}${Number(item.slot) > 0 ? ` [${item.slot}]` : ''}
-        <span class="item-id-badge">#${item.id}</span>
-      </h2>
+          ${getItemDisplayName(item)}
+          <span class="item-id-badge">#${item.id}</span>
+        </h2>
       </div>
       
       <div class="panel-section">
@@ -631,7 +644,7 @@ function renderQuestContent() {
           <div class="item-selector-wrapper">
             ${quest.producesId ? `
               <div class="item-selected-badge">
-                <strong><a class="item-link tree-item-name" onclick="navigateToItem(${quest.producesId})">${item.name}</a></strong> <small>(${quest.producesId})</small>
+                <strong><a class="item-link tree-item-name" onclick="navigateToItem(${quest.producesId})">${getItemDisplayName(item)}</a></strong>
                 <button class="clear-btn" onclick="updateProducesId(null)">×</button>
               </div>
             ` : `
@@ -757,9 +770,9 @@ function showAutocomplete(idx, items) {
   if (!dropdown) return;
   
   dropdown.innerHTML = items.map(item => `
-    <div class="autocomplete-item" onclick="selectAutocomplete(${idx}, ${item.id})">
-      ${item.name}<span class="autocomplete-item-id">[${item.id}]</span>
-    </div>
+  <div class="autocomplete-item" onclick="selectAutocomplete(${idx}, ${item.id})">
+    ${getItemDisplayName(item)}<span class="autocomplete-item-id">[${item.id}]</span>
+  </div>
   `).join('');
   dropdown.style.display = 'block';
 }
@@ -809,7 +822,7 @@ function renderRequirement(req, idx) {
           ${req.id ? `
             <div class="item-selected-badge">
               <strong style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
-                <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${item.name || 'Unknown'}</a>
+                <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || 'Unknown'}</a>
               </strong>
               <small>(${req.id})</small>
               <button class="clear-btn" onclick="updateReqId(${idx}, null)" style="margin-left: auto;">×</button>
@@ -859,14 +872,14 @@ function renderMaterialTree() {
           // Single quest - show as normal
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${item.name}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
+            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
           });
           walk(quests[0], depth + 1, effectiveAmount, newPath);
         } else {
           // Multiple quests - show options
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${item.name}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span style="color: var(--warning); font-size: 11px;">[${quests.length} OPTIONS]</span>`
+            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span style="color: var(--warning); font-size: 11px;">[${quests.length} OPTIONS]</span>`
           });
           
           quests.forEach((q, idx) => {
@@ -912,7 +925,7 @@ function renderMaterialTree() {
         const item = getItem(req.id);
         lines.push({
           level: depth,
-          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${item.name || 'Unknown'}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
+          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${getItemDisplayName(item) || 'Unknown'}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
         });
       }
     });
@@ -1386,7 +1399,7 @@ function setupProducesSearch(input) {
         matches.forEach(match => {
             const div = document.createElement('div');
             div.className = 'autocomplete-item';
-            div.innerHTML = `${match.name || 'Unknown'} <span class="autocomplete-item-id">[${match.id}]</span>`;
+            div.innerHTML = `${getItemDisplayName(match) || 'Unknown'} <span class="autocomplete-item-id">[${match.id}]</span>`;
             div.onclick = (e) => {
                 e.stopPropagation(); // Prevent event bubbling
                 updateProducesId(match.id);

@@ -7120,6 +7120,90 @@
               ]
             },
             {
+              "name": "Boy's Cap",
+              "producesId": 5016,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1030,
+                  "amount": 10,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Bride's Corolla",
+              "producesId": 5436,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1032,
+                  "amount": 1000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 10007,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Bride Mask",
+              "producesId": 5169,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 706,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7201,
+                  "amount": 500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7200,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1049,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1059,
+                  "amount": 500,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1054,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1024,
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
               "name": "Feather Beret",
               "producesId": 5170,
               "successRate": 100,
@@ -7140,6 +7224,142 @@
                 {
                   "type": "item",
                   "id": 982,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Bulb Headband",
+              "producesId": 5034,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2233,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 746,
+                  "amount": 20,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Bunny Band",
+              "producesId": 2214,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 949,
+                  "amount": 1000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 722,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 706,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2213,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cake Hat",
+              "producesId": 5024,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 529,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 530,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 538,
+                  "amount": 15,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 539,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Candle",
+              "producesId": 5028,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 2279,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 526,
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 7035,
+                  "amount": 50,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Chef Hat",
+              "producesId": 5026,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 539,
+                  "amount": 120,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": null,
                   "amount": 1,
                   "immune": false
                 }
