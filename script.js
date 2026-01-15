@@ -1182,6 +1182,12 @@ function updateProducesId(itemId) {
     if (!state.selectedQuest) return;
     state.selectedQuest.producesId = itemId;
     
+    // Auto-fill quest name with item display name (including slots)
+    if (itemId && DATA.items[itemId]) {
+        const item = DATA.items[itemId];
+        state.selectedQuest.name = getItemDisplayName(item) || state.selectedQuest.name;
+    }
+    
     // Close the dropdown immediately
     const dropdown = document.getElementById('produces-dropdown');
     if (dropdown) dropdown.style.display = 'none';
