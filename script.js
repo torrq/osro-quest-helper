@@ -746,11 +746,31 @@ function setupAutocomplete(input, idx) {
         ).slice(0, 10);
       }
     } else {
-      // Regular non-numeric search
+      // Regular non-numeric search - prioritize exact name matches
+      const lowerQuery = value.toLowerCase();
+      
       matches = items.filter(item => 
-        item.name.toLowerCase().includes(value) || 
-        item.id.toString().includes(value)
-      ).slice(0, 10);
+        item.name.toLowerCase().includes(lowerQuery) || 
+        item.id.toString().includes(lowerQuery)
+      ).sort((a, b) => {
+        const aNameLower = a.name.toLowerCase();
+        const bNameLower = b.name.toLowerCase();
+        
+        // Exact name match comes first
+        const aExactMatch = aNameLower === lowerQuery;
+        const bExactMatch = bNameLower === lowerQuery;
+        if (aExactMatch && !bExactMatch) return -1;
+        if (!aExactMatch && bExactMatch) return 1;
+        
+        // Then prioritize matches at the start of the name
+        const aStartsWith = aNameLower.startsWith(lowerQuery);
+        const bStartsWith = bNameLower.startsWith(lowerQuery);
+        if (aStartsWith && !bStartsWith) return -1;
+        if (!aStartsWith && bStartsWith) return 1;
+        
+        // Finally, sort by ID (lower first)
+        return a.id - b.id;
+      }).slice(0, 10);
     }
     
     if (matches.length > 0) {

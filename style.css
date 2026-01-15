@@ -523,13 +523,14 @@ textarea {
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--bg);
+  background: #0a0e14 !important; /* Force explicit color */
   border: 1px solid var(--accent);
   border-radius: 4px;
   max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
   margin-top: 2px;
+  opacity: 1; /* Force full opacity for Edge */
 }
 
 .autocomplete-item {
