@@ -9112,6 +9112,99 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Middle Headgears",
+          "quests": [
+            {
+              "name": "Alarm Mask",
+              "producesId": 5086,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1095,
+                  "amount": 3000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2288,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Angel Wing Ears [1]",
+              "producesId": 5074,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2254,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2286,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Binoculars [1]",
+              "producesId": 2296,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2243,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Blush",
+              "producesId": 5040,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7047,
+                  "amount": 100,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lower Headgears",
+          "quests": []
         }
       ]
     },
