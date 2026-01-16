@@ -98,9 +98,9 @@ if (DATA.groups.length === 0) {
 
 function getItem(id) {
   if (id === null || id === undefined) {
-    return { id: null, name: '', value: 0 };
+    return { name: '', value: 0 };
   }
-  return DATA.items[id] || { id, name: '', value: 0 };
+  return DATA.items[id] || { name: '', value: 0 };
 }
 
 function getItemDisplayName(item) {
@@ -122,7 +122,7 @@ function ensureItem(id, name) {
   if (isNaN(numId)) return null;
   
   if (!DATA.items[numId]) {
-    DATA.items[numId] = { id: numId, name: name || '', value: 0 };
+    DATA.items[numId] = { name: name || '', value: 0 };
   } else if (name && !DATA.items[numId].name) {
     DATA.items[numId].name = name;
   }
@@ -130,12 +130,16 @@ function ensureItem(id, name) {
 }
 
 function getAllItems() {
-  return Object.values(DATA.items).sort((a, b) => {
-    // Safety: ensure we are comparing strings even if a name is missing in the local JSON
-    const nameA = a.name || "";
-    const nameB = b.name || "";
-    return nameA.localeCompare(nameB);
-  });
+  return Object.entries(DATA.items)
+    .map(([id, item]) => ({
+      ...item,
+      id: +id   // derive numeric ID from key
+    }))
+    .sort((a, b) => {
+      const nameA = a.name || "";
+      const nameB = b.name || "";
+      return nameA.localeCompare(nameB);
+    });
 }
 
 function switchTab(tab) {
@@ -231,7 +235,7 @@ function findQuestsByItemId(itemId) {
 function navigateToItem(itemId) {
   state.currentTab = 'items';
   state.selectedQuest = null;
-  state.selectedItem = DATA.items[itemId] || null;
+  state.selectedItemId = itemId;
   render();
 }
 
@@ -288,17 +292,18 @@ function render() {
 function renderItems() {
   const container = document.getElementById('itemsList');
   let items = getAllItems();
-  
-  // Apply filter
+
   if (state.itemSearchFilter) {
-    items = items.filter(item => 
-      item.name.toLowerCase().includes(state.itemSearchFilter) ||
-      item.id.toString().includes(state.itemSearchFilter)
+    const q = state.itemSearchFilter;
+    items = items.filter(item =>
+      (item.name || "").toLowerCase().includes(q) ||
+      item.id.toString().includes(q)
     );
   }
-  
+
   container.innerHTML = items.map(item => `
-    <div class="item-row ${state.selectedItem?.id === item.id ? 'active' : ''}" onclick="selectItem(${item.id})">
+    <div class="item-row ${state.selectedItemId === item.id ? 'active' : ''}"
+         onclick="selectItem(${item.id})">
       <div class="item-row-header">
         <span>${getItemDisplayName(item) || '&lt;unnamed&gt;'}</span>
         <span class="item-row-id">#${item.id}</span>
@@ -308,14 +313,15 @@ function renderItems() {
 }
 
 function selectItem(id) {
-  state.selectedItem = DATA.items[id];
-  render();
+  state.selectedItemId = id;
+  renderItems();
+  renderItemContent();
 }
 
 function renderItemContent() {
   const container = document.getElementById('mainContent');
-  
-  if (!state.selectedItem) {
+
+  if (state.selectedItemId == null) {
     container.innerHTML = `
       <div class="empty-state">
         <h2>No Item Selected</h2>
@@ -324,20 +330,32 @@ function renderItemContent() {
     `;
     return;
   }
-  
-  const item = state.selectedItem;
-  const usage = findQuestsByItemId(item.id);
+
+  const id = state.selectedItemId;
+  const item = DATA.items[id];
+
+  if (!item) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <h2>Item Not Found</h2>
+        <p>The selected item no longer exists.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const usage = findQuestsByItemId(+id);
   const descriptionHtml = parseDescription(item.desc);
-  
+
   container.innerHTML = `
     <div class="editor">
       <div class="item-header">
         <h2>
           ${getItemDisplayName(item)}
-          <span class="item-id-badge">#${item.id}</span>
+          <span class="item-id-badge">#${id}</span>
         </h2>
       </div>
-      
+
       <div class="panel-section">
         ${descriptionHtml ? `
           <span class="item-label">Description:</span>
@@ -346,15 +364,18 @@ function renderItemContent() {
 
       <div class="panel-section">
         <div class="form-group">
-        <span class="item-label">Zeny Value:</span>
+          <span class="item-label">Zeny Value:</span>
           <div class="form-row-1">
-             <input type="number" 
-                    placeholder="0" 
-                    value="${item.value || 0}" 
-                    onchange="updateItemValue(this.value)"
-                    style="font-size: 1.2em; font-weight: bold; color: var(--accent);">
+            <input type="number"
+                   placeholder="0"
+                   value="${item.value || 0}"
+                   onchange="updateItemValue(${id}, this.value)"
+                   style="font-size: 1.2em; font-weight: bold; color: var(--accent);">
           </div>
-          <p class="help-text">Set the estimated market value for this item. This is saved to 'osromr_item_values.json'.</p>
+          <p class="help-text">
+            Set the estimated market value for this item.
+            This is saved to 'osromr_item_values.json'.
+          </p>
         </div>
       </div>
 
@@ -365,26 +386,37 @@ function renderItemContent() {
             <ul class="usage-list">
               ${usage.produces.map(u => `
                 <li>
-                  <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
+                  <a class="quest-link"
+                     onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
                     ${u.quest.name}
                   </a>
-                  <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
-                  <span class="quest-meta-info">[${u.quest.successRate}% Success]</span>
+                  <span class="quest-path-info">
+                    (${u.group.name} / ${u.subgroup.name})
+                  </span>
+                  <span class="quest-meta-info">
+                    [${u.quest.successRate}% Success]
+                  </span>
                 </li>
               `).join('')}
             </ul>
           ` : ''}
-          
+
           ${usage.requires.length > 0 ? `
             <h3>Required By:</h3>
             <ul class="usage-list">
               ${usage.requires.map(u => `
                 <li>
-                  <a class="quest-link" onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
+                  <a class="quest-link"
+                     onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
                     ${u.quest.name}
                   </a>
-                  <span class="quest-path-info">(${u.group.name} / ${u.subgroup.name})</span>
-                  ${u.amount ? `<span class="quest-meta-info">[Needs ${u.amount}]</span>` : ''}
+                  <span class="quest-path-info">
+                    (${u.group.name} / ${u.subgroup.name})
+                  </span>
+                  ${u.amount ? `
+                    <span class="quest-meta-info">
+                      [Needs ${u.amount}]
+                    </span>` : ''}
                 </li>
               `).join('')}
             </ul>
@@ -401,9 +433,10 @@ function renderItemContent() {
   `;
 }
 
-function updateItemValue(value) {
-  state.selectedItem.value = parseFloat(value) || 0;
-  render();
+function updateItemValue(id, value) {
+  if (DATA.items[id]) {
+    DATA.items[id].value = Number(value) || 0;
+  }
 }
 
 // Helper to parse RO color codes for HTML display
