@@ -11057,7 +11057,7 @@
       ]
     },
     {
-      "name": "Add Slot to Weapon",
+      "name": "Add Slot to Weapon (Seiyablem)",
       "subgroups": [
         {
           "name": "C Class",
@@ -13337,7 +13337,7 @@
       ]
     },
     {
-      "name": "Add Slot to Armor",
+      "name": "Add Slot to Armor (Seiyablem)",
       "subgroups": [
         {
           "name": "C Class",
@@ -14390,7 +14390,7 @@
       ]
     },
     {
-      "name": "Add Slot to Dragon Wings",
+      "name": "Add Slot to Dragon Wings (Seiyablem)",
       "subgroups": [
         {
           "name": "Dragon Wings",
@@ -14606,7 +14606,1006 @@
                 },
                 {
                   "type": "item",
-                  "id": 46852,
+                  "id": 42866,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Add Slot to Weapon (Leablem)",
+      "subgroups": [
+        {
+          "name": "C Class",
+          "quests": [
+            {
+              "name": "Book of Mother Earth [3]",
+              "producesId": 1569,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1554,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Book of Billows [3]",
+              "producesId": 1568,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1553,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Book of Gust of Wind [3]",
+              "producesId": 1571,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1556,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Book of Blazing Sun [3]",
+              "producesId": 1570,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1555,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "B Class",
+          "quests": [
+            {
+              "name": "Orcish Axe [4]",
+              "producesId": 1309,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Scimiter [3]",
+              "producesId": 1114,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Spike [2]",
+              "producesId": 1538,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "A Class",
+          "quests": [
+            {
+              "name": "Dragon Killer [2]",
+              "producesId": 13030,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 13001,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Katar of Dusty Thornbush [3]",
+              "producesId": 1276,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1257,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Katar of Raging Blaze [3]",
+              "producesId": 1277,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1258,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Katar of Cold Icicle [3]",
+              "producesId": 1275,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1256,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Katar of Piercing Wind [3]",
+              "producesId": 1278,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1259,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Golden Mace [2]",
+              "producesId": 1539,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1524,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Oriental Lute [2]",
+              "producesId": 1922,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1918,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Queen's Whip [2]",
+              "producesId": 1976,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1970,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Spectral Spear [1]",
+              "producesId": 1479,
+              "successRate": 15,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1477,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Gae Bolg [2]",
+              "producesId": 1480,
+              "successRate": 15,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1474,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Schweizersabel [2]",
+              "producesId": 1178,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1167,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "S Class",
+          "quests": [
+            {
+              "name": "Zephyrus [3]",
+              "producesId": 1481,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1468,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Mailbreaker [3]",
+              "producesId": 13032,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1225,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Slayer [2]",
+              "producesId": 1180,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1166,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Swordbreaker [3]",
+              "producesId": 13031,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1224,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Assassin Dagger [1]",
+              "producesId": 13033,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1232,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Grand Cross [1]",
+              "producesId": 1540,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1528,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Executioner [1]",
+              "producesId": 1179,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1169,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Add Slot to Armor (Leablem)",
+      "subgroups": [
+        {
+          "name": "C Class",
+          "quests": [
+            {
+              "name": "Sunflower [1]",
+              "producesId": 5351,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2253,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ph.D Hat [1]",
+              "producesId": 5347,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5012,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Big Ribbon [1]",
+              "producesId": 5348,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2244,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Boy's Cap [1]",
+              "producesId": 5349,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 5016,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "B Class",
+          "quests": [
+            {
+              "name": "Skull Ring [1]",
+              "producesId": 2715,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2609,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Pointed Shoes [1]",
+              "producesId": 2432,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2409,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "A Class",
+          "quests": [
+            {
+              "name": "Pirate Bandana [1]",
+              "producesId": 5350,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2287,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Black Leather Boots [1]",
+              "producesId": 2434,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2425,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "S Class",
+          "quests": [
+            {
+              "name": "Holy Robe [1]",
+              "producesId": 2373,
+              "successRate": 5,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2327,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Herald of God [1]",
+              "producesId": 2128,
+              "successRate": 5,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2111,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Undershirt [1]",
+              "producesId": 2523,
+              "successRate": 5,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2522,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Pantie [1]",
+              "producesId": 2371,
+              "successRate": 5,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 985,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 2339,
                   "amount": 1,
                   "immune": false
                 }
