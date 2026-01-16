@@ -10984,6 +10984,2391 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Equipment Infuser",
+      "subgroups": [
+        {
+          "name": "Infuse Icarus Weapons",
+          "quests": [
+            {
+              "name": "Infused Skewer [4]",
+              "producesId": 41087,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41033,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41003,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000,
+                  "immune": false
+                },
+                {
+                  "type": "credit",
+                  "amount": 100,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Infuse Abyss Weapons",
+          "quests": []
+        },
+        {
+          "name": "Infuse Dragon Weapons",
+          "quests": []
+        }
+      ]
+    },
+    {
+      "name": "Add Slot to Weapon",
+      "subgroups": [
+        {
+          "name": "C Class",
+          "quests": [
+            {
+              "name": "Trident [3]",
+              "producesId": 1461,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1460,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Rope [4]",
+              "producesId": 1951,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1950,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Violin [4]",
+              "producesId": 1902,
+              "successRate": 25,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1902,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "B Class",
+          "quests": [
+            {
+              "name": "Chain [3]",
+              "producesId": 1520,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1519,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Gladius [3]",
+              "producesId": 1220,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1219,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Gakkung [2]",
+              "producesId": 1716,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1714,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Pike [4]",
+              "producesId": 1408,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1407,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Haedonggum [2]",
+              "producesId": 1128,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1123,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Lute [3]",
+              "producesId": 1906,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1011,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1905,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Wire Whip [3]",
+              "producesId": 1955,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1011,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1954,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Waghnak [4]",
+              "producesId": 1802,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1010,
+                  "amount": 10,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Arbalest [2]",
+              "producesId": 1715,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1713,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "A Class",
+          "quests": [
+            {
+              "name": "Hunter Bow [1]",
+              "producesId": 1726,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1718,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Staff of Survival [1]",
+              "producesId": 1620,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1619,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Zweihander [2]",
+              "producesId": 1171,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 800000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1168,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Flamberge [2]",
+              "producesId": 1149,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1129,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Infiltrator [1]",
+              "producesId": 1266,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 700000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1261,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ballista [1]",
+              "producesId": 1727,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1722,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Stunner [2]",
+              "producesId": 1532,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1522,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Berserk [1]",
+              "producesId": 1816,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1814,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Claymore [2]",
+              "producesId": 1172,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1163,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "S Class",
+          "quests": [
+            {
+              "name": "Gungnir [2]",
+              "producesId": 1418,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1413,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Poison Knife [2]",
+              "producesId": 13016,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1239,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ice Pick [1]",
+              "producesId": 13017,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 2000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1230,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Sucsamad [1]",
+              "producesId": 13018,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1236,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Ginnungagap [1]",
+              "producesId": 13019,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 13002,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cutlus [1]",
+              "producesId": 13400,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1135,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Crescent Scythe [1]",
+              "producesId": 1476,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1466,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Staff of Survival [1]",
+              "producesId": 1618,
+              "successRate": 10,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 2000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 5,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 999,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1617,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SS Class",
+          "quests": [
+            {
+              "name": "Fist of Fury [4]",
+              "producesId": 41032,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41002,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Skewer [4]",
+              "producesId": 41033,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41003,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Sword [4]",
+              "producesId": 41034,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41004,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Bow [4]",
+              "producesId": 41035,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41005,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Staff [4]",
+              "producesId": 41036,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41006,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Book [4]",
+              "producesId": 41037,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41007,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Dagger [4]",
+              "producesId": 41038,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41008,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Axe [4]",
+              "producesId": 41039,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41009,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Spear [4]",
+              "producesId": 41040,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41010,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Whip [4]",
+              "producesId": 41041,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41011,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Violin [4]",
+              "producesId": 41042,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41012,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Katar [4]",
+              "producesId": 41043,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41013,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Revolver [4]",
+              "producesId": 41044,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41014,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Icarus Huuma [4]",
+              "producesId": 41045,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 10,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41015,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Banryu [4]",
+              "producesId": 41031,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 25000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 25,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41001,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Purple Saber [4]",
+              "producesId": 41060,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 25000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 25,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41058,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dark Saber [4]",
+              "producesId": 41061,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 25000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 25,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41059,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Balmung [4]",
+              "producesId": 1533,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 25000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 25,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 1161,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cursed Long Bow [4]",
+              "producesId": 41140,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41139,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Cursed Bone Wand [4]",
+              "producesId": 41142,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 1,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41141,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SSS Class",
+          "quests": [
+            {
+              "name": "Abyss Axe [2]",
+              "producesId": 41062,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41016,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Book [2]",
+              "producesId": 41063,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41017,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Bow [2]",
+              "producesId": 41064,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41018,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Dagger [2]",
+              "producesId": 41065,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41019,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Violin [2]",
+              "producesId": 41066,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41020,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Katar [2]",
+              "producesId": 41067,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41021,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Knuckle [2]",
+              "producesId": 41068,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41022,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Revolver [2]",
+              "producesId": 41069,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41023,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Spear [2]",
+              "producesId": 41070,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41024,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Staff [2]",
+              "producesId": 41071,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41025,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Sword [2]",
+              "producesId": 41072,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41026,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Abyss Whip [2]",
+              "producesId": 41073,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 20,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 2,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41027,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SSS-2 Class",
+          "quests": [
+            {
+              "name": "Dragon Axe [4]",
+              "producesId": 41101,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41088,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Book [4]",
+              "producesId": 41102,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41089,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Bow [4]",
+              "producesId": 41103,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41090,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Dagger [4]",
+              "producesId": 41104,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41091,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Guitar [4]",
+              "producesId": 41105,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41092,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Huuma [4]",
+              "producesId": 41106,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41093,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Katar [4]",
+              "producesId": 41107,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41094,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Knuckle [4]",
+              "producesId": 41108,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41095,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Revolver [4]",
+              "producesId": 41109,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41096,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Spear [4]",
+              "producesId": 41110,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41097,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Staff [4]",
+              "producesId": 41111,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41098,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Sword [4]",
+              "producesId": 41112,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41099,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            },
+            {
+              "name": "Dragon Whip [4]",
+              "producesId": 41113,
+              "successRate": 20,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 984,
+                  "amount": 50,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 40306,
+                  "amount": 3,
+                  "immune": false
+                },
+                {
+                  "type": "item",
+                  "id": 41100,
+                  "amount": 1,
+                  "immune": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Add Slot to Armor",
+      "subgroups": [
+        {
+          "name": "C Class",
+          "quests": []
+        },
+        {
+          "name": "B Class",
+          "quests": []
+        },
+        {
+          "name": "A Class",
+          "quests": []
+        },
+        {
+          "name": "S Class",
+          "quests": []
+        },
+        {
+          "name": "SS Class",
+          "quests": []
+        }
+      ]
+    },
+    {
+      "name": "Add Slot to Dragon Wings",
+      "subgroups": [
+        {
+          "name": "Dragon Wings",
+          "quests": []
+        }
+      ]
     }
   ]
 }
