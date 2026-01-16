@@ -69,7 +69,6 @@ if (DATA.groups.length === 0) {
                 DATA.items[id].value = values[id];
               } else {
                 DATA.items[id] = {
-                  id: parseInt(id),
                   name: '',
                   value: values[id]
                 };
