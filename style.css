@@ -60,7 +60,7 @@ body {
 .sidebar-header {
   padding: 16px;
   border-bottom: 1px solid var(--border);
-  background-image: url('osromr.jpg');
+  background-image: url('image/osromr.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
