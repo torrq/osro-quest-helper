@@ -595,7 +595,7 @@ textarea {
 
 .tree-line {
   font-family: Consolas, "Courier New", monospace;
-  font-size: 12pt;
+  font-size: 11pt;
   padding: 2px 0;
   color: var(--text-muted);
 }
@@ -829,7 +829,7 @@ textarea {
   border: 1px solid var(--border);
   padding: 14px 16px;
   font-family: Consolas, "Courier New", monospace;
-  font-size: 12pt;
+  font-size: 11pt;
   white-space: pre-wrap;
   color: var(--text);
 }
