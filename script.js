@@ -884,7 +884,7 @@ function renderMaterialTree() {
       const immuneBadge = req.immune ? ' <span style="color: var(--success); font-size: 11px;">[IMMUNE]</span>' : '';
       
       if (req.type === 'item' && questIndex.has(req.id)) {
-        const item = getItem(req.id);
+        const item = isItem ? getItem(req.id) : null;
         const quests = questIndex.get(req.id);
         
         if (quests.length === 1) {
@@ -919,15 +919,15 @@ function renderMaterialTree() {
       } else if (req.type === 'credit') {
         const zenyValue = effectiveAmount * getCreditValue();
         lines.push({
-          level: depth,
-          text: `${indent}${connector}<span class="tree-item-name">Credit</span> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`
+            level: depth,
+            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`
         });
       } else if (req.type === 'gold') {
-        const zenyValue = effectiveAmount * getGoldValue();
-        lines.push({
-          level: depth,
-          text: `${indent}${connector}<span class="tree-item-name">Gold</span> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`
-        });
+          const zenyValue = effectiveAmount * getGoldValue();
+          lines.push({
+              level: depth,
+              text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`
+          });
       } else if (req.type === 'vote_points' || req.type === 'activity_points' || req.type === 'hourly_points' || req.type === 'monster_arena_points' || req.type === 'otherworld_points' || req.type === 'hall_of_heritage_points' || req.type === 'event_points') {
         const typeName = req.type === 'vote_points' ? 'Vote Points' : 
                          req.type === 'activity_points' ? 'Activity Points' : 
@@ -944,7 +944,7 @@ function renderMaterialTree() {
         const item = getItem(req.id);
         lines.push({
           level: depth,
-          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${getItemDisplayName(item) || 'Unknown'}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
+          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || 'Unknown'}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
         });
       }
     });
