@@ -1,64 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OSRO Quest Helper</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-<div class="container">
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <h1>
-        <span>OSRO Quest Helper</span>
-        <a href="https://github.com/torrq/osro-quest-helper" class="github-link" title="GitHub Page" target="_blank" rel="noopener">
-          <img src="image/github.png" alt="GitHub" width="32" height="32">
-        </a>
-      </h1>
-      <div class="tab-bar">
-        <div class="tab active" onclick="switchTab('quests')">Quests</div>
-        <div class="tab" onclick="switchTab('items')">Items</div>
-      </div>
-      <div class="toolbar">
-        <button class="btn btn-primary btn-sm" id="addBtn" onclick="addGroup()">+ Group</button>
-        <div class="toolbar-actions">
-          <div class="dropdown">
-            <button class="btn btn-sm">Export ▾</button>
-            <div class="dropdown-content">
-              <button onclick="exportAll()">All (2 Files)</button>
-              <hr class="dropdown-divider">
-              <button onclick="exportQuests()">Quests JSON</button>
-              <button onclick="exportValues()">Values JSON</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSRO Quest Helper</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="container">
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h1>
+            <span>OSRO Quest Helper</span>
+            <a
+              href="https://github.com/torrq/osro-quest-helper"
+              class="github-link"
+              title="GitHub Page"
+              target="_blank"
+              rel="noopener"
+            >
+              <img src="image/github.png" alt="GitHub" width="32" height="32" />
+            </a>
+          </h1>
+          <div class="tab-bar">
+            <div class="tab active" onclick="switchTab('quests')">Quests</div>
+            <div class="tab" onclick="switchTab('items')">Items</div>
+          </div>
+          <div class="toolbar">
+            <button
+              class="btn btn-primary btn-sm"
+              id="addBtn"
+              onclick="addGroup()"
+            >
+              + Group
+            </button>
+            <div class="toolbar-actions">
+              <div class="dropdown">
+                <button class="btn btn-sm">Export ▾</button>
+                <div class="dropdown-content">
+                  <button onclick="exportAll()">All (2 Files)</button>
+                  <hr class="dropdown-divider" />
+                  <button onclick="exportQuests()">Quests JSON</button>
+                  <button onclick="exportValues()">Values JSON</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="questsSearch" class="search-section">
+            <div class="search-row">
+              <input
+                type="text"
+                id="questSearchInput"
+                class="search-input"
+                placeholder="Search quests..."
+              />
+              <button class="btn btn-sm" onclick="clearQuestSearch()">×</button>
+            </div>
+          </div>
+          <div id="itemsSearch" class="search-section hidden">
+            <div class="search-row">
+              <input
+                type="text"
+                id="itemSearchInput"
+                class="search-input"
+                placeholder="Search items..."
+              />
+              <button class="btn btn-sm" onclick="clearItemSearch()">×</button>
             </div>
           </div>
         </div>
+        <div class="tree-container" id="treeContainer"></div>
+        <div class="items-list hidden" id="itemsList"></div>
       </div>
-      <div id="questsSearch" class="search-section">
-        <div class="search-row">
-          <input type="text" id="questSearchInput" class="search-input" placeholder="Search quests...">
-          <button class="btn btn-sm" onclick="clearQuestSearch()">×</button>
-        </div>
-      </div>
-      <div id="itemsSearch" class="search-section hidden">
-        <div class="search-row">
-          <input type="text" id="itemSearchInput" class="search-input" placeholder="Search items...">
-          <button class="btn btn-sm" onclick="clearItemSearch()">×</button>
+      <div class="main-content" id="mainContent">
+        <div class="empty-state">
+          <h2>No Quest Selected</h2>
+          <p>Select a quest from the sidebar or import your quest data</p>
         </div>
       </div>
     </div>
-    <div class="tree-container" id="treeContainer"></div>
-    <div class="items-list hidden" id="itemsList"></div>
-  </div>
-  <div class="main-content" id="mainContent">
-    <div class="empty-state">
-      <h2>No Quest Selected</h2>
-      <p>Select a quest from the sidebar or import your quest data</p>
-    </div>
-  </div>
-</div>
-<script src="config.js"></script>
-<script src="script.js"></script>
-</body>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

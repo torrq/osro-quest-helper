@@ -46,7 +46,7 @@ body {
   color: #000;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar {
@@ -60,11 +60,11 @@ body {
 .sidebar-header {
   padding: 16px;
   border-bottom: 1px solid var(--border);
-  background-image: url('image/osromr.jpg');
+  background-image: url("image/osromr.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 180px; 
+  min-height: 180px;
   display: flex;
   flex-direction: column;
 }
@@ -174,7 +174,7 @@ body {
   flex: 1;
 }
 
-.file-input-wrapper input[type=file] {
+.file-input-wrapper input[type="file"] {
   position: absolute;
   top: 0;
   left: 0;
@@ -234,7 +234,8 @@ body {
   margin-bottom: 4px;
 }
 
-.group-header, .subgroup-header {
+.group-header,
+.subgroup-header {
   padding: 4px 8px;
   background: var(--bg);
   border: 1px solid var(--border);
@@ -244,7 +245,8 @@ body {
   margin-bottom: 4px;
 }
 
-.group-header:hover, .subgroup-header:hover {
+.group-header:hover,
+.subgroup-header:hover {
   background: var(--panel-hover);
 }
 
@@ -401,7 +403,7 @@ body {
 }
 
 div.quest-bound {
-  text-align: center
+  text-align: center;
 }
 
 .form-row {
@@ -417,7 +419,9 @@ div.quest-bound {
   margin-bottom: 5px;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   padding: 10px;
   background: var(--panel);
@@ -427,7 +431,9 @@ input, textarea, select {
   font-family: inherit;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
   border-color: var(--accent);
 }
@@ -542,7 +548,7 @@ textarea {
   border-radius: 4px;
   z-index: 1000;
   opacity: 1; /* Edge */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 .dropdown:hover .dropdown-content {
@@ -575,7 +581,7 @@ textarea {
   z-index: 1000;
   margin-top: 2px;
   opacity: 1; /* Force full opacity for Edge */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .autocomplete-item {
@@ -637,11 +643,22 @@ textarea {
   color: var(--text-muted);
 }
 
-.tree-line.level-0 { padding-left: 0; color: var(--text); }
-.tree-line.level-1 { padding-left: 20px; }
-.tree-line.level-2 { padding-left: 40px; }
-.tree-line.level-3 { padding-left: 60px; }
-.tree-line.level-4 { padding-left: 80px; }
+.tree-line.level-0 {
+  padding-left: 0;
+  color: var(--text);
+}
+.tree-line.level-1 {
+  padding-left: 20px;
+}
+.tree-line.level-2 {
+  padding-left: 40px;
+}
+.tree-line.level-3 {
+  padding-left: 60px;
+}
+.tree-line.level-4 {
+  padding-left: 80px;
+}
 
 .tree-item-name {
   color: var(--accent);
@@ -699,7 +716,7 @@ textarea {
     max-width: 320px;
     z-index: 999;
     transition: left 0.3s;
-    box-shadow: 4px 0 12px rgba(0,0,0,0.5);
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
   }
 
   .sidebar.open {
@@ -721,9 +738,9 @@ textarea {
 }
 
 .item-link {
-	color: var(--accent);
-	text-decoration: none;
-	cursor: pointer;
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .item-link:hover {
@@ -731,65 +748,65 @@ textarea {
 }
 
 .quest-link {
-	color: var(--accent);
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 16px;
+  color: var(--accent);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .usage-section {
-	margin-top: 24px;
-	padding-top: 24px;
-	border-top: 1px solid var(--border);
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
 }
 
 .usage-section h3 {
-	font-size: 16px;
-	margin-bottom: 12px;
-	color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--text-muted);
 }
 
 .usage-list {
-	list-style: none;
-	padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .usage-list li {
-	padding: 6px 0;
-	font-size: 13px;
+  padding: 6px 0;
+  font-size: 13px;
 }
 
 .quest-name-header {
-	font-size: 20px;
-	font-weight: bold;
-	margin-bottom: 20px;
-	padding-bottom: 10px;
-	border-bottom: 2px solid var(--border);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
 }
 
 .materials-header {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 30px 0 15px 0;
-	padding-bottom: 5px;
-	border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: bold;
+  margin: 30px 0 15px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
 }
 
 .total-summary-header {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 30px 0 15px 0;
-	padding: 10px;
-	background: var(--panel);
-	border: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: bold;
+  margin: 30px 0 15px 0;
+  padding: 10px;
+  background: var(--panel);
+  border: 1px solid var(--border);
 }
 
 .immune-badge {
-	color: var(--danger);
-	font-size: 11px;
-	margin-left: 8px;
-	font-weight: bold;
+  color: var(--danger);
+  font-size: 11px;
+  margin-left: 8px;
+  font-weight: bold;
 }
 
 .usage-section {
@@ -901,7 +918,7 @@ textarea {
 }
 .item-selected-badge small {
   margin-left: 4px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 2px 5px;
   border-radius: 3px;
   color: var(--text-muted);
@@ -931,7 +948,7 @@ textarea {
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Layout for the requirement/reward rows in the editor */
@@ -954,7 +971,8 @@ textarea {
   position: relative;
 }
 
-.item-amount, .item-success {
+.item-amount,
+.item-success {
   width: 100%;
   padding: 6px;
   background: var(--panel);
