@@ -2444,7 +2444,7 @@
                 },
                 {
                   "type": "gold",
-                  "amount": 969,
+                  "amount": 100,
                   "immune": false
                 }
               ]
@@ -4479,7 +4479,7 @@
                 {
                   "type": "item",
                   "id": 7063,
-                  "amount": 7063,
+                  "amount": 400,
                   "immune": false
                 },
                 {
