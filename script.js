@@ -1,31 +1,4 @@
-// === AUTO-IMPORT CONFIGURATION ===
-const AUTO_IMPORT_ON_FIRST_LOAD = true;
-const USE_LOCAL_SERVER = false; // Set to true for local files, false for GitHub URLs
-
-const REMOTE_URLS = {
-  meta: 'https://torrq.github.io/osro-quest-helper/data/osromr_meta.json',
-  items: 'https://torrq.github.io/osro-quest-helper/data/osromr_items.json',
-  values: 'https://torrq.github.io/osro-quest-helper/data/osromr_item_values.json',
-  quests: 'https://torrq.github.io/osro-quest-helper/data/osromr_quests.json'
-};
-
-const LOCAL_URLS = {
-  meta: 'http://127.0.0.1:8000/data/osromr_meta.json',
-  items: 'http://127.0.0.1:8000/data/osromr_items.json',
-  values: 'http://127.0.0.1:8000/data/osromr_item_values.json',
-  quests: 'http://127.0.0.1:8000/data/osromr_quests.json'
-};
-
-// Select the source based on the toggle
-const AUTO_IMPORT_URLS = USE_LOCAL_SERVER ? LOCAL_URLS : REMOTE_URLS;
-
 let DATA = {
-  meta: { 
-    creditValueZeny: 10000000, 
-    creditItemId: 40001,
-    goldValueZeny: 124000,
-    goldItemId: 969
-  },
   items: {},
   groups: []
 };
@@ -48,17 +21,11 @@ let state = {
 if (DATA.groups.length === 0) {
   if (AUTO_IMPORT_ON_FIRST_LOAD) {
     Promise.all([
-      fetch(AUTO_IMPORT_URLS.meta).then(r => r.ok ? r.json() : null),
       fetch(AUTO_IMPORT_URLS.items).then(r => r.ok ? r.json() : null),
       fetch(AUTO_IMPORT_URLS.values).then(r => r.ok ? r.json() : null),
       fetch(AUTO_IMPORT_URLS.quests).then(r => r.ok ? r.json() : null)
     ])
-      .then(([meta, items, values, quests]) => {
-        // Merge meta
-        if (meta) {
-          DATA.meta = meta;
-        }
-        
+      .then(([items, values, quests]) => {
         // Merge items with values
         if (items) {
           DATA.items = items;
@@ -862,9 +829,9 @@ function renderRequirement(req, idx) {
           <option value="vote_points" ${req.type === 'vote_points' ? 'selected' : ''}>Vote Points</option>
           <option value="hourly_points" ${req.type === 'hourly_points' ? 'selected' : ''}>Hourly Points</option>
           <option value="activity_points" ${req.type === 'activity_points' ? 'selected' : ''}>Activity Points</option>
-          <option value="monster_arena_points" ${req.type === 'monster_arena_points' ? 'selected' : ''}>Arena Points</option>
-          <option value="otherworld_points" ${req.type === 'otherworld_points' ? 'selected' : ''}>Otherworld</option>
-          <option value="hall_of_heritage_points" ${req.type === 'hall_of_heritage_points' ? 'selected' : ''}>Heritage</option>
+          <option value="monster_arena_points" ${req.type === 'monster_arena_points' ? 'selected' : ''}>MA Points</option>
+          <option value="otherworld_points" ${req.type === 'otherworld_points' ? 'selected' : ''}>Otherworld Points</option>
+          <option value="hall_of_heritage_points" ${req.type === 'hall_of_heritage_points' ? 'selected' : ''}>HoH Points</option>
         </select>
         <input type="number" placeholder="Amount" value="${req.amount}" onchange="updateReqAmount(${idx}, this.value)">
       </div>
@@ -950,13 +917,13 @@ function renderMaterialTree() {
           text: `${indent}${connector}<span class="tree-item-name">Zeny</span> × <span class="tree-amount">${effectiveAmount.toLocaleString()}</span>${immuneBadge}`
         });
       } else if (req.type === 'credit') {
-        const zenyValue = effectiveAmount * DATA.meta.creditValueZeny;
+        const zenyValue = effectiveAmount * getCreditValue();
         lines.push({
           level: depth,
           text: `${indent}${connector}<span class="tree-item-name">Credit</span> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`
         });
       } else if (req.type === 'gold') {
-        const zenyValue = effectiveAmount * DATA.meta.goldValueZeny;
+        const zenyValue = effectiveAmount * getGoldValue();
         lines.push({
           level: depth,
           text: `${indent}${connector}<span class="tree-item-name">Gold</span> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`
@@ -1021,9 +988,9 @@ function renderSummary() {
         if (req.type === 'zeny') {
           totalZeny += effectiveAmount;
         } else if (req.type === 'credit') {
-          totalZeny += effectiveAmount * DATA.meta.creditValueZeny;
+          totalZeny += effectiveAmount * getCreditValue();
         } else if (req.type === 'gold') {
-          totalZeny += effectiveAmount * DATA.meta.goldValueZeny;
+          totalZeny += effectiveAmount * getGoldValue();
         } else if (req.type === 'item') {
           const item = getItem(req.id);
           totalZeny += effectiveAmount * (item.value || 0);
@@ -1106,9 +1073,9 @@ function renderSummary() {
     let extra = '';
     let itemName = `<span class="summary-name">${entry.name}</span>`;
     if (entry.type === 'credit') {
-      extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * DATA.meta.creditValueZeny).toLocaleString()} zeny)</span>`;
+      extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
     } else if (entry.type === 'gold') {
-      extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * DATA.meta.goldValueZeny).toLocaleString()} zeny)</span>`;
+      extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * getGoldValue()).toLocaleString()} zeny)</span>`;
     } else if (entry.type === 'item' && entry.value > 0) {
       extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
     }
@@ -1321,21 +1288,10 @@ function exportValues() {
   URL.revokeObjectURL(url);
 }
 
-function exportMeta() {
-  const json = JSON.stringify(DATA.meta, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'osromr_meta.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
 function exportAll() {
   exportQuests();
   setTimeout(() => exportValues(), 100);
-  setTimeout(() => exportMeta(), 200);
 }
 
 function createItemRow(item, quest, type) {
