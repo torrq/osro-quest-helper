@@ -337,7 +337,9 @@ body {
 
 .main-content {
   overflow-y: auto;
-  padding: 24px;
+  padding-top: px;
+  padding-left: 24px;
+  padding-right: 24px;
   padding-bottom: 80px;
 }
 
@@ -352,16 +354,22 @@ body {
   margin-bottom: 8px;
 }
 
-.editor {
+.editor-quest {
   max-width: 1200px;
 }
 
-.editor h2 {
+.editor-quest h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-.form-group {
+.editor-item {
+  margin-top: 20px;
+  max-width: 1200px;
+}
+
+.editor-item h2 {
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
@@ -392,6 +400,17 @@ body {
 
 .quest-checkbox input[type="checkbox"] {
   width: auto;
+  cursor: pointer;
+}
+
+div.quest-bound {
+  margin-top: 40px;
+  text-align: center
+}
+
+.quest-bound label {
+  font-size: 12pt;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -430,7 +449,7 @@ textarea {
 }
 
 .requirements-section {
-  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .requirements-section h3 {
@@ -576,10 +595,8 @@ textarea {
 }
 
 .material-tree {
-  margin-top: 32px;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
   padding: 20px;
 }
 
@@ -610,10 +627,9 @@ textarea {
 }
 
 .summary-section {
-  margin-top: 32px;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
+
   padding: 20px;
 }
 
@@ -742,7 +758,6 @@ textarea {
 	padding: 10px;
 	background: var(--panel);
 	border: 1px solid var(--border);
-	border-radius: 6px;
 }
 
 .immune-badge {
@@ -824,10 +839,7 @@ textarea {
 .item-description-box {
   background: #1b2130;
   border: 1px solid var(--border);
-  border-radius: 6px;
   padding: 14px 16px;
-  margin-top: 10px;
-
   font-family: Consolas, "Courier New", monospace;
   font-size: 12pt;
   white-space: pre-wrap;

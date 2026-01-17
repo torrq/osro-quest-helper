@@ -329,7 +329,7 @@ function renderItemContent() {
   const descriptionHtml = parseDescription(item.desc);
 
   container.innerHTML = `
-    <div class="editor">
+    <div class="editor-item">
       <div class="item-header">
         <h2>
           ${getItemDisplayName(item)}
@@ -645,9 +645,8 @@ function renderQuestContent() {
   const descriptionHtml = parseDescription(item.desc);
   
   container.innerHTML = `
-    <div class="editor">
-      <h2>Quest Editor</h2>
-      
+    <div class="editor-quest">
+      <span class="item-label">Quest Name:</span>
       <div class="form-group">
         <input type="text" placeholder="Quest Name" value="${quest.name}" onchange="updateQuestName(this.value)">
       </div>
@@ -655,6 +654,7 @@ function renderQuestContent() {
       <div class="form-group">
         <div class="quest-info-row">
           <div class="item-selector-wrapper">
+            <span class="item-label" style="display: block; margin-bottom: 6px;">Produces Item:</span>
             ${quest.producesId ? `
               <div class="item-selected-badge">
                 <strong><a class="item-link tree-item-name" onclick="navigateToItem(${quest.producesId})">${getItemDisplayName(item)}</a></strong>
@@ -668,45 +668,41 @@ function renderQuestContent() {
             `}
           </div>
           
-          <input type="number" min="1" max="100" placeholder="Success %" value="${quest.successRate}" onchange="updateSuccessRate(this.value)" style="width: 80px;">
+          <div>
+            <span class="item-label" style="display: block; margin-bottom: 6px;">Success Rate:</span>
+            <input type="number" style="width:90px;" min="1" max="100" placeholder="%" value="${quest.successRate}" onchange="updateSuccessRate(this.value)">
+          </div>
           
-          <label class="quest-checkbox">
-            <input type="checkbox" ${quest.accountBound ? 'checked' : ''} onchange="updateQuestAccountBound(this.checked)">
-            Account Bound
-          </label>
+          <div class="quest-bound">
+            <label class="quest-checkbox">
+              <input type="checkbox" ${quest.accountBound ? 'checked' : ''} onchange="updateQuestAccountBound(this.checked)">
+              Acct Bound
+            </label>
+          </div>
         </div>
       </div>
-
-${descriptionHtml ? `
-          <span class="item-label">Description:</span>
-          <div class="item-description-box">${descriptionHtml}</div>` : ''}
-
+      <span class="item-label">Requirements: &nbsp;<button class="btn btn-sm btn-primary" onclick="addRequirement()">+ Add</button></span>
       <div class="requirements-section">
-        <h3>
-          Requirements
-          <button class="btn btn-sm btn-primary" onclick="addRequirement()">+ Add</button>
-        </h3>
         <div class="requirements-grid">
           ${quest.requirements.map((req, idx) => renderRequirement(req, idx)).join('')}
         </div>
       </div>
 
+${descriptionHtml ? `
+      <span class="item-label">Item Description:</span>
+      <div class="item-description-box">${descriptionHtml}</div>`
+:''}
+      <span class="item-label">Tree:</span>
       <div class="material-tree">
-        <h3>Material Tree</h3>
         ${renderMaterialTree()}
       </div>
 
+      <span class="item-label">Totals:</span>
       <div class="summary-section">
-        <div style="background: var(--bg); padding: 10px 16px; margin: -20px -20px 20px -20px; border-bottom: 1px solid var(--border); text-align: center; font-size: 15px; color: var(--accent); font-weight: 500;">
-          ${quest.name}
-        </div>
-        <h3>
-          Material Totals
-          <span style="margin-left: auto; font-size: 14px; font-style: italic; color: var(--text-muted); font-weight: normal;">
-            ${quest.successRate}% Success Rate
-          </span>
-        </h3>
         ${renderSummary()}
+        <div style="background: var(--bg); padding: 10px 16px; margin: 20px 40% 0 40%; border-top: 1px solid var(--border); text-align: center; font-size: 14px; color: yellow; font-weight: normal; font-style: italic;">
+            ${quest.successRate}% Success Rate
+        </div>
       </div>
     </div>
   `;
@@ -1499,7 +1495,8 @@ function setupProducesSearch(input) {
         return;
     }
 
-    const matches = Object.values(DATA.items)
+    const matches = Object.entries(DATA.items)
+        .map(([id, item]) => ({ ...item, id: parseInt(id) }))
         .filter(i => 
             (i.name && i.name.toLowerCase().includes(query)) || 
             (i.id && i.id.toString().includes(query))
