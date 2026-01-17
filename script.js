@@ -884,21 +884,23 @@ function renderMaterialTree() {
       const immuneBadge = req.immune ? ' <span style="color: var(--success); font-size: 11px;">[IMMUNE]</span>' : '';
       
       if (req.type === 'item' && questIndex.has(req.id)) {
-        const item = isItem ? getItem(req.id) : null;
+        const item = getItem(req.id);
         const quests = questIndex.get(req.id);
         
         if (quests.length === 1) {
           // Single quest - show as normal
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
+            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
+            // CHANGED: Use req.id instead of item.id (since item no longer has id property)
           });
           walk(quests[0], depth + 1, effectiveAmount, newPath);
         } else {
           // Multiple quests - show options
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${item.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span style="color: var(--warning); font-size: 11px;">[${quests.length} OPTIONS]</span>`
+            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span style="color: var(--warning); font-size: 11px;">[${quests.length} OPTIONS]</span>`
+            // CHANGED: Use req.id instead of item.id
           });
           
           quests.forEach((q, idx) => {
