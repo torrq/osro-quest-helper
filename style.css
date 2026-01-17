@@ -526,6 +526,43 @@ textarea {
   position: relative;
 }
 
+/* Dropdown (export menu) */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  min-width: 160px;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 1; /* Edge */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content button {
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.dropdown-content button:hover {
+  background: var(--panel-hover);
+}
+
 .autocomplete-dropdown {
   position: absolute;
   top: 100%;
@@ -993,4 +1030,32 @@ textarea {
 
 .summary-tab-content.active {
   display: block;
+}
+
+/* Search sections */
+.search-section {
+  margin-top: 8px;
+}
+
+.search-row {
+  display: flex;
+  gap: 4px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+/* Generic hidden helper */
+.hidden {
+  display: none !important;
+}
+
+/* Dropdown divider */
+.dropdown-divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 0;
 }

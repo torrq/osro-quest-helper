@@ -5,43 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OSRO Quest Helper</title>
 <link rel="stylesheet" href="style.css">
-<style>
-  /* Added a small style adjustment for the new export dropdown */
-  .dropdown { position: relative; display: inline-block; }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    /* FIXED: Use explicit color matching autocomplete to ensure opacity */
-    background-color: #0a0e14; 
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); /* Increased shadow opacity for better contrast */
-    z-index: 1000; /* Increased z-index */
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    right: 0;
-    opacity: 1; /* Force opacity for Edge */
-  }
-  
-  .dropdown:hover .dropdown-content { display: block; }
-  
-  .dropdown-content button {
-    width: 100%;
-    text-align: left;
-    padding: 8px 12px;
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-  }
-  
-  .dropdown-content button:hover { background-color: var(--panel-hover); }
-</style>
 </head>
 <body>
-
 <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-
 <div class="container">
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -62,32 +28,29 @@
             <button class="btn btn-sm">Export ▾</button>
             <div class="dropdown-content">
               <button onclick="exportAll()">All (2 Files)</button>
-              <hr style="border: 0; border-top: 1px solid var(--border); margin: 0;">
+              <hr class="dropdown-divider">
               <button onclick="exportQuests()">Quests JSON</button>
               <button onclick="exportValues()">Values JSON</button>
             </div>
           </div>
         </div>
       </div>
-      
-      <div id="questsSearch" style="margin-top: 8px;">
-        <div style="display: flex; gap: 4px;">
-          <input type="text" id="questSearchInput" placeholder="Search quests..." style="flex: 1; padding: 6px 8px; font-size: 13px;">
+      <div id="questsSearch" class="search-section">
+        <div class="search-row">
+          <input type="text" id="questSearchInput" class="search-input" placeholder="Search quests...">
           <button class="btn btn-sm" onclick="clearQuestSearch()">×</button>
         </div>
       </div>
-
-      <div id="itemsSearch" style="display: none; margin-top: 8px;">
-        <div style="display: flex; gap: 4px;">
-          <input type="text" id="itemSearchInput" placeholder="Search items..." style="flex: 1; padding: 6px 8px; font-size: 13px;">
+      <div id="itemsSearch" class="search-section hidden">
+        <div class="search-row">
+          <input type="text" id="itemSearchInput" class="search-input" placeholder="Search items...">
           <button class="btn btn-sm" onclick="clearItemSearch()">×</button>
         </div>
       </div>
     </div>
     <div class="tree-container" id="treeContainer"></div>
-    <div class="items-list" id="itemsList" style="display: none;"></div>
+    <div class="items-list hidden" id="itemsList"></div>
   </div>
-
   <div class="main-content" id="mainContent">
     <div class="empty-state">
       <h2>No Quest Selected</h2>
@@ -95,9 +58,7 @@
     </div>
   </div>
 </div>
-
 <script src="config.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

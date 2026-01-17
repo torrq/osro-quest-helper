@@ -214,32 +214,38 @@ function render() {
     }
   });
   
+  const treeContainer = document.getElementById('treeContainer');
+  const itemsList = document.getElementById('itemsList');
+  const itemsSearch = document.getElementById('itemsSearch');
+  const questsSearch = document.getElementById('questsSearch');
+  const addBtn = document.getElementById('addBtn');
+
   if (state.currentTab === 'quests') {
-    document.getElementById('treeContainer').style.display = 'block';
-    document.getElementById('itemsList').style.display = 'none';
-    document.getElementById('itemsSearch').style.display = 'none';
-    document.getElementById('questsSearch').style.display = 'block';
+    treeContainer.classList.remove('hidden');
+    itemsList.classList.add('hidden');
+    itemsSearch.classList.add('hidden');
+    questsSearch.classList.remove('hidden');
 
     // SHOW button for Quests
-    const addBtn = document.getElementById('addBtn');
-    addBtn.style.display = 'block'; // Ensure it is visible
+    addBtn.classList.remove('hidden');
     addBtn.textContent = '+ Group';
     addBtn.onclick = addGroup;
 
     renderSidebar();
     renderQuestContent();
   } else {
-    document.getElementById('treeContainer').style.display = 'none';
-    document.getElementById('itemsList').style.display = 'block';
-    document.getElementById('itemsSearch').style.display = 'block';
-    document.getElementById('questsSearch').style.display = 'none';
+    treeContainer.classList.add('hidden');
+    itemsList.classList.remove('hidden');
+    itemsSearch.classList.remove('hidden');
+    questsSearch.classList.add('hidden');
 
     // HIDE button for Items
-    document.getElementById('addBtn').style.display = 'none';
+    addBtn.classList.add('hidden');
 
     renderItems();
     renderItemContent();
   }
+
 }
 
 function renderItems() {
