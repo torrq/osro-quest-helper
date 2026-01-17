@@ -1,6 +1,6 @@
 // === AUTO-IMPORT CONFIGURATION ===
 const AUTO_IMPORT_ON_FIRST_LOAD = true;
-const USE_LOCAL_SERVER = true; // Set to true for local files, false for GitHub URLs
+const USE_LOCAL_SERVER = false; // Set to true for local files, false for GitHub URLs
 
 const REMOTE_URLS = {
   items: 'https://torrq.github.io/osro-quest-helper/data/osromr_items.json',
