@@ -589,9 +589,9 @@ textarea {
 }
 
 .tree-line {
-  font-family: "Courier New", monospace;
-  font-size: 13px;
-  padding: 4px 0;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12pt;
+  padding: 2px 0;
   color: var(--text-muted);
 }
 
@@ -683,6 +683,10 @@ textarea {
 	color: var(--accent);
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.item-link:hover {
+  text-decoration: underline;
 }
 
 .quest-link {
@@ -825,9 +829,7 @@ textarea {
   margin-top: 10px;
 
   font-family: Consolas, "Courier New", monospace;
-  font-size: 13px;
-  line-height: 1.45;
-
+  font-size: 12pt;
   white-space: pre-wrap;
   color: var(--text);
 }
@@ -952,4 +954,44 @@ textarea {
   color: var(--text-muted);
   font-style: italic;
   margin-top: 4px;
+}
+
+.summary-tabs-container {
+  margin-top: 16px;
+}
+
+.summary-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-tab {
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.summary-tab:hover {
+  color: var(--text);
+  background: var(--panel-hover);
+}
+
+.summary-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.summary-tab-content {
+  display: none;
+}
+
+.summary-tab-content.active {
+  display: block;
 }

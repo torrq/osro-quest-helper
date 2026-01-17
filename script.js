@@ -132,23 +132,18 @@ function findQuestsByItemId(itemId) {
   DATA.groups.forEach((group, gi) => {
     group.subgroups.forEach((subgroup, si) => {
       subgroup.quests.forEach((quest, qi) => {
-        // Check if quest produces this item
         if (quest.producesId === itemId) {
           results.produces.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
         }
-        
-        // Check if quest requires this item
-        const req = quest.requirements.find(r => r.type === 'item' && r.id === itemId);
-        if (req) {
-          results.requires.push({ 
-            quest, 
-            groupIdx: gi, 
-            subIdx: si, 
-            questIdx: qi, 
-            group, 
-            subgroup,
-            amount: req.amount // Store amount for display
-          });
+        if (quest.requirements.some(r => {
+          // Check regular items
+          if (r.type === 'item' && r.id === itemId) return true;
+          // Check special currency types
+          if (r.type === 'gold' && itemId === SPECIAL_ITEMS.GOLD) return true;
+          if (r.type === 'credit' && itemId === SPECIAL_ITEMS.CREDIT) return true;
+          return false;
+        })) {
+          results.requires.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
         }
       });
     });
@@ -190,8 +185,26 @@ function findQuestsByItemId(itemId) {
         if (quest.producesId === itemId) {
           results.produces.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
         }
-        if (quest.requirements.some(r => r.type === 'item' && r.id === itemId)) {
-          results.requires.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
+        // Find the matching requirement
+        const matchingReq = quest.requirements.find(r => {
+          // Check regular items
+          if (r.type === 'item' && r.id === itemId) return true;
+          // Check special currency types
+          if (r.type === 'gold' && itemId === SPECIAL_ITEMS.GOLD) return true;
+          if (r.type === 'credit' && itemId === SPECIAL_ITEMS.CREDIT) return true;
+          return false;
+        });
+        
+        if (matchingReq) {
+          results.requires.push({ 
+            quest, 
+            groupIdx: gi, 
+            subIdx: si, 
+            questIdx: qi, 
+            group, 
+            subgroup,
+            amount: matchingReq.amount // Store the amount from the requirement
+          });
         }
       });
     });
@@ -299,6 +312,7 @@ function renderItemContent() {
   }
 
   const id = state.selectedItemId;
+
   const item = DATA.items[id];
 
   if (!item) {
@@ -678,7 +692,7 @@ ${descriptionHtml ? `
       </div>
 
       <div class="material-tree">
-        <h3>Material Breakdown Tree</h3>
+        <h3>Material Tree</h3>
         ${renderMaterialTree()}
       </div>
 
@@ -687,7 +701,7 @@ ${descriptionHtml ? `
           ${quest.name}
         </div>
         <h3>
-          Total Materials Summary
+          Material Totals
           <span style="margin-left: auto; font-size: 14px; font-style: italic; color: var(--text-muted); font-weight: normal;">
             ${quest.successRate}% Success Rate
           </span>
@@ -892,7 +906,6 @@ function renderMaterialTree() {
           lines.push({
             level: depth,
             text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`
-            // CHANGED: Use req.id instead of item.id (since item no longer has id property)
           });
           walk(quests[0], depth + 1, effectiveAmount, newPath);
         } else {
@@ -900,7 +913,6 @@ function renderMaterialTree() {
           lines.push({
             level: depth,
             text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span style="color: var(--warning); font-size: 11px;">[${quests.length} OPTIONS]</span>`
-            // CHANGED: Use req.id instead of item.id
           });
           
           quests.forEach((q, idx) => {
@@ -963,14 +975,106 @@ function renderMaterialTree() {
 
 function renderSummary() {
   const questIndex = buildQuestIndex();
+  
+  // Find all items with multiple quest options
+  const multiQuestItems = new Map();
+  
+  function findMultiQuestItems(quest, questPath = new Set()) {
+    if (questPath.has(quest)) return;
+    const newPath = new Set(questPath);
+    newPath.add(quest);
+    
+    quest.requirements.forEach(req => {
+      if (req.type === 'item' && questIndex.has(req.id)) {
+        const quests = questIndex.get(req.id);
+        if (quests.length > 1) {
+          multiQuestItems.set(req.id, {
+            name: getItem(req.id).name,
+            quests: quests
+          });
+        }
+        // Continue searching in first option
+        findMultiQuestItems(quests[0], newPath);
+      }
+    });
+  }
+  
+  findMultiQuestItems(state.selectedQuest);
+  
+  // If no multi-quest items, calculate single summary
+  if (multiQuestItems.size === 0) {
+    return renderSingleSummary(questIndex, {});
+  }
+  
+  // Generate all combinations of quest choices
+  const items = Array.from(multiQuestItems.entries());
+  const combinations = generateCombinations(items);
+  
+  // Generate tab labels with group and subgroup names
+  const tabLabels = combinations.map(combo => {
+    const labels = [];
+    for (const [itemId, quest] of Object.entries(combo)) {
+      const itemName = multiQuestItems.get(Number(itemId)).name;
+      // Find the group and subgroup for this quest
+      let groupName = '';
+      let subgroupName = '';
+      DATA.groups.forEach(group => {
+        group.subgroups.forEach(subgroup => {
+          if (subgroup.quests.includes(quest)) {
+            groupName = group.name;
+            subgroupName = subgroup.name;
+          }
+        });
+      });
+      labels.push(`(${groupName} / ${subgroupName})`);
+    }
+    return labels.join(' | ');
+  });
+  
+  let html = `
+    <div class="summary-tabs-container">
+      <div class="summary-tabs">
+        ${combinations.map((combo, idx) => `
+          <div class="summary-tab ${idx === 0 ? 'active' : ''}" 
+               onclick="switchSummaryTab(${idx})"
+               title="${tabLabels[idx]}">
+            Option ${idx + 1} ${tabLabels[idx]}
+          </div>
+        `).join('')}
+      </div>
+      ${combinations.map((combo, idx) => `
+        <div class="summary-tab-content ${idx === 0 ? 'active' : ''}" 
+             id="summary-tab-${idx}">
+          ${renderSingleSummary(questIndex, combo)}
+        </div>
+      `).join('')}
+    </div>
+  `;
+  
+  return html;
+}
+
+function generateCombinations(items) {
+  if (items.length === 0) return [{}];
+  
+  const [first, ...rest] = items;
+  const [itemId, { quests }] = first;
+  const restCombos = generateCombinations(rest);
+  
+  const result = [];
+  for (const quest of quests) {
+    for (const combo of restCombos) {
+      result.push({ ...combo, [itemId]: quest });
+    }
+  }
+  return result;
+}
+
+function renderSingleSummary(questIndex, questChoices) {
   const totals = {};
   let totalZeny = 0;
   
-  // Track if we've seen items with multiple quest options
-  const multiQuestWarning = new Set();
-  
   function accumulate(quest, multiplier, questPath = new Set()) {
-    // Prevent infinite loops
     if (questPath.has(quest)) return;
     const newPath = new Set(questPath);
     newPath.add(quest);
@@ -979,11 +1083,9 @@ function renderSummary() {
       const effectiveAmount = (Number(req.amount) || 0) * multiplier;
       if (req.type === 'item' && questIndex.has(req.id)) {
         const quests = questIndex.get(req.id);
-        if (quests.length > 1) {
-          multiQuestWarning.add(getItem(req.id).name);
-        }
-        // Use first quest option for summary calculation
-        accumulate(quests[0], effectiveAmount, newPath);
+        // Use specified choice or default to first
+        const chosenQuest = questChoices[req.id] || quests[0];
+        accumulate(chosenQuest, effectiveAmount, newPath);
         return;
       } else {
         // Calculate zeny contributions
@@ -1009,7 +1111,6 @@ function renderSummary() {
                      req.type === 'otherworld_points' ? 'Otherworld Points' :
                      req.type === 'hall_of_heritage_points' ? 'Hall of Heritage Points' :
                      req.type === 'event_points' ? 'Event Points' :
-
                      getItem(req.id).name || 'Unknown';
         
         if (!totals[key]) {
@@ -1023,7 +1124,6 @@ function renderSummary() {
   accumulate(state.selectedQuest, 1);
   
   const entries = Object.values(totals).sort((a, b) => {
-    // Currency types first
     const currencyOrder = { 'zeny': 0, 'credit': 1, 'gold': 2 };
     const aIsCurrency = a.type in currencyOrder;
     const bIsCurrency = b.type in currencyOrder;
@@ -1034,12 +1134,10 @@ function renderSummary() {
     if (aIsCurrency) return -1;
     if (bIsCurrency) return 1;
     
-    // Then sort by amount (descending)
     if (a.amount !== b.amount) {
       return b.amount - a.amount;
     }
     
-    // Then alphabetically by name
     return a.name.localeCompare(b.name);
   });
   
@@ -1049,16 +1147,6 @@ function renderSummary() {
   
   let html = '';
   
-  // Warning about multiple quest options
-  if (multiQuestWarning.size > 0) {
-    html += `
-      <div style="background: var(--panel-hover); border: 1px solid var(--warning); border-radius: 4px; padding: 10px; margin-bottom: 12px; font-size: 12px; color: var(--warning);">
-        ⚠️ Multiple crafting options exist for: ${Array.from(multiQuestWarning).join(', ')}. Summary uses first option - see breakdown tree for alternatives.
-      </div>
-    `;
-  }
-  
-  // Add total zeny summary at the top
   if (totalZeny > 0) {
     html += `
       <div class="summary-item" style="border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 12px;">
@@ -1073,7 +1161,6 @@ function renderSummary() {
       entry.amount.toLocaleString() : 
       entry.amount;
     let extra = '';
-    let itemName = `<span class="summary-name">${entry.name}</span>`;
     if (entry.type === 'credit') {
       extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
     } else if (entry.type === 'gold') {
@@ -1083,13 +1170,22 @@ function renderSummary() {
     }
     return `
       <div class="summary-item">
-        <span class="summary-name">${itemName}</span>
+        <span class="summary-name">${entry.name}</span>
         <span class="summary-amount">${displayAmount}${extra}</span>
       </div>
     `;
   }).join('');
   
   return html;
+}
+
+function switchSummaryTab(index) {
+  document.querySelectorAll('.summary-tab').forEach((tab, idx) => {
+    tab.classList.toggle('active', idx === index);
+  });
+  document.querySelectorAll('.summary-tab-content').forEach((content, idx) => {
+    content.classList.toggle('active', idx === index);
+  });
 }
 
 function buildQuestIndex() {
