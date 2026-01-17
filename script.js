@@ -17,19 +17,6 @@ let state = {
   questSearchFilter: ''
 };
 
-(function checkLocalStorageAvailability() {
-  try {
-    const testKey = '__osro_storage_test__';
-    localStorage.setItem(testKey, 'test');
-    localStorage.removeItem(testKey);
-    console.log('[Storage] localStorage is available');
-  } catch (err) {
-    console.warn('[Storage] localStorage is NOT available');
-    console.warn('[Storage] You may be in private browsing mode');
-    console.warn('[Storage] Items will need to re-download on each page load');
-  }
-})();
-
 // Initialize data - always fetch from remote (no caching for development)
 (function initializeData() {
   // Always fetch quests, values, and items from remote
