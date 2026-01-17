@@ -134,20 +134,10 @@ function switchTab(tab) {
   render();
 }
 
-function filterItems(value) {
-  state.itemSearchFilter = value.toLowerCase();
-  renderItems();
-}
-
 function clearItemSearch() {
   state.itemSearchFilter = '';
   document.getElementById('itemSearchInput').value = '';
   renderItems();
-}
-
-function filterQuests(value) {
-  state.questSearchFilter = value.toLowerCase();
-  renderSidebar();
 }
 
 function clearQuestSearch() {
@@ -254,8 +244,29 @@ function render() {
 
 function renderItems() {
   const container = document.getElementById('itemsList');
-  let items = getAllItems();
+  
+  // 1. First, identify every item ID that is actually used in a quest
+  const usedItemIds = new Set();
+  DATA.groups.forEach(group => {
+    group.subgroups.forEach(subgroup => {
+      subgroup.quests.forEach(quest => {
+        // Add the produced item
+        if (quest.producesId) usedItemIds.add(Number(quest.producesId));
+        
+        // Add all required items
+        quest.requirements.forEach(req => {
+          if (req.type === 'item' && req.id) {
+            usedItemIds.add(Number(req.id));
+          }
+        });
+      });
+    });
+  });
 
+  // 2. Filter the master item list to only those in our 'used' Set
+  let items = getAllItems().filter(item => usedItemIds.has(item.id));
+
+  // 3. Apply search filter if active
   if (state.itemSearchFilter) {
     const q = state.itemSearchFilter;
     items = items.filter(item =>
@@ -264,15 +275,36 @@ function renderItems() {
     );
   }
 
-  container.innerHTML = items.map(item => `
-    <div class="item-row ${state.selectedItemId === item.id ? 'active' : ''}"
-         onclick="selectItem(${item.id})">
-      <div class="item-row-header">
-        <span>${getItemDisplayName(item) || '&lt;unnamed&gt;'}</span>
-        <span class="item-row-id">#${item.id}</span>
+  const totalFound = items.length;
+  const limit = 1000;
+  const displayedItems = items.slice(0, limit);
+
+  let html = '';
+  
+  // Display a count of used items vs search results
+  if (totalFound > 0) {
+    html += `<div style="padding: 4px 8px; font-size: 11px; color: var(--accent); border-bottom: 1px solid var(--border); text-align: center; background: rgba(255,255,255,0.03);">
+               Showing ${displayedItems.length} of ${totalFound} items used in quests
+             </div>`;
+  }
+
+  if (items.length === 0) {
+    html = `<div style="padding: 20px; text-align: center; color: var(--text-muted); font-style: italic;">
+              No used items found ${state.itemSearchFilter ? 'matching your search' : ''}
+            </div>`;
+  } else {
+    html += displayedItems.map(item => `
+      <div class="item-row ${state.selectedItemId === item.id ? 'active' : ''}"
+           onclick="selectItem(${item.id})">
+        <div class="item-row-header">
+          <span>${getItemDisplayName(item) || '&lt;unnamed&gt;'}</span>
+          <span class="item-row-id">#${item.id}</span>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
+  }
+
+  container.innerHTML = html;
 }
 
 function selectItem(id) {
@@ -1422,3 +1454,42 @@ document.addEventListener('click', (e) => {
 });
 
 render();
+
+/**
+ * Debounce Utility: Prevents a function from being called too rapidly.
+ */
+function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
+
+// Optimized Search Handlers
+const debouncedQuestFilter = debounce((value) => {
+  state.questSearchFilter = value.toLowerCase();
+  renderSidebar();
+}, 250);
+
+const debouncedItemFilter = debounce((value) => {
+  state.itemSearchFilter = value.toLowerCase();
+  renderItems();
+}, 250);
+
+// Attach event listeners after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  const qInput = document.getElementById('questSearchInput');
+  const iInput = document.getElementById('itemSearchInput');
+
+  if (qInput) {
+    qInput.addEventListener('input', (e) => debouncedQuestFilter(e.target.value));
+  }
+  if (iInput) {
+    iInput.addEventListener('input', (e) => debouncedItemFilter(e.target.value));
+  }
+});
+
+// Update the existing filter functions to be simple wrappers if needed elsewhere
+function filterItems(value) { debouncedItemFilter(value); }
+function filterQuests(value) { debouncedQuestFilter(value); }
