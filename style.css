@@ -202,8 +202,7 @@ body {
 .item-row {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 8px;
+  padding: 6px 8px;
   margin-bottom: 6px;
   cursor: pointer;
   transition: all 0.2s;
@@ -232,17 +231,16 @@ body {
 }
 
 .group {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .group-header, .subgroup-header {
-  padding: 8px;
+  padding: 4px 8px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   margin-bottom: 4px;
 }
 
@@ -283,18 +281,18 @@ body {
 }
 
 .subgroup {
-  margin-left: 16px;
-  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-bottom: 4px;
 }
 
 .quest-item {
-  padding: 6px 12px;
-  margin: 2px 0 2px 32px;
+  padding: 4px 6px;
+  margin: 2px 0 2px 4px;
   background: transparent;
   border-left: 2px solid transparent;
   cursor: grab;
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text);
   transition: all 0.2s;
   display: flex;
   align-items: center;
@@ -404,14 +402,7 @@ body {
 }
 
 div.quest-bound {
-  margin-top: 40px;
   text-align: center
-}
-
-.quest-bound label {
-  font-size: 12pt;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .form-row {
@@ -432,7 +423,6 @@ input, textarea, select {
   padding: 10px;
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
   color: var(--text);
   font-size: 14px;
   font-family: inherit;
@@ -544,7 +534,6 @@ textarea {
   right: 0;
   background: #0a0e14 !important; /* Force explicit color - matches --bg */
   border: 1px solid var(--accent);
-  border-radius: 4px;
   max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
@@ -597,7 +586,7 @@ textarea {
 .material-tree {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 20px;
+  padding: 15px;
 }
 
 .material-tree h3 {
@@ -630,7 +619,7 @@ textarea {
   background: var(--panel);
   border: 1px solid var(--border);
 
-  padding: 20px;
+  padding: 15px;
 }
 
 .summary-section h3 {
@@ -643,7 +632,7 @@ textarea {
 .summary-item {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  padding: 4px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -652,7 +641,7 @@ textarea {
 }
 
 .summary-name {
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .summary-amount {
@@ -917,7 +906,6 @@ textarea {
   align-items: center;
   background: var(--bg);
   padding: 8px;
-  border-radius: 6px;
   margin-bottom: 4px;
   cursor: default !important;
 }

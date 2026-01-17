@@ -17,8 +17,22 @@ let state = {
   questSearchFilter: ''
 };
 
-// Initialize data — auto-import remote file on first load if enabled
-if (DATA.groups.length === 0) {
+(function checkLocalStorageAvailability() {
+  try {
+    const testKey = '__osro_storage_test__';
+    localStorage.setItem(testKey, 'test');
+    localStorage.removeItem(testKey);
+    console.log('[Storage] localStorage is available');
+  } catch (err) {
+    console.warn('[Storage] localStorage is NOT available');
+    console.warn('[Storage] You may be in private browsing mode');
+    console.warn('[Storage] Items will need to re-download on each page load');
+  }
+})();
+
+// Initialize data - always fetch from remote (no caching for development)
+(function initializeData() {
+  // Always fetch quests, values, and items from remote
   if (AUTO_IMPORT_ON_FIRST_LOAD) {
     Promise.all([
       fetch(AUTO_IMPORT_URLS.items).then(r => r.ok ? r.json() : null),
@@ -29,6 +43,8 @@ if (DATA.groups.length === 0) {
         // Merge items with values
         if (items) {
           DATA.items = items;
+          console.log(`[Init] Loaded ${Object.keys(DATA.items).length} items from remote`);
+          
           // Apply values to items
           if (values) {
             Object.keys(values).forEach(id => {
@@ -41,27 +57,31 @@ if (DATA.groups.length === 0) {
                 };
               }
             });
+            console.log(`[Init] Applied ${Object.keys(values).length} item values`);
           }
+        } else {
+          console.warn('[Init] No items data received from remote');
         }
         
-        // Load quests
+        // Load quests (always from remote during development)
         if (quests && quests.groups) {
           DATA.groups = quests.groups;
+          console.log(`[Init] Loaded ${quests.groups.length} quest groups`);
+        } else {
+          console.warn('[Init] No quest data received from remote');
         }
         
         render();
       })
       .catch(err => {
-        console.error('Auto-import failed:', err);
+        console.error('[Init] Auto-import failed:', err);
         alert('Failed to auto-import data from remote URLs.\n\nCheck console for details.');
         render();
       });
   } else {
     render();
   }
-} else {
-  render();
-}
+})();
 
 function getItem(id) {
   if (id === null || id === undefined) {
@@ -125,30 +145,6 @@ function switchTab(tab) {
     document.getElementById('questsSearch').style.display = 'block';
   }
   render();
-}
-
-function findQuestsByItemId(itemId) {
-  const results = { produces: [], requires: [] };
-  DATA.groups.forEach((group, gi) => {
-    group.subgroups.forEach((subgroup, si) => {
-      subgroup.quests.forEach((quest, qi) => {
-        if (quest.producesId === itemId) {
-          results.produces.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
-        }
-        if (quest.requirements.some(r => {
-          // Check regular items
-          if (r.type === 'item' && r.id === itemId) return true;
-          // Check special currency types
-          if (r.type === 'gold' && itemId === SPECIAL_ITEMS.GOLD) return true;
-          if (r.type === 'credit' && itemId === SPECIAL_ITEMS.CREDIT) return true;
-          return false;
-        })) {
-          results.requires.push({ quest, groupIdx: gi, subIdx: si, questIdx: qi, group, subgroup });
-        }
-      });
-    });
-  });
-  return results;
 }
 
 function filterItems(value) {
@@ -556,7 +552,7 @@ function renderSidebar() {
               if (state.draggedFrom.groupIdx === groupIdx && state.draggedFrom.subIdx === subIdx) {
                 const quests = subgroup.quests;
                 const [removed] = quests.splice(state.draggedQuest, 1);
-                const newIdx = questIdx > state.draggedQuest ? questIdx : questIdx;
+                const newIdx = questIdx > state.draggedQuest ? questIdx - 1 : questIdx;
                 quests.splice(newIdx, 0, removed);
                 render();
               }
@@ -674,10 +670,8 @@ function renderQuestContent() {
           </div>
           
           <div class="quest-bound">
-            <label class="quest-checkbox">
-              <input type="checkbox" ${quest.accountBound ? 'checked' : ''} onchange="updateQuestAccountBound(this.checked)">
-              Acct Bound
-            </label>
+            <span class="item-label" style="display: block; margin-bottom: 6px;">Bound:</span>
+            <input type="checkbox" ${quest.accountBound ? 'checked' : ''} onchange="updateQuestAccountBound(this.checked)">
           </div>
         </div>
       </div>
@@ -700,9 +694,9 @@ ${descriptionHtml ? `
       <span class="item-label">Totals:</span>
       <div class="summary-section">
         ${renderSummary()}
-        <div style="background: var(--bg); padding: 10px 16px; margin: 20px 40% 0 40%; border-top: 1px solid var(--border); text-align: center; font-size: 14px; color: yellow; font-weight: normal; font-style: italic;">
+        <span style="background: var(--bg); display: block; padding: 10px 16px; margin-top: 10px; border-top: 1px solid var(--border); text-align: center; font-size: 14px; color: var(--accent); font-weight: normal; font-style: italic;">
             ${quest.successRate}% Success Rate
-        </div>
+        </span>
       </div>
     </div>
   `;
@@ -1388,99 +1382,11 @@ function exportAll() {
   setTimeout(() => exportValues(), 100);
 }
 
-function createItemRow(item, quest, type) {
-    const row = document.createElement('div');
-    row.className = 'item-row editor-item-row'; // Added specific class for editor rows
-    
-    // Look up the item name from our items database
-    const itemData = DATA.items[item.id]; 
-    const hasItem = !!itemData;
-
-    row.innerHTML = `
-        <div class="item-selector-container">
-            ${hasItem ? `
-                <div class="item-selected-badge">
-                    <strong>${itemData.name}</strong> <small>(${item.id})</small>
-                    <button class="clear-btn" title="Clear">×</button>
-                </div>
-            ` : `
-                <div class="search-container">
-                    <input type="text" class="item-search-input" placeholder="Search item or ID...">
-                    <div class="autocomplete-dropdown"></div>
-                </div>
-            `}
-        </div>
-        <input type="number" class="item-amount" value="${item.amount || 1}" title="Quantity">
-        <div class="rate-container">
-            <input type="number" class="item-success" value="${item.success || 100}" min="0" max="100">%
-        </div>
-        <label class="quest-checkbox">
-            <input type="checkbox" class="item-bound" ${item.bound ? 'checked' : ''}> Bound
-        </label>
-        <button class="btn btn-sm btn-danger remove-btn">×</button>
-    `;
-
-    // Search logic for empty slots
-    const searchInput = row.querySelector('.item-search-input');
-    if (searchInput) {
-        const resultsDropdown = row.querySelector('.autocomplete-dropdown');
-        searchInput.oninput = (e) => {
-            const query = e.target.value.toLowerCase();
-            resultsDropdown.innerHTML = '';
-            if (query.length < 2) {
-                resultsDropdown.style.display = 'none';
-                return;
-            }
-
-            const matches = Object.values(DATA.items)
-                .filter(i => i.name.toLowerCase().includes(query) || i.id.toString().includes(query))
-                .slice(0, 10);
-
-            if (matches.length > 0) {
-                resultsDropdown.style.display = 'block';
-                matches.forEach(match => {
-                    const div = document.createElement('div');
-                    div.className = 'autocomplete-item';
-                    div.innerHTML = `${match.name} <span class="autocomplete-item-id">[${match.id}]</span>`;
-                    div.onclick = () => {
-                        item.id = match.id;
-                        render(); 
-                        if (typeof saveData === 'function') saveData();
-                    };
-                    resultsDropdown.appendChild(div);
-                });
-            } else {
-                resultsDropdown.style.display = 'none';
-            }
-        };
-    }
-
-    // Clear button logic
-    const clearBtn = row.querySelector('.clear-btn');
-    if (clearBtn) {
-        clearBtn.onclick = () => {
-            item.id = null;
-            render();
-            if (typeof saveData === 'function') saveData();
-        };
-    }
-
-    // Update listeners
-    row.querySelector('.item-amount').onchange = (e) => { item.amount = parseInt(e.target.value) || 0; if (typeof saveData === 'function') saveData(); };
-    row.querySelector('.item-success').onchange = (e) => { item.success = parseInt(e.target.value) || 0; if (typeof saveData === 'function') saveData(); };
-    row.querySelector('.item-bound').onchange = (e) => { item.bound = e.target.checked; if (typeof saveData === 'function') saveData(); };
-    row.querySelector('.remove-btn').onclick = () => {
-        quest[type] = quest[type].filter(i => i !== item);
-        render();
-        if (typeof saveData === 'function') saveData();
-    };
-
-    return row;
-}
-
 function saveData() {
-    localStorage.setItem('osro_quest_data', JSON.stringify(DATA));
-    console.log("Data saved to local storage");
+  // No-op: Items are always fetched fresh from remote during development
+  // Quest data is not persisted (always from remote)
+  // This function is kept for compatibility in case it's called elsewhere
+  console.log('[Save] No caching - data always fresh from remote');
 }
 
 function setupProducesSearch(input) {

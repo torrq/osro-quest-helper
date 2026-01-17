@@ -8,18 +8,23 @@
 <style>
   /* Added a small style adjustment for the new export dropdown */
   .dropdown { position: relative; display: inline-block; }
+  
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--panel-bg);
+    /* FIXED: Use explicit color matching autocomplete to ensure opacity */
+    background-color: #0a0e14; 
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 100;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); /* Increased shadow opacity for better contrast */
+    z-index: 1000; /* Increased z-index */
     border: 1px solid var(--border);
     border-radius: 4px;
     right: 0;
+    opacity: 1; /* Force opacity for Edge */
   }
+  
   .dropdown:hover .dropdown-content { display: block; }
+  
   .dropdown-content button {
     width: 100%;
     text-align: left;
@@ -29,6 +34,7 @@
     color: var(--text);
     cursor: pointer;
   }
+  
   .dropdown-content button:hover { background-color: var(--panel-hover); }
 </style>
 </head>
