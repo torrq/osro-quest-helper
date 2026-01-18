@@ -7276,7 +7276,362 @@
         },
         {
           "name": "BTS - Medalions",
-          "quests": []
+          "quests": [
+            {
+              "name": "Medal of STR [1]",
+              "producesId": 2720,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 16
+                },
+                {
+                  "type": "item",
+                  "id": 2647,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Medal of AGI [1]",
+              "producesId": 2721,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 16
+                },
+                {
+                  "type": "item",
+                  "id": 2647,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Medal of VIT [1]",
+              "producesId": 2722,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 16
+                },
+                {
+                  "type": "item",
+                  "id": 2647,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Medal of INT [1]",
+              "producesId": 2723,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 16
+                },
+                {
+                  "type": "item",
+                  "id": 2647,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Medal of DEX [1]",
+              "producesId": 2724,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 16
+                },
+                {
+                  "type": "item",
+                  "id": 2647,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Medal of LUK [1]",
+              "producesId": 2725,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 16
+                },
+                {
+                  "type": "item",
+                  "id": 2647,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7451,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "BTS - Shadow Valkyrie",

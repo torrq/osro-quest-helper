@@ -195,8 +195,15 @@ body {
 .items-list {
   flex: 1;
   overflow-y: auto;
-  padding: 8px;
-  padding-bottom: 120px;
+  padding: 0 8px 4px 8px;
+}
+
+.items-search-banner {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
 }
 
 .item-row {
@@ -1084,16 +1091,6 @@ textarea {
 }
 .block {
   display: block !important;
-}
-
-/* Items List Banner */
-.items-search-banner {
-  padding: 4px 8px;
-  font-size: 11px;
-  color: var(--accent);
-  border-bottom: 1px solid var(--border);
-  text-align: center;
-  background: rgba(255, 255, 255, 0.03);
 }
 
 /* Empty States */

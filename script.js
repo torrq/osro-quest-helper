@@ -300,7 +300,7 @@ function renderItems() {
   // Display a count of used items vs search results
   if (totalFound > 0) {
     html += `<div class="items-search-banner">
-               Showing ${displayedItems.length} of ${totalFound} items used in quests
+               ${displayedItems.length} items
              </div>`;
   }
 
@@ -1522,23 +1522,23 @@ function updateReqImmune(idx, checked) {
 
 function exportQuests() {
   // Clean up immune: false before export
-  const cleanedGroups = DATA.groups.map(group => ({
+  const cleanedGroups = DATA.groups.map((group) => ({
     ...group,
-    subgroups: group.subgroups.map(subgroup => ({
+    subgroups: group.subgroups.map((subgroup) => ({
       ...subgroup,
-      quests: subgroup.quests.map(quest => ({
+      quests: subgroup.quests.map((quest) => ({
         ...quest,
-        requirements: quest.requirements.map(req => {
+        requirements: quest.requirements.map((req) => {
           const cleaned = { ...req };
           if (!cleaned.immune) {
             delete cleaned.immune;
           }
           return cleaned;
-        })
-      }))
-    }))
+        }),
+      })),
+    })),
   }));
-  
+
   const json = JSON.stringify({ groups: cleanedGroups }, null, 2);
   const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
