@@ -128,14 +128,10 @@ function switchTab(tab) {
     state.selectedQuest = null;
     state.itemSearchFilter = "";
     document.getElementById("itemSearchInput").value = "";
-    document.getElementById("itemsSearch").style.display = "block";
-    document.getElementById("questsSearch").style.display = "none";
   } else {
     state.selectedItem = null;
     state.questSearchFilter = "";
     document.getElementById("questSearchInput").value = "";
-    document.getElementById("itemsSearch").style.display = "none";
-    document.getElementById("questsSearch").style.display = "block";
   }
   render();
 }
@@ -303,13 +299,13 @@ function renderItems() {
 
   // Display a count of used items vs search results
   if (totalFound > 0) {
-    html += `<div style="padding: 4px 8px; font-size: 11px; color: var(--accent); border-bottom: 1px solid var(--border); text-align: center; background: rgba(255,255,255,0.03);">
+    html += `<div class="items-search-banner">
                Showing ${displayedItems.length} of ${totalFound} items used in quests
              </div>`;
   }
 
   if (items.length === 0) {
-    html = `<div style="padding: 20px; text-align: center; color: var(--text-muted); font-style: italic;">
+    html = `<div class="empty-msg-centered">
               No used items found ${state.itemSearchFilter ? "matching your search" : ""}
             </div>`;
   } else {
@@ -394,7 +390,7 @@ function renderItemContent() {
                    placeholder="0"
                    value="${item.value || 0}"
                    onchange="updateItemValue(${id}, this.value)"
-                   style="font-size: 1.2em; font-weight: bold; color: var(--accent);">
+                   class="zeny-input-large">
           </div>
           <p class="help-text">
             Set the estimated market value for this item.
@@ -471,7 +467,7 @@ function renderItemContent() {
       `
           : `
         <div class="usage-section">
-          <p style="color: var(--text-muted); font-style: italic; text-align: center; padding: 20px;">
+          <p class="empty-msg-centered">
             This item is not used in any quests.
           </p>
         </div>
@@ -656,9 +652,8 @@ function renderSidebar() {
           // Only show 'Add Quest' button if not filtering
           if (!filter) {
             const addQuestBtn = document.createElement("button");
-            addQuestBtn.className = "btn btn-sm";
+            addQuestBtn.className = "btn btn-sm btn-indent-quest";
             addQuestBtn.textContent = "+ Quest";
-            addQuestBtn.style.margin = "4px 0 4px 32px";
             addQuestBtn.onclick = () => addQuest(groupIdx, subIdx);
             subDiv.appendChild(addQuestBtn);
           }
@@ -670,9 +665,8 @@ function renderSidebar() {
       // Only show 'Add Subgroup' button if not filtering
       if (!filter) {
         const addSubBtn = document.createElement("button");
-        addSubBtn.className = "btn btn-sm";
+        addSubBtn.className = "btn btn-sm btn-indent-subgroup";
         addSubBtn.textContent = "+ Subgroup";
-        addSubBtn.style.margin = "4px 0 4px 16px";
         addSubBtn.onclick = () => addSubgroup(groupIdx);
         groupDiv.appendChild(addSubBtn);
       }
@@ -735,7 +729,7 @@ function renderQuestContent() {
       <div class="form-group">
         <div class="quest-info-row">
           <div class="item-selector-wrapper">
-            <span class="item-label" style="display: block; margin-bottom: 6px;">Produces Item:</span>
+            <span class="item-label label-block">Produces Item:</span>
             ${
               quest.producesId
                 ? `
@@ -754,12 +748,12 @@ function renderQuestContent() {
           </div>
           
           <div>
-            <span class="item-label" style="display: block; margin-bottom: 6px;">Success Rate:</span>
-            <input type="number" style="width:90px;" min="1" max="100" placeholder="%" value="${quest.successRate}" onchange="updateSuccessRate(this.value)">
+            <span class="item-label label-block">Success Rate:</span>
+            <input type="number" class="input-width-sm" min="1" max="100" placeholder="%" value="${quest.successRate}" onchange="updateSuccessRate(this.value)">
           </div>
           
           <div class="quest-bound">
-            <span class="item-label" style="display: block; margin-bottom: 6px;">Bound:</span>
+            <span class="item-label label-block">Bound:</span>
             <input type="checkbox" ${quest.accountBound ? "checked" : ""} onchange="updateQuestAccountBound(this.checked)">
           </div>
         </div>
@@ -786,7 +780,7 @@ ${
       <span class="item-label">Totals:</span>
       <div class="summary-section">
         ${renderSummary()}
-        <span style="background: var(--bg); display: block; padding: 10px 16px; margin-top: 10px; border-top: 1px solid var(--border); text-align: center; font-size: 14px; color: var(--accent); font-weight: normal; font-style: italic;">
+        <span class="quest-footer-badge">
             ${quest.successRate}% Success Rate
         </span>
       </div>
@@ -905,13 +899,13 @@ function showAutocomplete(idx, items) {
   `,
     )
     .join("");
-  dropdown.style.display = "block";
+  dropdown.classList.add("block");
 }
 
 function hideAutocomplete(idx) {
   const dropdown = document.querySelector(`#autocomplete-${idx}`);
   if (dropdown) {
-    dropdown.style.display = "none";
+    dropdown.classList.remove("block");
   }
 }
 
@@ -956,20 +950,19 @@ function renderRequirement(req, idx) {
             req.id
               ? `
             <div class="item-selected-badge">
-              <strong style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
+              <strong class="text-ellipsis-max">
                 <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a>
               </strong>
               <small>(${req.id})</small>
-              <button class="clear-btn" onclick="updateReqId(${idx}, null)" style="margin-left: auto;">×</button>
+              <button class="clear-btn ml-auto" onclick="updateReqId(${idx}, null)">×</button>
             </div>
           `
               : `
             <div class="search-container">
               <input type="text" 
-                     class="req-search-input" 
+                     class="req-search-input req-search-input-full" 
                      data-idx="${idx}" 
-                     placeholder="Search item..." 
-                     style="width: 100%;">
+                     placeholder="Search item...">
               <div id="autocomplete-${idx}" class="autocomplete-dropdown"></div>
             </div>
           `
@@ -980,7 +973,7 @@ function renderRequirement(req, idx) {
       }
 
       <div class="checkbox-group">
-        <label class="checkbox-label" style="font-size: 11px; opacity: 0.8;">
+        <label class="checkbox-label text-muted-xs opacity-80">
           <input type="checkbox" ${req.immune ? "checked" : ""} onchange="updateReqImmune(${idx}, this.checked)">Immune</label>
       </div>
     </div>
@@ -1002,7 +995,7 @@ function renderMaterialTree() {
       const indent = "  ".repeat(depth);
       const connector = depth > 0 ? "└─ " : "";
       const immuneBadge = req.immune
-        ? ' <span style="color: var(--success); font-size: 11px;">[IMMUNE]</span>'
+        ? ' <span class="text-immune">[IMMUNE]</span>'
         : "";
 
       if (req.type === "item" && questIndex.has(req.id)) {
@@ -1020,7 +1013,7 @@ function renderMaterialTree() {
           // Multiple quests - show options
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span style="color: var(--warning); font-size: 11px;">[${quests.length} OPTIONS]</span>`,
+            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${quests.length} OPTIONS]</span>`,
           });
 
           quests.forEach((q, idx) => {
@@ -1028,7 +1021,7 @@ function renderMaterialTree() {
             const optionNum = idx + 1;
             lines.push({
               level: depth + 1,
-              text: `${optionIndent}<span style="color: var(--text-muted);">Option ${optionNum}: ${q.name} (${q.successRate}% success)</span>`,
+              text: `${optionIndent}<span class="text-muted">Option ${optionNum}: ${q.name} (${q.successRate}% success)</span>`,
             });
             walk(q, depth + 2, effectiveAmount, newPath);
           });
@@ -1042,13 +1035,13 @@ function renderMaterialTree() {
         const zenyValue = effectiveAmount * getCreditValue();
         lines.push({
           level: depth,
-          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
+          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
         });
       } else if (req.type === "gold") {
         const zenyValue = effectiveAmount * getGoldValue();
         lines.push({
           level: depth,
-          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a> × <span class="tree-amount">${effectiveAmount}</span> <span style="color: var(--text-muted)">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
+          text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
         });
       } else if (
         req.type === "vote_points" ||
@@ -1300,9 +1293,9 @@ function renderSingleSummary(questIndex, questChoices) {
 
   if (totalZeny > 0) {
     html += `
-      <div class="summary-item" style="border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 12px;">
-        <span class="summary-name" style="font-weight: 600; color: var(--text);">Total Zeny Value</span>
-        <span class="summary-amount" style="font-size: 16px;">${totalZeny.toLocaleString()}</span>
+      <div class="summary-item summary-total-row">
+        <span class="summary-name summary-total-label">Total Zeny Value</span>
+        <span class="summary-amount summary-total-amount">${totalZeny.toLocaleString()}</span>
       </div>
     `;
   }
@@ -1313,11 +1306,11 @@ function renderSingleSummary(questIndex, questChoices) {
         entry.type === "zeny" ? entry.amount.toLocaleString() : entry.amount;
       let extra = "";
       if (entry.type === "credit") {
-        extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
+        extra = ` <span class="text-muted-sm">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
       } else if (entry.type === "gold") {
-        extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * getGoldValue()).toLocaleString()} zeny)</span>`;
+        extra = ` <span class="text-muted-sm">(${(entry.amount * getGoldValue()).toLocaleString()} zeny)</span>`;
       } else if (entry.type === "item" && entry.value > 0) {
-        extra = ` <span style="color: var(--text-muted); font-size: 12px;">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
+        extra = ` <span class="text-muted-sm">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
       }
       return `
       <div class="summary-item">
@@ -1444,7 +1437,7 @@ function updateProducesId(itemId) {
 
   // Close the dropdown immediately
   const dropdown = document.getElementById("produces-dropdown");
-  if (dropdown) dropdown.style.display = "none";
+  if (dropdown) dropdown.classList.remove("block");
 
   saveData();
   renderQuestContent(); // Re-render to show the selected item name
@@ -1569,7 +1562,7 @@ function setupProducesSearch(input) {
   dropdown.innerHTML = "";
 
   if (query.length < 2) {
-    dropdown.style.display = "none";
+    dropdown.classList.remove("block");
     return;
   }
 
@@ -1583,7 +1576,7 @@ function setupProducesSearch(input) {
     .slice(0, 10);
 
   if (matches.length > 0) {
-    dropdown.style.display = "block";
+    dropdown.classList.add("block");
     matches.forEach((match) => {
       const div = document.createElement("div");
       div.className = "autocomplete-item";
@@ -1595,7 +1588,7 @@ function setupProducesSearch(input) {
       dropdown.appendChild(div);
     });
   } else {
-    dropdown.style.display = "none";
+    dropdown.classList.remove("block");
   }
 }
 
@@ -1603,7 +1596,7 @@ function setupProducesSearch(input) {
 document.addEventListener("click", (e) => {
   const dropdown = document.getElementById("produces-dropdown");
   if (dropdown && !e.target.closest(".search-container")) {
-    dropdown.style.display = "none";
+    dropdown.classList.remove("block");
   }
 });
 

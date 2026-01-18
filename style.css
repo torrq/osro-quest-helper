@@ -1077,3 +1077,151 @@ textarea {
   border-top: 1px solid var(--border);
   margin: 0;
 }
+
+/* Utility for dynamic visibility */
+.hidden {
+  display: none !important;
+}
+.block {
+  display: block !important;
+}
+
+/* Items List Banner */
+.items-search-banner {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Empty States */
+.empty-msg-centered {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Form Styling */
+.zeny-input-large {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.label-block {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input-width-sm {
+  width: 90px;
+}
+.w-full {
+  width: 100% !important;
+}
+.ml-auto {
+  margin-left: auto;
+}
+
+/* Sidebar Button Indentation */
+.btn-indent-quest {
+  margin: 4px 0 4px 32px;
+}
+.btn-indent-subgroup {
+  margin: 4px 0 4px 16px;
+}
+
+/* Summary Components */
+.summary-footer-highlight {
+  background: var(--bg);
+  display: block;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: normal;
+  font-style: italic;
+}
+
+.summary-total-row {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.summary-total-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.summary-total-amount {
+  font-size: 16px;
+}
+
+/* Typography & Helpers */
+.text-ellipsis-max {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.text-muted-sm {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.text-muted-xs {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+.text-success-xs {
+  color: var(--success);
+  font-size: 11px;
+}
+.text-immune {
+  color: var(--success);
+  font-size: 12pt;
+  font-weight: bold;
+}
+.text-warning-xs {
+  color: var(--warning);
+  font-size: 11px;
+}
+.opacity-80 {
+  opacity: 0.8;
+}
+
+/* Styling for the success rate banner at the bottom of quest totals */
+.quest-footer-badge {
+  background: var(--bg);
+  display: block;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Full-width helper for requirement search inputs */
+.req-search-input-full {
+  width: 100%;
+}
+
+/* Sub-label styling for checkboxes */
+.checkbox-label-sm {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* Utility class for visibility (should match existing .block logic) */
+.block {
+  display: block !important;
+}
