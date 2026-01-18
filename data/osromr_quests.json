@@ -7635,7 +7635,224 @@
         },
         {
           "name": "BTS - Shadow Valkyrie",
-          "quests": []
+          "quests": [
+            {
+              "name": "Shadow Valkyrie Armor",
+              "producesId": 42835,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7078,
+                  "amount": 24
+                },
+                {
+                  "type": "item",
+                  "id": 2357,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40123,
+                  "amount": 555
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 30000
+                },
+                {
+                  "type": "credit",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Shadow Valkyrie Shield",
+              "producesId": 42836,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7078,
+                  "amount": 24
+                },
+                {
+                  "type": "item",
+                  "id": 2357,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40123,
+                  "amount": 555
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 30000
+                },
+                {
+                  "type": "credit",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Shadow Valkyrie Boots",
+              "producesId": 42837,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7078,
+                  "amount": 24
+                },
+                {
+                  "type": "item",
+                  "id": 2357,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40123,
+                  "amount": 555
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 30000
+                },
+                {
+                  "type": "credit",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Shadow Valkyrie Ring",
+              "producesId": 42838,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 7078,
+                  "amount": 24
+                },
+                {
+                  "type": "item",
+                  "id": 2357,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 999
+                },
+                {
+                  "type": "item",
+                  "id": 40123,
+                  "amount": 555
+                },
+                {
+                  "type": "item",
+                  "id": 983,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 30000
+                },
+                {
+                  "type": "credit",
+                  "amount": 300
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "BTS - Siege Equipments",
