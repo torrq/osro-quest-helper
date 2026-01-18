@@ -1471,7 +1471,6 @@ function addRequirement() {
     type: "item",
     id: null,
     amount: 1,
-    immune: false,
   });
   render();
 }
@@ -1487,7 +1486,10 @@ function updateReqType(idx, value) {
   if (value !== "item") {
     delete req.id;
   }
-  req.immune = req.immune || false;
+  // Keep immune only if it was already true
+  if (!req.immune) {
+    delete req.immune;
+  }
   render();
 }
 
@@ -1510,12 +1512,34 @@ function updateReqAmount(idx, value) {
 }
 
 function updateReqImmune(idx, checked) {
-  state.selectedQuest.requirements[idx].immune = checked;
+  if (checked) {
+    state.selectedQuest.requirements[idx].immune = true;
+  } else {
+    delete state.selectedQuest.requirements[idx].immune;
+  }
   render();
 }
 
 function exportQuests() {
-  const json = JSON.stringify({ groups: DATA.groups }, null, 2);
+  // Clean up immune: false before export
+  const cleanedGroups = DATA.groups.map(group => ({
+    ...group,
+    subgroups: group.subgroups.map(subgroup => ({
+      ...subgroup,
+      quests: subgroup.quests.map(quest => ({
+        ...quest,
+        requirements: quest.requirements.map(req => {
+          const cleaned = { ...req };
+          if (!cleaned.immune) {
+            delete cleaned.immune;
+          }
+          return cleaned;
+        })
+      }))
+    }))
+  }));
+  
+  const json = JSON.stringify({ groups: cleanedGroups }, null, 2);
   const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
