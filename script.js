@@ -564,7 +564,10 @@ function renderSidebar() {
     header.onclick = () => toggleGroup(groupIdx);
     header.innerHTML = `
       <span class="expand-icon ${isExpanded ? "expanded" : ""}">▶</span>
-      <span class="group-name-readonly">${group.name}</span>
+      <div class="group-name-container">
+        <span class="group-name-readonly">${group.name}</span>
+        ${group.caption ? `<span class="group-caption">${group.caption}</span>` : ''}
+      </div>
     `;
     groupDiv.appendChild(header);
 
@@ -670,19 +673,18 @@ function renderSidebar() {
 
             subDiv.appendChild(questDiv);
           });
+
+          if (!filter) {
+            const addQuestBtn = document.createElement("button");
+            addQuestBtn.className = "btn btn-sm btn-indent-quest";
+            addQuestBtn.textContent = "+ Quest";
+            addQuestBtn.onclick = () => addQuest(groupIdx, subIdx);
+            subDiv.appendChild(addQuestBtn);
+          }
         }
 
         groupDiv.appendChild(subDiv);
       });
-
-      // Only show 'Add Subgroup' button if not filtering
-      if (!filter) {
-        const addSubBtn = document.createElement("button");
-        addSubBtn.className = "btn btn-sm btn-indent-subgroup";
-        addSubBtn.textContent = "+ Subgroup";
-        addSubBtn.onclick = () => addSubgroup(groupIdx);
-        groupDiv.appendChild(addSubBtn);
-      }
     }
 
     container.appendChild(groupDiv);
@@ -696,11 +698,14 @@ function renderGroupsList() {
   let html = "";
 
   DATA.groups.forEach((group, groupIdx) => {
-    const isSelected = state.selectedGroupForEdit === groupIdx;
-    html += `
+  const isSelected = state.selectedGroupForEdit === groupIdx;
+  html += `
       <div class="group-edit-item ${isSelected ? "active" : ""}" onclick="selectGroupForEdit(${groupIdx})">
         <div class="group-edit-header">
-          <span class="group-edit-name">${group.name}</span>
+          <div class="group-edit-name-container">
+            <span class="group-edit-name">${group.name}</span>
+            ${group.caption ? `<span class="group-edit-caption">${group.caption}</span>` : ''}
+          </div>
           <span class="group-edit-count">${group.subgroups.length} subgroups</span>
         </div>
       </div>
@@ -722,7 +727,7 @@ function selectGroupForEdit(idx) {
 
 function renderGroupContent() {
   const container = document.getElementById("mainContent");
-
+  
   if (state.selectedGroupForEdit === null) {
     container.innerHTML = `
       <div class="empty-state">
@@ -732,10 +737,10 @@ function renderGroupContent() {
     `;
     return;
   }
-
+  
   const groupIdx = state.selectedGroupForEdit;
   const group = DATA.groups[groupIdx];
-
+  
   if (!group) {
     container.innerHTML = `
       <div class="empty-state">
@@ -745,7 +750,7 @@ function renderGroupContent() {
     `;
     return;
   }
-
+  
   let html = `
     <div class="editor-group">
       <div class="group-edit-top">
@@ -758,6 +763,21 @@ function renderGroupContent() {
         <input type="text" placeholder="Group Name" value="${group.name}" onchange="updateGroupName(${groupIdx}, this.value)">
       </div>
       
+      <div class="form-group">
+        <span class="item-label">Caption (optional):</span>
+        <input type="text" placeholder="e.g., Main Office, Prontera, etc." value="${group.caption || ''}" onchange="updateGroupCaption(${groupIdx}, this.value)">
+        <p class="help-text">A short location or description displayed under the group name</p>
+      </div>
+      
+      <div class="group-ordering-section">
+        <span class="item-label">Group Position:</span>
+        <div class="ordering-controls">
+          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, -1)" ${groupIdx === 0 ? 'disabled' : ''}>↑ Move Up</button>
+          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, 1)" ${groupIdx === DATA.groups.length - 1 ? 'disabled' : ''}>↓ Move Down</button>
+          <span class="ordering-info">Position ${groupIdx + 1} of ${DATA.groups.length}</span>
+        </div>
+      </div>
+      
       <div class="subgroups-section">
         <div class="subgroups-header">
           <span class="item-label">Subgroups (${group.subgroups.length})</span>
@@ -766,7 +786,7 @@ function renderGroupContent() {
         
         <div class="subgroups-list">
   `;
-
+  
   if (group.subgroups.length === 0) {
     html += `<div class="empty-msg-centered">No subgroups yet. Click "+ Add Subgroup" to create one.</div>`;
   } else {
@@ -776,20 +796,57 @@ function renderGroupContent() {
           <div class="subgroup-edit-header">
             <input type="text" class="subgroup-edit-name-input" value="${subgroup.name}" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
             <span class="subgroup-quest-count">${subgroup.quests.length} quests</span>
+            <div class="subgroup-ordering-controls">
+              <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, -1)" ${subIdx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+              <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, 1)" ${subIdx === group.subgroups.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+            </div>
             <button class="btn btn-sm btn-danger" onclick="deleteSubgroup(${groupIdx}, ${subIdx})">Delete</button>
           </div>
         </div>
       `;
     });
   }
-
+  
   html += `
         </div>
       </div>
     </div>
   `;
-
+  
   container.innerHTML = html;
+}
+
+function updateGroupCaption(idx, value) {
+  DATA.groups[idx].caption = value.trim();
+  render();
+}
+
+function moveGroup(idx, direction) {
+  const newIdx = idx + direction;
+  if (newIdx < 0 || newIdx >= DATA.groups.length) return;
+  
+  // Swap groups
+  const temp = DATA.groups[idx];
+  DATA.groups[idx] = DATA.groups[newIdx];
+  DATA.groups[newIdx] = temp;
+  
+  // Update selected index
+  state.selectedGroupForEdit = newIdx;
+  
+  render();
+}
+
+function moveSubgroup(groupIdx, subIdx, direction) {
+  const group = DATA.groups[groupIdx];
+  const newIdx = subIdx + direction;
+  if (newIdx < 0 || newIdx >= group.subgroups.length) return;
+  
+  // Swap subgroups
+  const temp = group.subgroups[subIdx];
+  group.subgroups[subIdx] = group.subgroups[newIdx];
+  group.subgroups[newIdx] = temp;
+  
+  render();
 }
 
 function toggleGroup(idx) {

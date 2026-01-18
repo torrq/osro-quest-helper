@@ -642,7 +642,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 13"
     },
     {
       "name": "Quest Shop",
@@ -2595,7 +2596,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@quest"
     },
     {
       "name": "Tier Upgrade - Shop 1",
@@ -4811,7 +4813,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 48"
     },
     {
       "name": "Tier Upgrade - Shop 2",
@@ -5402,7 +5405,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 48"
     },
     {
       "name": "BTS Quest Shop",
@@ -8171,7 +8175,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@quest"
     },
     {
       "name": "Dragonslayer",
@@ -13485,7 +13490,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@quest"
     },
     {
       "name": "Classic Headgear",
@@ -15783,7 +15789,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@quest"
     },
     {
       "name": "Donation Ticket Shop",
@@ -16512,7 +16519,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 26"
     },
     {
       "name": "Monster Arena Shop",
@@ -16839,7 +16847,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 18"
     },
     {
       "name": "Dye Making",
@@ -18827,7 +18836,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 48"
     },
     {
       "name": "Add Slot to Weapon (Seiyablem)",
@@ -20820,7 +20830,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 42"
     },
     {
       "name": "Add Slot to Armor (Seiyablem)",
@@ -21761,7 +21772,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 42"
     },
     {
       "name": "Add Slot to Dragon Wings (Seiyablem)",
@@ -21960,7 +21972,8 @@
             }
           ]
         }
-      ]
+      ],
+      "caption": "@npc 42"
     },
     {
       "name": "Add Slot to Weapon (Leablem)",
