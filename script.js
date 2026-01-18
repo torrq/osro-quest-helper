@@ -242,12 +242,6 @@ function render() {
     groupsList.classList.add("hidden");
     itemsSearch.classList.add("hidden");
     questsSearch.classList.remove("hidden");
-
-    // SHOW button for Quests
-    addBtn.classList.remove("hidden");
-    addBtn.textContent = "+ Group";
-    addBtn.onclick = addGroup;
-
     renderSidebar();
     renderQuestContent();
   } else if (state.currentTab === "groups") {
