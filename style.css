@@ -1222,3 +1222,132 @@ textarea {
 .block {
   display: block !important;
 }
+
+/* Read-only group/subgroup names in tree view */
+.group-name-readonly,
+.subgroup-name-readonly {
+  flex: 1;
+  padding: 4px 8px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* Quest Groups Management */
+.groups-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 8px 4px 8px;
+}
+
+.group-edit-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.group-edit-item:hover {
+  background: var(--panel-hover);
+  border-color: var(--accent);
+}
+
+.group-edit-item.active {
+  border-color: var(--accent);
+  background: var(--panel-hover);
+}
+
+.group-edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-edit-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.group-edit-count {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.editor-group {
+  max-width: 1200px;
+}
+
+.group-edit-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.group-edit-top h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.subgroups-section {
+  margin-top: 32px;
+}
+
+.subgroups-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.subgroups-list {
+  display: grid;
+  gap: 12px;
+}
+
+.subgroup-edit-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.subgroup-edit-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.subgroup-edit-name-input {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.subgroup-quest-count {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Clickable group/subgroup headers */
+.group-header.clickable,
+.subgroup-header.clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.group-header.clickable:hover,
+.subgroup-header.clickable:hover {
+  background: var(--panel-hover);
+  border-color: var(--accent);
+}
+
+.group-header.clickable .expand-icon,
+.subgroup-header.clickable .expand-icon {
+  pointer-events: none;
+}

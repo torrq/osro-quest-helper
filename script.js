@@ -7,6 +7,7 @@ let state = {
   currentTab: "quests",
   selectedQuest: null,
   selectedItem: null,
+  selectedGroupForEdit: null,
   selectedGroup: null,
   selectedSubgroup: null,
   expandedGroups: new Set(),
@@ -128,6 +129,10 @@ function switchTab(tab) {
     state.selectedQuest = null;
     state.itemSearchFilter = "";
     document.getElementById("itemSearchInput").value = "";
+  } else if (tab === "groups") {
+    state.selectedQuest = null;
+    state.selectedItem = null;
+    state.selectedGroupForEdit = null;
   } else {
     state.selectedItem = null;
     state.questSearchFilter = "";
@@ -226,6 +231,7 @@ function render() {
 
   const treeContainer = document.getElementById("treeContainer");
   const itemsList = document.getElementById("itemsList");
+  const groupsList = document.getElementById("groupsList");
   const itemsSearch = document.getElementById("itemsSearch");
   const questsSearch = document.getElementById("questsSearch");
   const addBtn = document.getElementById("addBtn");
@@ -233,6 +239,7 @@ function render() {
   if (state.currentTab === "quests") {
     treeContainer.classList.remove("hidden");
     itemsList.classList.add("hidden");
+    groupsList.classList.add("hidden");
     itemsSearch.classList.add("hidden");
     questsSearch.classList.remove("hidden");
 
@@ -243,8 +250,23 @@ function render() {
 
     renderSidebar();
     renderQuestContent();
+  } else if (state.currentTab === "groups") {
+    treeContainer.classList.add("hidden");
+    itemsList.classList.add("hidden");
+    groupsList.classList.remove("hidden");
+    itemsSearch.classList.add("hidden");
+    questsSearch.classList.add("hidden");
+
+    // SHOW button for Groups
+    addBtn.classList.remove("hidden");
+    addBtn.textContent = "+ Group";
+    addBtn.onclick = addGroup;
+
+    renderGroupsList();
+    renderGroupContent();
   } else {
     treeContainer.classList.add("hidden");
+    groupsList.classList.add("hidden");
     itemsList.classList.remove("hidden");
     itemsSearch.classList.remove("hidden");
     questsSearch.classList.add("hidden");
@@ -340,7 +362,7 @@ function renderItemContent() {
     container.innerHTML = `
       <div class="empty-state">
         <h2>No Item Selected</h2>
-        <p>Select an item from the sidebar to view details and edit its value</p>
+        <p>Select an item from the sidebar</p>
       </div>
     `;
     return;
@@ -538,11 +560,11 @@ function renderSidebar() {
     const isExpanded = filter ? true : state.expandedGroups.has(groupIdx);
 
     const header = document.createElement("div");
-    header.className = "group-header";
+    header.className = "group-header clickable";
+    header.onclick = () => toggleGroup(groupIdx);
     header.innerHTML = `
-      <span class="expand-icon ${isExpanded ? "expanded" : ""}" onclick="toggleGroup(${groupIdx})">▶</span>
-      <input class="editable-name" value="${group.name}" onclick="event.stopPropagation()" onchange="updateGroupName(${groupIdx}, this.value)">
-      <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteGroup(${groupIdx})">×</button>
+      <span class="expand-icon ${isExpanded ? "expanded" : ""}">▶</span>
+      <span class="group-name-readonly">${group.name}</span>
     `;
     groupDiv.appendChild(header);
 
@@ -566,11 +588,11 @@ function renderSidebar() {
           : state.expandedSubgroups.has(`${groupIdx}-${subIdx}`);
 
         const subHeader = document.createElement("div");
-        subHeader.className = "subgroup-header";
+        subHeader.className = "subgroup-header clickable";
+        subHeader.onclick = () => toggleSubgroup(groupIdx, subIdx);
         subHeader.innerHTML = `
-          <span class="expand-icon ${isSubExpanded ? "expanded" : ""}" onclick="toggleSubgroup(${groupIdx}, ${subIdx})">▶</span>
-          <input class="editable-name" value="${subgroup.name}" onclick="event.stopPropagation()" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
-          <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteSubgroup(${groupIdx}, ${subIdx})">×</button>
+          <span class="expand-icon ${isSubExpanded ? "expanded" : ""}">▶</span>
+          <span class="subgroup-name-readonly">${subgroup.name}</span>
         `;
         subDiv.appendChild(subHeader);
 
@@ -648,15 +670,6 @@ function renderSidebar() {
 
             subDiv.appendChild(questDiv);
           });
-
-          // Only show 'Add Quest' button if not filtering
-          if (!filter) {
-            const addQuestBtn = document.createElement("button");
-            addQuestBtn.className = "btn btn-sm btn-indent-quest";
-            addQuestBtn.textContent = "+ Quest";
-            addQuestBtn.onclick = () => addQuest(groupIdx, subIdx);
-            subDiv.appendChild(addQuestBtn);
-          }
         }
 
         groupDiv.appendChild(subDiv);
@@ -674,6 +687,109 @@ function renderSidebar() {
 
     container.appendChild(groupDiv);
   });
+}
+
+// For rendering groups management list
+function renderGroupsList() {
+  const container = document.getElementById("groupsList");
+
+  let html = "";
+
+  DATA.groups.forEach((group, groupIdx) => {
+    const isSelected = state.selectedGroupForEdit === groupIdx;
+    html += `
+      <div class="group-edit-item ${isSelected ? "active" : ""}" onclick="selectGroupForEdit(${groupIdx})">
+        <div class="group-edit-header">
+          <span class="group-edit-name">${group.name}</span>
+          <span class="group-edit-count">${group.subgroups.length} subgroups</span>
+        </div>
+      </div>
+    `;
+  });
+
+  if (DATA.groups.length === 0) {
+    html = `<div class="empty-msg-centered">No quest groups yet. Click "+ Group" to create one.</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function selectGroupForEdit(idx) {
+  state.selectedGroupForEdit = idx;
+  renderGroupsList();
+  renderGroupContent();
+}
+
+function renderGroupContent() {
+  const container = document.getElementById("mainContent");
+
+  if (state.selectedGroupForEdit === null) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <h2>No Group Selected</h2>
+        <p>Select a group from the sidebar to edit</p>
+      </div>
+    `;
+    return;
+  }
+
+  const groupIdx = state.selectedGroupForEdit;
+  const group = DATA.groups[groupIdx];
+
+  if (!group) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <h2>Group Not Found</h2>
+        <p>The selected group no longer exists.</p>
+      </div>
+    `;
+    return;
+  }
+
+  let html = `
+    <div class="editor-group">
+      <div class="group-edit-top">
+        <h2>Edit Quest Group</h2>
+        <button class="btn btn-danger" onclick="deleteGroup(${groupIdx})">Delete Group</button>
+      </div>
+      
+      <div class="form-group">
+        <span class="item-label">Group Name:</span>
+        <input type="text" placeholder="Group Name" value="${group.name}" onchange="updateGroupName(${groupIdx}, this.value)">
+      </div>
+      
+      <div class="subgroups-section">
+        <div class="subgroups-header">
+          <span class="item-label">Subgroups (${group.subgroups.length})</span>
+          <button class="btn btn-sm btn-primary" onclick="addSubgroup(${groupIdx})">+ Add Subgroup</button>
+        </div>
+        
+        <div class="subgroups-list">
+  `;
+
+  if (group.subgroups.length === 0) {
+    html += `<div class="empty-msg-centered">No subgroups yet. Click "+ Add Subgroup" to create one.</div>`;
+  } else {
+    group.subgroups.forEach((subgroup, subIdx) => {
+      html += `
+        <div class="subgroup-edit-card">
+          <div class="subgroup-edit-header">
+            <input type="text" class="subgroup-edit-name-input" value="${subgroup.name}" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
+            <span class="subgroup-quest-count">${subgroup.quests.length} quests</span>
+            <button class="btn btn-sm btn-danger" onclick="deleteSubgroup(${groupIdx}, ${subIdx})">Delete</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  html += `
+        </div>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
 }
 
 function toggleGroup(idx) {
@@ -709,7 +825,7 @@ function renderQuestContent() {
     container.innerHTML = `
       <div class="empty-state">
         <h2>No Quest Selected</h2>
-        <p>Select a quest from the sidebar or import your quest data</p>
+        <p>Select a quest from the sidebar</p>
       </div>
     `;
     return;
@@ -1355,7 +1471,13 @@ function addGroup() {
     subgroups: [],
   };
   DATA.groups.push(group);
-  state.expandedGroups.add(DATA.groups.length - 1);
+
+  if (state.currentTab === "groups") {
+    selectGroupForEdit(DATA.groups.length - 1);
+  } else {
+    state.expandedGroups.add(DATA.groups.length - 1);
+  }
+
   render();
 }
 
@@ -1366,6 +1488,13 @@ function deleteGroup(idx) {
     if (state.selectedGroup === DATA.groups[idx]) {
       state.selectedQuest = null;
     }
+
+    if (state.selectedGroupForEdit === idx) {
+      state.selectedGroupForEdit = null;
+    } else if (state.selectedGroupForEdit > idx) {
+      state.selectedGroupForEdit--;
+    }
+
     render();
   }
 }
@@ -1386,8 +1515,6 @@ function addSubgroup(groupIdx) {
     quests: [],
   };
   DATA.groups[groupIdx].subgroups.push(subgroup);
-  const subIdx = DATA.groups[groupIdx].subgroups.length - 1;
-  state.expandedSubgroups.add(`${groupIdx}-${subIdx}`);
   render();
 }
 
@@ -1667,7 +1794,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Update the existing filter functions to be simple wrappers if needed elsewhere
 function filterItems(value) {
   debouncedItemFilter(value);
 }

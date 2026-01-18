@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OSRO Quest Helper</title>
+    <title>OSRO Quests (MR)</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
       <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <h1>
-            <span>OSRO Quest Helper</span>
+            <span>OSRO Quests (MR)</span>
             <a
               href="https://github.com/torrq/osro-quest-helper"
               class="github-link"
@@ -26,6 +26,7 @@
           <div class="tab-bar">
             <div class="tab active" onclick="switchTab('quests')">Quests</div>
             <div class="tab" onclick="switchTab('items')">Items</div>
+            <div class="tab" onclick="switchTab('groups')">Groups</div>
           </div>
           <div class="toolbar">
             <button
@@ -72,11 +73,12 @@
         </div>
         <div class="tree-container" id="treeContainer"></div>
         <div class="items-list hidden" id="itemsList"></div>
+        <div class="groups-list hidden" id="groupsList"></div>
       </div>
       <div class="main-content" id="mainContent">
         <div class="empty-state">
           <h2>No Quest Selected</h2>
-          <p>Select a quest from the sidebar or import your quest data</p>
+          <p>Select a quest from the sidebar</p>
         </div>
       </div>
     </div>
