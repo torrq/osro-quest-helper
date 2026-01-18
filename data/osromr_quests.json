@@ -7856,7 +7856,320 @@
         },
         {
           "name": "BTS - Siege Equipments",
-          "quests": []
+          "quests": [
+            {
+              "name": "Siege Greaves [1]",
+              "producesId": 2483,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 10
+                },
+                {
+                  "type": "gold",
+                  "amount": 10000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Boots [1]",
+              "producesId": 2484,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7566,
+                  "amount": 20
+                },
+                {
+                  "type": "gold",
+                  "amount": 10000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Shoes [1]",
+              "producesId": 2485,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7754,
+                  "amount": 30
+                },
+                {
+                  "type": "gold",
+                  "amount": 10000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Manteau [1]",
+              "producesId": 2586,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7513,
+                  "amount": 30
+                },
+                {
+                  "type": "gold",
+                  "amount": 10000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Muffler [1]",
+              "producesId": 2587,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7562,
+                  "amount": 30
+                },
+                {
+                  "type": "gold",
+                  "amount": 10000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Plate [1]",
+              "producesId": 15046,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7450,
+                  "amount": 10
+                },
+                {
+                  "type": "gold",
+                  "amount": 15000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Suit [1]",
+              "producesId": 15047,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4428,
+                  "amount": 10
+                },
+                {
+                  "type": "gold",
+                  "amount": 15000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Siege Robe [1]",
+              "producesId": 15048,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 40085,
+                  "amount": 600
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 7510,
+                  "amount": 10
+                },
+                {
+                  "type": "gold",
+                  "amount": 15000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                }
+              ]
+            }
+          ]
         }
       ]
     },
