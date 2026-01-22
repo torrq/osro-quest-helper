@@ -18835,6 +18835,811 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Infuse Cards",
+          "quests": [
+            {
+              "name": "Infused Turtle General Card",
+              "producesId": 43800,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4305,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Drake Card",
+              "producesId": 43801,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4137,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Baphomet Card",
+              "producesId": 43802,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4147,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Lady Tanee Card",
+              "producesId": 43803,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4376,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Moonlight Flower Card",
+              "producesId": 43804,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4131,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Maya Card",
+              "producesId": 43805,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4146,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Phreeoni Card",
+              "producesId": 43806,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4121,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Doppelganger Card",
+              "producesId": 43807,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4142,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Orc Hero Card",
+              "producesId": 43808,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4143,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Orc Lord Card",
+              "producesId": 43809,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4135,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Ghostring Card",
+              "producesId": 43810,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4047,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Infused Vesper Card",
+              "producesId": 43811,
+              "successRate": 60,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4374,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Infused Dark Snake Lord Card",
+              "producesId": 43812,
+              "successRate": 60,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4330,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Infused Kiel-D-01 Card",
+              "producesId": 43813,
+              "successRate": 70,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4403,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Infused Tao Gunka Card",
+              "producesId": 43814,
+              "successRate": 70,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4302,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Infused Golden Thiefbug Card",
+              "producesId": 43815,
+              "successRate": 70,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4128,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Infused Fallen Bishop Card",
+              "producesId": 43816,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4441,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Infused Entweihen Crothen Card",
+              "producesId": 43817,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4451,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Infused Randgris Card",
+              "producesId": 43818,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4407,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Infused Memory of Thanatos Card",
+              "producesId": 43819,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200000000
+                },
+                {
+                  "type": "item",
+                  "id": 40314,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 200
+                },
+                {
+                  "type": "item",
+                  "id": 4399,
+                  "amount": 5
+                }
+              ]
+            }
+          ]
         }
       ],
       "caption": "@npc 48"
