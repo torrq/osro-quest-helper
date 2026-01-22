@@ -10290,7 +10290,7 @@
   },
   "4145": {
     "name": "Berzebub Card",
-    "desc": "STR +3, DEX +3\nEnable to use level 4\nWarm Wind skill.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMaximum HP +5%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^B40088 Accessory^000000\nWeight:^009900 1^000000"
+    "desc": "STR +3, DEX +3, INT +3\nEnable to use level 4\nWarm Wind skill.\nIncreases resistance against ^777777Neutral^000000 elemental attack by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMaximum HP +5%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^B40088 Accessory^000000\nWeight:^009900 1^000000"
   },
   "4146": {
     "name": "Maya Card",
@@ -11138,7 +11138,7 @@
   },
   "4357": {
     "name": "Lord Knight Card",
-    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nEnables use of ^008800Level 1 Berserk^000000.\nMaximum HP - 10%.\n[ ^2EDE28Knight Class^000000 ]\nNegates HP penalty.\nInflict 10% more damage with Bowling Bash, Brandish Spear and Spiral Pierce.\nClass: ^777777Card^000000\nCompound on: ^777777Headgear^000000\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMaximum HP +7%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nEnables use of ^008800Level 1 Berserk^000000.\nMaximum HP - 10%.\n[ ^2EDE28Knight Class^000000 ]\nNegates HP penalty.\nInflict 10% more damage with Bowling Bash, Brandish Spear and Spiral Pierce.\nClass: ^777777Card^000000\nCompound on: ^777777Headgear^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMaximum HP +7%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
   },
   "4358": {
     "name": "Seyren Windsor Card",
@@ -11146,7 +11146,7 @@
   },
   "4359": {
     "name": "Assassin Cross Card",
-    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nEnables the use of Level 3 ^009900Cloaking^000000.\n[ ^2EDE28Assassin Class^000000 ]\nIncrease Sonic Blow and Grimtooth damage by ((STR/10)+(DEX/5))%.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAGI +7\n------------------------\nClass:^6666CC Card^000000\nCompound on: ^777777Garment^000000\nWeight:^009900 1^000000"
+    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nEnables the use of Level 3 ^009900Cloaking^000000.\n[ ^2EDE28Assassin Class^000000 ]\nIncrease Sonic Blow and Grimtooth damage by ((STR/10)+(DEX/5))%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\n^6666CCDemihuman^000000 damage +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAGI +7\n------------------------\nClass:^6666CC Card^000000\nCompound on: ^777777Garment^000000\nWeight:^009900 1^000000"
   },
   "4360": {
     "name": "Eremes Guile Card",
@@ -11154,7 +11154,7 @@
   },
   "4361": {
     "name": "Whitesmith Card",
-    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nAdd low chance of breaking the enemy's weapon and armor when attacking.\nAdd low chance of auto casting ^008800Level 6 Mammonite^000000 when attacking, If higher level of this skill is learned then it will be cast.\nAdd low chance of auto casting ^008800Level 1 Maximum Over-Thrust^000000 when attacking.\nMakes weapon unstrippable.\n[ ^2EDE28Whitesmith Class^000000 ]\nInflict 25% more damage with Cart Termination.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nATK +4%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nAdd low chance of breaking the enemy's weapon and armor when attacking.\nAdd low chance of auto casting ^008800Level 6 Mammonite^000000 when attacking, If higher level of this skill is learned then it will be cast.\nAdd low chance of auto casting ^008800Level 1 Maximum Over-Thrust^000000 when attacking.\nMakes weapon unstrippable.\n[ ^2EDE28Whitesmith Class^000000 ]\nInflict 25% more damage with Cart Termination.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nATK +4%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4362": {
     "name": "Howard Alt-Eisen Card",
@@ -11162,7 +11162,7 @@
   },
   "4363": {
     "name": "High Priest Card",
-    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nAdd the chance of auto casting ^008800Level 4 Safety Wall^000000 on the user when receives Physical Damage.\n15% Resistance against ^880000Dark^000000 Property.\n[ ^2EDE28Priest Class^000000 ]\nIncrease ATK by 1% for every 10 base INT.\nIncrease MATK by 1% for every 15 base VIT.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAdd the chance of auto casting ^008800Level 3 Safety Wall^000000 on the user when receives Physical Damage.\n------------------------\nClass:^6666CC Card^000000\nCompound on:^00CC33 Accessory^000000\nWeight:^009900 1^000000"
+    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nAdd the chance of auto casting ^008800Level 4 Safety Wall^000000 on the user when receives Physical Damage.\n15% Resistance against ^880000Dark^000000 Property.\n[ ^2EDE28Priest Class^000000 ]\nIncrease ATK by 1% for every 10 base INT.\nIncrease MATK by 1% for every 15 base VIT.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nResist to all element +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAdd the chance of auto casting ^008800Level 3 Safety Wall^000000 on the user when receives Physical Damage.\n------------------------\nClass:^6666CC Card^000000\nCompound on:^00CC33 Accessory^000000\nWeight:^009900 1^000000"
   },
   "4364": {
     "name": "Margaretha Sorin Card",
@@ -11170,7 +11170,7 @@
   },
   "4365": {
     "name": "High Wizard Card",
-    "desc": "Int +3\nEnable to see hidden enemies.\n[ ^2EDE28Wizard Class^000000 ]\nMATK + 3%\nIncrease Jupitel Thunder damage by 3%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMATK +4%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+    "desc": "Int +3\nEnable to see hidden enemies.\n[ ^2EDE28Wizard Class^000000 ]\nMATK + 3%\nIncrease Jupitel Thunder damage by 3%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT +2, MATK +2\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMATK +4%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
   },
   "4366": {
     "name": "Kathryne Keyron Card",
@@ -11178,7 +11178,7 @@
   },
   "4367": {
     "name": "Sniper Card",
-    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nHIT + 200.\nGives 50% Lifesteal\n[ ^2EDE28Sniper Class^000000 ]\nInflict 25% more damage with Focused Arrow Strike.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nLong Range damage +4%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nHIT + 200.\nGives 50% Lifesteal\n[ ^2EDE28Sniper Class^000000 ]\nInflict 25% more damage with Focused Arrow Strike.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDEX +2, HIT +2\n------------------------\n[ ^008000Unlock Effect^000000 ]\nLong Range damage +4%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4368": {
     "name": "Cecil Damon Card",
@@ -42926,7 +42926,7 @@
   },
   "18628": {
     "name": "Drooping Domovoi",
-    "desc": "Bu~oi to achieve it is asleep as dead. To even worry about whether wake up sleeping on the defenseless too.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "Bu~oi to achieve it is asleep as dead. To even worry about whether wake up sleeping on the defenseless too.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18629": {
@@ -42973,17 +42973,17 @@
   },
   "18638": {
     "name": "Citron Hat",
-    "desc": "A hat that looks like a sour citron. Fresh fragrance makes you feel happy and lucky.\nLuk +3\nReduce damage from Plant type monster for 10%.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 40^000000\nPosition:^6666CC All except Novice^000000",
+    "desc": "A hat that looks like a sour citron. Fresh fragrance makes you feel happy and lucky.\nLuk +3\nReduce damage from Plant type monster for 10%.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 40^000000\nPosition:^6666CC All except Novice^000000",
     "slot": 1
   },
   "18639": {
     "name": "Naval Officer Hat",
-    "desc": "A hat only for officers who passed hard training from the NAVY. White, Blue and Yellow color is the symbol of a sailor's providence.\nLuk +3\nGives 10% more damage to Water elemental monsters.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 20^000000\nPosition:^6666CC All except Novice^000000",
+    "desc": "A hat only for officers who passed hard training from the NAVY. White, Blue and Yellow color is the symbol of a sailor's providence.\nLuk +3\nGives 10% more damage to Water elemental monsters.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 20^000000\nPosition:^6666CC All except Novice^000000",
     "slot": 1
   },
   "18640": {
     "name": "Starfish Headband",
-    "desc": "A hair band that looks like a starfish.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 20^000000\nPosition:^6666CC All except Novice^000000",
+    "desc": "A hair band that looks like a starfish.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 20^000000\nPosition:^6666CC All except Novice^000000",
     "slot": 1
   },
   "18641": {
@@ -43333,8 +43333,7 @@
   },
   "18725": {
     "name": "Rabbit Knit Hat",
-    "desc": "A hat with large rabbit ears.\n-------------------------\nMax Weight + 750\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHIT + 1\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
-    "slot": 1
+    "desc": "A hat with large rabbit ears.\n-------------------------\nMax Weight + 750\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHIT + 1\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18726": {
     "name": "Sky Met",
@@ -62597,8 +62596,8 @@
     "desc": "A coin used to play at the '^CC5500Gacha Machine^000000' Try your luck!\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "40010": {
-    "name": "Gachapon Golden Coin",
-    "desc": "A coin used to play at the '^CC5500Gacha Machine^000000' Try your luck! With better chances!\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+    "name": "Reposition Ticket",
+    "desc": "A ticket that reposition converted costume headgears.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "40011": {
     "name": "Name Passport",
@@ -62843,6 +62842,10 @@
   "40074": {
     "name": "Dried Yggdrasil Seed",
     "desc": "Dried seed from the Yggdrasil tree which holds our world together. It has a weird, energizing pungence.\n^FFFFFF_^000000\nClass:^0000FF Restorative^000000\nHeal:^009900 50%^000000 HP, ^00990050%^000000 SP\nCooldown: ^7777770.8 Second^000000\nWeight:^009900 15^000000"
+  },
+  "40075": {
+    "name": "AS Reset Card",
+    "desc": "A card that allows you to reset your auto-support timer. Please use it wisely..\n^FFFFFF_^000000\nWeight:^009900 3^000000"
   },
   "40076": {
     "name": "Instance Reset Ticket",
@@ -63100,6 +63103,10 @@
     "name": "Special Leader Package",
     "desc": "A package that provides a extra items for guild leader.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
+  "40220": {
+    "name": "Guild Package II",
+    "desc": "A Guild Package Box exclusively for guilds in OldschoolRO.\n^FFFFFF_^000000\nLevel Requirement:^009900 235^000000\nJobs:^6666CC Every Rebirth Job except High Novice^000000\nWeight:^009900 1^000000"
+  },
   "40251": {
     "name": "Jedi Talisman",
     "desc": "Soullinks to Jedis.\n- Giving twice more time for ^33CC00Force Sacrifice's^000000 duration and preventing you from dying.\n- You will lose 50% of your HP when the skill ends and won't be able to use the skill again for 1 minute.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
@@ -63114,7 +63121,7 @@
   },
   "40254": {
     "name": "Assassin Talisman",
-    "desc": "Soul Links to Assassins and Assassins Cross.\n- Boosting their ^33CC00Sonic Blow^000000 by doubling its damage and halving the Cool Down for the skill's duration.\n- However, the bonuses are reduced to +25% bonus damage and no Cool Down bonus when in Siege Mode (WoE).\n- Boosting their ^33CC00Throw Venom Knife^000000 by 100%.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+    "desc": "Soul Links to Assassins and Assassins Cross.\n- Boosting their ^33CC00Sonic Blow^000000 by 150% damage and halving the Cool Down for the skill's duration.\n- Has a chance to reflect single target magic back to its caster by 5% chance.\n- Boosting their ^33CC00Throw Venom Knife^000000 by 100%.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "40255": {
     "name": "Crusader Talisman",
@@ -64921,35 +64928,35 @@
   },
   "42528": {
     "name": "Arctic Wings II",
-    "desc": "An icy wind blows through these wings.\nInt +14\nDecreases damage taken from ^0000FFWater^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^880000Freeze^000000 status on the target when dealing physical damage.\nRandom chance to auto-cast Level 1 ^33CC00Decrease Agility^000000 when attacking.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "An icy wind blows through these wings.\nInt +14\nDecreases damage taken from ^0000FFWater^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^880000Freeze^000000 status on the target when dealing physical damage.\nRandom chance to auto-cast Level 1 ^33CC00Decrease Agility^000000 when attacking.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMATK +2\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42529": {
     "name": "Black Butterfly Wings II",
-    "desc": "Beautiful butterfly wings that has been dyed black.\nAgi +14, Flee +36\nIncreases movement speed by 15%.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "Beautiful butterfly wings that has been dyed black.\nAgi +14, Flee +36\nIncreases movement speed by 15%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nFlee +2\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42530": {
     "name": "Demon Wings II",
-    "desc": "A tormentor's wings.\nStr +14\nDecreases damage taken from ^662266Shadow^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^880000Bleeding^000000 status on the target when dealing physical damage.\nRandom chance to auto-cast Level 3 ^33CC00Tiger Knuckle Fist^000000 when attacking.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "A tormentor's wings.\nStr +14\nDecreases damage taken from ^662266Shadow^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^880000Bleeding^000000 status on the target when dealing physical damage.\nRandom chance to auto-cast Level 3 ^33CC00Tiger Knuckle Fist^000000 when attacking.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK +2\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42531": {
     "name": "Gargoyle Wings II",
-    "desc": "Are you a spiritual protector?\nDex +14.\nIncreases range physical damage by 3%.\nDecreases damage taken from ^2F4F4FUndead^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^A52A2AStone^000000 status on the target when dealing physical damage.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "Are you a spiritual protector?\nDex +14.\nIncreases range physical damage by 3%.\nDecreases damage taken from ^2F4F4FUndead^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^A52A2AStone^000000 status on the target when dealing physical damage.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHit +2\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42532": {
     "name": "Icarus Wings II",
-    "desc": "Wings that once was all about divinity, but now has been forsaken.\nPerfect Dodge +3\nAgi +17, Flee +12\nDecreases damage taken from ^0000FFWater^000000, ^8B4513Earth^000000, ^FF0000Fire^000000, ^008000Wind^000000, ^4B0082Poison^000000, ^696969Holy^000000, ^2F4F4FDark^000000, ^696969Ghost^000000 and ^2F4F4FUndead^000000 element attacks by 15%.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 4^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "Wings that once was all about divinity, but now has been forsaken.\nPerfect Dodge +3\nAgi +17, Flee +12\nDecreases damage taken from ^0000FFWater^000000, ^8B4513Earth^000000, ^FF0000Fire^000000, ^008000Wind^000000, ^4B0082Poison^000000, ^696969Holy^000000, ^2F4F4FDark^000000, ^696969Ghost^000000 and ^2F4F4FUndead^000000 element attacks by 15%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAgi +1\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 4^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42533": {
     "name": "Phoenix Wings II",
-    "desc": "'Immortality' the flames scream as it blazes.\nVit +14\nMaximum HP +13%\nDecreases damage taken from ^FF0000Demi-Human^000000 by 3%.\nDecreases damage taken from ^FF0000Fire^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^A52A2ABlind^000000 status on the target when dealing physical damage.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "'Immortality' the flames scream as it blazes.\nVit +14\nMaximum HP +13%\nDecreases damage taken from ^FF0000Demi-Human^000000 by 3%.\nDecreases damage taken from ^FF0000Fire^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^A52A2ABlind^000000 status on the target when dealing physical damage.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP +100\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42534": {
     "name": "Torn Wings II",
-    "desc": "Wings that have endured a lot of battles.\nPerfect Dodge +6.\nLuk +14. Critical Rate +8.\nCritical Damage +2%.\nDecreases damage taken from ^008000Wind^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^A52A2ASilence^000000 status on the target when dealing physical damage.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "Wings that have endured a lot of battles.\nPerfect Dodge +6.\nLuk +14. Critical Rate +8.\nCritical Damage +2%.\nDecreases damage taken from ^008000Wind^000000 elemental attacks by 10%.\nAdds a 5% chance to inflict ^A52A2ASilence^000000 status on the target when dealing physical damage.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nCritical +1\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42535": {
     "name": "White Butterfly Wings II",
-    "desc": "Beautiful butterfly wings that has been dyed white.\nAgi +14, Flee +36\nIncreases movement speed by 15%.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "Beautiful butterfly wings that has been dyed white.\nAgi +14, Flee +36\nIncreases movement speed by 15%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nFlee +2\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42536": {
     "name": "Claw Wings I",
@@ -64957,7 +64964,7 @@
   },
   "42537": {
     "name": "Claw Wings II",
-    "desc": "A wing that is sharp as a blade.\nDex +2\nIncreases range physical damage by 17%.\nReceives more damage taken from ^FF0000Medium^000000 enemies size by 5%.\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
+    "desc": "A wing that is sharp as a blade.\nDex +2\nIncreases range physical damage by 17%.\nReceives more damage taken from ^FF0000Medium^000000 enemies size by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHit +2\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000"
   },
   "42601": {
     "name": "Corrupted War Armor",
@@ -65179,22 +65186,22 @@
   },
   "42827": {
     "name": "Otherworld Armor",
-    "desc": "^FF0000This item does NOT work in PVP and GVG maps.^000000\nAll Stats + 1\nIncrease magic and physical damage on ALL monsters by 2% per ^885500(Refine Rate)^000000\nIncrease magic and physical damage on ALL monsters by 20%.\n50% Resistance against '^880000Stun^000000' Status.\n50% Resistance against '^880000Silence^000000' Status.\n^FF0000Indestructible^000000 in battle.\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Armor^000000\nDefense:^0000FF 6^000000\nWeight:^009900 280^000000\nJobs:^6666CC All^000000",
+    "desc": "^FF0000This item does NOT work in PVP and GVG maps.^000000\nAll Stats + 1\nIncrease magic and physical damage on ALL monsters by 2% per ^885500(Refine Rate)^000000\nIncrease magic and physical damage on ALL monsters by 20%.\n50% Resistance against '^880000Stun^000000' Status.\n50% Resistance against '^880000Silence^000000' Status.\n^FF0000Indestructible^000000 in battle.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMagic reflect chance +1%\n------------------------\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Armor^000000\nDefense:^0000FF 6^000000\nWeight:^009900 280^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "42828": {
     "name": "Otherworld Shoes",
-    "desc": "^FF0000This item does NOT work in PVP and GVG maps.^000000\nMaximum HP and SP + 20%\nIncrease Movement Speed by 40%\nIncrease magic and physical damage on ALL monsters by 1% per ^885500(Refine Rate)^000000\n100% Resistance against '^880000Sleep^000000' Status.\n^FF0000Indestructible^000000 in battle.\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Footwear^000000\nDefense:^0000FF 4^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
+    "desc": "^FF0000This item does NOT work in PVP and GVG maps.^000000\nMaximum HP and SP + 20%\nIncrease Movement Speed by 40%\nIncrease magic and physical damage on ALL monsters by 1% per ^885500(Refine Rate)^000000\n100% Resistance against '^880000Sleep^000000' Status.\n^FF0000Indestructible^000000 in battle.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReflect 1% of all melee physical damage back to attacker.\n------------------------\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Footwear^000000\nDefense:^0000FF 4^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "42829": {
     "name": "Otherworld Robe",
-    "desc": "^FF0000This item works in ALL maps.^000000\nFlee + 10\nAdditional Flee + 3, per ^885500(Refine Rate)^000000\nReflect 5% Range Damage\nAdditional Reflect 3% Range Damage per ^885500(Refine Rate)^000000\n^FF0000Indestructible^000000 in battle.\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
+    "desc": "^FF0000This item works in ALL maps.^000000\nFlee + 10\nAdditional Flee + 3, per ^885500(Refine Rate)^000000\nReflect 5% Range Damage\nAdditional Reflect 3% Range Damage per ^885500(Refine Rate)^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReflect 1% range damage.\n------------------------\n^FF0000Indestructible^000000 in battle.\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "42830": {
     "name": "Otherworld Shield",
-    "desc": "^FF0000This item works in ALL maps.^000000\nAdds 20%\nresistance to Wind,\nEarth, Poison and\nHoly properties.\nMDEF +5\nReflect 1% Range Damage per ^885500(Refine Rate)^000000\n100% Resistance against '^880000Stone Curse^000000' Status.\n^FF0000Indestructible^000000 in battle.\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Shield^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
+    "desc": "^FF0000This item works in ALL maps.^000000\nAdds 20%\nresistance to Wind,\nEarth, Poison and\nHoly properties.\nMDEF +5\nReflect 1% Range Damage per ^885500(Refine Rate)^000000\n100% Resistance against '^880000Stone Curse^000000' Status.\n^FF0000Indestructible^000000 in battle.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecreases Chance of being hit by critical by 1%\n------------------------\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Shield^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "42831": {
@@ -65356,6 +65363,29 @@
   "42866": {
     "name": "Force Dragon Wings",
     "desc": "Wings from a quelled flame-breathing beast.\nAll Stats + 5\nIncrease damage against ^777777Demi-Humans^000000 by 10%.\n[ ^2EDE28Sith & Jedi Class^000000 ]\nIncrease damage inflicted on all enemies by 25%.\n[ ^2EDE28Star Gladiator Class^000000 ]\nIncrease damage inflicted on all enemies by 25%.\n[^000088+ Force Valkyrie Helm Equip Set^000000]\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSTR + 1\n------------------------\nSource:^777777 Donation Shop^000000\nClass:^6666CC Wings^000000\nDefense:^0000FF 10^000000\nElement:^22AA22 Dark^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All classes^000000",
+    "slot": 1
+  },
+  "42867": {
+    "name": "Fortune Sword I",
+    "desc": "A knife with a gold handle that is said to bring great fortune to whoever holds it.\nLuk +5\nPerfect Dodge +20\nDisabled effect if more than one is Equipped.\n^FF0000+8 Upgrade:^000000 Increase resistance\nto ^777777ALL^000000 property\nattacks by 2%.\n^FF0000+10 Upgrade:^000000 Additional resistance\nto ^777777ALL^000000 property\nattacks by 2%.\nSource:^777777 Quest^000000\nClass:^6666CC Dagger^000000\nAttack:^CC0000 90^000000\nWeight:^009900 50^000000\nWeapon Level:^009900 4^000000\nLevel Requirement:^009900 24^000000\nJobs:^6666CC Swordman, Mage, Archer, Merchant, Thief Classes, Ninja, Sith and Jedi^000000"
+  },
+  "42868": {
+    "name": "Asprika I",
+    "desc": "A wing made of all lights that exist in the world. It's name means 'Light of the gods'.\nIncreases resistance to all elemental properties by 20%.\nFLEE + 15, MDEF + 5.\nAdditional Flee + 2 per ^885500(Refine Rate)^000000.\nDecreases Chance of being hit by critical by 2%\nCan not be destroyed.\n^ffffff_^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecreases Chance of being hit by critical by 1%\n------------------------\nSource:^777777 ?^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 5^000000\nWeight:^009900 40^000000\nLevel Requirement:^009900 94^000000\nJobs:^6666CC All^000000"
+  },
+  "42869": {
+    "name": "Blank Eyes I",
+    "desc": "A special item that makes its wearer look absent-minded.\nLuk +3\nCritical Attack +4%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nCritical + 1\n------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nPosition:^6666CC Middle^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42870": {
+    "name": "Otherworld Ring",
+    "desc": "^FF0000This item does NOT work in PVP and GVG maps.^000000\nAll Stats + 5\nMaximum HP + 1%\nReduced Skill delay by 5%\n^FF0000The following effects does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 1% per ^885500(Refine Rate)^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n------------------------\n^777777Refinable Accessory^000000\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42871": {
+    "name": "Gigantic Baphomet Horns I",
+    "desc": "An upgraded headgear forged from the horns of the Unsealed Baphomet.\nStr +12\nHit +10\nDecreases damage taken from ^FF0000Demi-Human^000000 by 10%.\nEndow a weapon with damage that will splash around the character with each attack.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 5, HIT + 1\n------------------------\nSource:^777777 Monster Arena^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 20^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "43001": {
@@ -65792,6 +65822,86 @@
   "43735": {
     "name": "Gemini-S58 Card [Void]",
     "desc": "Nullify 80% magic\nspells, including\nsupportive skills,\nthat target character.\nReceive 10% less damage from Medium size enemy.\nIncreases damage dealing to Neutral Property by 5%.\n^FF0000Does not work when GTB Card Void is equipped.^000000\nClass: ^777777Card^000000\nCompound on: ^777777Shield^000000\nWeight: ^7777771^000000"
+  },
+  "43800": {
+    "name": "Infused Turtle General Card",
+    "desc": "Atk +20%\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43801": {
+    "name": "Infused Drake Card",
+    "desc": "Increases physical damage inflicted on ^6666CCDemihuman^000000 monsters by 20%.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43802": {
+    "name": "Infused Baphomet Card",
+    "desc": "Hit -10\nEndow a weapon with damage that will splash 9 cells around the character with each attack.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43803": {
+    "name": "Infused Lady Tanee Card",
+    "desc": "MaxSP +50%\nMaxHP -40%\nAdds a low chance of dropping ^008800Banana^000000 when defeating monsters.\nIncreases healing effect of ^008800Banana^000000 by 100%.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
+  },
+  "43804": {
+    "name": "Infused Moonlight Flower Card",
+    "desc": "Enable faster Movement Speed so long as the Footgear to which this card is compounded is equipped.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
+  },
+  "43805": {
+    "name": "Infused Maya Card",
+    "desc": "Enable a 50% chance of reflecting Magic spells, aside from skills which target the ground, cast on the character.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^6666CC Shield^000000\nWeight:^009900 1^000000"
+  },
+  "43806": {
+    "name": "Infused Phreeoni Card",
+    "desc": "Hit + 100\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43807": {
+    "name": "Infused Doppelganger Card",
+    "desc": "Enable faster Attack Speed so long as the weapon to which this card is compounded is equipped.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43808": {
+    "name": "Infused Orc Hero Card",
+    "desc": "Vit + 3\nPrevents ^663399Stun^000000 status.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+  },
+  "43809": {
+    "name": "Infused Orc Lord Card",
+    "desc": "Reflect 30% of all melee physical damage back to attacker.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^00CC33 Armor^000000\nWeight:^009900 1^000000"
+  },
+  "43810": {
+    "name": "Infused Ghostring Card",
+    "desc": "Enchants armor with ^777777Ghost^000000 elemental.\nReduce natural HP regeneration by 25%.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^00CC33 Armor^000000\nWeight:^009900 1^000000"
+  },
+  "43811": {
+    "name": "Infused Vesper Card",
+    "desc": "Dex + 2\nIgnores 30% of ^6666CCBoss^000000 monster's Magic Defense Rate when inflicting magic attacks against them.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+  },
+  "43812": {
+    "name": "Infused Dark Snake Lord Card",
+    "desc": "Int +3\nImmune to ^663399Blind^000000 and ^FF0000Curse^000000 state.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+  },
+  "43813": {
+    "name": "Infused Kiel-D-01 Card",
+    "desc": "HIT + 20, Str + 2.\nIncrease Perfect Dodge by 1.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+  },
+  "43814": {
+    "name": "Infused Tao Gunka Card",
+    "desc": "MaxHP +100%\nReduce physical and magical defense by 50%.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^00CC33 Armor^000000\nWeight:^009900 1^000000"
+  },
+  "43815": {
+    "name": "Infused Golden Thiefbug Card",
+    "desc": "Nullify 80% magic attack, including supportive skills, that target character at the cost of doubling SP Consumption cost when using skills.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^6666CC Shield^000000\nWeight:^009900 1^000000"
+  },
+  "43816": {
+    "name": "Infused Fallen Bishop Card",
+    "desc": "MATK + 20%\nReduces Max SP by 50%.\nIncrease magic damage against Demi-Human and Angels by 20%.\n^FF0000This card is part of the 3-Cards Max Deadly Combo restriction.^000000\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
+  },
+  "43817": {
+    "name": "Infused Entweihen Crothen Card",
+    "desc": "Increases magical damage inflicted on all enemies by 25%\nIncreases SP Consumption by 10%\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^00CC33 Armor^000000\nWeight:^009900 1^000000"
+  },
+  "43818": {
+    "name": "Infused Randgris Card",
+    "desc": "Atk +10%.\nAdds a chance of autocast ^008800Level 1 Dispell^000000 with each physical attack.\nMake Compounded weapon is indestructible, but it can still be destroyed by failed upgrade attempts.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 2%.\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43819": {
+    "name": "Infused Memory of Thanatos Card",
+    "desc": "Hit -30\nMaximum HP -10%\nEach attack drains 1 SP.\nEnchants compounded weapon with the ^008800Infiltration^000000 skill effect.\nIncrease magic and physical damage on ALL monsters by 2%.\n^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "43901": {
     "name": "Dark Thanatos Card",
@@ -67730,7 +67840,7 @@
   },
   "46065": {
     "name": "Gold Cursed Sword",
-    "desc": "This Cursed Sword constantly drains the power of the user.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This Cursed Sword constantly drains the power of the user.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46066": {
     "name": "Green Cursed Sword",
@@ -67870,35 +67980,35 @@
   },
   "46100": {
     "name": "Apple in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46101": {
     "name": "Carrot in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46102": {
     "name": "Chocolate in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46103": {
     "name": "Cone in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46104": {
     "name": "Food in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46105": {
     "name": "Meat in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46106": {
     "name": "Orange in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46107": {
     "name": "Strawberry in Mouth",
-    "desc": "Delectables! Surely brings joy!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Delectables! Surely brings joy!\nSource:^777777 Hourly Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46108": {
     "name": "Oblivion Wings",
@@ -67942,7 +68052,7 @@
   },
   "46118": {
     "name": "Sword Barrier",
-    "desc": "Fear not! These swords can deflect magical attacks.\nIncrease Maximum HP by 10%.\nReduce damage from Demi-Human Race by 10%.\nEnables use of Level 1 ^008800Auto-Guard^000000.\nSource:^777777 ?^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 15^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 100^000000\nJobs:^6666CC All^000000"
+    "desc": "Fear not! These swords can deflect magical attacks.\nIncrease Maximum HP by 10%.\nReduce damage from Demi-Human Race by 10%.\nEnables use of Level 1 ^008800Auto-Guard^000000.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Donate^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 15^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 100^000000\nJobs:^6666CC All^000000"
   },
   "46119": {
     "name": "Red Water Spellcaster",
@@ -68018,43 +68128,43 @@
   },
   "46137": {
     "name": "Marin Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46138": {
     "name": "Moon Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46139": {
     "name": "Music Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46140": {
     "name": "Poring Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46141": {
     "name": "Rose Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46142": {
     "name": "Stem Rose Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Activity Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46143": {
     "name": "Snowflake Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46144": {
     "name": "Star Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46145": {
     "name": "Sunflower Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46146": {
     "name": "Sweets Ring",
-    "desc": "This is a piece from the Ring Series. These rings have different properties.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This is a piece from the Ring Series. These rings have different properties.\nSource:^777777 Vote Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46147": {
     "name": "Bliss Wings",
@@ -68270,7 +68380,7 @@
   },
   "46519": {
     "name": "Cyan Destiny Aura",
-    "desc": "To be able to control your fate is a godly power.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "To be able to control your fate is a godly power.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46520": {
     "name": "Green Destiny Aura",
@@ -68350,7 +68460,7 @@
   },
   "46539": {
     "name": "Yellow Essence Aura",
-    "desc": "The most significant elemental power exudes from the wielder.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "The most significant elemental power exudes from the wielder.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46540": {
     "name": "Black God Aura",
@@ -69777,7 +69887,7 @@
   },
   "46895": {
     "name": "Pikachu Mask",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46896": {
     "name": "Pikachu Pet",
@@ -71777,15 +71887,15 @@
   },
   "48302": {
     "name": "Chibi Christmas Star",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nPerfect Dodge + 1\n------------------------\n[ ^008000Deposit Effect^000000 ]\nPerfect Dodge + 1\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nPerfect Dodge + 1\n------------------------\n[ ^008000Deposit Effect^000000 ]\nPerfect Dodge + 1\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48303": {
     "name": "Chibi Frozen King",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncrease damage on Large monsters by 5%.\nDrop Rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncrease damage on Large monsters by 5%.\nDrop Rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48304": {
     "name": "Chibi Frozen Princess",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncrease damage on Large monsters by 5%.\nDrop Rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncrease damage on Large monsters by 5%.\nDrop Rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n------------------------\nSource:^777777 2024 Christmas^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48305": {
     "name": "Chibi Reindeer",
@@ -72525,19 +72635,19 @@
   },
   "48490": {
     "name": "Akatsuki Eye",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48491": {
     "name": "Akatsuki Hat v2",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48492": {
     "name": "Akatsuki Robe",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48493": {
     "name": "Anya Wig",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48494": {
     "name": "Aurous Demon Colossus",
@@ -72545,7 +72655,7 @@
   },
   "48495": {
     "name": "Baryon Tail",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Donation Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48496": {
     "name": "Battle Ring",
@@ -72777,23 +72887,23 @@
   },
   "48554": {
     "name": "Pet Reaper",
-    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n[ ^008000Deposit Effect^000000 ]\nIncreases resistance against ^777777Neutral^000000 elemental attack by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncreases resistance against ^777777Neutral^000000 elemental attack by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48555": {
     "name": "Pet Reaperina",
-    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n[ ^008000Deposit Effect^000000 ]\nIncreases resistance against ^777777Neutral^000000 elemental attack by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncreases resistance against ^777777Neutral^000000 elemental attack by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48556": {
     "name": "Pet Reaperina PNK",
-    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48557": {
     "name": "Pet Reaperina YLW",
-    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48558": {
     "name": "Pet Roxy",
-    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from long range physical attacks by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncrease Movespeed by 5%\n[ ^996600Month of November^000000 ]\nAll Stats + 1\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from long range physical attacks by 1%.\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48559": {
     "name": "Pet Samara",
