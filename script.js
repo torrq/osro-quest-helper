@@ -16,7 +16,9 @@ let state = {
   draggedFrom: null,
   itemSearchFilter: "",
   questSearchFilter: "",
-  editorMode: false
+  editorMode: false,
+  expandedTreeItems: new Set(),
+  showFullTotals: false,
 };
 
 // Apply initial viewer mode class
@@ -956,7 +958,16 @@ function renderQuestContent() {
         ${renderMaterialTree()}
       </div>
 
+      ${hasNestedQuests() ? `
+      <div class="totals-header">
+        <span class="item-label">Totals:</span>
+        <button class="btn btn-sm btn-toggle-totals" onclick="toggleTotals()">
+          ${state.showFullTotals ? 'This Quest Only' : 'Include Sub-Quests'}
+        </button>
+      </div>
+      ` : `
       <span class="item-label">Totals:</span>
+      `}
       <div class="summary-section">
         ${renderSummary()}
         <span class="quest-footer-badge">
@@ -979,6 +990,17 @@ function renderQuestContent() {
       setupProducesSearch(producesInput),
     );
   }
+}
+
+function hasNestedQuests() {
+  if (!state.selectedQuest) return false;
+  
+  const questIndex = buildQuestIndex();
+  
+  // Check if any requirement is an item that has a quest to produce it
+  return state.selectedQuest.requirements.some(req => 
+    req.type === "item" && questIndex.has(req.id)
+  );
 }
 
 function setupAutocomplete(input, idx) {
@@ -1162,65 +1184,92 @@ function renderRequirement(req, idx) {
 function renderMaterialTree() {
   const questIndex = buildQuestIndex();
   const lines = [];
+  const MAX_DEPTH = 10;
 
-  function walk(quest, depth, multiplier, questPath = new Set()) {
-    // Prevent infinite loops
-    if (questPath.has(quest)) return;
+  function walk(quest, depth, multiplier, questPath = new Set(), parentKey = '', parentExpanded = true) {
+    // Prevent infinite loops and excessive depth
+    if (questPath.has(quest) || depth > MAX_DEPTH) return;
     const newPath = new Set(questPath);
     newPath.add(quest);
 
-    quest.requirements.forEach((req) => {
+    quest.requirements.forEach((req, reqIdx) => {
       const effectiveAmount = (Number(req.amount) || 0) * multiplier;
       const indent = "  ".repeat(depth);
       const connector = depth > 0 ? "└─ " : "";
       const immuneBadge = req.immune
         ? ' <span class="text-immune">[IMMUNE]</span>'
         : "";
+      
+      const itemKey = `${parentKey}-${depth}-${reqIdx}`;
+      const isExpanded = state.expandedTreeItems.has(itemKey);
+      const hasChildren = req.type === "item" && questIndex.has(req.id);
+      
+      // Item is visible if: it's at root level OR its parent is expanded
+      const isVisible = depth === 0 || parentExpanded;
 
       if (req.type === "item" && questIndex.has(req.id)) {
         const item = getItem(req.id);
         const quests = questIndex.get(req.id);
 
         if (quests.length === 1) {
-          // Single quest - show as normal
+          // Single quest - show expand icon if it has children
+          const expandIcon = hasChildren 
+            ? `<span class="tree-expand-icon ${isExpanded ? 'expanded' : ''}" onclick="toggleTreeItem('${itemKey}')">▶</span> `
+            : '';
+          
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
+            text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
+            visible: isVisible
           });
-          walk(quests[0], depth + 1, effectiveAmount, newPath);
+          
+          // Recurse into children, passing whether THIS item is expanded
+          walk(quests[0], depth + 1, effectiveAmount, newPath, itemKey, isExpanded);
         } else {
-          // Multiple quests - show options
+          // Multiple quests - show expand icon if it has children
+          const expandIcon = hasChildren
+            ? `<span class="tree-expand-icon ${isExpanded ? 'expanded' : ''}" onclick="toggleTreeItem('${itemKey}')">▶</span> `
+            : '';
+          
           lines.push({
             level: depth,
-            text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${quests.length} OPTIONS]</span>`,
+            text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${quests.length} OPTIONS]</span>`,
+            visible: isVisible
           });
 
-          quests.forEach((q, idx) => {
-            const optionIndent = "  ".repeat(depth + 1);
-            const optionNum = idx + 1;
-            lines.push({
-              level: depth + 1,
-              text: `${optionIndent}<span class="text-muted">Option ${optionNum}: ${q.name} (${q.successRate}% success)</span>`,
+          if (isExpanded) {
+            quests.forEach((q, idx) => {
+              const optionIndent = "  ".repeat(depth + 1);
+              const optionNum = idx + 1;
+              const optionKey = `${itemKey}-opt${idx}`;
+              lines.push({
+                level: depth + 1,
+                text: `${optionIndent}<span class="text-muted">Option ${optionNum}: ${q.name} (${q.successRate}% success)</span>`,
+                visible: isExpanded
+              });
+              walk(q, depth + 2, effectiveAmount, newPath, optionKey, true);
             });
-            walk(q, depth + 2, effectiveAmount, newPath);
-          });
+          }
         }
       } else if (req.type === "zeny") {
         lines.push({
           level: depth,
           text: `${indent}${connector}<span class="tree-item-name">Zeny</span> × <span class="tree-amount">${effectiveAmount.toLocaleString()}</span>${immuneBadge}`,
+          visible: isVisible
         });
       } else if (req.type === "credit") {
         const zenyValue = effectiveAmount * getCreditValue();
         lines.push({
           level: depth,
           text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
+          visible: isVisible
         });
       } else if (req.type === "gold") {
         const zenyValue = effectiveAmount * getGoldValue();
         lines.push({
           level: depth,
           text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
+          visible: isVisible
         });
       } else if (
         req.type === "vote_points" ||
@@ -1248,32 +1297,166 @@ function renderMaterialTree() {
         lines.push({
           level: depth,
           text: `${indent}${connector}<span class="tree-item-name">${typeName}</span> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
+          visible: isVisible
         });
       } else if (req.type === "item") {
         const item = getItem(req.id);
         lines.push({
           level: depth,
           text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
+          visible: isVisible
         });
       }
     });
   }
 
-  walk(state.selectedQuest, 0, 1);
+  walk(state.selectedQuest, 0, 1, new Set(), '', true);
 
   if (lines.length === 0) {
     return '<div class="tree-line">No requirements</div>';
   }
 
   return lines
+    .filter(line => line.visible)
     .map(
       (line) => `<div class="tree-line level-${line.level}">${line.text}</div>`,
     )
     .join("");
 }
 
+function toggleTreeItem(itemKey) {
+  if (state.expandedTreeItems.has(itemKey)) {
+    state.expandedTreeItems.delete(itemKey);
+  } else {
+    state.expandedTreeItems.add(itemKey);
+  }
+  renderQuestContent();
+}
+
+function toggleTotals() {
+  state.showFullTotals = !state.showFullTotals;
+  renderQuestContent();
+}
+
+function renderDirectRequirements() {
+  const quest = state.selectedQuest;
+  let totalZeny = 0;
+  const totals = {};
+
+  quest.requirements.forEach((req) => {
+    const effectiveAmount = Number(req.amount) || 0;
+    
+    // Calculate zeny
+    if (req.type === "zeny") {
+      totalZeny += effectiveAmount;
+    } else if (req.type === "credit") {
+      totalZeny += effectiveAmount * getCreditValue();
+    } else if (req.type === "gold") {
+      totalZeny += effectiveAmount * getGoldValue();
+    } else if (req.type === "item") {
+      const item = getItem(req.id);
+      totalZeny += effectiveAmount * (item.value || 0);
+    }
+
+    const key = req.type === "item" ? `item_${req.id}` : req.type;
+    const name =
+      req.type === "zeny"
+        ? "Zeny"
+        : req.type === "credit"
+          ? "Credit"
+          : req.type === "gold"
+            ? "Gold"
+            : req.type === "vote_points"
+              ? "Vote Points"
+              : req.type === "activity_points"
+                ? "Activity Points"
+                : req.type === "hourly_points"
+                  ? "Hourly Points"
+                  : req.type === "monster_arena_points"
+                    ? "Monster Arena Points"
+                    : req.type === "otherworld_points"
+                      ? "Otherworld Points"
+                      : req.type === "hall_of_heritage_points"
+                        ? "Hall of Heritage Points"
+                        : req.type === "event_points"
+                          ? "Event Points"
+                          : getItem(req.id).name || "Unknown";
+
+    if (!totals[key]) {
+      totals[key] = {
+        name,
+        amount: 0,
+        type: req.type,
+        value: req.type === "item" ? getItem(req.id).value : 0,
+      };
+    }
+    totals[key].amount += effectiveAmount;
+  });
+
+  const entries = Object.values(totals).sort((a, b) => {
+    const currencyOrder = { zeny: 0, credit: 1, gold: 2 };
+    const aIsCurrency = a.type in currencyOrder;
+    const bIsCurrency = b.type in currencyOrder;
+
+    if (aIsCurrency && bIsCurrency) {
+      return currencyOrder[a.type] - currencyOrder[b.type];
+    }
+    if (aIsCurrency) return -1;
+    if (bIsCurrency) return 1;
+
+    if (a.amount !== b.amount) {
+      return b.amount - a.amount;
+    }
+
+    return a.name.localeCompare(b.name);
+  });
+
+  if (entries.length === 0) {
+    return '<div class="summary-item"><span>No materials required</span></div>';
+  }
+
+  let html = "";
+
+  if (totalZeny > 0) {
+    html += `
+      <div class="summary-item summary-total-row">
+        <span class="summary-name summary-total-label">Total Zeny Value</span>
+        <span class="summary-amount summary-total-amount">${totalZeny.toLocaleString()}</span>
+      </div>
+    `;
+  }
+
+  html += entries
+    .map((entry) => {
+      const displayAmount =
+        entry.type === "zeny" ? entry.amount.toLocaleString() : entry.amount;
+      let extra = "";
+      if (entry.type === "credit") {
+        extra = ` <span class="text-muted-sm">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
+      } else if (entry.type === "gold") {
+        extra = ` <span class="text-muted-sm">(${(entry.amount * getGoldValue()).toLocaleString()} zeny)</span>`;
+      } else if (entry.type === "item" && entry.value > 0) {
+        extra = ` <span class="text-muted-sm">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
+      }
+      return `
+      <div class="summary-item">
+        <span class="summary-name">${entry.name}</span>
+        <span class="summary-amount">${displayAmount}${extra}</span>
+      </div>
+    `;
+    })
+    .join("");
+
+  return html;
+}
+
 function renderSummary() {
   const questIndex = buildQuestIndex();
+
+  // If showing direct only, just return direct requirements
+  if (!state.showFullTotals) {
+    return renderDirectRequirements();
+  }
 
   // Find all items with multiple quest options
   const multiQuestItems = new Map();

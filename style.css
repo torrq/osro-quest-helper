@@ -646,7 +646,7 @@ textarea {
 
 .tree-line {
   font-family: Consolas, "Courier New", monospace;
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 2px 0;
   color: var(--text-muted);
 }
@@ -911,6 +911,11 @@ textarea {
   min-width: 250px;
 }
 
+.form-group input {
+  font-size: 16pt;
+  color: var(--accent);
+}
+
 .item-selected-badge {
   display: flex;
   align-items: center;
@@ -919,7 +924,7 @@ textarea {
   border: 1px solid var(--border);
   padding: 6px 12px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 16pt;
 }
 .item-selected-badge strong {
   color: var(--accent);
@@ -1510,17 +1515,14 @@ body.viewer-mode .item-label:has(+ .requirements-section), /* Hide if label is d
 body.viewer-mode .btn-indent-quest,
 body.viewer-mode .tab[onclick*="groups"],
 body.viewer-mode .toolbar-actions,
-body.viewer-mode #addBtn {
+body.viewer-mode #addBtn,
+body.viewer-mode .quest-bound {
   display: none !important;
 }
 
 body.viewer-mode .quest-item {
   cursor: default;
   pointer-events: auto;
-}
-
-body.viewer-mode .quest-item .drag-handle {
-  display: none;
 }
 
 body.viewer-mode .quest-item .quest-name {
@@ -1534,7 +1536,7 @@ body.viewer-mode .editor-quest select {
   pointer-events: none;
   background: var(--bg);
   border-color: var(--border);
-  opacity: 0.7;
+
 }
 
 body.viewer-mode .item-selected-badge .clear-btn {
@@ -1543,4 +1545,55 @@ body.viewer-mode .item-selected-badge .clear-btn {
 
 body.viewer-mode .search-container {
   display: none;
+}
+
+/* Tree expand icons */
+.tree-expand-icon {
+  display: inline-block;
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 10px;
+  transition: transform 0.2s;
+  user-select: none;
+  margin-right: 4px;
+}
+
+.tree-expand-icon.expanded {
+  transform: rotate(90deg);
+}
+
+.tree-expand-icon:hover {
+  color: var(--accent-hover);
+}
+
+/* Totals header with toggle */
+.totals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.totals-header .item-label {
+  margin: 0;
+}
+
+.btn-toggle-totals {
+  font-size: 11px;
+  padding: 4px 8px;
+}
+
+.btn-toggle-totals {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  font-size: 11px;
+  padding: 4px 8px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.btn-toggle-totals:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
