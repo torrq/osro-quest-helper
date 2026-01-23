@@ -1,6 +1,6 @@
 # OSRO Quest Helper
 
-A web-based quest management and material tracking tool for **OSRO Midrate**. Organize quests, track materials needed for crafting chains, and calculate total resource costs with ease.
+A web-based quest, material and autoloot management tool for OSRO Midrate. Organize quests, track materials needed for crafting chains, generate @alootid2 commands, and calculate total resource costs with ease.
 
 ## 🎮 Live Preview
 
