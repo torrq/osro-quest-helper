@@ -243,13 +243,13 @@ body {
 
 .group-header,
 .subgroup-header {
-  padding: 4px 8px;
+  padding: 2px 2px 2px 12px;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border: 1px solid #222 !important;
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 0px;
 }
 
 .group-header:hover,
@@ -258,9 +258,10 @@ body {
 }
 
 .expand-icon {
-  font-size: 10px;
+  font-size: 16px;
   transition: transform 0.2s;
   cursor: pointer;
+  color: lightgreen;
 }
 
 .expand-icon.expanded {
@@ -290,8 +291,8 @@ body {
 }
 
 .subgroup {
-  margin-left: 8px;
-  margin-bottom: 4px;
+  margin-left: 12px;
+  margin-bottom: 0px;
 }
 
 .quest-item {
@@ -300,7 +301,7 @@ body {
   background: transparent;
   border-left: 2px solid transparent;
   cursor: grab;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text);
   transition: all 0.2s;
   display: flex;
@@ -1363,15 +1364,12 @@ textarea {
 
 .group-name-readonly {
   font-weight: 600;
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text);
   padding: 0;
 }
 
 .group-caption {
-  font-size: 11px;
-  font-style: italic;
-  color: var(--text-muted);
   padding: 0;
 }
 
@@ -1379,7 +1377,7 @@ textarea {
   flex: 1;
   padding: 4px 8px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text);
 }
 
@@ -1437,8 +1435,9 @@ textarea {
   gap: 2px;
 }
 
-.group-edit-caption {
-  font-size: 10px;
+.group-caption, .group-edit-caption {
+  font-size: 12px;
   font-style: italic;
-  color: var(--text-muted);
+  font-family: monospace;
+  color: var(--accent);
 }

@@ -308,7 +308,7 @@ function renderItems() {
   }
 
   const totalFound = items.length;
-  const limit = 1000;
+  const limit = 1500;
   const displayedItems = items.slice(0, limit);
 
   let html = "";
