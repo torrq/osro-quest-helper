@@ -2233,11 +2233,12 @@ function renderAutolootMain() {
           .map((id) => {
             const itemDef = DATA.items[id];
             const name = itemDef ? itemDef.name : "Unknown Item";
+            const nameStyle = name === "Unknown Item" ? " style=\"color:red;\"" : "";
             return `
             <div class="al-item-card">
               <div style="display:flex; align-items:center; overflow:hidden;">
                 <span style="color:var(--accent); font-family:monospace; margin-right:8px;">${id}</span>
-                <span title="${name}">${name}</span>
+                <span title="${name}"${nameStyle}>${name}</span>
               </div>
               <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
             </div>
@@ -2405,9 +2406,7 @@ function importAlootCommands() {
 
   if (!text.trim()) return;
 
-  // Normalize whitespace
-  text = text.replace(/\s+/g, " ").trim();
-
+  // We need to keep the line breaks for splitting, so don't replace \s+ globally yet
   const lines = text.split(/\r?\n/);
   const ids = new Set();
   const slot = state.selectedAutolootSlot;
@@ -2417,21 +2416,27 @@ function importAlootCommands() {
     return;
   }
 
+  // List of commands that are followed by a slot number we should ignore
+  const commandsWithSlots = ["save", "reset", "load", "clear", "add", "remove"];
+
   for (let line of lines) {
     line = line.trim();
     if (!line.toLowerCase().startsWith("@alootid2")) continue;
 
-    const parts = line.split(" ").slice(1);
+    // Split line into parts and remove the @alootid2 prefix
+    const parts = line.split(/\s+/).slice(1);
 
     for (let i = 0; i < parts.length; i++) {
       const token = parts[i].toLowerCase();
 
-      // Skip: save <slot>
-      if (token === "save") {
+      // If the token is a command (save, reset, load, etc.), 
+      // skip the command AND the next part (the slot number)
+      if (commandsWithSlots.includes(token)) {
         i++; // skip slot number
         continue;
       }
 
+      // If it's purely a number and wasn't skipped above, it's an item ID
       if (/^\d+$/.test(token)) {
         ids.add(Number(token));
       }
@@ -2443,6 +2448,7 @@ function importAlootCommands() {
     return;
   }
 
+  // Add all found IDs to the current slot
   ids.forEach((id) => addToAutoloot(slot, id));
 
   textarea.value = "";
