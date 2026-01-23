@@ -2190,6 +2190,8 @@ function renderAutolootMain() {
   if (commandBlocks.length === 0) {
     commandHtml = `<div style="color:var(--text-muted); font-style:italic;">Slot is empty. Add items below.</div>`;
   } else {
+    commandBlocks.unshift(`@alootid2 reset ${slot}`);
+    commandBlocks.push(`@alootid2 load ${slot}`);
     commandHtml = commandBlocks
       .map((cmd) => `<div class="al-code-block">${cmd}</div>`)
       .join("");
