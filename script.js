@@ -19,7 +19,14 @@ let state = {
   editorMode: false,
   expandedTreeItems: new Set(),
   showFullTotals: false,
+  autolootData: JSON.parse(localStorage.getItem('osro_autoloot_v1')) || {},
+  selectedAutolootSlot: 1,
 };
+
+// Ensure all 10 slots exist
+for (let i = 1; i <= 10; i++) {
+  if (!state.autolootData[i]) state.autolootData[i] = [];
+}
 
 // Apply initial viewer mode class
 document.body.classList.add('viewer-mode');
@@ -129,22 +136,44 @@ function getAllItems() {
     });
 }
 
-function switchTab(tab) {
-  state.currentTab = tab;
-  if (tab === "items") {
-    state.selectedQuest = null;
-    state.itemSearchFilter = "";
-    document.getElementById("itemSearchInput").value = "";
-  } else if (tab === "groups") {
-    state.selectedQuest = null;
-    state.selectedItem = null;
-    state.selectedGroupForEdit = null;
-  } else {
-    state.selectedItem = null;
-    state.questSearchFilter = "";
-    document.getElementById("questSearchInput").value = "";
+function switchTab(tabName) {
+  state.currentTab = tabName;
+
+  // 1. Update Tab styling
+  document.querySelectorAll(".tab").forEach((t) => {
+    t.classList.toggle("active", t.textContent.toLowerCase().includes(tabName));
+  });
+
+  // 2. Hide ALL Sidebar Content
+  document.getElementById("treeContainer").classList.add("hidden");
+  document.getElementById("itemsList").classList.add("hidden");
+  document.getElementById("groupsList").classList.add("hidden");
+  const alList = document.getElementById("autolootList");
+  if (alList) alList.classList.add("hidden");
+
+  // 3. Hide ALL Search/Header Inputs
+  document.getElementById("questsSearch").classList.add("hidden");
+  document.getElementById("itemsSearch").classList.add("hidden");
+  
+  // 4. Show Specific Content
+  if (tabName === "quests") {
+    document.getElementById("treeContainer").classList.remove("hidden");
+    document.getElementById("questsSearch").classList.remove("hidden");
+    renderSidebar();
+    render(); // Render main quest view
+  } else if (tabName === "items") {
+    document.getElementById("itemsList").classList.remove("hidden");
+    document.getElementById("itemsSearch").classList.remove("hidden");
+    renderItems();
+  } else if (tabName === "groups") {
+    document.getElementById("groupsList").classList.remove("hidden");
+    renderGroups();
+  } else if (tabName === "autoloot") {
+    // NEW: Handle Autoloot Tab
+    if (alList) alList.classList.remove("hidden");
+    renderAutolootSidebar();
+    renderAutolootMain();
   }
-  render();
 }
 
 function clearItemSearch() {
@@ -2062,4 +2091,264 @@ function toggleEditorMode(enabled) {
   }
   
   render();
+}
+
+// ==========================================
+// AUTOLOOT MANAGER LOGIC
+// ==========================================
+
+function saveAutoloot() {
+  localStorage.setItem('osro_autoloot_v1', JSON.stringify(state.autolootData));
+  renderAutolootSidebar();
+  renderAutolootMain();
+}
+
+function renderAutolootSidebar() {
+  const container = document.getElementById("autolootList");
+  if (!container) return;
+
+  container.innerHTML = "";
+  
+  for (let i = 1; i <= 10; i++) {
+    const itemCount = state.autolootData[i] ? state.autolootData[i].length : 0;
+    const isActive = state.selectedAutolootSlot === i;
+    
+    const div = document.createElement("div");
+    div.className = `autoloot-slot-row ${isActive ? 'active' : ''}`;
+    div.onclick = () => {
+      state.selectedAutolootSlot = i;
+      renderAutolootSidebar();
+      renderAutolootMain();
+    };
+    
+    div.innerHTML = `
+      <span style="font-weight: 500;">@alootid2 slot ${i}</span>
+      <span class="slot-badge">${itemCount} items</span>
+    `;
+    container.appendChild(div);
+  }
+}
+
+function renderAutolootMain() {
+  const container = document.getElementById("mainContent");
+  const slot = state.selectedAutolootSlot;
+  const items = state.autolootData[slot] || [];
+
+  // ===============================================
+  // 1. SMART COMMAND GENERATION
+  // ===============================================
+  // RO chat limits are strict. We limit by BOTH count and characters.
+  const MAX_ITEMS_PER_LINE = 18; 
+  const MAX_CHARS_PER_LINE = 100; // Safety buffer (usually 120 is max)
+  const PREFIX = `@alootid2 save ${slot} `;
+
+  let commandBlocks = [];
+  let currentChunk = [];
+  let currentLength = PREFIX.length;
+
+  items.forEach((id) => {
+    const idStr = id.toString();
+    // Calculate length this ID would add (id + space)
+    const addedLength = idStr.length + 1; 
+
+    // Check if adding this item would exceed limits
+    if (
+      currentChunk.length >= MAX_ITEMS_PER_LINE || 
+      (currentLength + addedLength) > MAX_CHARS_PER_LINE
+    ) {
+      // Push current line and reset
+      if (currentChunk.length > 0) {
+        commandBlocks.push(`${PREFIX}${currentChunk.join(" ")}`);
+      }
+      currentChunk = [];
+      currentLength = PREFIX.length;
+    }
+
+    // Add item to current buffer
+    currentChunk.push(idStr);
+    currentLength += addedLength;
+  });
+
+  // Push any remaining items
+  if (currentChunk.length > 0) {
+    commandBlocks.push(`${PREFIX}${currentChunk.join(" ")}`);
+  }
+
+  // If empty, show placeholder
+  let commandHtml = "";
+  if (commandBlocks.length === 0) {
+    commandHtml = `<div style="color:var(--text-muted); font-style:italic;">Slot is empty. Add items below.</div>`;
+  } else {
+    commandHtml = commandBlocks.map(cmd => 
+      `<div class="al-code-block">${cmd}</div>`
+    ).join("");
+  }
+
+  // ===============================================
+  // 2. RENDER UI
+  // ===============================================
+  container.innerHTML = `
+    <div class="autoloot-main">
+      <h2 style="margin-bottom: 10px;">Autoloot Manager <span style="color:var(--text-muted); font-size:0.6em">Slot ${slot}</span></h2>
+      <p style="color:var(--text-muted); margin-bottom: 20px; font-size: 0.9em;">
+        Commands are automatically optimized to fit server line limits (max 18 items or 100 chars).
+      </p>
+
+      <div class="al-command-box">
+        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+          <h4 style="color:var(--accent); text-transform:uppercase; font-size:12px; letter-spacing:1px;">Generated Commands</h4>
+          <button class="btn btn-sm" onclick="copyAllAutoloot()" style="font-size:11px;">Copy All</button>
+        </div>
+        ${commandHtml}
+      </div>
+
+      <div class="al-search-wrapper">
+        <input type="text" 
+          id="alSearchInput" 
+          class="al-search-input" 
+          placeholder="Search Item Name or ID to add..." 
+          autocomplete="off"
+          oninput="handleAutolootSearch(this.value)"
+        >
+        <div id="alSearchResults" class="al-search-dropdown hidden"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+        <h3 style="font-size:16px;">Stored Items (${items.length})</h3>
+        ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear Slot</button>` : ''}
+      </div>
+
+      <div class="al-items-grid">
+        ${items.map(id => {
+          const itemDef = DATA.items[id];
+          const name = itemDef ? itemDef.name : "Unknown Item";
+          return `
+            <div class="al-item-card">
+              <div style="display:flex; align-items:center; overflow:hidden;">
+                <span style="color:var(--accent); font-family:monospace; margin-right:8px;">${id}</span>
+                <span title="${name}">${name}</span>
+              </div>
+              <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function handleAutolootSearch(query) {
+  const resultsDiv = document.getElementById("alSearchResults");
+  
+  // 1. Basic validation
+  if (!query || query.trim().length < 1) {
+    resultsDiv.classList.add("hidden");
+    return;
+  }
+
+  const lowerQ = query.toLowerCase();
+  // 2. Use getAllItems() to get the clean array of items exactly like Editor Mode
+  const allItems = getAllItems(); 
+  
+  let matches = [];
+  
+  // Check if input is a number (ID search)
+  const queryNum = parseInt(query, 10);
+  const isNumeric = !isNaN(queryNum) && queryNum.toString() === query.trim();
+
+  if (isNumeric) {
+    // Exact ID match first
+    const exactMatch = allItems.find(item => item.id === queryNum);
+    if (exactMatch) matches.push(exactMatch);
+    
+    // Then partial ID matches
+    const others = allItems.filter(item => 
+      item.id !== queryNum && 
+      (item.id.toString().includes(query) || (item.name && item.name.toLowerCase().includes(lowerQ)))
+    ).slice(0, 10);
+    matches = matches.concat(others);
+  } else {
+    // Text search logic
+    matches = allItems
+      .filter(item => 
+        (item.name && item.name.toLowerCase().includes(lowerQ)) || 
+        item.id.toString().includes(lowerQ)
+      )
+      .sort((a, b) => {
+        const aName = (a.name || "").toLowerCase();
+        const bName = (b.name || "").toLowerCase();
+        
+        // Prioritize exact name match
+        if (aName === lowerQ && bName !== lowerQ) return -1;
+        if (bName === lowerQ && aName !== lowerQ) return 1;
+        
+        // Prioritize "starts with"
+        if (aName.startsWith(lowerQ) && !bName.startsWith(lowerQ)) return -1;
+        if (bName.startsWith(lowerQ) && !aName.startsWith(lowerQ)) return 1;
+        
+        return a.id - b.id;
+      })
+      .slice(0, 15);
+  }
+
+  if (matches.length === 0) {
+    resultsDiv.classList.add("hidden");
+    return;
+  }
+
+  // 3. Render results using getItemDisplayName for consistent formatting (e.g. showing slots)
+  resultsDiv.innerHTML = matches.map(item => `
+    <div class="al-result-item" onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
+      <span style="color:var(--accent); font-family:monospace; margin-right:8px; font-weight:bold;">${item.id}</span>
+      <div style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+        ${getItemDisplayName(item)}
+      </div>
+    </div>
+  `).join("");
+  
+  resultsDiv.classList.remove("hidden");
+}
+
+// Helper to hide search when clicking outside
+document.addEventListener("click", (e) => {
+  const searchWrapper = document.querySelector(".al-search-wrapper");
+  const resultsDiv = document.getElementById("alSearchResults");
+  if (searchWrapper && resultsDiv && !searchWrapper.contains(e.target)) {
+    resultsDiv.classList.add("hidden");
+  }
+});
+
+function addToAutoloot(slot, id) {
+  if (!state.autolootData[slot].includes(id)) {
+    state.autolootData[slot].push(id);
+    saveAutoloot();
+    
+    // Clear search box but keep focus
+    const input = document.getElementById("alSearchInput");
+    if(input) {
+      input.value = "";
+      input.focus();
+    }
+    document.getElementById("alSearchResults").classList.add("hidden");
+  }
+}
+
+function removeFromAutoloot(slot, id) {
+  state.autolootData[slot] = state.autolootData[slot].filter(x => x !== id);
+  saveAutoloot();
+}
+
+function clearAutolootSlot(slot) {
+  if(confirm(`Clear all items from Slot ${slot}?`)) {
+    state.autolootData[slot] = [];
+    saveAutoloot();
+  }
+}
+
+function copyAllAutoloot() {
+  const blocks = document.querySelectorAll(".al-code-block");
+  let text = "";
+  blocks.forEach(b => text += b.textContent + "\n");
+  navigator.clipboard.writeText(text);
+  alert("Commands copied to clipboard");
 }

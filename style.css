@@ -1597,3 +1597,180 @@ body.viewer-mode .search-container {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
 }
+
+/* Autoloot Sidebar Items */
+.autoloot-slot-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.autoloot-slot-item:hover {
+  background: var(--panel-hover);
+}
+
+.autoloot-slot-item.active {
+  background: var(--panel-hover);
+  border-left: 3px solid var(--accent);
+}
+
+.slot-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* =========================================
+   AUTOLOOT MANAGER STYLES
+   ========================================= */
+
+/* Sidebar Slots */
+.autoloot-slot-row {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.autoloot-slot-row:hover {
+  background: var(--panel-hover);
+}
+
+.autoloot-slot-row.active {
+  background: var(--panel-hover);
+  border-left: 3px solid var(--accent);
+  padding-left: 12px; /* compensate for border */
+}
+
+.slot-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Main Content Area */
+.autoloot-main {
+  padding: 20px;
+  max-width: 900px;
+}
+
+.al-command-box {
+  background: #0d1117; /* Darker than bg */
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.al-code-block {
+  font-family: 'Consolas', 'Monaco', monospace;
+  color: #79c0ff;
+  background: rgba(0,0,0,0.3);
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 13px;
+  user-select: all; /* Makes selection easier */
+}
+
+.al-search-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.al-search-input {
+  width: 100%;
+  padding: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.al-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.al-search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: none;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 500;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.al-result-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.al-result-item:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.al-result-item span {
+  font-family: monospace;
+  margin-right: 10px;
+  opacity: 0.7;
+}
+
+/* Item Grid */
+.al-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.al-item-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.al-item-card span {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.al-remove-btn {
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.al-remove-btn:hover {
+  color: var(--danger);
+}
