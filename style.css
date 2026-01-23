@@ -1660,8 +1660,9 @@ body.viewer-mode .search-container {
 
 /* Main Content Area */
 .autoloot-main {
-  padding: 20px;
-  max-width: 900px;
+  padding: 2px;
+  max-width: 1200px;
+  margin-top: 20px;
 }
 
 .al-command-box {
