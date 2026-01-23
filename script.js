@@ -19,7 +19,7 @@ let state = {
   editorMode: false,
   expandedTreeItems: new Set(),
   showFullTotals: false,
-  autolootData: JSON.parse(localStorage.getItem('osro_autoloot_v1')) || {},
+  autolootData: JSON.parse(localStorage.getItem("osro_autoloot_v1")) || {},
   selectedAutolootSlot: 1,
 };
 
@@ -29,7 +29,7 @@ for (let i = 1; i <= 10; i++) {
 }
 
 // Apply initial viewer mode class
-document.body.classList.add('viewer-mode');
+document.body.classList.add("viewer-mode");
 
 // Initialize data - always fetch from remote (no caching for development)
 (function initializeData() {
@@ -154,7 +154,7 @@ function switchTab(tabName) {
   // 3. Hide ALL Search/Header Inputs
   document.getElementById("questsSearch").classList.add("hidden");
   document.getElementById("itemsSearch").classList.add("hidden");
-  
+
   // 4. Show Specific Content
   if (tabName === "quests") {
     document.getElementById("treeContainer").classList.remove("hidden");
@@ -595,7 +595,7 @@ function renderSidebar() {
       <span class="expand-icon ${isExpanded ? "expanded" : ""}">▶</span>
       <div class="group-name-container">
         <span class="group-name-readonly">${group.name}</span>
-        ${group.caption ? `<span class="group-caption">${group.caption}</span>` : ''}
+        ${group.caption ? `<span class="group-caption">${group.caption}</span>` : ""}
       </div>
     `;
     groupDiv.appendChild(header);
@@ -628,26 +628,26 @@ function renderSidebar() {
         `;
         subDiv.appendChild(subHeader);
 
-      if (isSubExpanded) {
+        if (isSubExpanded) {
           // Use matchingQuests array for filtering (or all quests if no filter)
           // We need original index for drag/drop to work correctly, so we iterate original array but check visibility
           subgroup.quests.forEach((quest, questIdx) => {
             if (filter && !quest.name.toLowerCase().includes(filter)) return;
-            
+
             const questDiv = document.createElement("div");
             questDiv.className = "quest-item";
             if (state.selectedQuest === quest) {
               questDiv.classList.add("active");
             }
-            
+
             // Only make draggable in editor mode
             questDiv.draggable = state.editorMode;
-            
+
             questDiv.innerHTML = `
-              <span class="drag-handle">${state.editorMode ? '⋮⋮' : '◆'}</span>
+              <span class="drag-handle">${state.editorMode ? "⋮⋮" : "◆"}</span>
               <span class="quest-name">${quest.name}</span>
             `;
-            
+
             // Only add drag/drop listeners in editor mode
             if (state.editorMode) {
               questDiv.addEventListener("dragstart", (e) => {
@@ -655,18 +655,18 @@ function renderSidebar() {
                 state.draggedFrom = { groupIdx, subIdx };
                 questDiv.classList.add("dragging");
               });
-              
+
               questDiv.addEventListener("dragend", (e) => {
                 questDiv.classList.remove("dragging");
                 document
                   .querySelectorAll(".quest-item")
                   .forEach((el) => el.classList.remove("drag-over"));
               });
-              
+
               questDiv.addEventListener("dragover", (e) => {
                 e.preventDefault();
               });
-              
+
               questDiv.addEventListener("dragenter", (e) => {
                 if (
                   state.draggedQuest !== questIdx ||
@@ -676,15 +676,15 @@ function renderSidebar() {
                   questDiv.classList.add("drag-over");
                 }
               });
-              
+
               questDiv.addEventListener("dragleave", (e) => {
                 questDiv.classList.remove("drag-over");
               });
-              
+
               questDiv.addEventListener("drop", (e) => {
                 e.preventDefault();
                 questDiv.classList.remove("drag-over");
-                
+
                 if (
                   state.draggedFrom.groupIdx === groupIdx &&
                   state.draggedFrom.subIdx === subIdx
@@ -698,17 +698,17 @@ function renderSidebar() {
                 }
               });
             }
-            
+
             questDiv.querySelector(".quest-name").onclick = () => {
               selectQuest(group, subgroup, quest);
               if (window.innerWidth <= 768) {
                 toggleSidebar();
               }
             };
-            
+
             subDiv.appendChild(questDiv);
           });
-          
+
           if (!filter && state.editorMode) {
             const addQuestBtn = document.createElement("button");
             addQuestBtn.className = "btn btn-sm btn-indent-quest";
@@ -732,13 +732,13 @@ function renderGroupsList() {
   let html = "";
 
   DATA.groups.forEach((group, groupIdx) => {
-  const isSelected = state.selectedGroupForEdit === groupIdx;
-  html += `
+    const isSelected = state.selectedGroupForEdit === groupIdx;
+    html += `
       <div class="group-edit-item ${isSelected ? "active" : ""}" onclick="selectGroupForEdit(${groupIdx})">
         <div class="group-edit-header">
           <div class="group-edit-name-container">
             <span class="group-edit-name">${group.name}</span>
-            ${group.caption ? `<span class="group-edit-caption">${group.caption}</span>` : ''}
+            ${group.caption ? `<span class="group-edit-caption">${group.caption}</span>` : ""}
           </div>
           <span class="group-edit-count">${group.subgroups.length} subgroups</span>
         </div>
@@ -761,7 +761,7 @@ function selectGroupForEdit(idx) {
 
 function renderGroupContent() {
   const container = document.getElementById("mainContent");
-  
+
   if (state.selectedGroupForEdit === null) {
     container.innerHTML = `
       <div class="empty-state">
@@ -771,10 +771,10 @@ function renderGroupContent() {
     `;
     return;
   }
-  
+
   const groupIdx = state.selectedGroupForEdit;
   const group = DATA.groups[groupIdx];
-  
+
   if (!group) {
     container.innerHTML = `
       <div class="empty-state">
@@ -784,7 +784,7 @@ function renderGroupContent() {
     `;
     return;
   }
-  
+
   let html = `
     <div class="editor-group">
       <div class="group-edit-top">
@@ -799,15 +799,15 @@ function renderGroupContent() {
       
       <div class="form-group">
         <span class="item-label">Caption (optional):</span>
-        <input type="text" placeholder="e.g., Main Office, Prontera, etc." value="${group.caption || ''}" onchange="updateGroupCaption(${groupIdx}, this.value)">
+        <input type="text" placeholder="e.g., Main Office, Prontera, etc." value="${group.caption || ""}" onchange="updateGroupCaption(${groupIdx}, this.value)">
         <p class="help-text">A short location or description displayed under the group name</p>
       </div>
       
       <div class="group-ordering-section">
         <span class="item-label">Group Position:</span>
         <div class="ordering-controls">
-          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, -1)" ${groupIdx === 0 ? 'disabled' : ''}>↑ Move Up</button>
-          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, 1)" ${groupIdx === DATA.groups.length - 1 ? 'disabled' : ''}>↓ Move Down</button>
+          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, -1)" ${groupIdx === 0 ? "disabled" : ""}>↑ Move Up</button>
+          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, 1)" ${groupIdx === DATA.groups.length - 1 ? "disabled" : ""}>↓ Move Down</button>
           <span class="ordering-info">Position ${groupIdx + 1} of ${DATA.groups.length}</span>
         </div>
       </div>
@@ -820,7 +820,7 @@ function renderGroupContent() {
         
         <div class="subgroups-list">
   `;
-  
+
   if (group.subgroups.length === 0) {
     html += `<div class="empty-msg-centered">No subgroups yet. Click "+ Add Subgroup" to create one.</div>`;
   } else {
@@ -831,8 +831,8 @@ function renderGroupContent() {
             <input type="text" class="subgroup-edit-name-input" value="${subgroup.name}" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
             <span class="subgroup-quest-count">${subgroup.quests.length} quests</span>
             <div class="subgroup-ordering-controls">
-              <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, -1)" ${subIdx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
-              <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, 1)" ${subIdx === group.subgroups.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+              <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, -1)" ${subIdx === 0 ? "disabled" : ""} title="Move Up">↑</button>
+              <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, 1)" ${subIdx === group.subgroups.length - 1 ? "disabled" : ""} title="Move Down">↓</button>
             </div>
             <button class="btn btn-sm btn-danger" onclick="deleteSubgroup(${groupIdx}, ${subIdx})">Delete</button>
           </div>
@@ -840,13 +840,13 @@ function renderGroupContent() {
       `;
     });
   }
-  
+
   html += `
         </div>
       </div>
     </div>
   `;
-  
+
   container.innerHTML = html;
 }
 
@@ -858,15 +858,15 @@ function updateGroupCaption(idx, value) {
 function moveGroup(idx, direction) {
   const newIdx = idx + direction;
   if (newIdx < 0 || newIdx >= DATA.groups.length) return;
-  
+
   // Swap groups
   const temp = DATA.groups[idx];
   DATA.groups[idx] = DATA.groups[newIdx];
   DATA.groups[newIdx] = temp;
-  
+
   // Update selected index
   state.selectedGroupForEdit = newIdx;
-  
+
   render();
 }
 
@@ -874,12 +874,12 @@ function moveSubgroup(groupIdx, subIdx, direction) {
   const group = DATA.groups[groupIdx];
   const newIdx = subIdx + direction;
   if (newIdx < 0 || newIdx >= group.subgroups.length) return;
-  
+
   // Swap subgroups
   const temp = group.subgroups[subIdx];
   group.subgroups[subIdx] = group.subgroups[newIdx];
   group.subgroups[newIdx] = temp;
-  
+
   render();
 }
 
@@ -987,16 +987,20 @@ function renderQuestContent() {
         ${renderMaterialTree()}
       </div>
 
-      ${hasNestedQuests() ? `
+      ${
+        hasNestedQuests()
+          ? `
       <div class="totals-header">
         <span class="item-label">Totals:</span>
         <button class="btn btn-sm btn-toggle-totals" onclick="toggleTotals()">
-          ${state.showFullTotals ? 'This Quest Only' : 'Include Sub-Quests'}
+          ${state.showFullTotals ? "This Quest Only" : "Include Sub-Quests"}
         </button>
       </div>
-      ` : `
+      `
+          : `
       <span class="item-label">Totals:</span>
-      `}
+      `
+      }
       <div class="summary-section">
         ${renderSummary()}
         <span class="quest-footer-badge">
@@ -1023,12 +1027,12 @@ function renderQuestContent() {
 
 function hasNestedQuests() {
   if (!state.selectedQuest) return false;
-  
+
   const questIndex = buildQuestIndex();
-  
+
   // Check if any requirement is an item that has a quest to produce it
-  return state.selectedQuest.requirements.some(req => 
-    req.type === "item" && questIndex.has(req.id)
+  return state.selectedQuest.requirements.some(
+    (req) => req.type === "item" && questIndex.has(req.id),
   );
 }
 
@@ -1215,7 +1219,14 @@ function renderMaterialTree() {
   const lines = [];
   const MAX_DEPTH = 10;
 
-  function walk(quest, depth, multiplier, questPath = new Set(), parentKey = '', parentExpanded = true) {
+  function walk(
+    quest,
+    depth,
+    multiplier,
+    questPath = new Set(),
+    parentKey = "",
+    parentExpanded = true,
+  ) {
     // Prevent infinite loops and excessive depth
     if (questPath.has(quest) || depth > MAX_DEPTH) return;
     const newPath = new Set(questPath);
@@ -1228,11 +1239,11 @@ function renderMaterialTree() {
       const immuneBadge = req.immune
         ? ' <span class="text-immune">[IMMUNE]</span>'
         : "";
-      
+
       const itemKey = `${parentKey}-${depth}-${reqIdx}`;
       const isExpanded = state.expandedTreeItems.has(itemKey);
       const hasChildren = req.type === "item" && questIndex.has(req.id);
-      
+
       // Item is visible if: it's at root level OR its parent is expanded
       const isVisible = depth === 0 || parentExpanded;
 
@@ -1242,28 +1253,35 @@ function renderMaterialTree() {
 
         if (quests.length === 1) {
           // Single quest - show expand icon if it has children
-          const expandIcon = hasChildren 
-            ? `<span class="tree-expand-icon ${isExpanded ? 'expanded' : ''}" onclick="toggleTreeItem('${itemKey}')">▶</span> `
-            : '';
-          
+          const expandIcon = hasChildren
+            ? `<span class="tree-expand-icon ${isExpanded ? "expanded" : ""}" onclick="toggleTreeItem('${itemKey}')">▶</span> `
+            : "";
+
           lines.push({
             level: depth,
             text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
-            visible: isVisible
+            visible: isVisible,
           });
-          
+
           // Recurse into children, passing whether THIS item is expanded
-          walk(quests[0], depth + 1, effectiveAmount, newPath, itemKey, isExpanded);
+          walk(
+            quests[0],
+            depth + 1,
+            effectiveAmount,
+            newPath,
+            itemKey,
+            isExpanded,
+          );
         } else {
           // Multiple quests - show expand icon if it has children
           const expandIcon = hasChildren
-            ? `<span class="tree-expand-icon ${isExpanded ? 'expanded' : ''}" onclick="toggleTreeItem('${itemKey}')">▶</span> `
-            : '';
-          
+            ? `<span class="tree-expand-icon ${isExpanded ? "expanded" : ""}" onclick="toggleTreeItem('${itemKey}')">▶</span> `
+            : "";
+
           lines.push({
             level: depth,
             text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${quests.length} OPTIONS]</span>`,
-            visible: isVisible
+            visible: isVisible,
           });
 
           if (isExpanded) {
@@ -1274,7 +1292,7 @@ function renderMaterialTree() {
               lines.push({
                 level: depth + 1,
                 text: `${optionIndent}<span class="text-muted">Option ${optionNum}: ${q.name} (${q.successRate}% success)</span>`,
-                visible: isExpanded
+                visible: isExpanded,
               });
               walk(q, depth + 2, effectiveAmount, newPath, optionKey, true);
             });
@@ -1284,21 +1302,21 @@ function renderMaterialTree() {
         lines.push({
           level: depth,
           text: `${indent}${connector}<span class="tree-item-name">Zeny</span> × <span class="tree-amount">${effectiveAmount.toLocaleString()}</span>${immuneBadge}`,
-          visible: isVisible
+          visible: isVisible,
         });
       } else if (req.type === "credit") {
         const zenyValue = effectiveAmount * getCreditValue();
         lines.push({
           level: depth,
           text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
-          visible: isVisible
+          visible: isVisible,
         });
       } else if (req.type === "gold") {
         const zenyValue = effectiveAmount * getGoldValue();
         lines.push({
           level: depth,
           text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`,
-          visible: isVisible
+          visible: isVisible,
         });
       } else if (
         req.type === "vote_points" ||
@@ -1326,27 +1344,27 @@ function renderMaterialTree() {
         lines.push({
           level: depth,
           text: `${indent}${connector}<span class="tree-item-name">${typeName}</span> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
-          visible: isVisible
+          visible: isVisible,
         });
       } else if (req.type === "item") {
         const item = getItem(req.id);
         lines.push({
           level: depth,
           text: `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
-          visible: isVisible
+          visible: isVisible,
         });
       }
     });
   }
 
-  walk(state.selectedQuest, 0, 1, new Set(), '', true);
+  walk(state.selectedQuest, 0, 1, new Set(), "", true);
 
   if (lines.length === 0) {
     return '<div class="tree-line">No requirements</div>';
   }
 
   return lines
-    .filter(line => line.visible)
+    .filter((line) => line.visible)
     .map(
       (line) => `<div class="tree-line level-${line.level}">${line.text}</div>`,
     )
@@ -1374,7 +1392,7 @@ function renderDirectRequirements() {
 
   quest.requirements.forEach((req) => {
     const effectiveAmount = Number(req.amount) || 0;
-    
+
     // Calculate zeny
     if (req.type === "zeny") {
       totalZeny += effectiveAmount;
@@ -2079,26 +2097,22 @@ function filterQuests(value) {
 
 function toggleEditorMode(enabled) {
   state.editorMode = enabled;
-  
+
   if (enabled) {
-    document.body.classList.remove('viewer-mode');
+    document.body.classList.remove("viewer-mode");
   } else {
-    document.body.classList.add('viewer-mode');
+    document.body.classList.add("viewer-mode");
     // Switch away from Groups tab if currently on it
-    if (state.currentTab === 'groups') {
-      switchTab('quests');
+    if (state.currentTab === "groups") {
+      switchTab("quests");
     }
   }
-  
+
   render();
 }
 
-// ==========================================
-// AUTOLOOT MANAGER LOGIC
-// ==========================================
-
 function saveAutoloot() {
-  localStorage.setItem('osro_autoloot_v1', JSON.stringify(state.autolootData));
+  localStorage.setItem("osro_autoloot_v1", JSON.stringify(state.autolootData));
   renderAutolootSidebar();
   renderAutolootMain();
 }
@@ -2108,19 +2122,19 @@ function renderAutolootSidebar() {
   if (!container) return;
 
   container.innerHTML = "";
-  
+
   for (let i = 1; i <= 10; i++) {
     const itemCount = state.autolootData[i] ? state.autolootData[i].length : 0;
     const isActive = state.selectedAutolootSlot === i;
-    
+
     const div = document.createElement("div");
-    div.className = `autoloot-slot-row ${isActive ? 'active' : ''}`;
+    div.className = `autoloot-slot-row ${isActive ? "active" : ""}`;
     div.onclick = () => {
       state.selectedAutolootSlot = i;
       renderAutolootSidebar();
       renderAutolootMain();
     };
-    
+
     div.innerHTML = `
       <span style="font-weight: 500;">@alootid2 slot ${i}</span>
       <span class="slot-badge">${itemCount} items</span>
@@ -2146,12 +2160,12 @@ function renderAutolootMain() {
   items.forEach((id) => {
     const idStr = id.toString();
     // Calculate length this ID would add (id + space)
-    const addedLength = idStr.length + 1; 
+    const addedLength = idStr.length + 1;
 
     // Check if adding this item would exceed limits
     if (
-      currentChunk.length >= MAX_ITEMS_PER_LINE || 
-      (currentLength + addedLength) > MAX_CHARS_PER_LINE
+      currentChunk.length >= MAX_ITEMS_PER_LINE ||
+      currentLength + addedLength > MAX_CHARS_PER_LINE
     ) {
       // Push current line and reset
       if (currentChunk.length > 0) {
@@ -2176,9 +2190,9 @@ function renderAutolootMain() {
   if (commandBlocks.length === 0) {
     commandHtml = `<div style="color:var(--text-muted); font-style:italic;">Slot is empty. Add items below.</div>`;
   } else {
-    commandHtml = commandBlocks.map(cmd => 
-      `<div class="al-code-block">${cmd}</div>`
-    ).join("");
+    commandHtml = commandBlocks
+      .map((cmd) => `<div class="al-code-block">${cmd}</div>`)
+      .join("");
   }
 
   container.innerHTML = `
@@ -2232,14 +2246,15 @@ function renderAutolootMain() {
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">
         <h3 style="font-size:16px;">Stored Items (${items.length})</h3>
-        ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear Slot</button>` : ''}
+        ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear Slot</button>` : ""}
       </div>
 
       <div class="al-items-grid">
-        ${items.map(id => {
-          const itemDef = DATA.items[id];
-          const name = itemDef ? itemDef.name : "Unknown Item";
-          return `
+        ${items
+          .map((id) => {
+            const itemDef = DATA.items[id];
+            const name = itemDef ? itemDef.name : "Unknown Item";
+            return `
             <div class="al-item-card">
               <div style="display:flex; align-items:center; overflow:hidden;">
                 <span style="color:var(--accent); font-family:monospace; margin-right:8px;">${id}</span>
@@ -2248,7 +2263,8 @@ function renderAutolootMain() {
               <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
             </div>
           `;
-        }).join('')}
+          })
+          .join("")}
       </div>
     </div>
   `;
@@ -2256,7 +2272,7 @@ function renderAutolootMain() {
 
 function handleAutolootSearch(query) {
   const resultsDiv = document.getElementById("alSearchResults");
-  
+
   // 1. Basic validation
   if (!query || query.trim().length < 1) {
     resultsDiv.classList.add("hidden");
@@ -2265,44 +2281,49 @@ function handleAutolootSearch(query) {
 
   const lowerQ = query.toLowerCase();
   // 2. Use getAllItems() to get the clean array of items exactly like Editor Mode
-  const allItems = getAllItems(); 
-  
+  const allItems = getAllItems();
+
   let matches = [];
-  
+
   // Check if input is a number (ID search)
   const queryNum = parseInt(query, 10);
   const isNumeric = !isNaN(queryNum) && queryNum.toString() === query.trim();
 
   if (isNumeric) {
     // Exact ID match first
-    const exactMatch = allItems.find(item => item.id === queryNum);
+    const exactMatch = allItems.find((item) => item.id === queryNum);
     if (exactMatch) matches.push(exactMatch);
-    
+
     // Then partial ID matches
-    const others = allItems.filter(item => 
-      item.id !== queryNum && 
-      (item.id.toString().includes(query) || (item.name && item.name.toLowerCase().includes(lowerQ)))
-    ).slice(0, 10);
+    const others = allItems
+      .filter(
+        (item) =>
+          item.id !== queryNum &&
+          (item.id.toString().includes(query) ||
+            (item.name && item.name.toLowerCase().includes(lowerQ))),
+      )
+      .slice(0, 10);
     matches = matches.concat(others);
   } else {
     // Text search logic
     matches = allItems
-      .filter(item => 
-        (item.name && item.name.toLowerCase().includes(lowerQ)) || 
-        item.id.toString().includes(lowerQ)
+      .filter(
+        (item) =>
+          (item.name && item.name.toLowerCase().includes(lowerQ)) ||
+          item.id.toString().includes(lowerQ),
       )
       .sort((a, b) => {
         const aName = (a.name || "").toLowerCase();
         const bName = (b.name || "").toLowerCase();
-        
+
         // Prioritize exact name match
         if (aName === lowerQ && bName !== lowerQ) return -1;
         if (bName === lowerQ && aName !== lowerQ) return 1;
-        
+
         // Prioritize "starts with"
         if (aName.startsWith(lowerQ) && !bName.startsWith(lowerQ)) return -1;
         if (bName.startsWith(lowerQ) && !aName.startsWith(lowerQ)) return 1;
-        
+
         return a.id - b.id;
       })
       .slice(0, 15);
@@ -2314,15 +2335,19 @@ function handleAutolootSearch(query) {
   }
 
   // 3. Render results using getItemDisplayName for consistent formatting (e.g. showing slots)
-  resultsDiv.innerHTML = matches.map(item => `
+  resultsDiv.innerHTML = matches
+    .map(
+      (item) => `
     <div class="al-result-item" onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
       <span style="color:var(--accent); font-family:monospace; margin-right:8px; font-weight:bold;">${item.id}</span>
       <div style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
         ${getItemDisplayName(item)}
       </div>
     </div>
-  `).join("");
-  
+  `,
+    )
+    .join("");
+
   resultsDiv.classList.remove("hidden");
 }
 
@@ -2339,10 +2364,10 @@ function addToAutoloot(slot, id) {
   if (!state.autolootData[slot].includes(id)) {
     state.autolootData[slot].push(id);
     saveAutoloot();
-    
+
     // Clear search box but keep focus
     const input = document.getElementById("alSearchInput");
-    if(input) {
+    if (input) {
       input.value = "";
       input.focus();
     }
@@ -2351,12 +2376,12 @@ function addToAutoloot(slot, id) {
 }
 
 function removeFromAutoloot(slot, id) {
-  state.autolootData[slot] = state.autolootData[slot].filter(x => x !== id);
+  state.autolootData[slot] = state.autolootData[slot].filter((x) => x !== id);
   saveAutoloot();
 }
 
 function clearAutolootSlot(slot) {
-  if(confirm(`Clear all items from Slot ${slot}?`)) {
+  if (confirm(`Clear all items from Slot ${slot}?`)) {
     state.autolootData[slot] = [];
     saveAutoloot();
   }
@@ -2365,7 +2390,7 @@ function clearAutolootSlot(slot) {
 function copyAllAutoloot() {
   const blocks = document.querySelectorAll(".al-code-block");
   let text = "";
-  blocks.forEach(b => text += b.textContent + "\n");
+  blocks.forEach((b) => (text += b.textContent + "\n"));
   navigator.clipboard.writeText(text);
   alert("Commands copied to clipboard");
 }
@@ -2414,11 +2439,9 @@ function importAlootCommands() {
     return;
   }
 
-  ids.forEach(id => addToAutoloot(slot, id));
+  ids.forEach((id) => addToAutoloot(slot, id));
 
   textarea.value = "";
   renderAutolootSidebar();
   renderAutolootMain();
 }
-
-

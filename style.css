@@ -1440,7 +1440,8 @@ textarea {
   gap: 2px;
 }
 
-.group-caption, .group-edit-caption {
+.group-caption,
+.group-edit-caption {
   font-size: 12px;
   font-style: italic;
   font-family: monospace;
@@ -1536,7 +1537,6 @@ body.viewer-mode .editor-quest select {
   pointer-events: none;
   background: var(--bg);
   border-color: var(--border);
-
 }
 
 body.viewer-mode .item-selected-badge .clear-btn {
@@ -1673,9 +1673,9 @@ body.viewer-mode .search-container {
 }
 
 .al-code-block {
-  font-family: 'Consolas', 'Monaco', monospace;
+  font-family: "Consolas", "Monaco", monospace;
   color: #79c0ff;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   padding: 8px;
   border-radius: 4px;
   margin-bottom: 8px;
