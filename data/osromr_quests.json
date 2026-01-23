@@ -3754,6 +3754,62 @@
                   "amount": 300
                 }
               ]
+            },
+            {
+              "name": "Fortune Sword I",
+              "producesId": 42867,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000000
+                },
+                {
+                  "type": "item",
+                  "id": 1223,
+                  "amount": 1,
+                  "immune": true
+                },
+                {
+                  "type": "item",
+                  "id": 7510,
+                  "amount": 20
+                },
+                {
+                  "type": "item",
+                  "id": 7024,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 7563,
+                  "amount": 30
+                },
+                {
+                  "type": "item",
+                  "id": 4285,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 30
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000
+                },
+                {
+                  "type": "credit",
+                  "amount": 300
+                }
+              ]
             }
           ]
         },
@@ -4810,6 +4866,118 @@
                   "amount": 300
                 }
               ]
+            },
+            {
+              "name": "Blank Eyes I [1]",
+              "producesId": 42869,
+              "successRate": 60,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "item",
+                  "id": 5102,
+                  "amount": 1,
+                  "immune": true
+                },
+                {
+                  "type": "item",
+                  "id": 7081,
+                  "amount": 4
+                },
+                {
+                  "type": "item",
+                  "id": 7083,
+                  "amount": 4
+                },
+                {
+                  "type": "item",
+                  "id": 982,
+                  "amount": 30
+                },
+                {
+                  "type": "item",
+                  "id": 976,
+                  "amount": 30
+                },
+                {
+                  "type": "item",
+                  "id": 4411,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 30
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000
+                },
+                {
+                  "type": "credit",
+                  "amount": 100
+                }
+              ]
+            },
+            {
+              "name": "Gigantic Baphomet Horns I [1]",
+              "producesId": 42871,
+              "successRate": 60,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "item",
+                  "id": 45176,
+                  "amount": 1,
+                  "immune": true
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 7082,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 7562,
+                  "amount": 30
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 30
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 7444,
+                  "amount": 200
+                },
+                {
+                  "type": "gold",
+                  "amount": 6000
+                },
+                {
+                  "type": "credit",
+                  "amount": 100
+                }
+              ]
             }
           ]
         }
@@ -5392,6 +5560,72 @@
                   "type": "item",
                   "id": 40087,
                   "amount": 300
+                },
+                {
+                  "type": "gold",
+                  "amount": 6000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Asprika I",
+              "producesId": 42868,
+              "successRate": 50,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "item",
+                  "id": 2541,
+                  "amount": 1,
+                  "immune": true
+                },
+                {
+                  "type": "item",
+                  "id": 7079,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 7087,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 7562,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 2717,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 7566,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 80
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 500
                 },
                 {
                   "type": "gold",
