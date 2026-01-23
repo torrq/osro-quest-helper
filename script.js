@@ -2134,9 +2134,6 @@ function renderAutolootMain() {
   const slot = state.selectedAutolootSlot;
   const items = state.autolootData[slot] || [];
 
-  // ===============================================
-  // 1. SMART COMMAND GENERATION
-  // ===============================================
   // RO chat limits are strict. We limit by BOTH count and characters.
   const MAX_ITEMS_PER_LINE = 18; 
   const MAX_CHARS_PER_LINE = 100; // Safety buffer (usually 120 is max)
@@ -2184,9 +2181,6 @@ function renderAutolootMain() {
     ).join("");
   }
 
-  // ===============================================
-  // 2. RENDER UI
-  // ===============================================
   container.innerHTML = `
     <div class="autoloot-main">
       <h2 style="margin-bottom: 10px;">Autoloot Manager <span style="color:var(--text-muted); font-size:0.6em">Slot ${slot}</span></h2>
@@ -2212,6 +2206,29 @@ function renderAutolootMain() {
         >
         <div id="alSearchResults" class="al-search-dropdown hidden"></div>
       </div>
+
+<div class="al-paste-wrapper">
+  <label class="item-label">Paste @alootid2 commands</label>
+  <textarea
+    id="alootPasteBox"
+    class="al-paste-textarea"
+    placeholder="@alootid2 607 909 910"
+  ></textarea>
+
+  <div class="al-paste-actions">
+    <button
+      class="btn btn-primary btn-sm"
+      onclick="importAlootCommands()"
+    >
+      Import
+    </button>
+
+    <span class="help-text">
+      Space-separated item IDs only. Extra spacing is fine.
+    </span>
+  </div>
+</div>
+
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">
         <h3 style="font-size:16px;">Stored Items (${items.length})</h3>
@@ -2352,3 +2369,56 @@ function copyAllAutoloot() {
   navigator.clipboard.writeText(text);
   alert("Commands copied to clipboard");
 }
+
+function importAlootCommands() {
+  const textarea = document.getElementById("alootPasteBox");
+  let text = textarea.value;
+
+  if (!text.trim()) return;
+
+  // Normalize whitespace
+  text = text.replace(/\s+/g, " ").trim();
+
+  const lines = text.split(/\r?\n/);
+  const ids = new Set();
+  const slot = state.selectedAutolootSlot;
+
+  if (!slot) {
+    alert("No autoloot slot selected.");
+    return;
+  }
+
+  for (let line of lines) {
+    line = line.trim();
+    if (!line.toLowerCase().startsWith("@alootid2")) continue;
+
+    const parts = line.split(" ").slice(1);
+
+    for (let i = 0; i < parts.length; i++) {
+      const token = parts[i].toLowerCase();
+
+      // Skip: save <slot>
+      if (token === "save") {
+        i++; // skip slot number
+        continue;
+      }
+
+      if (/^\d+$/.test(token)) {
+        ids.add(Number(token));
+      }
+    }
+  }
+
+  if (!ids.size) {
+    alert("No valid @alootid2 item IDs found.");
+    return;
+  }
+
+  ids.forEach(id => addToAutoloot(slot, id));
+
+  textarea.value = "";
+  renderAutolootSidebar();
+  renderAutolootMain();
+}
+
+
