@@ -1441,3 +1441,106 @@ textarea {
   font-family: monospace;
   color: var(--accent);
 }
+
+/* Editor Mode Toggle */
+.editor-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  margin: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border);
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--bg);
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--accent);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+  background-color: #000;
+}
+
+.toggle-label {
+  font-size: 12px;
+  color: var(--text);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  user-select: none;
+}
+
+/* Editor Mode Restrictions */
+body.viewer-mode .requirements-section,
+body.viewer-mode .requirements-section + .item-label, /* Hide the "Requirements:" label that comes before */
+body.viewer-mode .item-label:has(+ .requirements-section), /* Hide if label is directly before requirements */
+body.viewer-mode .btn-indent-quest,
+body.viewer-mode .tab[onclick*="groups"],
+body.viewer-mode .toolbar-actions,
+body.viewer-mode #addBtn {
+  display: none !important;
+}
+
+body.viewer-mode .quest-item {
+  cursor: default;
+  pointer-events: auto;
+}
+
+body.viewer-mode .quest-item .drag-handle {
+  display: none;
+}
+
+body.viewer-mode .quest-item .quest-name {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+body.viewer-mode .editor-quest input[type="text"],
+body.viewer-mode .editor-quest input[type="number"]:not(.zeny-input-large),
+body.viewer-mode .editor-quest select {
+  pointer-events: none;
+  background: var(--bg);
+  border-color: var(--border);
+  opacity: 0.7;
+}
+
+body.viewer-mode .item-selected-badge .clear-btn {
+  display: none;
+}
+
+body.viewer-mode .search-container {
+  display: none;
+}

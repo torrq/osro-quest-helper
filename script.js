@@ -16,6 +16,7 @@ let state = {
   draggedFrom: null,
   itemSearchFilter: "",
   questSearchFilter: "",
+  editorMode: false
 };
 
 // Initialize data - always fetch from remote (no caching for development)
@@ -593,82 +594,88 @@ function renderSidebar() {
         `;
         subDiv.appendChild(subHeader);
 
-        if (isSubExpanded) {
+      if (isSubExpanded) {
           // Use matchingQuests array for filtering (or all quests if no filter)
           // We need original index for drag/drop to work correctly, so we iterate original array but check visibility
           subgroup.quests.forEach((quest, questIdx) => {
             if (filter && !quest.name.toLowerCase().includes(filter)) return;
-
+            
             const questDiv = document.createElement("div");
             questDiv.className = "quest-item";
             if (state.selectedQuest === quest) {
               questDiv.classList.add("active");
             }
-            questDiv.draggable = true;
+            
+            // Only make draggable in editor mode
+            questDiv.draggable = state.editorMode;
+            
             questDiv.innerHTML = `
-              <span class="drag-handle">⋮⋮</span>
+              <span class="drag-handle">${state.editorMode ? '⋮⋮' : '◆'}</span>
               <span class="quest-name">${quest.name}</span>
             `;
-
-            questDiv.addEventListener("dragstart", (e) => {
-              state.draggedQuest = questIdx;
-              state.draggedFrom = { groupIdx, subIdx };
-              questDiv.classList.add("dragging");
-            });
-
-            questDiv.addEventListener("dragend", (e) => {
-              questDiv.classList.remove("dragging");
-              document
-                .querySelectorAll(".quest-item")
-                .forEach((el) => el.classList.remove("drag-over"));
-            });
-
-            questDiv.addEventListener("dragover", (e) => {
-              e.preventDefault();
-            });
-
-            questDiv.addEventListener("dragenter", (e) => {
-              if (
-                state.draggedQuest !== questIdx ||
-                state.draggedFrom.groupIdx !== groupIdx ||
-                state.draggedFrom.subIdx !== subIdx
-              ) {
-                questDiv.classList.add("drag-over");
-              }
-            });
-
-            questDiv.addEventListener("dragleave", (e) => {
-              questDiv.classList.remove("drag-over");
-            });
-
-            questDiv.addEventListener("drop", (e) => {
-              e.preventDefault();
-              questDiv.classList.remove("drag-over");
-
-              if (
-                state.draggedFrom.groupIdx === groupIdx &&
-                state.draggedFrom.subIdx === subIdx
-              ) {
-                const quests = subgroup.quests;
-                const [removed] = quests.splice(state.draggedQuest, 1);
-                const newIdx =
-                  questIdx > state.draggedQuest ? questIdx - 1 : questIdx;
-                quests.splice(newIdx, 0, removed);
-                render();
-              }
-            });
-
+            
+            // Only add drag/drop listeners in editor mode
+            if (state.editorMode) {
+              questDiv.addEventListener("dragstart", (e) => {
+                state.draggedQuest = questIdx;
+                state.draggedFrom = { groupIdx, subIdx };
+                questDiv.classList.add("dragging");
+              });
+              
+              questDiv.addEventListener("dragend", (e) => {
+                questDiv.classList.remove("dragging");
+                document
+                  .querySelectorAll(".quest-item")
+                  .forEach((el) => el.classList.remove("drag-over"));
+              });
+              
+              questDiv.addEventListener("dragover", (e) => {
+                e.preventDefault();
+              });
+              
+              questDiv.addEventListener("dragenter", (e) => {
+                if (
+                  state.draggedQuest !== questIdx ||
+                  state.draggedFrom.groupIdx !== groupIdx ||
+                  state.draggedFrom.subIdx !== subIdx
+                ) {
+                  questDiv.classList.add("drag-over");
+                }
+              });
+              
+              questDiv.addEventListener("dragleave", (e) => {
+                questDiv.classList.remove("drag-over");
+              });
+              
+              questDiv.addEventListener("drop", (e) => {
+                e.preventDefault();
+                questDiv.classList.remove("drag-over");
+                
+                if (
+                  state.draggedFrom.groupIdx === groupIdx &&
+                  state.draggedFrom.subIdx === subIdx
+                ) {
+                  const quests = subgroup.quests;
+                  const [removed] = quests.splice(state.draggedQuest, 1);
+                  const newIdx =
+                    questIdx > state.draggedQuest ? questIdx - 1 : questIdx;
+                  quests.splice(newIdx, 0, removed);
+                  render();
+                }
+              });
+            }
+            
             questDiv.querySelector(".quest-name").onclick = () => {
               selectQuest(group, subgroup, quest);
               if (window.innerWidth <= 768) {
                 toggleSidebar();
               }
             };
-
+            
             subDiv.appendChild(questDiv);
           });
-
-          if (!filter) {
+          
+          if (!filter && state.editorMode) {
             const addQuestBtn = document.createElement("button");
             addQuestBtn.className = "btn btn-sm btn-indent-quest";
             addQuestBtn.textContent = "+ Quest";
@@ -676,7 +683,6 @@ function renderSidebar() {
             subDiv.appendChild(addQuestBtn);
           }
         }
-
         groupDiv.appendChild(subDiv);
       });
     }
@@ -925,20 +931,23 @@ function renderQuestContent() {
           </div>
         </div>
       </div>
-      <span class="item-label">Requirements: &nbsp;<button class="btn btn-sm btn-primary" onclick="addRequirement()">+ Add</button></span>
-      <div class="requirements-section">
-        <div class="requirements-grid">
-          ${quest.requirements.map((req, idx) => renderRequirement(req, idx)).join("")}
+      <div class="requirements-wrapper">
+        <span class="item-label">Requirements: &nbsp;<button class="btn btn-sm btn-primary" onclick="addRequirement()">+ Add</button></span>
+        <div class="requirements-section">
+          <div class="requirements-grid">
+            ${quest.requirements.map((req, idx) => renderRequirement(req, idx)).join("")}
+          </div>
         </div>
       </div>
 
-${
-  descriptionHtml
-    ? `
-      <span class="item-label">Item Description:</span>
-      <div class="item-description-box">${descriptionHtml}</div>`
-    : ""
-}
+      ${
+        descriptionHtml
+          ? `
+        <span class="item-label">Item Description:</span>
+        <div class="item-description-box">${descriptionHtml}</div>`
+          : ""
+      }
+
       <span class="item-label">Tree:</span>
       <div class="material-tree">
         ${renderMaterialTree()}
@@ -1848,6 +1857,23 @@ document.addEventListener("DOMContentLoaded", () => {
 function filterItems(value) {
   debouncedItemFilter(value);
 }
+
 function filterQuests(value) {
   debouncedQuestFilter(value);
+}
+
+function toggleEditorMode(enabled) {
+  state.editorMode = enabled;
+  
+  if (enabled) {
+    document.body.classList.remove('viewer-mode');
+  } else {
+    document.body.classList.add('viewer-mode');
+    // Switch away from Groups tab if currently on it
+    if (state.currentTab === 'groups') {
+      switchTab('quests');
+    }
+  }
+  
+  render();
 }
