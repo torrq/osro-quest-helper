@@ -19,6 +19,9 @@ let state = {
   editorMode: false
 };
 
+// Apply initial viewer mode class
+document.body.classList.add('viewer-mode');
+
 // Initialize data - always fetch from remote (no caching for development)
 (function initializeData() {
   // Always fetch quests, values, and items from remote
