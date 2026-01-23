@@ -2201,7 +2201,7 @@ function renderAutolootMain() {
     <div class="autoloot-main">
       <h2 style="margin-bottom: 10px;">Autoloot Manager <span style="color:var(--text-muted); font-size:0.6em">Slot ${slot}</span></h2>
       <p style="color:var(--text-muted); margin-bottom: 20px; font-size: 0.9em;">
-        Commands are automatically optimized to fit server line limits (max 18 items or 100 chars).
+        Commands are automatically optimized to fit server line limits (max ${MAX_ITEMS_PER_LINE} items or ${MAX_CHARS_PER_LINE} chars).
       </p>
 
       <div class="al-command-box">
