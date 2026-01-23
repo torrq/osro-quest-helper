@@ -1681,7 +1681,7 @@ body.viewer-mode .search-container {
   margin-bottom: 4px;
   white-space: pre-wrap;
   word-break: break-all;
-  font-size: 13pt;
+  font-size: 12pt;
   user-select: all; /* Makes selection easier */
 }
 
