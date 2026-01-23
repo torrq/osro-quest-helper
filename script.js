@@ -2223,29 +2223,6 @@ function renderAutolootMain() {
         <div id="alSearchResults" class="al-search-dropdown hidden"></div>
       </div>
 
-<div class="al-paste-wrapper">
-  <label class="item-label">Paste @alootid2 commands</label>
-  <textarea
-    id="alootPasteBox"
-    class="al-paste-textarea"
-    placeholder="@alootid2 607 909 910"
-  ></textarea>
-
-  <div class="al-paste-actions">
-    <button
-      class="btn btn-primary btn-sm"
-      onclick="importAlootCommands()"
-    >
-      Import
-    </button>
-
-    <span class="help-text">
-      Space-separated item IDs only. Extra spacing is fine.
-    </span>
-  </div>
-</div>
-
-
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">
         <h3 style="font-size:16px;">Stored Items (${items.length})</h3>
         ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear Slot</button>` : ""}
@@ -2268,7 +2245,32 @@ function renderAutolootMain() {
           })
           .join("")}
       </div>
+
+      <div class="al-paste-wrapper">
+        <label class="item-label">Paste @alootid2 commands</label>
+        <textarea
+          id="alootPasteBox"
+          class="al-paste-textarea"
+          placeholder="@alootid2 607 909 910"
+        ></textarea>
+
+        <div class="al-paste-actions">
+          <button
+            class="btn btn-primary btn-sm"
+            onclick="importAlootCommands()"
+          >
+            Import
+          </button>
+
+          <span class="help-text">
+            Space-separated item IDs only. Extra spacing is fine.
+          </span>
+        </div>
+      </div>
+
     </div>
+
+
   `;
 }
 

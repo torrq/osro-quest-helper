@@ -645,7 +645,7 @@ textarea {
 }
 
 .tree-line {
-  font-family: Consolas, "Courier New", monospace;
+  font-family: "Consolas", "Monaco", monospace;
   font-size: 12pt;
   padding: 2px 0;
   color: var(--text-muted);
@@ -890,7 +890,7 @@ textarea {
   background: #1b2130;
   border: 1px solid var(--border);
   padding: 14px 16px;
-  font-family: Consolas, "Courier New", monospace;
+  font-family: "Consolas", "Monaco", monospace;
   font-size: 11pt;
   white-space: pre-wrap;
   color: var(--text);
@@ -1676,12 +1676,12 @@ body.viewer-mode .search-container {
   font-family: "Consolas", "Monaco", monospace;
   color: #79c0ff;
   background: rgba(0, 0, 0, 0.3);
-  padding: 8px;
+  padding: 4px 8px 4px 8px;
   border-radius: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   white-space: pre-wrap;
   word-break: break-all;
-  font-size: 13px;
+  font-size: 13pt;
   user-select: all; /* Makes selection easier */
 }
 
