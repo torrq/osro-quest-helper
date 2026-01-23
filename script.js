@@ -2134,9 +2134,9 @@ function renderAutolootMain() {
   const slot = state.selectedAutolootSlot;
   const items = state.autolootData[slot] || [];
 
-  // RO chat limits are strict. We limit by BOTH count and characters.
-  const MAX_ITEMS_PER_LINE = 18; 
-  const MAX_CHARS_PER_LINE = 100; // Safety buffer (usually 120 is max)
+  // @alootid2 limits
+  const MAX_ITEMS_PER_LINE = 10;
+  const MAX_CHARS_PER_LINE = 100;
   const PREFIX = `@alootid2 save ${slot} `;
 
   let commandBlocks = [];
