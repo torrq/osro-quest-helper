@@ -40,13 +40,11 @@
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
           </div>
           <div class="toolbar">
-            <button
-              class="btn btn-primary btn-sm hidden"
-              id="addBtn"
-              onclick="addGroup()"
-            >
-              + Group
-            </button>
+            <div id="groupsActions" class="search-section hidden">
+              <div class="search-row">
+                <button class="btn btn-primary btn-sm" onclick="addGroup()">+ Add Group</button>
+              </div>
+            </div>
             <div class="toolbar-actions">
               <div class="dropdown">
                 <button class="btn btn-sm">Export ▾</button>
@@ -94,7 +92,11 @@
         </div>
       </div>
     </div>
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/items.js"></script>
+    <script src="js/quests.js"></script>
+    <script src="js/groups.js"></script>
+    <script src="js/autoloot.js"></script>
   </body>
 </html>
