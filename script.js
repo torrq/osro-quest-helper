@@ -155,21 +155,22 @@ function switchTab(tabName) {
   document.getElementById("questsSearch").classList.add("hidden");
   document.getElementById("itemsSearch").classList.add("hidden");
 
-  // 4. Show Specific Content
+  // 4. Show Specific Content and render main content
   if (tabName === "quests") {
     document.getElementById("treeContainer").classList.remove("hidden");
     document.getElementById("questsSearch").classList.remove("hidden");
     renderSidebar();
-    render(); // Render main quest view
+    renderQuestContent();
   } else if (tabName === "items") {
     document.getElementById("itemsList").classList.remove("hidden");
     document.getElementById("itemsSearch").classList.remove("hidden");
     renderItems();
+    renderItemContent();
   } else if (tabName === "groups") {
     document.getElementById("groupsList").classList.remove("hidden");
-    renderGroups();
+    renderGroupsList();
+    renderGroupContent();
   } else if (tabName === "autoloot") {
-    // NEW: Handle Autoloot Tab
     if (alList) alList.classList.remove("hidden");
     renderAutolootSidebar();
     renderAutolootMain();
@@ -256,56 +257,7 @@ function navigateToQuest(groupIdx, subIdx, questIdx) {
 }
 
 function render() {
-  // Update tabs
-  document.querySelectorAll(".tab").forEach((tab) => {
-    tab.classList.remove("active");
-    if (tab.textContent.toLowerCase() === state.currentTab) {
-      tab.classList.add("active");
-    }
-  });
-
-  const treeContainer = document.getElementById("treeContainer");
-  const itemsList = document.getElementById("itemsList");
-  const groupsList = document.getElementById("groupsList");
-  const itemsSearch = document.getElementById("itemsSearch");
-  const questsSearch = document.getElementById("questsSearch");
-  const addBtn = document.getElementById("addBtn");
-
-  if (state.currentTab === "quests") {
-    treeContainer.classList.remove("hidden");
-    itemsList.classList.add("hidden");
-    groupsList.classList.add("hidden");
-    itemsSearch.classList.add("hidden");
-    questsSearch.classList.remove("hidden");
-    renderSidebar();
-    renderQuestContent();
-  } else if (state.currentTab === "groups") {
-    treeContainer.classList.add("hidden");
-    itemsList.classList.add("hidden");
-    groupsList.classList.remove("hidden");
-    itemsSearch.classList.add("hidden");
-    questsSearch.classList.add("hidden");
-
-    // SHOW button for Groups
-    addBtn.classList.remove("hidden");
-    addBtn.textContent = "+ Group";
-    addBtn.onclick = addGroup;
-
-    renderGroupsList();
-    renderGroupContent();
-  } else {
-    treeContainer.classList.add("hidden");
-    groupsList.classList.add("hidden");
-    itemsList.classList.remove("hidden");
-    itemsSearch.classList.remove("hidden");
-    questsSearch.classList.add("hidden");
-
-    // HIDE button for Items
-    addBtn.classList.add("hidden");
-
-    renderItems();
-    renderItemContent();
-  }
+  switchTab(state.currentTab);
 }
 
 function renderItems() {
