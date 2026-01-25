@@ -14,7 +14,7 @@ function renderGroupsList() {
             <span class="group-edit-name">${group.name}</span>
             ${group.caption ? `<span class="group-edit-caption">${group.caption}</span>` : ""}
           </div>
-          <span class="group-edit-count">${group.subgroups.length} subgroups</span>
+          <span class="group-edit-count">${group.subgroups.length} sub</span>
         </div>
       </div>
     `;

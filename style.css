@@ -186,29 +186,29 @@ body {
 .tree-container {
   flex: 1;
   overflow-y: auto;
-  padding: 8px;
-  padding-bottom: 80px;
+  padding: 0;
 }
 
 .items-list {
   flex: 1;
   overflow-y: auto;
-  padding: 0 8px 4px 8px;
+  padding: 0;
 }
 
 .items-search-banner {
   padding: 4px 8px;
-  font-size: 11px;
+  font-size: 12pt;
   color: var(--accent);
-  border-bottom: 1px solid var(--border);
   text-align: center;
+  font-style: italic;
 }
 
 .item-row {
   background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 6px 8px;
-  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  padding: 10px 8px;
+  margin-bottom: 2px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -243,10 +243,9 @@ body {
 .subgroup-header {
   padding: 2px 2px 2px 12px;
   background: var(--bg);
-  border: 1px solid #222 !important;
+  border-bottom: 1px solid #222 !important;
   display: flex;
   align-items: center;
-  gap: 4px;
   margin-bottom: 0px;
 }
 
@@ -289,17 +288,17 @@ body {
 }
 
 .subgroup {
-  margin-left: 12px;
+  margin-left: 10px;
   margin-bottom: 0px;
 }
 
 .quest-item {
-  padding: 4px 6px;
-  margin: 2px 0 2px 4px;
+  padding: 5px 0 5px 8px;
+  margin: 0 0 0 0;
   background: transparent;
-  border-left: 2px solid transparent;
+  border-left: 4px solid transparent;
   cursor: grab;
-  font-size: 14px;
+  font-size: 12pt;
   color: var(--text);
   transition: all 0.2s;
   display: flex;
@@ -1231,7 +1230,7 @@ textarea {
   flex: 1;
   padding: 4px 8px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12pt;
   color: var(--text);
 }
 
@@ -1239,7 +1238,7 @@ textarea {
 .groups-list {
   flex: 1;
   overflow-y: auto;
-  padding: 0 8px 4px 8px;
+  padding: 0;
 }
 
 .group-edit-item {
@@ -1276,6 +1275,7 @@ textarea {
 .group-edit-count {
   color: var(--text-muted);
   font-size: 11px;
+  white-space: nowrap;
 }
 
 .editor-group {
@@ -1295,7 +1295,7 @@ textarea {
 }
 
 .subgroups-section {
-  margin-top: 32px;
+  margin-top: 12px;
 }
 
 .subgroups-header {
@@ -1360,12 +1360,12 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 4px 8px;
+  padding: 2px 8px;
 }
 
 .group-name-readonly {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 12pt;
   color: var(--text);
   padding: 0;
 }
@@ -1376,17 +1376,15 @@ textarea {
 
 .subgroup-name-readonly {
   flex: 1;
-  padding: 4px 8px;
+  padding: 6px 8px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12pt;
   color: var(--text);
 }
 
 /* Group ordering controls */
 .group-ordering-section {
   margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
 }
 
 .ordering-controls {
@@ -1436,9 +1434,17 @@ textarea {
   gap: 2px;
 }
 
-.group-caption,
+.group-caption {
+  font-size: 11pt;
+  font-style: italic;
+  font-family: monospace;
+  text-align: right;
+  padding-right: 10px;
+  color: var(--accent);
+}
+
 .group-edit-caption {
-  font-size: 12px;
+  font-size: 11pt;
   font-style: italic;
   font-family: monospace;
   color: var(--accent);
