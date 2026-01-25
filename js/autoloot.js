@@ -37,13 +37,13 @@ function createSlotElement(slotNum) {
   return `
     <div class="autoloot-slot-row ${isActive ? "active" : ""}" 
          onclick="selectAutolootSlot(${slotNum})">
-      <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;">
-        <span style="font-size: 20px; font-weight: 700; color: var(--accent); min-width: 30px;">${slotNum}</span>
-        <div style="flex: 1; min-width: 0; overflow: hidden;">
-          <div style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${slotName}">
+      <div class="autoloot-slot-row-inner">
+        <span class="autoloot-slot-row-number">${slotNum}</span>
+        <div class="autoloot-slot-row-name-container">
+          <div class="autoloot-slot-row-name" title="${slotName}">
             ${slotName}
           </div>
-          <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">
+          <div class="autoloot-slot-row-itemcount">
             ${itemCount} item${itemCount !== 1 ? 's' : ''}
           </div>
         </div>
@@ -56,6 +56,7 @@ function selectAutolootSlot(slotNum) {
   state.selectedAutolootSlot = slotNum;
   renderAutolootSidebar();
   renderAutolootMain();
+  if (window.innerWidth <= 768) toggleSidebar();
 }
 
 // ===== MAIN CONTENT RENDERING =====

@@ -1631,7 +1631,7 @@ body.viewer-mode .search-container {
 
 /* Sidebar Slots */
 .autoloot-slot-row {
-  padding: 8px 15px;
+  padding: 4px 15px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   display: flex;
@@ -1640,14 +1640,49 @@ body.viewer-mode .search-container {
   transition: background 0.2s;
 }
 
+.autoloot-slot-row-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.autoloot-slot-row-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 24px;
+  text-align: right;
+}
+
+.autoloot-slot-row-name-container {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.autoloot-slot-row-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.autoloot-slot-row-itemcount {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
 .autoloot-slot-row:hover {
   background: var(--panel-hover);
 }
 
 .autoloot-slot-row.active {
   background: var(--panel-hover);
-  border-left: 3px solid var(--accent);
-  padding-left: 12px; /* compensate for border */
+  border-left: 5px solid var(--accent);
+  padding-left: 8px; /* compensate for border */
 }
 
 .slot-badge {

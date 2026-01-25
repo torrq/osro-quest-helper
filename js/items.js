@@ -74,6 +74,7 @@ function selectItem(id) {
   state.selectedItemId = id;
   renderItems();
   renderItemContent();
+  if (window.innerWidth <= 768) toggleSidebar();
 }
 
 function renderItemContent() {
