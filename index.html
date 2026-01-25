@@ -39,24 +39,6 @@
             <div class="tab" onclick="switchTab('groups')">Groups</div>
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
           </div>
-          <div class="toolbar">
-            <div id="groupsActions" class="search-section hidden">
-              <div class="search-row">
-                <button class="btn btn-primary btn-sm" onclick="addGroup()">+ Add Group</button>
-              </div>
-            </div>
-            <div class="toolbar-actions">
-              <div class="dropdown">
-                <button class="btn btn-sm">Export ▾</button>
-                <div class="dropdown-content">
-                  <button onclick="exportAll()">All (2 Files)</button>
-                  <hr class="dropdown-divider" />
-                  <button onclick="exportQuests()">Quests JSON</button>
-                  <button onclick="exportValues()">Values JSON</button>
-                </div>
-              </div>
-            </div>
-          </div>
           <div id="questsSearch" class="search-section">
             <div class="search-row">
               <input
@@ -77,6 +59,24 @@
                 placeholder="Search items..."
               />
               <button class="btn btn-sm" onclick="clearItemSearch()">×</button>
+            </div>
+          </div>
+          <div class="toolbar">
+            <div id="groupsActions" class="search-section hidden">
+              <div class="search-row">
+                <button class="btn btn-primary btn-sm" onclick="addGroup()">+ Add Group</button>
+              </div>
+            </div>
+            <div class="toolbar-actions">
+              <div class="dropdown">
+                <button class="btn btn-sm">Export ▾</button>
+                <div class="dropdown-content">
+                  <button onclick="exportAll()">All (2 Files)</button>
+                  <hr class="dropdown-divider" />
+                  <button onclick="exportQuests()">Quests JSON</button>
+                  <button onclick="exportValues()">Values JSON</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

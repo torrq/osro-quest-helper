@@ -6,6 +6,7 @@ const AUTOLOOT_CONFIG = {
   MAX_ITEMS_PER_LINE: 10,
   MAX_CHARS_PER_LINE: 100,
   MAX_SLOTS: 10,
+  MAX_ITEMS_PER_SLOT: 100,
   COMMANDS_WITH_SLOTS: ["save", "reset", "load", "clear", "add", "remove"]
 };
 
@@ -81,25 +82,24 @@ function renderHeader(slot) {
   const slotName = state.autolootNames[slot] || `Autoloot Slot ${slot}`;
   
   return `
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; gap: 15px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; gap: 15px;">
       <div style="flex: 1; min-width: 0;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-          <h2 style="margin: 0;">Autoloot Manager</h2>
-          <span style="color: var(--text-muted); font-size: 0.9em;">Slot ${slot}</span>
+          <h2 style="margin: 0;">Autoloot Slot #${slot}</h2>
         </div>
-        <div style="margin-bottom: 15px;">
+        <div style="margin-bottom: 5px;">
           <input 
             type="text" 
             id="slotNameInput"
             placeholder="Enter slot name..."
             value="${slotName}"
             onchange="updateSlotName(${slot}, this.value)"
-            style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 16px; font-weight: 500; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text); border-radius: 4px;"
+            style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 14pt; font-weight: 500; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text); border-radius: 4px;"
           >
         </div>
-        <p style="color: var(--text-muted); margin: 0; font-size: 0.9em;">
-          Commands are automatically optimized to fit server line limits 
-          (max ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_LINE} items or ${AUTOLOOT_CONFIG.MAX_CHARS_PER_LINE} chars).
+        <p style="font-style: italic; color: var(--text-muted); margin: 0 8px; font-size: 0.8em;">
+          Commands are automatically optimized to fit line limits 
+          (max ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_LINE} items/${AUTOLOOT_CONFIG.MAX_CHARS_PER_LINE} chars)
         </p>
       </div>
     </div>
@@ -144,7 +144,7 @@ function renderSearchBox() {
 function renderItemsSection(slot, items) {
   return `
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">
-      <h3 style="font-size:16px;">Stored Items (${items.length})</h3>
+      <h3 style="font-size:16px;">Stored Items (${items.length}/${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT})</h3>
       ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear Slot</button>` : ""}
     </div>
     <div class="al-items-grid">
@@ -327,11 +327,20 @@ function updateSlotName(slot, name) {
 }
 
 function addToAutoloot(slot, id) {
-  if (!state.autolootData[slot].includes(id)) {
-    state.autolootData[slot].push(id);
-    saveAutoloot();
-    clearSearchInput();
+  const currentItems = state.autolootData[slot];
+  
+  if (currentItems.includes(id)) {
+    return; // Item already exists
   }
+  
+  if (currentItems.length >= AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT) {
+    alert(`Slot ${slot} is full! Maximum ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} items per slot.`);
+    return;
+  }
+  
+  currentItems.push(id);
+  saveAutoloot();
+  clearSearchInput();
 }
 
 function clearSearchInput() {
@@ -387,10 +396,37 @@ function importAlootCommands() {
     return;
   }
 
-  ids.forEach(id => addToAutoloot(slot, id));
+  const currentItems = state.autolootData[slot];
+  const availableSpace = AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT - currentItems.length;
+  
+  if (availableSpace <= 0) {
+    alert(`Slot ${slot} is full! Maximum ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} items per slot.`);
+    return;
+  }
+
+  let added = 0;
+  let skipped = 0;
+  
+  for (const id of ids) {
+    if (currentItems.length >= AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT) {
+      skipped = ids.size - added;
+      break;
+    }
+    
+    if (!currentItems.includes(id)) {
+      currentItems.push(id);
+      added++;
+      saveAutoloot();
+    }
+  }
+
   textarea.value = "";
   renderAutolootSidebar();
   renderAutolootMain();
+  
+  if (skipped > 0) {
+    alert(`Added ${added} items. ${skipped} items skipped due to ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} item limit.`);
+  }
 }
 
 function parseAlootCommands(text) {

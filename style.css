@@ -58,13 +58,12 @@ body {
 }
 
 .sidebar-header {
-  padding: 16px;
+  padding: 10px 8px;
   border-bottom: 1px solid var(--border);
   background-image: url("image/osromr.jpg");
-  background-size: cover;
+  background-size: stretch;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 180px;
   display: flex;
   flex-direction: column;
 }
@@ -96,7 +95,6 @@ body {
 .toolbar {
   display: flex;
   gap: 8px;
-  margin-bottom: 8px;
 }
 
 .toolbar-actions {
@@ -740,8 +738,8 @@ textarea {
   }
 
   .main-content {
-    padding: 16px;
-    padding-bottom: 100px;
+    padding: 4px 8px;
+    padding-bottom: 50px;
   }
 }
 
@@ -1064,13 +1062,11 @@ textarea {
 }
 
 /* Search sections */
-.search-section {
-  margin-top: 8px;
-}
 
 .search-row {
   display: flex;
   gap: 4px;
+  margin-bottom: 4px;
 }
 
 .search-input {
@@ -1697,7 +1693,6 @@ body.viewer-mode .search-container {
 .autoloot-main {
   padding: 2px;
   max-width: 1200px;
-  margin-top: 20px;
 }
 
 .al-command-box {
