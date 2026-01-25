@@ -1,6 +1,7 @@
 // main.js - Globals, Init, and Helpers
 
-// === GLOBAL DATA & STATE ===
+// ===== GLOBAL DATA & STATE =====
+
 window.DATA = {
   items: {},
   groups: [],
@@ -23,86 +24,87 @@ window.state = {
   expandedTreeItems: new Set(),
   showFullTotals: false,
   autolootData: JSON.parse(localStorage.getItem("osro_autoloot_v1")) || {},
+  autolootNames: JSON.parse(localStorage.getItem("osro_autoloot_names_v1")) || {},
   selectedAutolootSlot: 1,
   selectedItemId: null,
 };
 
-// Ensure all 10 slots exist
+// Ensure all 10 autoloot slots exist
 for (let i = 1; i <= 10; i++) {
   if (!state.autolootData[i]) state.autolootData[i] = [];
 }
 
-// Apply initial viewer mode class
 document.body.classList.add("viewer-mode");
 
-// === INITIALIZATION ===
+// ===== INITIALIZATION =====
+
 (function initializeData() {
-  // Always fetch quests, values, and items from remote
-  if (
-    typeof AUTO_IMPORT_ON_FIRST_LOAD !== "undefined" &&
-    AUTO_IMPORT_ON_FIRST_LOAD
-  ) {
-    Promise.all([
-      fetch(AUTO_IMPORT_URLS.items).then((r) => (r.ok ? r.json() : null)),
-      fetch(AUTO_IMPORT_URLS.values).then((r) => (r.ok ? r.json() : null)),
-      fetch(AUTO_IMPORT_URLS.quests).then((r) => (r.ok ? r.json() : null)),
-    ])
-      .then(([items, values, quests]) => {
-        // Merge items with values
-        if (items) {
-          DATA.items = items;
-          console.log(
-            `[Init] Loaded ${Object.keys(DATA.items).length} items from remote`,
-          );
-
-          // Apply values to items
-          if (values) {
-            Object.keys(values).forEach((id) => {
-              if (DATA.items[id]) {
-                DATA.items[id].value = values[id];
-              } else {
-                DATA.items[id] = {
-                  name: "",
-                  value: values[id],
-                };
-              }
-            });
-            console.log(
-              `[Init] Applied ${Object.keys(values).length} item values`,
-            );
-          }
-        } else {
-          console.warn("[Init] No items data received from remote");
-        }
-
-        // Load quests
-        if (quests && quests.groups) {
-          DATA.groups = quests.groups;
-          console.log(`[Init] Loaded ${quests.groups.length} quest groups`);
-        } else {
-          console.warn("[Init] No quest data received from remote");
-        }
-
-        render();
-      })
-      .catch((err) => {
-        console.error("[Init] Auto-import failed:", err);
-        alert(
-          "Failed to auto-import data from remote URLs.\n\nCheck console for details.",
-        );
-        render();
-      });
-  } else {
+  if (!AUTO_IMPORT_ON_FIRST_LOAD) {
     render();
+    return;
   }
+
+  Promise.all([
+    fetchJSON(AUTO_IMPORT_URLS.items),
+    fetchJSON(AUTO_IMPORT_URLS.values),
+    fetchJSON(AUTO_IMPORT_URLS.quests)
+  ])
+    .then(([items, values, quests]) => {
+      loadItems(items, values);
+      loadQuests(quests);
+      render();
+    })
+    .catch(handleInitError);
 })();
 
-// === SHARED HELPERS ===
-function getItem(id) {
-  if (id === null || id === undefined) {
-    return { name: "", value: 0 };
+function fetchJSON(url) {
+  return fetch(url).then(r => r.ok ? r.json() : null);
+}
+
+function loadItems(items, values) {
+  if (!items) {
+    console.warn("[Init] No items data received from remote");
+    return;
   }
-  return DATA.items[id] || { name: "", value: 0 };
+
+  DATA.items = items;
+  console.log(`[Init] Loaded ${Object.keys(DATA.items).length} items from remote`);
+
+  if (values) {
+    applyItemValues(values);
+    console.log(`[Init] Applied ${Object.keys(values).length} item values`);
+  }
+}
+
+function applyItemValues(values) {
+  Object.entries(values).forEach(([id, value]) => {
+    if (DATA.items[id]) {
+      DATA.items[id].value = value;
+    } else {
+      DATA.items[id] = { name: "", value };
+    }
+  });
+}
+
+function loadQuests(quests) {
+  if (quests?.groups) {
+    DATA.groups = quests.groups;
+    console.log(`[Init] Loaded ${quests.groups.length} quest groups`);
+  } else {
+    console.warn("[Init] No quest data received from remote");
+  }
+}
+
+function handleInitError(err) {
+  console.error("[Init] Auto-import failed:", err);
+  alert("Failed to auto-import data from remote URLs.\n\nCheck console for details.");
+  render();
+}
+
+// ===== ITEM HELPERS =====
+
+function getItem(id) {
+  return (id != null && DATA.items[id]) || { name: "", value: 0 };
 }
 
 function getItemDisplayName(item) {
@@ -112,16 +114,9 @@ function getItemDisplayName(item) {
   return slot > 0 ? `${safeName} [${slot}]` : safeName;
 }
 
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
-
 function ensureItem(id, name) {
-  if (id === null || id === undefined || id === "") return null;
   const numId = parseInt(id);
-  if (isNaN(numId)) return null;
+  if (!id || isNaN(numId)) return null;
 
   if (!DATA.items[numId]) {
     DATA.items[numId] = { name: name || "", value: 0 };
@@ -133,19 +128,21 @@ function ensureItem(id, name) {
 
 function getAllItems() {
   return Object.entries(DATA.items)
-    .map(([id, item]) => ({
-      ...item,
-      id: +id, // derive numeric ID from key
-    }))
-    .sort((a, b) => {
-      const nameA = a.name || "";
-      const nameB = b.name || "";
-      return nameA.localeCompare(nameB);
-    });
+    .map(([id, item]) => ({ ...item, id: +id }))
+    .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+}
+
+// ===== TEXT HELPERS =====
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 function parseDescription(desc) {
   if (!desc) return "";
+  
   let text;
   if (typeof desc === "string") {
     text = desc.replace(/\n/g, "<br>");
@@ -154,52 +151,79 @@ function parseDescription(desc) {
   } else {
     return "";
   }
+  
   // RO color handling
-  text = text.replace(/\^000000/g, "</span>");
-  text = text.replace(/\^([0-9A-Fa-f]{6})/g, '<span style="color: #$1">');
-  return text;
+  return text
+    .replace(/\^000000/g, "</span>")
+    .replace(/\^([0-9A-Fa-f]{6})/g, '<span style="color: #$1">');
 }
 
-// === TAB NAVIGATION ===
+// ===== TAB NAVIGATION =====
+
+const TAB_ELEMENTS = {
+  quests: {
+    sidebar: "treeContainer",
+    search: "questsSearch",
+    render: ["renderSidebar", "renderQuestContent"]
+  },
+  items: {
+    sidebar: "itemsList",
+    search: "itemsSearch",
+    render: ["renderItems", "renderItemContent"]
+  },
+  groups: {
+    sidebar: "groupsList",
+    search: "groupsActions",
+    render: ["renderGroupsList", "renderGroupContent"],
+    editorOnly: true
+  },
+  autoloot: {
+    sidebar: "autolootList",
+    render: ["renderAutolootSidebar", "renderAutolootMain"]
+  }
+};
+
 function switchTab(tabName) {
   state.currentTab = tabName;
+  updateTabButtons(tabName);
+  hideAllElements();
+  showTabElements(tabName);
+}
 
-  document.querySelectorAll(".tab").forEach((t) => {
-    t.classList.toggle("active", t.textContent.toLowerCase().includes(tabName));
+function updateTabButtons(tabName) {
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.classList.toggle("active", tab.textContent.toLowerCase().includes(tabName));
+  });
+}
+
+function hideAllElements() {
+  ["treeContainer", "itemsList", "groupsList", "autolootList"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add("hidden");
   });
 
-  document.getElementById("treeContainer").classList.add("hidden");
-  document.getElementById("itemsList").classList.add("hidden");
-  document.getElementById("groupsList").classList.add("hidden");
-  const alList = document.getElementById("autolootList");
-  if (alList) alList.classList.add("hidden");
+  ["questsSearch", "itemsSearch", "groupsActions"].forEach(id => {
+    document.getElementById(id).classList.add("hidden");
+  });
+}
 
-  document.getElementById("questsSearch").classList.add("hidden");
-  document.getElementById("itemsSearch").classList.add("hidden");
-  document.getElementById("groupsActions").classList.add("hidden");
+function showTabElements(tabName) {
+  const config = TAB_ELEMENTS[tabName];
+  if (!config) return;
 
-  if (tabName === "quests") {
-    document.getElementById("treeContainer").classList.remove("hidden");
-    document.getElementById("questsSearch").classList.remove("hidden");
-    if (window.renderSidebar) renderSidebar();
-    if (window.renderQuestContent) renderQuestContent();
-  } else if (tabName === "items") {
-    document.getElementById("itemsList").classList.remove("hidden");
-    document.getElementById("itemsSearch").classList.remove("hidden");
-    if (window.renderItems) renderItems();
-    if (window.renderItemContent) renderItemContent();
-  } else if (tabName === "groups") {
-    document.getElementById("groupsList").classList.remove("hidden");
-    if (state.editorMode) {
-      document.getElementById("groupsActions").classList.remove("hidden");
-    }
-    if (window.renderGroupsList) renderGroupsList();
-    if (window.renderGroupContent) renderGroupContent();
-  } else if (tabName === "autoloot") {
-    if (alList) alList.classList.remove("hidden");
-    if (window.renderAutolootSidebar) renderAutolootSidebar();
-    if (window.renderAutolootMain) renderAutolootMain();
+  // Show sidebar
+  const sidebar = document.getElementById(config.sidebar);
+  if (sidebar) sidebar.classList.remove("hidden");
+
+  // Show search/actions (if not editor-only or if in editor mode)
+  if (config.search && (!config.editorOnly || state.editorMode)) {
+    document.getElementById(config.search).classList.remove("hidden");
   }
+
+  // Call render functions
+  config.render?.forEach(fnName => {
+    if (window[fnName]) window[fnName]();
+  });
 }
 
 function render() {
@@ -212,14 +236,12 @@ function toggleSidebar() {
 
 function toggleEditorMode(enabled) {
   state.editorMode = enabled;
-  if (enabled) {
-    document.body.classList.remove("viewer-mode");
-  } else {
-    document.body.classList.add("viewer-mode");
-    if (state.currentTab === "groups") {
-      switchTab("quests");
-    }
+  document.body.classList.toggle("viewer-mode", !enabled);
+  
+  if (!enabled && state.currentTab === "groups") {
+    switchTab("quests");
   }
+  
   render();
 }
 
@@ -227,74 +249,67 @@ function saveData() {
   console.log("[Save] No caching - data always fresh from remote");
 }
 
-// === EXPORT FUNCTIONS ===
+// ===== EXPORT FUNCTIONS =====
+
 function exportQuests() {
-  const cleanedGroups = DATA.groups.map((group) => ({
+  const cleanedGroups = DATA.groups.map(group => ({
     ...group,
-    subgroups: group.subgroups.map((subgroup) => ({
+    subgroups: group.subgroups.map(subgroup => ({
       ...subgroup,
-      quests: subgroup.quests.map((quest) => ({
+      quests: subgroup.quests.map(quest => ({
         ...quest,
-        requirements: quest.requirements.map((req) => {
+        requirements: quest.requirements.map(req => {
           const cleaned = { ...req };
-          if (!cleaned.immune) {
-            delete cleaned.immune;
-          }
+          if (!cleaned.immune) delete cleaned.immune;
           return cleaned;
-        }),
-      })),
-    })),
+        })
+      }))
+    }))
   }));
 
-  const json = JSON.stringify({ groups: cleanedGroups }, null, 2);
-  const blob = new Blob([json], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "osromr_quests.json";
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadJSON({ groups: cleanedGroups }, "osromr_quests.json");
 }
 
 function exportValues() {
   const values = {};
-  Object.keys(DATA.items).forEach((id) => {
-    if (DATA.items[id].value && DATA.items[id].value > 0) {
-      values[id] = DATA.items[id].value;
-    }
+  Object.entries(DATA.items).forEach(([id, item]) => {
+    if (item.value > 0) values[id] = item.value;
   });
-  const json = JSON.stringify(values, null, 2);
-  const blob = new Blob([json], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "osromr_item_values.json";
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadJSON(values, "osromr_item_values.json");
 }
 
 function exportAll() {
   exportQuests();
-  setTimeout(() => exportValues(), 100);
+  setTimeout(exportValues, 100);
 }
 
-// === SEARCH DEBOUNCING ===
+function downloadJSON(data, filename) {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ===== SEARCH FUNCTIONS =====
+
 function debounce(func, timeout = 300) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
-    timer = setTimeout(() => {
-      func.apply(this, args);
-    }, timeout);
+    timer = setTimeout(() => func.apply(this, args), timeout);
   };
 }
 
-const debouncedQuestFilter = debounce((value) => {
+const debouncedQuestFilter = debounce(value => {
   state.questSearchFilter = value.toLowerCase();
   if (window.renderSidebar) renderSidebar();
 }, 250);
 
-const debouncedItemFilter = debounce((value) => {
+const debouncedItemFilter = debounce(value => {
   state.itemSearchFilter = value.toLowerCase();
   if (window.renderItems) renderItems();
 }, 250);
@@ -311,18 +326,16 @@ function clearQuestSearch() {
   if (window.renderSidebar) renderSidebar();
 }
 
+// ===== EVENT LISTENERS =====
+
 document.addEventListener("DOMContentLoaded", () => {
   const qInput = document.getElementById("questSearchInput");
   const iInput = document.getElementById("itemSearchInput");
 
   if (qInput) {
-    qInput.addEventListener("input", (e) =>
-      debouncedQuestFilter(e.target.value),
-    );
+    qInput.addEventListener("input", e => debouncedQuestFilter(e.target.value));
   }
   if (iInput) {
-    iInput.addEventListener("input", (e) =>
-      debouncedItemFilter(e.target.value),
-    );
+    iInput.addEventListener("input", e => debouncedItemFilter(e.target.value));
   }
 });

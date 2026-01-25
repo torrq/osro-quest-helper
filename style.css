@@ -1631,7 +1631,7 @@ body.viewer-mode .search-container {
 
 /* Sidebar Slots */
 .autoloot-slot-row {
-  padding: 12px 15px;
+  padding: 8px 15px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   display: flex;
