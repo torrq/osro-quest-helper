@@ -1718,7 +1718,7 @@ body.viewer-mode .search-container {
 
 .al-search-wrapper {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .al-search-input {
@@ -1804,4 +1804,13 @@ body.viewer-mode .search-container {
 
 .al-remove-btn:hover {
   color: var(--danger);
+}
+
+.al-paste-actions {
+  margin-top: 12px;
+}
+
+.al-paste-actions button {
+  margin-right: 6px;
+  font-size: 12pt;
 }

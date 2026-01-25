@@ -176,7 +176,7 @@ function renderImportSection() {
       <textarea
         id="alootPasteBox"
         class="al-paste-textarea"
-        placeholder="@alootid2 607 909 910"
+        placeholder="Example: @alootid2 save 1 7451 7507 7510"
       ></textarea>
       <div class="al-paste-actions">
         <button class="btn btn-primary btn-sm" onclick="importAlootCommands()">
