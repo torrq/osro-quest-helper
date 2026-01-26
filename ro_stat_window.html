@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragnarok Online - Stat Window</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .stat-window {
+            background: linear-gradient(to bottom, #e8e8e8 0%, #c0c0c0 100%);
+            border: 3px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            box-shadow: 
+                inset 1px 1px 0 rgba(255,255,255,0.8),
+                inset -1px -1px 0 rgba(0,0,0,0.2),
+                3px 3px 10px rgba(0,0,0,0.5);
+            width: 380px;
+            padding: 0;
+        }
+
+        .title-bar {
+            background: linear-gradient(to bottom, #000080 0%, #1084d0 100%);
+            color: white;
+            padding: 4px 8px;
+            font-weight: bold;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #fff;
+        }
+
+        .close-btn {
+            background: #c0c0c0;
+            border: 1px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .window-content {
+            padding: 15px;
+            background: #d4d0c8;
+        }
+
+        .stat-points-display {
+            background: #fff;
+            border: 2px inset #808080;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            color: #000080;
+        }
+
+        .stat-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 6px;
+            background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
+            border: 1px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+        }
+
+        .stat-label {
+            width: 45px;
+            font-weight: bold;
+            font-size: 13px;
+            color: #000;
+        }
+
+        .stat-value {
+            width: 60px;
+            text-align: right;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000080;
+            margin-right: 10px;
+        }
+
+        .stat-cost {
+            width: 80px;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+        }
+
+        .add-btn {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #c0c0c0 100%);
+            border: 2px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            width: 28px;
+            height: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: auto;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .add-btn:hover:not(:disabled) {
+            background: linear-gradient(to bottom, #fff 0%, #d0d0d0 100%);
+        }
+
+        .add-btn:active:not(:disabled) {
+            border: 2px solid #808080;
+            border-right-color: #fff;
+            border-bottom-color: #fff;
+            background: #c0c0c0;
+        }
+
+        .add-btn:disabled {
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .reset-btn {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #c0c0c0 100%);
+            border: 2px solid #fff;
+            border-right-color: #808080;
+            border-bottom-color: #808080;
+            padding: 8px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        .reset-btn:hover {
+            background: linear-gradient(to bottom, #fff 0%, #d0d0d0 100%);
+        }
+
+        .reset-btn:active {
+            border: 2px solid #808080;
+            border-right-color: #fff;
+            border-bottom-color: #fff;
+            background: #c0c0c0;
+        }
+
+        .info-text {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="stat-window">
+        <div class="title-bar">
+            <span>Status Window</span>
+            <div class="close-btn">×</div>
+        </div>
+        <div class="window-content">
+            <div class="stat-points-display">
+                Stat Points: <span id="statPoints">1256</span>
+            </div>
+
+            <div id="stats">
+                <div class="stat-row">
+                    <div class="stat-label">STR</div>
+                    <div class="stat-value" id="str-value">1</div>
+                    <div class="stat-cost" id="str-cost">Cost: 2</div>
+                    <button class="add-btn" onclick="addStat('str')">+</button>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">AGI</div>
+                    <div class="stat-value" id="agi-value">1</div>
+                    <div class="stat-cost" id="agi-cost">Cost: 2</div>
+                    <button class="add-btn" onclick="addStat('agi')">+</button>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">VIT</div>
+                    <div class="stat-value" id="vit-value">1</div>
+                    <div class="stat-cost" id="vit-cost">Cost: 2</div>
+                    <button class="add-btn" onclick="addStat('vit')">+</button>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">INT</div>
+                    <div class="stat-value" id="int-value">1</div>
+                    <div class="stat-cost" id="int-cost">Cost: 2</div>
+                    <button class="add-btn" onclick="addStat('int')">+</button>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">DEX</div>
+                    <div class="stat-value" id="dex-value">1</div>
+                    <div class="stat-cost" id="dex-cost">Cost: 2</div>
+                    <button class="add-btn" onclick="addStat('dex')">+</button>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">LUK</div>
+                    <div class="stat-value" id="luk-value">1</div>
+                    <div class="stat-cost" id="luk-cost">Cost: 2</div>
+                    <button class="add-btn" onclick="addStat('luk')">+</button>
+                </div>
+            </div>
+
+            <button class="reset-btn" onclick="resetStats()">Reset Stats</button>
+
+            <div class="info-text">
+                Max stat: 99 | Enough points for 2 stats at max
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        const MAX_STAT = 99;
+        const INITIAL_STAT_POINTS = 1256; // Enough for 2 stats at 99
+
+        let stats = {
+            str: 1,
+            agi: 1,
+            vit: 1,
+            int: 1,
+            dex: 1,
+            luk: 1
+        };
+
+        let statPoints = INITIAL_STAT_POINTS;
+
+        // Calculate cost to increase a stat from current value
+        // Formula: floor((currentStat - 1) / 10) + 2
+        function calculateStatCost(currentValue) {
+            return Math.floor((currentValue - 1) / 10) + 2;
+        }
+
+        // Update the display
+        function updateDisplay() {
+            // Update stat points
+            document.getElementById('statPoints').textContent = statPoints;
+
+            // Update each stat
+            for (let stat in stats) {
+                const value = stats[stat];
+                const cost = calculateStatCost(value);
+                
+                document.getElementById(`${stat}-value`).textContent = value;
+                document.getElementById(`${stat}-cost`).textContent = `Cost: ${cost}`;
+                
+                // Disable button if not enough points or at max
+                const btn = document.querySelector(`[onclick="addStat('${stat}')"]`);
+                btn.disabled = (statPoints < cost || value >= MAX_STAT);
+            }
+        }
+
+        // Add a stat point
+        function addStat(statName) {
+            const currentValue = stats[statName];
+            const cost = calculateStatCost(currentValue);
+
+            // Check if we can afford it and haven't hit max
+            if (statPoints >= cost && currentValue < MAX_STAT) {
+                stats[statName]++;
+                statPoints -= cost;
+                updateDisplay();
+            }
+        }
+
+        // Reset all stats
+        function resetStats() {
+            stats = {
+                str: 1,
+                agi: 1,
+                vit: 1,
+                int: 1,
+                dex: 1,
+                luk: 1
+            };
+            statPoints = INITIAL_STAT_POINTS;
+            updateDisplay();
+        }
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
