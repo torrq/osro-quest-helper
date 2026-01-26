@@ -235,6 +235,7 @@ function renderItemContent() {
 function updateItemValue(id, value) {
   if (DATA.items[id]) {
     DATA.items[id].value = Number(value) || 0;
+    saveItemValuesToStorage();
   }
 }
 
