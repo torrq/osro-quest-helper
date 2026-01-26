@@ -1,8 +1,8 @@
-# OSRO Quest Helper
+# OSRO Quests
 
-A web-based quest, material and autoloot management tool for OSRO Midrate. Organize quests, track materials needed for crafting chains, generate @alootid2 commands, and calculate total resource costs with ease.
+A web-based quest, material and autoloot management tool for [OSRO Midrate](https://osro.mr). Organize quests, track materials needed for crafting chains, generate @alootid2 commands, and calculate total resource costs with ease.
 
-## 🎮 Live Preview
+## 🎮 Live Page
 
 **Try it now! [https://torrq.github.io/osro-quest-helper](https://torrq.github.io/osro-quest-helper)**
 
@@ -57,53 +57,6 @@ The app is fully responsive and optimized for mobile devices:
 - Touch-friendly interface
 - Proper spacing and padding for comfortable scrolling
 
-## 💾 Data Format
-
-```json
-{
-  "meta": {
-    "creditValueZeny": 10000000,
-    "creditItemId": 40001,
-    "goldValueZeny": 124000,
-    "goldItemId": 969
-  },
-  "items": {
-    "969": {
-      "id": 969,
-      "name": "Gold",
-      "value": 124000
-    }
-  },
-  "groups": [
-    {
-      "name": "Group Name",
-      "subgroups": [
-        {
-          "name": "Subgroup Name",
-          "quests": [
-            {
-              "name": "Quest Name",
-              "producesId": 969,
-              "successRate": 100,
-              "description": "Quest description",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 1234,
-                  "amount": 5,
-                  "immune": false
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
-
 ## 🛠️ Development
 
 ### Local Setup
@@ -121,25 +74,6 @@ The app is fully responsive and optimized for mobile devices:
    ```
 
 3. Navigate to `http://localhost:8000`
-
-### File Structure
-```
-osro-quest-helper/
-├── index.html          # Main HTML file
-├── style.css           # Styling and responsive design
-├── script.js           # All application logic
-├── osromr_quests.json  # Default quest data (for auto-import)
-├── github.png          # GitHub link icon
-└── osromr.jpg          # Header background image
-```
-
-### Configuration
-
-In `script.js`, you can enable/disable auto-import:
-```javascript
-const AUTO_IMPORT_ON_FIRST_LOAD = true;  // Set to false to start with empty state
-const AUTO_IMPORT_URL = 'https://torrq.github.io/osro-quest-helper/osromr_quests.json';
-```
 
 ## 🔧 Technologies
 
