@@ -27,6 +27,7 @@ window.state = {
   autolootNames: JSON.parse(localStorage.getItem("osro_autoloot_names_v1")) || {},
   selectedAutolootSlot: 1,
   selectedItemId: null,
+  showValuesOnly: false,
 };
 
 // Ensure all 10 autoloot slots exist
@@ -46,12 +47,12 @@ document.body.classList.add("viewer-mode");
 
   Promise.all([
     fetchJSON(AUTO_IMPORT_URLS.items),
-    fetchJSON(AUTO_IMPORT_URLS.values),
     fetchJSON(AUTO_IMPORT_URLS.quests)
   ])
-    .then(([items, values, quests]) => {
-      loadItems(items, values);
+    .then(([items, quests]) => {
+      loadItems(items);
       loadQuests(quests);
+      loadItemValuesFromStorage();
       render();
     })
     .catch(handleInitError);
@@ -61,7 +62,7 @@ function fetchJSON(url) {
   return fetch(url).then(r => r.ok ? r.json() : null);
 }
 
-function loadItems(items, values) {
+function loadItems(items) {
   if (!items) {
     console.warn("[Init] No items data received from remote");
     return;
@@ -69,11 +70,39 @@ function loadItems(items, values) {
 
   DATA.items = items;
   console.log(`[Init] Loaded ${Object.keys(DATA.items).length} items from remote`);
+}
 
-  if (values) {
-    applyItemValues(values);
-    console.log(`[Init] Applied ${Object.keys(values).length} item values`);
+function loadItemValuesFromStorage() {
+  const stored = localStorage.getItem("osro_item_values_v1");
+  
+  if (stored) {
+    // Load from localStorage
+    try {
+      const values = JSON.parse(stored);
+      applyItemValues(values);
+      console.log(`[Init] Loaded ${Object.keys(values).length} item values from localStorage`);
+    } catch (err) {
+      console.error("[Init] Failed to parse stored item values:", err);
+      loadItemValuesFromRemote();
+    }
+  } else {
+    // No localStorage, load from remote
+    loadItemValuesFromRemote();
   }
+}
+
+function loadItemValuesFromRemote() {
+  fetchJSON(AUTO_IMPORT_URLS.values)
+    .then(values => {
+      if (values) {
+        applyItemValues(values);
+        saveItemValuesToStorage();
+        console.log(`[Init] Loaded ${Object.keys(values).length} item values from remote and saved to localStorage`);
+      }
+    })
+    .catch(err => {
+      console.error("[Init] Failed to load item values from remote:", err);
+    });
 }
 
 function applyItemValues(values) {
@@ -84,6 +113,49 @@ function applyItemValues(values) {
       DATA.items[id] = { name: "", value };
     }
   });
+}
+
+function saveItemValuesToStorage() {
+  const values = {};
+  Object.entries(DATA.items).forEach(([id, item]) => {
+    if (item.value > 0) values[id] = item.value;
+  });
+  localStorage.setItem("osro_item_values_v1", JSON.stringify(values));
+}
+
+function importItemValues() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    try {
+      const text = await file.text();
+      const values = JSON.parse(text);
+      
+      applyItemValues(values);
+      saveItemValuesToStorage();
+      
+      alert(`Successfully imported ${Object.keys(values).length} item values!`);
+      
+      if (state.currentTab === 'items') {
+        renderItems();
+        if (state.selectedItemId) renderItemContent();
+      }
+    } catch (err) {
+      alert('Failed to import item values. Please check the file format.');
+    }
+  };
+  
+  input.click();
+}
+
+function toggleValuesFilter(checked) {
+  state.showValuesOnly = checked;
+  renderItems();
 }
 
 function loadQuests(quests) {

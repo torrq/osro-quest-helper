@@ -60,6 +60,14 @@
               />
               <button class="btn btn-sm" onclick="clearItemSearch()">×</button>
             </div>
+            <div class="market-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="showValuesOnly" onchange="toggleValuesFilter(this.checked)">
+                <span>Zeny Values</span>
+              </label>
+              <button class="btn btn-sm" onclick="importItemValues()" title="Import Zeny Values">Import</button>
+              <button class="btn btn-sm" onclick="exportValues()" title="Export Zeny Values">Export</button>
+            </div>
           </div>
           <div class="toolbar">
             <div id="groupsActions" class="search-section hidden">

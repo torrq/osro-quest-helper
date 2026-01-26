@@ -16,6 +16,12 @@ function renderItems() {
           if (req.type === "item" && req.id) {
             usedItemIds.add(Number(req.id));
           }
+          if (req.type === "gold") {
+            usedItemIds.add(SPECIAL_ITEMS.GOLD);
+          }
+          if (req.type === "credit") {
+            usedItemIds.add(SPECIAL_ITEMS.CREDIT);
+          }
         });
       });
     });
@@ -32,6 +38,11 @@ function renderItems() {
         (item.name || "").toLowerCase().includes(q) ||
         item.id.toString().includes(q),
     );
+  }
+
+  // 4. Apply values filter if active
+  if (state.showValuesOnly) {
+    items = items.filter((item) => (item.value || 0) > 0);
   }
 
   const totalFound = items.length;

@@ -1070,6 +1070,25 @@ textarea {
   font-size: 13px;
 }
 
+.market-row {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 0 0;
+  text-align: right;
+}
+
+.market-row span {
+  font-size: 10pt;
+  color: var(--text-muted);
+  padding: 2px 8px 2px 0;
+}
+
+.market-row .checkbox-label {
+  width: auto;
+  margin-right: auto;
+}
+
+
 /* Generic hidden helper */
 .hidden {
   display: none !important;
@@ -1626,6 +1645,12 @@ body.viewer-mode .search-container {
 /* =========================================
    AUTOLOOT MANAGER STYLES
    ========================================= */
+
+.autoloot-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
 
 /* Sidebar Slots */
 .autoloot-slot-row {
