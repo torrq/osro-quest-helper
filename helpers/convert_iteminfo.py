@@ -9,12 +9,10 @@ ITEM_START_RE = re.compile(r"\[(\d+)\]\s*=\s*{")
 KEY_VALUE_RE = re.compile(r"^(\w+)\s*=\s*(.+?)(?:,\s*)?$")
 STRING_RE = re.compile(r'"((?:[^"\\]|\\.)*)"')
 
-
 def parse_lua_string(value):
     """Extract a single string value"""
     m = STRING_RE.search(value)
     return m.group(1) if m else None
-
 
 def parse_multiline_array(lines, start_index):
     """Parse array that may span multiple lines"""
@@ -35,7 +33,6 @@ def parse_multiline_array(lines, start_index):
         i += 1
 
     return values, i
-
 
 def parse_item_block(lines, start_index):
     """Parse a complete item block and return all its properties"""
@@ -73,7 +70,6 @@ def parse_item_block(lines, start_index):
 
     return item_data, i
 
-
 def convert_lub_to_json(text):
     lines = text.splitlines()
     items = {}
@@ -109,7 +105,6 @@ def convert_lub_to_json(text):
         items[str(item_id)] = current
 
     return items
-
 
 def main():
     for encoding in ["cp949", "utf-8", "latin-1"]:
@@ -166,7 +161,6 @@ def main():
         slot_text = f" [{slot} slot(s)]" if slot > 0 else ""
         print(f"  {item_id}: {name}{slot_text}")
     print(f"")
-
 
 if __name__ == "__main__":
     main()

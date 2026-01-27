@@ -8,7 +8,6 @@ IMAGE_DIR = SCRIPT_DIR / ".." / "image" / "item"
 ITEMS_FILE = SCRIPT_DIR / ".." / "data" / "osromr_items.json"
 OUTPUT_FILE = SCRIPT_DIR / ".." / "data" / "osromr_item_icons.json"
 
-
 def get_available_icons():
     """Scan image/item directory and return list of item IDs that have icons"""
     icons = []
@@ -30,7 +29,6 @@ def get_available_icons():
     icons.sort()
     
     return icons
-
 
 def main():
     print("\nScanning image/item/ directory for item icons...")
