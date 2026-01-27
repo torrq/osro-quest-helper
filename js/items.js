@@ -27,6 +27,17 @@ function renderItems() {
     });
   });
 
+  // 1b. Add items from autoloot lists
+  if (state.autolootData) {
+    Object.values(state.autolootData).forEach((autolootList) => {
+      if (Array.isArray(autolootList)) {
+        autolootList.forEach((itemId) => {
+          usedItemIds.add(Number(itemId));
+        });
+      }
+    });
+  }
+
   // 2. Filter the master item list to only those in our 'used' Set
   let items = getAllItems().filter((item) => usedItemIds.has(item.id));
 

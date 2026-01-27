@@ -156,14 +156,14 @@ function renderItemsSection(slot, items) {
 function renderItemCard(slot, id) {
   const item = DATA.items[id];
   const name = item?.name || "Unknown Item";
-  const nameStyle = name === "Unknown Item" ? ' style="color:red;"' : "";
+  const nameStyle = name === "Unknown Item" ? ' class="color-red"' : "";
 
   return `
     <div class="al-item-card">
-      <div style="display:flex; align-items:center; overflow:hidden; gap: 8px;">
+      <div class="al-item-card-left">
         ${renderItemIcon(id)}
-        <span style="color:var(--accent); font-family:monospace;">${id}</span>
         <span title="${name}"${nameStyle}>${name}</span>
+        <span class="al-item-card-itemid">${id}</span>
       </div>
       <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
     </div>

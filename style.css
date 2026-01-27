@@ -707,6 +707,10 @@ textarea {
   font-size: 24pt;
 }
 
+.color-red {
+  color: red;
+}
+
 .pixelated {
   image-rendering: pixelated
 }
@@ -1809,34 +1813,43 @@ body.viewer-mode .search-container {
 /* Item Grid */
 .al-items-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 6px;
 }
 
 .al-item-card {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 6px 4px 6px 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.al-item-card-left {
+  display:flex; align-items:center; overflow:hidden; gap: 8px;
+}
+
 .al-item-card span {
-  font-size: 13px;
+  font-size: 11pt;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 180px;
+  max-width: 170px;
+}
+
+.al-item-card-itemid {
+  color: var(--accent);
+  font-family: monospace;
 }
 
 .al-remove-btn {
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-  padding: 0 4px;
+  font-size: 22pt;
+  line-height: 11pt;
+  padding: 0 4px 4px 6px;
 }
 
 .al-remove-btn:hover {
