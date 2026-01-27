@@ -232,7 +232,7 @@ function renderItemIcon(id, sizeClass = "icon24") {
   } else {
     const iconUrl = getItemIconUrl(id);
     if (iconUrl) {
-      return `<img src="${iconUrl}" alt="Item ${id}" class="item-icon pixelated ${sizeClass}" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
+      return `<img src="${iconUrl}" alt="Item #${id}" title="Item #${id}" class="item-icon pixelated ${sizeClass}" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
     }
     return `<div class="item-icon-placeholder ${sizeClass}"></div>`;
   }

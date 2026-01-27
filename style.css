@@ -1963,7 +1963,7 @@ body.viewer-mode .search-container {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 11pt;
+  font-size: 12pt;
   line-height: 1;
   font-weight: bold;
 }
@@ -1986,7 +1986,7 @@ body.viewer-mode .search-container {
 }
 
 .item-icon-placeholder-zeny::after {
-  content: '$';
+  content: 'Z';
   color: #00ff22;
 }
 
