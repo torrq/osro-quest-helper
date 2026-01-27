@@ -116,11 +116,11 @@ def main():
         try:
             with open(INPUT_FILE, "r", encoding=encoding) as f:
                 text = f.read()
-            print(f"Successfully read file with {encoding} encoding")
+            print(f"\nSuccessfully read \"{INPUT_FILE}\" with {encoding} encoding")
             break
         except (UnicodeDecodeError, FileNotFoundError) as e:
             if encoding == "latin-1":
-                print(f"Error reading file: {e}")
+                print(f"\nError reading file: {e}")
                 return
 
     items = convert_lub_to_json(text)
@@ -131,13 +131,13 @@ def main():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=2)
 
-    print(f"\nConverted {len(items)} items → {OUTPUT_FILE}")
+    print(f"Converted {len(items)} items → {OUTPUT_FILE}")
 
     # -------- Balanced random sample output --------
-    print("\nSample items:")
+    print("\nRandom samples:\n")
 
     ids = sorted(int(i) for i in items.keys())
-    count = min(20, len(ids))
+    count = min(10, len(ids))
 
     if count == 0:
         print("  (no items parsed)")
@@ -165,6 +165,7 @@ def main():
         slot = item.get("slot", 0)
         slot_text = f" [{slot} slot(s)]" if slot > 0 else ""
         print(f"  {item_id}: {name}{slot_text}")
+    print(f"")
 
 
 if __name__ == "__main__":
