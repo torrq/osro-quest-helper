@@ -5,6 +5,7 @@
 window.DATA = {
   items: {},
   groups: [],
+  itemIcons: []
 };
 
 window.state = {
@@ -47,11 +48,13 @@ document.body.classList.add("viewer-mode");
 
   Promise.all([
     fetchJSON(AUTO_IMPORT_URLS.items),
-    fetchJSON(AUTO_IMPORT_URLS.quests)
+    fetchJSON(AUTO_IMPORT_URLS.quests),
+    fetchJSON(AUTO_IMPORT_URLS.icons)
   ])
-    .then(([items, quests]) => {
+    .then(([items, quests, icons]) => {
       loadItems(items);
       loadQuests(quests);
+      loadItemIcons(icons);
       loadItemValuesFromStorage();
       render();
     })
@@ -167,6 +170,15 @@ function loadQuests(quests) {
   }
 }
 
+function loadItemIcons(icons) {
+  if (icons && Array.isArray(icons)) {
+    DATA.itemIcons = icons;
+    console.log(`[Init] Loaded ${icons.length} item icons`);
+  } else {
+    console.warn("[Init] No item icons data received from remote");
+  }
+}
+
 function handleInitError(err) {
   console.error("[Init] Auto-import failed:", err);
   alert("Failed to auto-import data from remote URLs.\n\nCheck console for details.");
@@ -202,6 +214,29 @@ function getAllItems() {
   return Object.entries(DATA.items)
     .map(([id, item]) => ({ ...item, id: +id }))
     .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+}
+
+function getItemIconUrl(id) {
+  const numId = Number(id); // Convert to number for comparison
+  if (DATA.itemIcons && DATA.itemIcons.includes(numId)) {
+    return `image/item/${numId}.png`;
+  }
+  return null;
+}
+
+function renderItemIcon(id, size = 24) {
+  const iconUrl = getItemIconUrl(id);
+  
+  if (iconUrl) {
+    return `<img src="${iconUrl}" 
+                 alt="Item ${id}" 
+                 class="item-icon" 
+                 style="width: ${size}px; height: ${size}px; image-rendering: pixelated;"
+                 onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder\\' style=\\'width:${size}px;height:${size}px;\\'></div>';">`;
+  }
+  
+  // CSS placeholder when no icon exists
+  return `<div class="item-icon-placeholder" style="width: ${size}px; height: ${size}px;"></div>`;
 }
 
 // ===== TEXT HELPERS =====

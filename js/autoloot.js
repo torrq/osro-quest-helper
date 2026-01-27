@@ -160,8 +160,9 @@ function renderItemCard(slot, id) {
 
   return `
     <div class="al-item-card">
-      <div style="display:flex; align-items:center; overflow:hidden;">
-        <span style="color:var(--accent); font-family:monospace; margin-right:8px;">${id}</span>
+      <div style="display:flex; align-items:center; overflow:hidden; gap: 8px;">
+        ${renderItemIcon(id, 24)}
+        <span style="color:var(--accent); font-family:monospace;">${id}</span>
         <span title="${name}"${nameStyle}>${name}</span>
       </div>
       <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
@@ -301,7 +302,8 @@ function sortByRelevance(a, b, lowerQuery) {
 function renderSearchResults(resultsDiv, matches) {
   resultsDiv.innerHTML = matches.map(item => `
     <div class="al-result-item" onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
-      <span style="color:var(--accent); font-family:monospace; margin-right:8px; font-weight:bold;">
+      ${renderItemIcon(item.id, 24)}
+      <span style="color:var(--accent); font-family:monospace; margin-left:8px; margin-right:8px; font-weight:bold;">
         ${item.id}
       </span>
       <div style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">

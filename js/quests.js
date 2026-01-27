@@ -140,8 +140,13 @@ function createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx) 
   questDiv.className = "quest-item";
   if (state.selectedQuest === quest) questDiv.classList.add("active");
   questDiv.draggable = state.editorMode;
+  
+  // Get icon HTML
+  const iconHtml = quest.producesId ? renderItemIcon(quest.producesId, 20) : '';
+  
   questDiv.innerHTML = `
-    <span class="drag-handle">${state.editorMode ? "⋮⋮" : "◆"}</span>
+    <span class="drag-handle">${state.editorMode ? "⋮⋮" : ""}</span>
+    ${iconHtml}
     <span class="quest-name">${quest.name}</span>
   `;
 
@@ -238,7 +243,11 @@ function renderQuestContent() {
       </div>
 
       ${renderRequirementsSection(quest)}
-      ${descriptionHtml ? `<span class="item-label">Item Description:</span><div class="item-description-box">${descriptionHtml}</div>` : ""}
+
+      ${descriptionHtml ? `
+        <span class="item-label">Item Description:</span>
+        <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
+      ` : ""}
       
       <span class="item-label">Tree:</span>
       <div class="material-tree">${renderMaterialTree()}</div>
@@ -263,13 +272,15 @@ function renderProducesSelector(quest, item) {
       ${quest.producesId ? `
         <div class="item-selected-badge">
           <strong><a class="item-link tree-item-name" onclick="navigateToItem(${quest.producesId})">${getItemDisplayName(item)}</a></strong>
-          <button class="clear-btn" onclick="updateProducesId(null)">×</button>
+          ${state.editorMode ? `<button class="clear-btn" onclick="updateProducesId(null)">×</button>` : ''}
         </div>
-      ` : `
+      ` : state.editorMode ? `
         <div class="search-container">
           <input type="text" id="produces-search" placeholder="Search item to produce..." oninput="setupProducesSearch(this)">
           <div id="produces-dropdown" class="autocomplete-dropdown"></div>
         </div>
+      ` : `
+        <div class="text-muted">No item produced</div>
       `}
     </div>
   `;
@@ -367,10 +378,13 @@ function renderRequirement(req, idx) {
 }
 
 function renderItemRequirement(req, idx, item) {
+  const iconHtml = req.id ? renderItemIcon(req.id, 20) : '';
+  
   return `
     <div class="req-name-row">
       ${req.id ? `
         <div class="item-selected-badge">
+          ${iconHtml}
           <strong class="text-ellipsis-max">
             <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a>
           </strong>
@@ -639,14 +653,17 @@ function calculateZenyValue(req, amount) {
 
 function accumulateRequirement(totals, req, effectiveAmount) {
   const key = req.type === "item" ? `item_${req.id}` : req.type;
-  const name = CURRENCY_NAMES[req.type] || (req.type === "item" ? (getItem(req.id).name || "Unknown") : req.type);
+  const item = req.type === "item" ? getItem(req.id) : null;
+  const name = CURRENCY_NAMES[req.type] || (req.type === "item" ? (item?.name || "Unknown") : req.type);
 
   if (!totals[key]) {
     totals[key] = {
       name,
       amount: 0,
       type: req.type,
-      value: req.type === "item" ? getItem(req.id).value : 0
+      itemId: req.type === "item" ? req.id : null,  // ADD THIS
+      slot: req.type === "item" ? (Number(item?.slot) || 0) : 0,  // ADD THIS
+      value: req.type === "item" ? (item?.value || 0) : 0
     };
   }
   totals[key].amount += effectiveAmount;
@@ -691,9 +708,21 @@ function renderSummaryItems(entries, totalZeny) {
       extra = ` <span class="text-muted-sm">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
     }
 
+    // Add icon for items
+    const iconHtml = entry.type === "item" && entry.itemId ? renderItemIcon(entry.itemId, 24) : '';
+    
+    // Add slot display for items
+    const slotDisplay = entry.type === "item" && entry.slot > 0 ? ` [${entry.slot}]` : '';
+    
+    // Make item names clickable
+    const nameHtml = entry.type === "item" && entry.itemId 
+      ? `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}${slotDisplay}</a>`
+      : `${entry.name}${slotDisplay}`;
+
     return `
       <div class="summary-item">
-        <span class="summary-name">${entry.name}</span>
+        ${iconHtml}
+        <span class="summary-name">${nameHtml}</span>
         <span class="summary-amount">${displayAmount}${extra}</span>
       </div>
     `;

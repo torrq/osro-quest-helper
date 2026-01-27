@@ -685,22 +685,31 @@ textarea {
 
 .summary-item {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
   padding: 4px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .summary-item:last-child {
   border-bottom: none;
 }
 
+.summary-item .item-icon,
+.summary-item .item-icon-placeholder {
+  flex-shrink: 0;
+}
+
 .summary-name {
-  color: var(--text);
+  flex: 1;
+    color: var(--text);
+  min-width: 0;
 }
 
 .summary-amount {
-  color: var(--accent);
-  font-weight: 600;
+  margin-left: auto;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
@@ -877,16 +886,6 @@ textarea {
 .file-input-wrapper:hover .btn {
   background: var(--panel-hover);
   border-color: var(--accent);
-}
-
-.item-description-box {
-  background: #1b2130;
-  border: 1px solid var(--border);
-  padding: 14px 16px;
-  font-family: "Consolas", "Monaco", monospace;
-  font-size: 11pt;
-  white-space: pre-wrap;
-  color: var(--text);
 }
 
 .item-label {
@@ -1840,4 +1839,215 @@ body.viewer-mode .search-container {
 .al-paste-actions button {
   margin-right: 6px;
   font-size: 12pt;
+}
+
+/* Item Icons */
+.item-icon {
+  display: inline-block;
+  vertical-align: middle;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  flex-shrink: 0;
+}
+
+.item-icon-placeholder {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 2px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.item-icon-placeholder::after {
+  content: '?';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Update item-row-header to better align icons */
+.item-row-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Ensure al-result-item aligns icons properly */
+.al-result-item {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Ensure al-item-card icons align properly */
+.al-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Item Icons */
+.item-icon {
+  display: inline-block;
+  vertical-align: middle;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  flex-shrink: 0;
+}
+
+.item-icon-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  background: #3a3a3a;
+  border: 1px solid #555;
+  border-radius: 3px;
+  flex-shrink: 0;
+  position: relative;
+  color: #888;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.item-icon-placeholder::after {
+  content: '?';
+  font-size: calc(100% * 0.6); /* 60% of container size */
+  line-height: 1;
+}
+
+/* Specific sizes for better question mark scaling */
+.item-icon-placeholder[style*="24px"]::after {
+  font-size: 14px;
+}
+
+.item-icon-placeholder[style*="48px"]::after {
+  font-size: 28px;
+}
+
+/* Update item-row-header to better align icons */
+.item-row-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Requirement card icon positioning */
+.requirement-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-secondary);
+}
+
+.req-icon-container {
+  position: absolute;
+  top: 12px;
+  right: 40px; /* Position next to the × button */
+}
+
+.req-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-selected-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  flex: 1;
+}
+
+.item-selected-badge .item-icon,
+.item-selected-badge .item-icon-placeholder {
+  flex-shrink: 0;
+}
+
+/* Produces item badge */
+.item-selected-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.item-selected-badge .item-icon,
+.item-selected-badge .item-icon-placeholder {
+  flex-shrink: 0;
+}
+
+.item-selected-badge strong {
+  flex: 1;
+  min-width: 0; /* Allow text to shrink */
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  margin-left: auto;
+}
+
+.clear-btn:hover {
+  color: var(--danger-hover);
+}
+
+/* Item description box with icon */
+.item-description-box {
+  background: #1b2130;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 11pt;
+  white-space: pre-wrap;
+  color: var(--text);
+  position: relative;
+  padding: 12px;
+  padding-right: 64px; /* Space for the icon on the right */
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  line-height: 1.6;
+  min-height: 60px; /* Ensure box is tall enough for icon */
+}
+
+.desc-box-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+/* Ensure icon doesn't overlap on small screens */
+@media (max-width: 768px) {
+  .item-description-box {
+    padding-right: 12px;
+  }
+  
+  .desc-box-icon {
+    position: static;
+    float: right;
+    margin-left: 12px;
+    margin-bottom: 8px;
+  }
 }

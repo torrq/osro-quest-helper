@@ -64,18 +64,19 @@ function renderItems() {
             </div>`;
   } else {
     html += displayedItems
-      .map(
-        (item) => `
-      <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
-           onclick="selectItem(${item.id})">
-        <div class="item-row-header">
-          <span>${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
-          <span class="item-row-id">#${item.id}</span>
-        </div>
-      </div>
-    `,
-      )
-      .join("");
+  .map(
+    (item) => `
+  <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
+       onclick="selectItem(${item.id})">
+    <div class="item-row-header">
+      ${renderItemIcon(item.id, 24)}
+      <span style="margin-left: 8px;">${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
+      <span class="item-row-id">#${item.id}</span>
+    </div>
+  </div>
+`,
+  )
+  .join("");
   }
 
   container.innerHTML = html;
@@ -121,10 +122,13 @@ function renderItemContent() {
   container.innerHTML = `
     <div class="editor-item">
       <div class="item-header">
-        <h2>
-          ${getItemDisplayName(item)}
-          <span class="item-id-badge">#${id}</span>
-        </h2>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          ${renderItemIcon(id, 48)}
+          <h2 style="margin: 0;">
+            ${getItemDisplayName(item)}
+            <span class="item-id-badge">#${id}</span>
+          </h2>
+        </div>
       </div>
 
       <div class="panel-section">
