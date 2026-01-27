@@ -142,7 +142,7 @@ function createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx) 
   questDiv.draggable = state.editorMode;
   
   // Get icon HTML
-  const iconHtml = quest.producesId ? renderItemIcon(quest.producesId, 20) : '';
+  const iconHtml = quest.producesId ? renderItemIcon(quest.producesId) : '';
   
   questDiv.innerHTML = `
     <span class="drag-handle">${state.editorMode ? "⋮⋮" : ""}</span>
@@ -246,7 +246,7 @@ function renderQuestContent() {
 
       ${descriptionHtml ? `
         <span class="item-label">Item Description:</span>
-        <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
+        <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, "icon48")}</div>` : ''}${descriptionHtml}</div>
       ` : ""}
       
       <span class="item-label">Tree:</span>
@@ -378,7 +378,7 @@ function renderRequirement(req, idx) {
 }
 
 function renderItemRequirement(req, idx, item) {
-  const iconHtml = req.id ? renderItemIcon(req.id, 20) : '';
+  const iconHtml = req.id ? renderItemIcon(req.id) : '';
   
   return `
     <div class="req-name-row">
@@ -708,16 +708,29 @@ function renderSummaryItems(entries, totalZeny) {
       extra = ` <span class="text-muted-sm">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
     }
 
-    // Add icon for items
-    const iconHtml = entry.type === "item" && entry.itemId ? renderItemIcon(entry.itemId, 24) : '';
-    
     // Add slot display for items
     const slotDisplay = entry.type === "item" && entry.slot > 0 ? ` [${entry.slot}]` : '';
     
+    iconHtml = '';
+    nameHtml = '';
+
     // Make item names clickable
-    const nameHtml = entry.type === "item" && entry.itemId 
-      ? `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}${slotDisplay}</a>`
-      : `${entry.name}${slotDisplay}`;
+    if(entry.type === "item" && entry.itemId) {
+      iconHtml = renderItemIcon(entry.itemId);
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}${slotDisplay}</a>`;
+    } else if (entry.type === "zeny") {
+      iconHtml = renderItemIcon(1);
+      nameHtml = `${entry.name}${slotDisplay}`;
+    } else if(entry.type === "gold") {
+      iconHtml = renderItemIcon(SPECIAL_ITEMS.GOLD);
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">${entry.name}${slotDisplay}</a>`;
+    } else if(entry.type === "credit") {
+      iconHtml = renderItemIcon(SPECIAL_ITEMS.CREDIT);
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">${entry.name}${slotDisplay}</a>`;
+    } else {
+      iconHtml = renderItemIcon(2);
+      nameHtml = `${entry.name}${slotDisplay}`;
+    }
 
     return `
       <div class="summary-item">

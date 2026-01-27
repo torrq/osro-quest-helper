@@ -224,19 +224,18 @@ function getItemIconUrl(id) {
   return null;
 }
 
-function renderItemIcon(id, size = 24) {
-  const iconUrl = getItemIconUrl(id);
-  
-  if (iconUrl) {
-    return `<img src="${iconUrl}" 
-                 alt="Item ${id}" 
-                 class="item-icon" 
-                 style="width: ${size}px; height: ${size}px; image-rendering: pixelated;"
-                 onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder\\' style=\\'width:${size}px;height:${size}px;\\'></div>';">`;
+function renderItemIcon(id, sizeClass = "icon24") {
+  if(id === 1) {
+    return `<div class="item-icon-placeholder-zeny ${sizeClass}"></div>`;
+  } else if (id === 2) {
+    return `<div class="item-icon-placeholder-points ${sizeClass}"></div>`;
+  } else {
+    const iconUrl = getItemIconUrl(id);
+    if (iconUrl) {
+      return `<img src="${iconUrl}" alt="Item ${id}" class="item-icon pixelated ${sizeClass}" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
+    }
+    return `<div class="item-icon-placeholder ${sizeClass}"></div>`;
   }
-  
-  // CSS placeholder when no icon exists
-  return `<div class="item-icon-placeholder" style="width: ${size}px; height: ${size}px;"></div>`;
 }
 
 // ===== TEXT HELPERS =====

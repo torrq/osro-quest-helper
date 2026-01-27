@@ -69,7 +69,7 @@ function renderItems() {
   <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
        onclick="selectItem(${item.id})">
     <div class="item-row-header">
-      ${renderItemIcon(item.id, 24)}
+      ${renderItemIcon(item.id)}
       <span style="margin-left: 8px;">${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
       <span class="item-row-id">#${item.id}</span>
     </div>
@@ -123,7 +123,7 @@ function renderItemContent() {
     <div class="editor-item">
       <div class="item-header">
         <div style="display: flex; align-items: center; gap: 12px;">
-          ${renderItemIcon(id, 48)}
+          ${renderItemIcon(id, "size48")}
           <h2 style="margin: 0;">
             ${getItemDisplayName(item)}
             <span class="item-id-badge">#${id}</span>

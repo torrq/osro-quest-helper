@@ -237,7 +237,7 @@ body {
 
 .group-header,
 .subgroup-header {
-  padding: 2px 2px 2px 12px;
+  padding: 2px 0 2px 10px;
   background: var(--bg);
   border-bottom: 1px solid #222 !important;
   display: flex;
@@ -284,12 +284,12 @@ body {
 }
 
 .subgroup {
-  margin-left: 10px;
+  margin-left: 6px;
   margin-bottom: 0px;
 }
 
 .quest-item {
-  padding: 5px 0 5px 8px;
+  padding: 3px 0 4px 4px;
   margin: 0 0 0 0;
   background: transparent;
   border-left: 4px solid transparent;
@@ -299,7 +299,7 @@ body {
   transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
 }
 
 .quest-item:active {
@@ -695,9 +695,20 @@ textarea {
   border-bottom: none;
 }
 
-.summary-item .item-icon,
-.summary-item .item-icon-placeholder {
-  flex-shrink: 0;
+.icon24 {
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+}
+
+.icon48 {
+  width: 48px;
+  height: 48px;
+  font-size: 24pt;
+}
+
+.pixelated {
+  image-rendering: pixelated
 }
 
 .summary-name {
@@ -1870,6 +1881,38 @@ body.viewer-mode .search-container {
   font-weight: bold;
 }
 
+.summary-item .item-icon,
+.summary-item .item-icon-placeholder,
+.summary-item .item-icon-placeholder-points {
+  flex-shrink: 0;
+}
+
+.item-selected-badge .item-icon,
+.item-selected-badge .item-icon-placeholder,
+.item-selected-badge .item-icon-placeholder-points {
+  flex-shrink: 0;
+}
+
+.item-icon-placeholder-points {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 2px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.item-icon-placeholder-points::after {
+  content: '$';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
 /* Update item-row-header to better align icons */
 .item-row-header {
   display: flex;
@@ -1893,43 +1936,69 @@ body.viewer-mode .search-container {
 }
 
 /* Item Icons */
+.item-icon, .item-icon-placeholder, .item-icon-placeholder-points {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
 .item-icon {
   display: inline-block;
-  vertical-align: middle;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-  flex-shrink: 0;
 }
 
-.item-icon-placeholder {
+.item-icon-placeholder, .item-icon-placeholder-zeny, .item-icon-placeholder-points {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  vertical-align: middle;
-  background: #3a3a3a;
-  border: 1px solid #555;
   border-radius: 3px;
-  flex-shrink: 0;
   position: relative;
-  color: #888;
   font-weight: bold;
   font-family: Arial, sans-serif;
 }
 
+.item-icon-placeholder::after, .item-icon-placeholder-zeny::after, .item-icon-placeholder-points::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11pt;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.item-icon-placeholder {
+  background: #3a3a3a;
+  color: #888;
+  border: 1px solid #555;
+}
+
 .item-icon-placeholder::after {
   content: '?';
-  font-size: calc(100% * 0.6); /* 60% of container size */
-  line-height: 1;
+  color: #999;
 }
 
-/* Specific sizes for better question mark scaling */
-.item-icon-placeholder[style*="24px"]::after {
-  font-size: 14px;
+.item-icon-placeholder-zeny {
+  background: #062b09;
+  border: 1px solid #2a7537;
+  color: #888;
 }
 
-.item-icon-placeholder[style*="48px"]::after {
-  font-size: 28px;
+.item-icon-placeholder-zeny::after {
+  content: '$';
+  color: #00ff22;
+}
+
+.item-icon-placeholder-points {
+  background: #a30000;
+  border: 1px solid #f31a7f;
+  color: #888;
+}
+
+.item-icon-placeholder-points::after {
+  content: 'P';
+  color: #ffd0ff;
 }
 
 /* Update item-row-header to better align icons */
@@ -1973,11 +2042,6 @@ body.viewer-mode .search-container {
   flex: 1;
 }
 
-.item-selected-badge .item-icon,
-.item-selected-badge .item-icon-placeholder {
-  flex-shrink: 0;
-}
-
 /* Produces item badge */
 .item-selected-badge {
   display: flex;
@@ -1989,10 +2053,7 @@ body.viewer-mode .search-container {
   border-radius: 4px;
 }
 
-.item-selected-badge .item-icon,
-.item-selected-badge .item-icon-placeholder {
-  flex-shrink: 0;
-}
+
 
 .item-selected-badge strong {
   flex: 1;
