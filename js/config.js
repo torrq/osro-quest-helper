@@ -34,8 +34,8 @@ const AUTO_IMPORT_URLS = USE_LOCAL_SERVER ? LOCAL_URLS : REMOTE_URLS;
 
 // These items are used as currency in the game
 const SPECIAL_ITEMS = {
-  CREDIT: 40001,  // Credits (premium currency)
-  GOLD: 969,      // Emperium/Gold
+  CREDIT: 40001,  // Credits
+  GOLD: 969,      // Gold
 };
 
 // === HELPER FUNCTIONS ===
@@ -49,7 +49,7 @@ function getCreditValue() {
 }
 
 /**
- * Get the current zeny value of Gold/Emperium from the items database
+ * Get the current zeny value of Gold from the items database
  * @returns {number} Zeny value per Gold
  */
 function getGoldValue() {
