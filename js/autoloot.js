@@ -157,12 +157,14 @@ function renderItemCard(slot, id) {
   const item = DATA.items[id];
   const name = item?.name || "Unknown Item";
   const nameStyle = name === "Unknown Item" ? ' class="color-red"' : "";
+  const slotCount = Number(item?.slot) || 0;
+  const displayName = slotCount > 0 ? `${name} [${slotCount}]` : name;
 
   return `
     <div class="al-item-card">
       <div class="al-item-card-left">
-        ${renderItemIcon(id)}
-        <span title="${name}"${nameStyle}>${name}</span>
+        ${renderItemIcon(id, 24)}
+        <span title="${displayName}"${nameStyle}>${displayName}</span>
         <span class="al-item-card-itemid">${id}</span>
       </div>
       <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
@@ -300,17 +302,24 @@ function sortByRelevance(a, b, lowerQuery) {
 }
 
 function renderSearchResults(resultsDiv, matches) {
-  resultsDiv.innerHTML = matches.map(item => `
-    <div class="al-result-item" onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
-      ${renderItemIcon(item.id)}
-      <span style="color:var(--accent); font-family:monospace; margin-left:8px; margin-right:8px; font-weight:bold;">
-        ${item.id}
-      </span>
-      <div style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-        ${getItemDisplayName(item)}
+  resultsDiv.innerHTML = matches.map(item => {
+    const slotCount = Number(item.slot) || 0;
+    const displayName = slotCount > 0 
+      ? `${item.name || 'Unknown'} [${slotCount}]`
+      : (item.name || 'Unknown');
+    
+    return `
+      <div class="al-result-item" onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
+        ${renderItemIcon(item.id, 24)}
+        <div style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;margin-left:8px;">
+          ${displayName}
+        </div>
+        <span style="color:var(--text); font-family:monospace; margin:0 8px 0 8px; font-weight:bold;font-size:14pt;">
+          ${item.id}
+        </span>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
 
   resultsDiv.classList.remove("hidden");
 }

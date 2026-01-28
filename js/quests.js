@@ -39,12 +39,25 @@ function selectQuest(group, subgroup, quest) {
 
 // ===== SIDEBAR RENDERING =====
 
-function renderSidebar() {
+function renderSidebarCore() {
   const container = document.getElementById("treeContainer");
+  
+  if (!container) {
+    console.warn('[renderSidebar] Container element not found');
+    return;
+  }
+  
   container.innerHTML = "";
   const filter = state.questSearchFilter;
 
+  if (!Array.isArray(DATA.groups)) {
+    console.warn('[renderSidebar] DATA.groups is not an array');
+    return;
+  }
+
   DATA.groups.forEach((group, groupIdx) => {
+    if (!group) return;
+    
     const { hasMatch, matchingSubgroups } = getGroupMatches(group, filter);
     if (filter && !hasMatch) return;
 
@@ -56,11 +69,17 @@ function renderSidebar() {
 function getGroupMatches(group, filter) {
   if (!filter) return { hasMatch: true, matchingSubgroups: [] };
   
+  if (!group || !Array.isArray(group.subgroups)) {
+    return { hasMatch: false, matchingSubgroups: [] };
+  }
+  
   let hasMatch = false;
   const matchingSubgroups = [];
 
   group.subgroups.forEach((subgroup, subIdx) => {
-    if (subgroup.quests.some(q => q.name.toLowerCase().includes(filter))) {
+    if (!subgroup || !Array.isArray(subgroup.quests)) return;
+    
+    if (subgroup.quests.some(q => q && q.name && q.name.toLowerCase().includes(filter))) {
       hasMatch = true;
       matchingSubgroups.push(subIdx);
     }
@@ -76,8 +95,9 @@ function createGroupElement(group, groupIdx, filter, matchingSubgroups) {
 
   groupDiv.appendChild(createGroupHeader(group, groupIdx, isExpanded));
 
-  if (isExpanded) {
+  if (isExpanded && Array.isArray(group.subgroups)) {
     group.subgroups.forEach((subgroup, subIdx) => {
+      if (!subgroup) return;
       if (filter && !matchingSubgroups.includes(subIdx)) return;
       groupDiv.appendChild(createSubgroupElement(group, subgroup, groupIdx, subIdx, filter));
     });
@@ -107,12 +127,13 @@ function createSubgroupElement(group, subgroup, groupIdx, subIdx, filter) {
 
   subDiv.appendChild(createSubgroupHeader(subgroup, groupIdx, subIdx, isSubExpanded));
 
-  if (isSubExpanded) {
+  if (isSubExpanded && Array.isArray(subgroup.quests)) {
     const matchingQuests = filter 
-      ? subgroup.quests.filter(q => q.name.toLowerCase().includes(filter))
+      ? subgroup.quests.filter(q => q && q.name && q.name.toLowerCase().includes(filter))
       : subgroup.quests;
 
     matchingQuests.forEach((quest, questIdx) => {
+      if (!quest) return;
       subDiv.appendChild(createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx));
     });
 
@@ -210,8 +231,13 @@ function createAddQuestButton(groupIdx, subIdx) {
 
 // ===== QUEST CONTENT RENDERING =====
 
-function renderQuestContent() {
+function renderQuestContentCore() {
   const container = document.getElementById("mainContent");
+  
+  if (!container) {
+    console.warn('[renderQuestContent] Container element not found');
+    return;
+  }
 
   if (!state.selectedQuest) {
     container.innerHTML = `
@@ -246,7 +272,7 @@ function renderQuestContent() {
 
       ${descriptionHtml ? `
         <span class="item-label">Item Description:</span>
-        <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, "icon48")}</div>` : ''}${descriptionHtml}</div>
+        <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
       ` : ""}
       
       <span class="item-label">Tree:</span>
@@ -771,9 +797,20 @@ function switchSummaryTab(index) {
 
 function buildQuestIndex() {
   const index = new Map();
+  
+  if (!Array.isArray(DATA.groups)) {
+    return index;
+  }
+  
   DATA.groups.forEach(group => {
+    if (!group || !Array.isArray(group.subgroups)) return;
+    
     group.subgroups.forEach(subgroup => {
+      if (!subgroup || !Array.isArray(subgroup.quests)) return;
+      
       subgroup.quests.forEach(quest => {
+        if (!quest || !quest.producesId) return;
+        
         if (!index.has(quest.producesId)) {
           index.set(quest.producesId, []);
         }
@@ -992,3 +1029,47 @@ document.addEventListener("click", e => {
     dropdown.classList.remove("block");
   }
 });
+
+// ===== ERROR-WRAPPED RENDER FUNCTIONS =====
+
+// Wrap render functions with error boundaries and data validation
+window.renderSidebar = withErrorBoundary(
+  withDataValidation(renderSidebarCore, 'renderSidebar', ['DATA.groups']),
+  'renderSidebar'
+);
+
+window.renderQuestContent = withErrorBoundary(
+  withDataValidation(renderQuestContentCore, 'renderQuestContent', ['DATA.items']),
+  'renderQuestContent'
+);
+
+// ===== EXPOSE FUNCTIONS CALLED FROM HTML =====
+
+// Navigation and selection
+window.navigateToQuest = navigateToQuest;
+window.toggleGroup = toggleGroup;
+window.toggleSubgroup = toggleSubgroup;
+window.selectQuest = selectQuest;
+
+// Quest editing
+window.addQuest = addQuest;
+window.updateQuestName = updateQuestName;
+window.updateProducesId = updateProducesId;
+window.updateSuccessRate = updateSuccessRate;
+window.updateQuestAccountBound = updateQuestAccountBound;
+window.addRequirement = addRequirement;
+window.deleteRequirement = deleteRequirement;
+window.updateReqType = updateReqType;
+window.updateReqId = updateReqId;
+window.updateReqAmount = updateReqAmount;
+window.updateReqImmune = updateReqImmune;
+
+// Autocomplete
+window.setupProducesSearch = setupProducesSearch;
+window.setupAutocomplete = setupAutocomplete;
+window.selectAutocomplete = selectAutocomplete;
+
+// Utility functions
+window.toggleTotals = toggleTotals;
+window.toggleTreeItem = toggleTreeItem;
+window.switchSummaryTab = switchSummaryTab;

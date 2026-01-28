@@ -1,20 +1,35 @@
 // groups.js - Group and Subgroup Management Logic
 
-function renderGroupsList() {
+function renderGroupsListCore() {
   const container = document.getElementById("groupsList");
+  
+  if (!container) {
+    console.warn('[renderGroupsList] Container element not found');
+    return;
+  }
 
   let html = "";
 
+  if (!Array.isArray(DATA.groups)) {
+    console.warn('[renderGroupsList] DATA.groups is not an array');
+    container.innerHTML = `<div class="empty-msg-centered">No quest data loaded.</div>`;
+    return;
+  }
+
   DATA.groups.forEach((group, groupIdx) => {
+    if (!group) return;
+    
     const isSelected = state.selectedGroupForEdit === groupIdx;
+    const subgroupCount = Array.isArray(group.subgroups) ? group.subgroups.length : 0;
+    
     html += `
       <div class="group-edit-item ${isSelected ? "active" : ""}" onclick="selectGroupForEdit(${groupIdx})">
         <div class="group-edit-header">
           <div class="group-edit-name-container">
-            <span class="group-edit-name">${group.name}</span>
+            <span class="group-edit-name">${group.name || 'Unnamed Group'}</span>
             ${group.caption ? `<span class="group-edit-caption">${group.caption}</span>` : ""}
           </div>
-          <span class="group-edit-count">${group.subgroups.length} sub</span>
+          <span class="group-edit-count">${subgroupCount} sub</span>
         </div>
       </div>
     `;
@@ -33,8 +48,13 @@ function selectGroupForEdit(idx) {
   renderGroupContent();
 }
 
-function renderGroupContent() {
+function renderGroupContentCore() {
   const container = document.getElementById("mainContent");
+  
+  if (!container) {
+    console.warn('[renderGroupContent] Container element not found');
+    return;
+  }
 
   if (state.selectedGroupForEdit === null) {
     container.innerHTML = `
@@ -88,22 +108,26 @@ function renderGroupContent() {
       
       <div class="subgroups-section">
         <div class="subgroups-header">
-          <span class="item-label">Subgroups (${group.subgroups.length})</span>
+          <span class="item-label">Subgroups (${Array.isArray(group.subgroups) ? group.subgroups.length : 0})</span>
           <button class="btn btn-sm btn-primary" onclick="addSubgroup(${groupIdx})">+ Add Subgroup</button>
         </div>
         
         <div class="subgroups-list">
   `;
 
-  if (group.subgroups.length === 0) {
+  if (!Array.isArray(group.subgroups) || group.subgroups.length === 0) {
     html += `<div class="empty-msg-centered">No subgroups yet. Click "+ Add Subgroup" to create one.</div>`;
   } else {
     group.subgroups.forEach((subgroup, subIdx) => {
+      if (!subgroup) return;
+      
+      const questCount = Array.isArray(subgroup.quests) ? subgroup.quests.length : 0;
+      
       html += `
         <div class="subgroup-edit-card">
           <div class="subgroup-edit-header">
-            <input type="text" class="subgroup-edit-name-input" value="${subgroup.name}" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
-            <span class="subgroup-quest-count">${subgroup.quests.length} quests</span>
+            <input type="text" class="subgroup-edit-name-input" value="${subgroup.name || 'Unnamed Subgroup'}" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
+            <span class="subgroup-quest-count">${questCount} quests</span>
             <div class="subgroup-ordering-controls">
               <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, -1)" ${subIdx === 0 ? "disabled" : ""} title="Move Up">↑</button>
               <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, 1)" ${subIdx === group.subgroups.length - 1 ? "disabled" : ""} title="Move Down">↓</button>
@@ -221,3 +245,34 @@ function deleteSubgroup(groupIdx, subIdx) {
     render();
   }
 }
+
+// ===== ERROR-WRAPPED RENDER FUNCTIONS =====
+
+// Wrap render functions with error boundaries and data validation
+window.renderGroupsList = withErrorBoundary(
+  withDataValidation(renderGroupsListCore, 'renderGroupsList', ['DATA.groups']),
+  'renderGroupsList'
+);
+
+window.renderGroupContent = withErrorBoundary(
+  withDataValidation(renderGroupContentCore, 'renderGroupContent', ['DATA.groups']),
+  'renderGroupContent'
+);
+
+// ===== EXPOSE FUNCTIONS CALLED FROM HTML =====
+
+// Group selection
+window.selectGroupForEdit = selectGroupForEdit;
+
+// Group management
+window.addGroup = addGroup;
+window.deleteGroup = deleteGroup;
+window.updateGroupName = updateGroupName;
+window.updateGroupCaption = updateGroupCaption;
+window.moveGroup = moveGroup;
+
+// Subgroup management
+window.addSubgroup = addSubgroup;
+window.updateSubgroupName = updateSubgroupName;
+window.moveSubgroup = moveSubgroup;
+window.deleteSubgroup = deleteSubgroup;

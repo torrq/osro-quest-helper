@@ -40,6 +40,13 @@ document.body.classList.add("viewer-mode");
 
 // ===== INITIALIZATION =====
 
+// Track initialization state to prevent race conditions
+window.initState = {
+  complete: false,
+  valuesLoaded: false,
+  userHasEditedValues: false
+};
+
 (function initializeData() {
   if (!AUTO_IMPORT_ON_FIRST_LOAD) {
     render();
@@ -55,7 +62,10 @@ document.body.classList.add("viewer-mode");
       loadItems(items);
       loadQuests(quests);
       loadItemIcons(icons);
-      loadItemValuesFromStorage();
+      return loadItemValuesFromStorage();
+    })
+    .then(() => {
+      initState.complete = true;
       render();
     })
     .catch(handleInitError);
@@ -83,28 +93,45 @@ function loadItemValuesFromStorage() {
     try {
       const values = JSON.parse(stored);
       applyItemValues(values);
+      initState.valuesLoaded = true;
       console.log(`[Init] Loaded ${Object.keys(values).length} item values from localStorage`);
+      return Promise.resolve();
     } catch (err) {
       console.error("[Init] Failed to parse stored item values:", err);
-      loadItemValuesFromRemote();
+      console.warn("[Init] Corrupt localStorage detected. Attempting to load from remote...");
+      // Clear corrupt data
+      localStorage.removeItem("osro_item_values_v1");
+      // Load from remote and return the promise
+      return loadItemValuesFromRemote();
     }
   } else {
     // No localStorage, load from remote
-    loadItemValuesFromRemote();
+    console.log("[Init] No stored item values found. Loading from remote...");
+    return loadItemValuesFromRemote();
   }
 }
 
 function loadItemValuesFromRemote() {
-  fetchJSON(AUTO_IMPORT_URLS.values)
+  return fetchJSON(AUTO_IMPORT_URLS.values)
     .then(values => {
       if (values) {
+        // Check if user has already edited values during initialization
+        if (initState.userHasEditedValues) {
+          console.warn("[Init] User has already edited values. Skipping remote import to preserve user changes.");
+          return;
+        }
+        
         applyItemValues(values);
         saveItemValuesToStorage();
+        initState.valuesLoaded = true;
         console.log(`[Init] Loaded ${Object.keys(values).length} item values from remote and saved to localStorage`);
+      } else {
+        console.warn("[Init] No item values data received from remote");
       }
     })
     .catch(err => {
       console.error("[Init] Failed to load item values from remote:", err);
+      // Don't throw - allow app to continue with no values
     });
 }
 
@@ -124,6 +151,17 @@ function saveItemValuesToStorage() {
     if (item.value > 0) values[id] = item.value;
   });
   localStorage.setItem("osro_item_values_v1", JSON.stringify(values));
+}
+
+function saveAutolootData() {
+  try {
+    localStorage.setItem("osro_autoloot_v1", JSON.stringify(state.autolootData));
+    localStorage.setItem("osro_autoloot_names_v1", JSON.stringify(state.autolootNames));
+    console.log("[Autoloot] Saved autoloot data to localStorage");
+  } catch (error) {
+    console.error("[Autoloot] Failed to save autoloot data:", error);
+    logError("saveAutolootData", error);
+  }
 }
 
 function importItemValues() {
@@ -181,8 +219,130 @@ function loadItemIcons(icons) {
 
 function handleInitError(err) {
   console.error("[Init] Auto-import failed:", err);
-  alert("Failed to auto-import data from remote URLs.\n\nCheck console for details.");
+  logError("Initialization", err);
+  
+  const message = "Failed to auto-import data from remote URLs.\n\n" +
+                  "Error: " + (err.message || String(err)) + "\n\n" +
+                  "The application may not function correctly. Check console for details.";
+  
+  alert(message);
+  
+  // Still try to render with whatever data we have
+  initState.complete = true;
   render();
+}
+
+// ===== ERROR HANDLING & BOUNDARIES =====
+
+// Error logging and display
+window.errorLog = [];
+
+function logError(context, error, data = {}) {
+  const errorEntry = {
+    timestamp: new Date().toISOString(),
+    context,
+    message: error.message || String(error),
+    stack: error.stack,
+    data
+  };
+  
+  errorLog.push(errorEntry);
+  console.error(`[Error] ${context}:`, error, data);
+  
+  // Keep only last 50 errors
+  if (errorLog.length > 50) {
+    errorLog.shift();
+  }
+}
+
+function showErrorMessage(container, context, error, canRetry = false) {
+  const containerId = typeof container === 'string' ? container : container?.id || 'unknown';
+  const errorMessage = error.message || String(error);
+  
+  const html = `
+    <div class="error-state">
+      <h2>⚠️ Something Went Wrong</h2>
+      <p class="error-context">Error in: <strong>${context}</strong></p>
+      <details class="error-details">
+        <summary>Error Details</summary>
+        <pre>${escapeHtml(errorMessage)}</pre>
+        ${error.stack ? `<pre class="error-stack">${escapeHtml(error.stack)}</pre>` : ''}
+      </details>
+      ${canRetry ? `
+        <button onclick="location.reload()" class="btn-retry">
+          🔄 Reload Page
+        </button>
+      ` : ''}
+      <p class="error-help">
+        If this problem persists, try clearing your browser cache or 
+        <a href="#" onclick="localStorage.clear(); location.reload();">resetting your data</a>.
+      </p>
+    </div>
+  `;
+  
+  if (typeof container === 'string') {
+    const el = document.getElementById(container);
+    if (el) el.innerHTML = html;
+  } else if (container instanceof HTMLElement) {
+    container.innerHTML = html;
+  }
+}
+
+// Error boundary wrapper for render functions
+function withErrorBoundary(fn, context) {
+  return function(...args) {
+    try {
+      const result = fn.apply(this, args);
+      return result;
+    } catch (error) {
+      logError(context, error, { args });
+      
+      // Try to show error in appropriate container
+      let containerId = null;
+      if (context.includes('Items')) {
+        containerId = context.includes('Content') ? 'mainContent' : 'itemsList';
+      } else if (context.includes('Quest')) {
+        containerId = context.includes('Content') ? 'mainContent' : 'treeContainer';
+      } else if (context.includes('Group')) {
+        containerId = context.includes('Content') ? 'mainContent' : 'groupsList';
+      } else if (context.includes('Autoloot')) {
+        containerId = context.includes('Main') ? 'mainContent' : 'autolootList';
+      }
+      
+      if (containerId) {
+        showErrorMessage(containerId, context, error, true);
+      } else {
+        // Fallback: show alert
+        alert(`Error in ${context}: ${error.message}\n\nPlease refresh the page.`);
+      }
+      
+      // Don't throw - allow app to continue
+      return null;
+    }
+  };
+}
+
+// Wrap a function with validation for required data structures
+function withDataValidation(fn, context, requiredData = []) {
+  return function(...args) {
+    // Check required data exists
+    for (const dataPath of requiredData) {
+      const parts = dataPath.split('.');
+      let current = window;
+      
+      for (const part of parts) {
+        if (current[part] === undefined || current[part] === null) {
+          const error = new Error(`Required data missing: ${dataPath}`);
+          logError(context, error, { requiredData });
+          console.warn(`[${context}] Skipping render - required data not loaded yet`);
+          return null;
+        }
+        current = current[part];
+      }
+    }
+    
+    return fn.apply(this, args);
+  };
 }
 
 // ===== ITEM HELPERS =====
@@ -211,6 +371,11 @@ function ensureItem(id, name) {
 }
 
 function getAllItems() {
+  if (!DATA.items || typeof DATA.items !== 'object') {
+    console.warn('[getAllItems] DATA.items is not a valid object');
+    return [];
+  }
+  
   return Object.entries(DATA.items)
     .map(([id, item]) => ({ ...item, id: +id }))
     .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
@@ -224,8 +389,13 @@ function getItemIconUrl(id) {
   return null;
 }
 
-function renderItemIcon(id, sizeClass = "icon24") {
-  if(id === 1) {
+function renderItemIcon(id, size = 24) {
+  // Normalize/validate size: only allow 24 or 48 for now
+  const parsed = Number(size);
+  const validSize = parsed === 24 || parsed === 48 ? parsed : 24;
+  const sizeClass = `icon${validSize}`;
+
+  if (id === 1) {
     return `<div class="item-icon-placeholder-zeny ${sizeClass}"></div>`;
   } else if (id === 2) {
     return `<div class="item-icon-placeholder-points ${sizeClass}"></div>`;
@@ -249,19 +419,25 @@ function escapeHtml(text) {
 function parseDescription(desc) {
   if (!desc) return "";
   
-  let text;
-  if (typeof desc === "string") {
-    text = desc.replace(/\n/g, "<br>");
-  } else if (Array.isArray(desc)) {
-    text = desc.join("<br>");
-  } else {
-    return "";
+  try {
+    let text;
+    if (typeof desc === "string") {
+      text = desc.replace(/\n/g, "<br>");
+    } else if (Array.isArray(desc)) {
+      text = desc.join("<br>");
+    } else {
+      console.warn('[parseDescription] Unexpected description type:', typeof desc);
+      return "";
+    }
+    
+    // RO color handling
+    return text
+      .replace(/\^000000/g, "</span>")
+      .replace(/\^([0-9A-Fa-f]{6})/g, '<span style="color: #$1">');
+  } catch (error) {
+    console.error('[parseDescription] Error parsing description:', error);
+    return String(desc); // Fallback to string representation
   }
-  
-  // RO color handling
-  return text
-    .replace(/\^000000/g, "</span>")
-    .replace(/\^([0-9A-Fa-f]{6})/g, '<span style="color: #$1">');
 }
 
 // ===== TAB NAVIGATION =====
@@ -323,12 +499,22 @@ function showTabElements(tabName) {
 
   // Show search/actions (if not editor-only or if in editor mode)
   if (config.search && (!config.editorOnly || state.editorMode)) {
-    document.getElementById(config.search).classList.remove("hidden");
+    const searchEl = document.getElementById(config.search);
+    if (searchEl) searchEl.classList.remove("hidden");
   }
 
-  // Call render functions
+  // Call render functions with error handling
   config.render?.forEach(fnName => {
-    if (window[fnName]) window[fnName]();
+    if (window[fnName]) {
+      try {
+        window[fnName]();
+      } catch (error) {
+        logError(`showTabElements -> ${fnName}`, error, { tabName });
+        console.error(`[showTabElements] Failed to call ${fnName}:`, error);
+      }
+    } else {
+      console.warn(`[showTabElements] Render function '${fnName}' not found`);
+    }
   });
 }
 
@@ -445,3 +631,20 @@ document.addEventListener("DOMContentLoaded", () => {
     iInput.addEventListener("input", e => debouncedItemFilter(e.target.value));
   }
 });
+
+// ===== PUBLIC API EXPOSURE =====
+
+// Explicitly expose functions that may be called from HTML or other scripts
+// This ensures compatibility even if loaded as a module
+window.toggleSidebar = toggleSidebar;
+window.toggleEditorMode = toggleEditorMode;
+window.switchTab = switchTab;
+window.clearItemSearch = clearItemSearch;
+window.clearQuestSearch = clearQuestSearch;
+window.importItemValues = importItemValues;
+window.toggleValuesFilter = toggleValuesFilter;
+window.exportQuests = exportQuests;
+window.exportValues = exportValues;
+window.exportAll = exportAll;
+window.saveData = saveData;
+window.render = render;

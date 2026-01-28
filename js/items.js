@@ -1,31 +1,50 @@
 // items.js - Item List and Detail Logic
 
-function renderItems() {
+function renderItemsCore() {
   const container = document.getElementById("itemsList");
+  
+  if (!container) {
+    console.warn('[renderItems] Container element not found');
+    return;
+  }
 
   // 1. First, identify every item ID that is actually used in a quest
   const usedItemIds = new Set();
-  DATA.groups.forEach((group) => {
-    group.subgroups.forEach((subgroup) => {
-      subgroup.quests.forEach((quest) => {
-        // Add the produced item
-        if (quest.producesId) usedItemIds.add(Number(quest.producesId));
+  
+  // Safely iterate through groups
+  if (Array.isArray(DATA.groups)) {
+    DATA.groups.forEach((group) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach((subgroup) => {
+        if (!subgroup || !Array.isArray(subgroup.quests)) return;
+        
+        subgroup.quests.forEach((quest) => {
+          if (!quest) return;
+          
+          // Add the produced item
+          if (quest.producesId) usedItemIds.add(Number(quest.producesId));
 
-        // Add all required items
-        quest.requirements.forEach((req) => {
-          if (req.type === "item" && req.id) {
-            usedItemIds.add(Number(req.id));
-          }
-          if (req.type === "gold") {
-            usedItemIds.add(SPECIAL_ITEMS.GOLD);
-          }
-          if (req.type === "credit") {
-            usedItemIds.add(SPECIAL_ITEMS.CREDIT);
+          // Add all required items
+          if (Array.isArray(quest.requirements)) {
+            quest.requirements.forEach((req) => {
+              if (!req) return;
+              
+              if (req.type === "item" && req.id) {
+                usedItemIds.add(Number(req.id));
+              }
+              if (req.type === "gold" && typeof SPECIAL_ITEMS !== 'undefined') {
+                usedItemIds.add(SPECIAL_ITEMS.GOLD);
+              }
+              if (req.type === "credit" && typeof SPECIAL_ITEMS !== 'undefined') {
+                usedItemIds.add(SPECIAL_ITEMS.CREDIT);
+              }
+            });
           }
         });
       });
     });
-  });
+  }
 
   // 1b. Add items from autoloot lists
   if (state.autolootData) {
@@ -100,8 +119,13 @@ function selectItem(id) {
   if (window.innerWidth <= 768) toggleSidebar();
 }
 
-function renderItemContent() {
+function renderItemContentCore() {
   const container = document.getElementById("mainContent");
+  
+  if (!container) {
+    console.warn('[renderItemContent] Container element not found');
+    return;
+  }
 
   if (state.selectedItemId == null) {
     container.innerHTML = `
@@ -134,7 +158,7 @@ function renderItemContent() {
     <div class="editor-item">
       <div class="item-header">
         <div style="display: flex; align-items: center; gap: 12px;">
-          ${renderItemIcon(id, "size48")}
+          ${renderItemIcon(id, 48)}
           <h2 style="margin: 0;">
             ${getItemDisplayName(item)}
             <span class="item-id-badge">#${id}</span>
@@ -249,6 +273,11 @@ function renderItemContent() {
 
 function updateItemValue(id, value) {
   if (DATA.items[id]) {
+    // Mark that user has edited values (prevents race condition with remote fetch)
+    if (window.initState) {
+      window.initState.userHasEditedValues = true;
+    }
+    
     DATA.items[id].value = Number(value) || 0;
     saveItemValuesToStorage();
   }
@@ -256,9 +285,21 @@ function updateItemValue(id, value) {
 
 function findQuestsByItemId(itemId) {
   const results = { produces: [], requires: [] };
+  
+  if (!Array.isArray(DATA.groups)) {
+    console.warn('[findQuestsByItemId] DATA.groups is not an array');
+    return results;
+  }
+  
   DATA.groups.forEach((group, gi) => {
+    if (!group || !Array.isArray(group.subgroups)) return;
+    
     group.subgroups.forEach((subgroup, si) => {
+      if (!subgroup || !Array.isArray(subgroup.quests)) return;
+      
       subgroup.quests.forEach((quest, qi) => {
+        if (!quest) return;
+        
         if (quest.producesId === itemId) {
           results.produces.push({
             quest,
@@ -269,27 +310,31 @@ function findQuestsByItemId(itemId) {
             subgroup,
           });
         }
+        
         // Find the matching requirement
-        const matchingReq = quest.requirements.find((r) => {
-          // Check regular items
-          if (r.type === "item" && r.id === itemId) return true;
-          // Check special currency types
-          if (r.type === "gold" && itemId === SPECIAL_ITEMS.GOLD) return true;
-          if (r.type === "credit" && itemId === SPECIAL_ITEMS.CREDIT)
-            return true;
-          return false;
-        });
-
-        if (matchingReq) {
-          results.requires.push({
-            quest,
-            groupIdx: gi,
-            subIdx: si,
-            questIdx: qi,
-            group,
-            subgroup,
-            amount: matchingReq.amount, // Store the amount from the requirement
+        if (Array.isArray(quest.requirements)) {
+          const matchingReq = quest.requirements.find((r) => {
+            if (!r) return false;
+            // Check regular items
+            if (r.type === "item" && r.id === itemId) return true;
+            // Check special currency types
+            if (r.type === "gold" && itemId === SPECIAL_ITEMS.GOLD) return true;
+            if (r.type === "credit" && itemId === SPECIAL_ITEMS.CREDIT)
+              return true;
+            return false;
           });
+
+          if (matchingReq) {
+            results.requires.push({
+              quest,
+              groupIdx: gi,
+              subIdx: si,
+              questIdx: qi,
+              group,
+              subgroup,
+              amount: matchingReq.amount, // Store the amount from the requirement
+            });
+          }
         }
       });
     });
@@ -303,3 +348,24 @@ function navigateToItem(itemId) {
   state.selectedItemId = itemId;
   render();
 }
+
+// ===== ERROR-WRAPPED RENDER FUNCTIONS =====
+
+// Wrap render functions with error boundaries and data validation
+window.renderItems = withErrorBoundary(
+  withDataValidation(renderItemsCore, 'renderItems', ['DATA.items', 'DATA.groups']),
+  'renderItems'
+);
+
+window.renderItemContent = withErrorBoundary(
+  withDataValidation(renderItemContentCore, 'renderItemContent', ['DATA.items']),
+  'renderItemContent'
+);
+
+// ===== EXPOSE FUNCTIONS CALLED FROM HTML =====
+
+// These functions are called from inline HTML event handlers (onclick, onchange)
+// and must be globally accessible on the window object
+window.selectItem = selectItem;
+window.updateItemValue = updateItemValue;
+window.navigateToItem = navigateToItem;
