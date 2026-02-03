@@ -112,11 +112,33 @@ function renderItemsCore() {
   container.innerHTML = html;
 }
 
-function selectItem(id) {
+function selectItem(id, pushToHistory = true) {
   state.selectedItemId = id;
+  
+  // Update URL with item ID for sharing and browser history
+  if (id && typeof updateURL === 'function') {
+    updateURL(id.toString(), 'item', pushToHistory);
+  }
+  
   renderItems();
   renderItemContent();
   if (window.innerWidth <= 768) toggleSidebar();
+}
+
+// Select an item by ID (for URL navigation)
+function selectItemById(itemId, pushToHistory = true) {
+  const id = parseInt(itemId);
+  if (DATA.items[id]) {
+    selectItem(id, pushToHistory);
+    
+    // Scroll to item in sidebar after a short delay
+    setTimeout(() => {
+      const itemElement = document.querySelector('.item-row.active');
+      if (itemElement) {
+        itemElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 100);
+  }
 }
 
 function renderItemContentCore() {
@@ -156,6 +178,11 @@ function renderItemContentCore() {
 
   container.innerHTML = `
     <div class="editor-item">
+      <div class="quest-header-actions">
+        <button class="btn btn-sm copy-link-btn" onclick="copyItemLink()" title="Copy link to this item">
+          🔗 Copy Link
+        </button>
+      </div>
       <div class="item-header">
         <div style="display: flex; align-items: center; gap: 12px;">
           ${renderItemIcon(id, 48)}
@@ -342,11 +369,26 @@ function findQuestsByItemId(itemId) {
   return results;
 }
 
+// items.js - Navigation Logic Fix
+
 function navigateToItem(itemId) {
-  state.currentTab = "items";
-  state.selectedQuest = null;
-  state.selectedItemId = itemId;
-  render();
+  const id = parseInt(itemId);
+
+  // 1. Switch to items tab if not already there.
+  // We pass 'false' to suppress the default URL update (e.g., ?tab=items),
+  // because we are about to set a more specific URL (e.g., ?item=123).
+  if (state.currentTab !== "items") {
+    switchTab("items", false);
+  }
+
+  // 2. Use the robust selection functions
+  // If the item exists in our data, use selectItemById (handles scrolling & URL).
+  // If not, use selectItem directly to show the "Item Not Found" state with the ID.
+  if (DATA.items[id]) {
+    selectItemById(id);
+  } else {
+    selectItem(id);
+  }
 }
 
 // ===== ERROR-WRAPPED RENDER FUNCTIONS =====
@@ -367,5 +409,6 @@ window.renderItemContent = withErrorBoundary(
 // These functions are called from inline HTML event handlers (onclick, onchange)
 // and must be globally accessible on the window object
 window.selectItem = selectItem;
+window.selectItemById = selectItemById;
 window.updateItemValue = updateItemValue;
 window.navigateToItem = navigateToItem;

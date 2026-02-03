@@ -30,10 +30,17 @@ function toggleSubgroup(groupIdx, subIdx) {
   render();
 }
 
-function selectQuest(group, subgroup, quest) {
+function selectQuest(group, subgroup, quest, pushToHistory = true) {
   state.selectedQuest = quest;
   state.selectedGroup = group;
   state.selectedSubgroup = subgroup;
+  
+  // Update URL with quest ID for sharing and browser history
+  // Only push to history if this is a user-initiated click (not browser navigation)
+  if (quest && quest.producesId && typeof updateURL === 'function') {
+    updateURL(quest.producesId.toString(), 'quest', pushToHistory);
+  }
+  
   render();
 }
 
@@ -254,6 +261,11 @@ function renderQuestContentCore() {
   const descriptionHtml = parseDescription(item.desc);
 
   container.innerHTML = `
+    <div class="quest-header-actions">
+      <button class="btn btn-sm copy-link-btn" onclick="copyQuestLink()" title="Copy link to this quest">
+        🔗 Copy Link
+      </button>
+    </div>
     <div class="editor-quest">
       <span class="item-label">Quest Name:</span>
       <div class="form-group">

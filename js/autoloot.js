@@ -53,8 +53,14 @@ function createSlotElement(slotNum) {
   `;
 }
 
-function selectAutolootSlot(slotNum) {
+function selectAutolootSlot(slotNum, pushToHistory = true) {
   state.selectedAutolootSlot = slotNum;
+  
+  // Update URL with autoloot slot for sharing and browser history
+  if (slotNum && typeof updateURL === 'function') {
+    updateURL(slotNum.toString(), 'autoloot', pushToHistory);
+  }
+  
   renderAutolootSidebar();
   renderAutolootMain();
   if (window.innerWidth <= 768) toggleSidebar();
@@ -82,6 +88,11 @@ function renderHeader(slot) {
   const slotName = state.autolootNames[slot] || `Autoloot Slot ${slot}`;
   
   return `
+    <div class="quest-header-actions">
+      <button class="btn btn-sm copy-link-btn" onclick="copyAutolootLink()" title="Copy link to this autoloot slot">
+        🔗 Copy Link
+      </button>
+    </div>
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; gap: 15px;">
       <div style="flex: 1; min-width: 0;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">

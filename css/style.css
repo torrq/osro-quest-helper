@@ -82,7 +82,7 @@ body {
 .sidebar-header {
   padding: 10px 4px;
   border-bottom: 1px solid var(--border);
-  background-image: url("image/osromr.jpg");
+  background-image: url("../image/osromr.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1794,5 +1794,82 @@ body.viewer-mode .editor-quest select {
     float: right;
     margin-left: 12px;
     margin-bottom: 8px;
+  }
+}
+/* =========================================
+   QUEST LINK SHARING & NAVIGATION
+   ========================================= */
+
+/* Quest header with actions */
+.quest-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Copy Link Button */
+.copy-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--success);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.copy-link-btn:hover {
+  background: #4ade80;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(63, 185, 80, 0.4);
+}
+
+.copy-link-btn:active {
+  transform: translateY(0);
+}
+
+.copy-link-btn.copied {
+  background: var(--accent);
+  animation: pulse-copy 0.3s ease;
+}
+
+@keyframes pulse-copy {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Active Quest Highlighting - Enhanced */
+.quest-item.active {
+  background: rgba(88, 166, 255, 0.15) !important;
+  border-left: 3px solid var(--accent) !important;
+  font-weight: 600 !important;
+}
+
+.quest-item.active .quest-name {
+  color: var(--accent-hover);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .quest-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .copy-link-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

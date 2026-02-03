@@ -465,11 +465,23 @@ const TAB_ELEMENTS = {
   }
 };
 
-function switchTab(tabName) {
+function switchTab(tabName, pushState = true) {
+  const previousTab = state.currentTab;
   state.currentTab = tabName;
   updateTabButtons(tabName);
   hideAllElements();
   showTabElements(tabName);
+  
+  // Auto-select first item when switching to a tab with no selection
+  // This ensures browser history works properly
+  if (pushState) {
+    setTimeout(() => {
+      if (previousTab !== tabName) {
+        // Tab switched but item already selected - still update URL
+        updateURL(null, null, pushState);
+      }
+    }, 50);
+  }
 }
 
 function updateTabButtons(tabName) {
@@ -516,6 +528,25 @@ function showTabElements(tabName) {
       console.warn(`[showTabElements] Render function '${fnName}' not found`);
     }
   });
+}
+
+// Auto-select first item when switching to items tab with no selection
+function selectFirstItem() {
+  if (window.renderItems) {
+    // Trigger render to populate the list
+    window.renderItems();
+  }
+  
+  // Wait for render, then select first
+  setTimeout(() => {
+    const firstItemRow = document.querySelector('.item-row');
+    if (firstItemRow) {
+      const itemId = firstItemRow.onclick?.toString().match(/selectItem\((\d+)/)?.[1];
+      if (itemId && window.selectItem) {
+        window.selectItem(parseInt(itemId), true);
+      }
+    }
+  }, 100);
 }
 
 function render() {
@@ -618,6 +649,268 @@ function clearQuestSearch() {
   if (window.renderSidebar) renderSidebar();
 }
 
+// ===== URL NAVIGATION FUNCTIONS =====
+
+// Handle URL parameters on page load and navigation
+function handleURLNavigation() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const questId = urlParams.get('quest');
+  const itemId = urlParams.get('item');
+  const autolootSlot = urlParams.get('autoloot');
+  const tab = urlParams.get('tab');
+  
+  // Helper to ensure tab is active before selection
+  const ensureTab = (tabName) => {
+    if (state.currentTab !== tabName) {
+      switchTab(tabName, false); // false = don't push to history during load
+    }
+  };
+
+  // Priority 1: Entity Deep Links (Implicitly set the tab)
+  if (questId) {
+    ensureTab('quests');
+    selectQuestById(questId, false);
+  } 
+  else if (itemId) {
+    ensureTab('items');
+    if (window.selectItemById) {
+      // Clear any existing search filter so the deep-linked item is visible
+      if (state.itemSearchFilter) {
+        state.itemSearchFilter = "";
+        document.getElementById("itemSearchInput").value = "";
+      }
+      window.selectItemById(itemId, false);
+    }
+  } 
+  else if (autolootSlot) {
+    ensureTab('autoloot');
+    if (window.selectAutolootSlot) {
+      window.selectAutolootSlot(parseInt(autolootSlot), false);
+    }
+  }
+  // Priority 2: Pure Tab Navigation (Only if no entity is linked)
+  else if (tab) {
+    ensureTab(tab);
+  }
+}
+
+// Update URL with current state without reloading page
+function updateURL(entityId = null, entityType = null, pushState = true) {
+  const url = new URL(window.location);
+  
+  // 1. Clear all tracking parameters first to ensure a clean state
+  url.searchParams.delete('quest');
+  url.searchParams.delete('item');
+  url.searchParams.delete('autoloot');
+  url.searchParams.delete('tab'); // Always clear tab initially
+  
+  // 2. Set the specific entity parameter
+  if (entityId && entityType) {
+    url.searchParams.set(entityType, entityId);
+    // Note: We intentionally DO NOT set 'tab' here. 
+    // The entity presence implies the tab (quest->quests, item->items, etc.)
+  } 
+  // 3. If no entity is selected, we rely on the tab parameter
+  else if (state.currentTab !== 'quests') {
+    // Only set tab if it's not the default "quests" tab
+    url.searchParams.set('tab', state.currentTab);
+  }
+  
+  // 4. Create state object for history
+  const historyState = {
+    tab: state.currentTab,
+    questId: entityType === 'quest' ? entityId : null,
+    itemId: entityType === 'item' ? entityId : null,
+    autolootSlot: entityType === 'autoloot' ? entityId : null
+  };
+  
+  if (pushState) {
+    window.history.pushState(historyState, '', url);
+  } else {
+    window.history.replaceState(historyState, '', url);
+  }
+}
+
+// Find a quest by ID in the group/subgroup/quest structure
+function findQuestById(questId) {
+  if (!DATA.groups || !Array.isArray(DATA.groups)) return null;
+  
+  for (let groupIdx = 0; groupIdx < DATA.groups.length; groupIdx++) {
+    const group = DATA.groups[groupIdx];
+    if (!group || !Array.isArray(group.subgroups)) continue;
+    
+    for (let subIdx = 0; subIdx < group.subgroups.length; subIdx++) {
+      const subgroup = group.subgroups[subIdx];
+      if (!subgroup || !Array.isArray(subgroup.quests)) continue;
+      
+      for (let questIdx = 0; questIdx < subgroup.quests.length; questIdx++) {
+        const quest = subgroup.quests[questIdx];
+        if (quest && quest.producesId && quest.producesId.toString() === questId) {
+          return { quest, group, subgroup, groupIdx, subIdx, questIdx };
+        }
+        // Also check by quest name as fallback
+        if (quest && quest.name && quest.name.toLowerCase().replace(/\s+/g, '-') === questId) {
+          return { quest, group, subgroup, groupIdx, subIdx, questIdx };
+        }
+      }
+    }
+  }
+  return null;
+}
+
+// Select and display a quest by its ID
+function selectQuestById(questId, pushToHistory = true) {
+  const result = findQuestById(questId);
+  if (result) {
+    const { quest, group, subgroup, groupIdx, subIdx } = result;
+    
+    // Expand the group and subgroup
+    state.expandedGroups.add(groupIdx);
+    state.expandedSubgroups.add(`${groupIdx}-${subIdx}`);
+    
+    // Select the quest (this will trigger rendering)
+    // Pass pushToHistory to control whether we add to browser history
+    if (window.selectQuest) {
+      window.selectQuest(group, subgroup, quest, pushToHistory);
+    }
+    
+    // Scroll to the quest after a short delay to allow rendering
+    setTimeout(() => {
+      const questElement = document.querySelector('.quest-item.active');
+      if (questElement) {
+        questElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 100);
+  }
+}
+
+// Expand tree nodes to reveal a specific quest
+function expandTreeToQuest(questId) {
+  const result = findQuestById(questId);
+  if (result) {
+    const { groupIdx, subIdx } = result;
+    state.expandedGroups.add(groupIdx);
+    state.expandedSubgroups.add(`${groupIdx}-${subIdx}`);
+    render();
+  }
+}
+
+// Highlight the active quest in the tree
+function highlightActiveQuest(questId) {
+  // The active class is already handled by quests.js
+  // This is here for compatibility
+  const result = findQuestById(questId);
+  if (result) {
+    const { quest } = result;
+    state.selectedQuest = quest;
+  }
+}
+
+// Copy the current quest URL to clipboard
+function copyQuestLink() {
+  if (!state.selectedQuest || !state.selectedQuest.producesId) {
+    alert('No quest selected');
+    return;
+  }
+  
+  const url = new URL(window.location);
+  url.searchParams.set('quest', state.selectedQuest.producesId.toString());
+  
+  navigator.clipboard.writeText(url.toString()).then(() => {
+    showCopyFeedback('.copy-link-btn');
+  }).catch(err => {
+    console.error('Failed to copy link:', err);
+    prompt('Copy this link:', url.toString());
+  });
+}
+
+// Select a quest from browser history (back/forward navigation)
+function selectQuestFromHistory(questId) {
+  if (!questId) {
+    state.selectedQuest = null;
+    render();
+    return;
+  }
+  
+  // Don't push to history - we're already navigating through history
+  selectQuestById(questId, false);
+}
+// Select an item from browser history (back/forward navigation)
+function selectItemFromHistory(itemId) {
+  if (!itemId) {
+    state.selectedItemId = null;
+    render();
+    return;
+  }
+  
+  if (window.selectItemById) {
+    window.selectItemById(itemId, false);
+  }
+}
+
+// Select an autoloot slot from browser history (back/forward navigation)
+function selectAutolootSlotFromHistory(slotNum) {
+  if (!slotNum) {
+    render();
+    return;
+  }
+  
+  if (window.selectAutolootSlot) {
+    window.selectAutolootSlot(parseInt(slotNum), false);
+  }
+}
+
+// Copy the current item URL to clipboard
+function copyItemLink() {
+  if (!state.selectedItemId) {
+    alert('No item selected');
+    return;
+  }
+  
+  const url = new URL(window.location);
+  url.searchParams.set('item', state.selectedItemId.toString());
+  
+  navigator.clipboard.writeText(url.toString()).then(() => {
+    showCopyFeedback('.copy-link-btn');
+  }).catch(err => {
+    console.error('Failed to copy link:', err);
+    prompt('Copy this link:', url.toString());
+  });
+}
+
+// Copy the current autoloot slot URL to clipboard
+function copyAutolootLink() {
+  if (!state.selectedAutolootSlot) {
+    alert('No autoloot slot selected');
+    return;
+  }
+  
+  const url = new URL(window.location);
+  url.searchParams.set('autoloot', state.selectedAutolootSlot.toString());
+  
+  navigator.clipboard.writeText(url.toString()).then(() => {
+    showCopyFeedback('.copy-link-btn');
+  }).catch(err => {
+    console.error('Failed to copy link:', err);
+    prompt('Copy this link:', url.toString());
+  });
+}
+
+// Show copy feedback animation
+function showCopyFeedback(selector) {
+  const btn = document.querySelector(selector);
+  if (btn) {
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.classList.remove('copied');
+    }, 2000);
+  }
+}
+
+
 // ===== EVENT LISTENERS =====
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -630,6 +923,50 @@ document.addEventListener("DOMContentLoaded", () => {
   if (iInput) {
     iInput.addEventListener("input", e => debouncedItemFilter(e.target.value));
   }
+  
+  // Handle URL parameters on page load (delayed to ensure data is loaded)
+  setTimeout(() => {
+    if (initState.complete) {
+      handleURLNavigation();
+      
+      // Set initial history state if none exists
+      if (!window.history.state) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const questId = urlParams.get('quest');
+        window.history.replaceState(
+          { questId: questId || null, tab: state.currentTab },
+          '',
+          window.location.href
+        );
+      }
+    }
+  }, 100);
+  
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', function(event) {
+    if (event.state) {
+      const { tab, questId, itemId, autolootSlot } = event.state;
+      
+      // Switch to the correct tab first if needed
+      if (tab && tab !== state.currentTab) {
+        switchTab(tab, false);
+      }
+      
+      // Then handle the specific entity based on which parameter exists
+      if (questId) {
+        selectQuestFromHistory(questId);
+      } else if (itemId) {
+        selectItemFromHistory(itemId);
+      } else if (autolootSlot) {
+        selectAutolootSlotFromHistory(autolootSlot);
+      } else {
+        // No selection - clear current selection
+        state.selectedQuest = null;
+        state.selectedItemId = null;
+        render();
+      }
+    }
+  });
 });
 
 // ===== PUBLIC API EXPOSURE =====
@@ -648,3 +985,6 @@ window.exportValues = exportValues;
 window.exportAll = exportAll;
 window.saveData = saveData;
 window.render = render;
+window.copyQuestLink = copyQuestLink;
+window.copyItemLink = copyItemLink;
+window.copyAutolootLink = copyAutolootLink;
