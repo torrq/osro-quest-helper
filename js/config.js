@@ -2,6 +2,8 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
+const VERSION = "100";
+
 // === DATA SOURCE CONFIGURATION ===
 
 // Toggle between local development server and production GitHub URLs

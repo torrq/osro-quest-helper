@@ -47,7 +47,7 @@ window.initState = {
   userHasEditedValues: false
 };
 
-(function initializeData() {
+function initializeData() {
   if (!AUTO_IMPORT_ON_FIRST_LOAD) {
     render();
     return;
@@ -66,10 +66,26 @@ window.initState = {
     })
     .then(() => {
       initState.complete = true;
+      
+      // This ensures we never miss the window or check too early.
+      handleURLNavigation();
+      
+      // Render the final state (handleURLNavigation might have set a specific tab)
       render();
+      
+      // Initialize history state if needed
+      if (!window.history.state) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const questId = urlParams.get('quest');
+        window.history.replaceState(
+          { questId: questId || null, tab: state.currentTab },
+          '',
+          window.location.href
+        );
+      }
     })
     .catch(handleInitError);
-})();
+}
 
 function fetchJSON(url) {
   return fetch(url).then(r => r.ok ? r.json() : null);
@@ -910,10 +926,15 @@ function showCopyFeedback(selector) {
   }
 }
 
-
 // ===== EVENT LISTENERS =====
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  const logo = document.getElementById("osro-quests-logo");
+  if (logo) {
+        logo.title = `OSRO Quests v${VERSION} (Midrate)`;
+  }
+
   const qInput = document.getElementById("questSearchInput");
   const iInput = document.getElementById("itemSearchInput");
 
@@ -924,35 +945,15 @@ document.addEventListener("DOMContentLoaded", () => {
     iInput.addEventListener("input", e => debouncedItemFilter(e.target.value));
   }
   
-  // Handle URL parameters on page load (delayed to ensure data is loaded)
-  setTimeout(() => {
-    if (initState.complete) {
-      handleURLNavigation();
-      
-      // Set initial history state if none exists
-      if (!window.history.state) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const questId = urlParams.get('quest');
-        window.history.replaceState(
-          { questId: questId || null, tab: state.currentTab },
-          '',
-          window.location.href
-        );
-      }
-    }
-  }, 100);
-  
   // Handle browser back/forward buttons
   window.addEventListener('popstate', function(event) {
     if (event.state) {
       const { tab, questId, itemId, autolootSlot } = event.state;
       
-      // Switch to the correct tab first if needed
       if (tab && tab !== state.currentTab) {
         switchTab(tab, false);
       }
       
-      // Then handle the specific entity based on which parameter exists
       if (questId) {
         selectQuestFromHistory(questId);
       } else if (itemId) {
@@ -960,13 +961,16 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (autolootSlot) {
         selectAutolootSlotFromHistory(autolootSlot);
       } else {
-        // No selection - clear current selection
         state.selectedQuest = null;
         state.selectedItemId = null;
         render();
       }
     }
   });
+
+  // START APPLICATION
+  // Trigger initialization only after DOM is fully ready.
+  initializeData();
 });
 
 // ===== PUBLIC API EXPOSURE =====
