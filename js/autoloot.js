@@ -3,8 +3,8 @@
 // ===== CONSTANTS =====
 
 const AUTOLOOT_CONFIG = {
-  MAX_ITEMS_PER_LINE: 10,
-  MAX_CHARS_PER_LINE: 100,
+  MAX_ITEMS_PER_LINE: 25, // Just an upper bound, specific limits handled in generateCommands
+  MAX_CHARS_PER_LINE: 255, 
   MAX_SLOTS: 10,
   MAX_ITEMS_PER_SLOT: 100,
   COMMANDS_WITH_SLOTS: ["save", "reset", "load", "clear", "add", "remove"]
@@ -109,8 +109,8 @@ function renderHeader(slot) {
           >
         </div>
         <p style="font-style: italic; color: var(--text-muted); margin: 0 8px; font-size: 0.8em;">
-          Commands are automatically optimized to fit line limits 
-          (max ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_LINE} items/${AUTOLOOT_CONFIG.MAX_CHARS_PER_LINE} chars)
+          Commands are automatically optimized to prevent client overflow errors 
+          (bursts first, then throttles item count).
         </p>
       </div>
     </div>
@@ -209,29 +209,58 @@ function renderImportSection() {
 function generateCommands(slot, items) {
   if (items.length === 0) return [];
 
-  const { MAX_ITEMS_PER_LINE, MAX_CHARS_PER_LINE } = AUTOLOOT_CONFIG;
-  const prefix = `@alootid2 save ${slot} `;
+  const { MAX_CHARS_PER_LINE } = AUTOLOOT_CONFIG;
   const commandBlocks = [];
+  const prefix = `@alootid2 save ${slot} `;
+  
+  // Revised "Steeper Decay" Strategy based on your testing:
+  // Line 1: 20 items (Burst)
+  // Line 2: 15 items
+  // Line 3: 12 items
+  // Lines 4-7: 7 items (Sustained)
+  // Lines 8-9: 6 items (Fatigue sets in)
+  // Lines 10+: 5 items (Maximum safety)
+  const getLineLimit = (index) => {
+    if (index === 0) return 20;
+    if (index === 1) return 15;
+    if (index === 2) return 12;
+    if (index < 7) return 7;  // Lines 4, 5, 6, 7
+    if (index < 9) return 6;  // Lines 8, 9
+    return 5;                 // Line 10+
+  };
+
   let currentChunk = [];
+  let currentLineIndex = 0;
   let currentLength = prefix.length;
 
   items.forEach(id => {
     const idStr = id.toString();
-    const addedLength = idStr.length + 1;
+    
+    // 1. Determine Dynamic Limit for the current line number
+    const limit = getLineLimit(currentLineIndex);
+    
+    // 2. Calculate projected length
+    const spaceCost = currentChunk.length > 0 ? 1 : 0;
+    const totalCost = spaceCost + idStr.length;
 
-    if (currentChunk.length >= MAX_ITEMS_PER_LINE || 
-        currentLength + addedLength > MAX_CHARS_PER_LINE) {
-      if (currentChunk.length > 0) {
-        commandBlocks.push(`${prefix}${currentChunk.join(" ")}`);
-      }
+    // 3. Check Condition: Item Count Limit OR Character Limit
+    if (currentChunk.length >= limit || (currentLength + totalCost) > MAX_CHARS_PER_LINE) {
+      // Flush current line
+      commandBlocks.push(`${prefix}${currentChunk.join(" ")}`);
+      
+      // Reset for next line
       currentChunk = [];
+      currentLineIndex++;
       currentLength = prefix.length;
     }
 
+    // Add item
     currentChunk.push(idStr);
-    currentLength += addedLength;
+    const addedLen = (currentChunk.length === 1) ? idStr.length : (1 + idStr.length);
+    currentLength += addedLen;
   });
 
+  // Flush remaining items
   if (currentChunk.length > 0) {
     commandBlocks.push(`${prefix}${currentChunk.join(" ")}`);
   }
