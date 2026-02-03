@@ -1,7 +1,15 @@
-import json
+#!/usr/bin/env python3
+"""
+convert_iteminfo-mrhr.py
+
+Convert an OSRO MR/HR itemInfo Lub file -> JSON (structure-aware, cp949-friendly).
+"""
+
 import re
+import json
 import random
 
+# Edit these if needed
 INPUT_FILE = "itemInfo_EN.lub"
 OUTPUT_FILE = "osromr_items.json"
 
