@@ -932,7 +932,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const logo = document.getElementById("osro-quests-logo");
   if (logo) {
-        logo.title = `OSRO Quests v${VERSION} (Midrate)`;
+        logo.title = `OSRO Quests v${VERSION} (${FLAVOR})`;
+  }
+
+  const versionTag = document.getElementById("header-version-tag");
+  if (versionTag) {
+        versionTag.textContent = `${FLAVOR}`;
   }
 
   const qInput = document.getElementById("questSearchInput");

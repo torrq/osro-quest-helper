@@ -80,7 +80,7 @@ body {
 }
 
 .sidebar-header {
-  padding: 10px 4px;
+  padding: 0 4px 4px 4px;
   border-bottom: 1px solid var(--border);
   background-image: url("../image/osromr.jpg");
   background-size: cover;
@@ -95,6 +95,30 @@ body {
   margin-top: 0;
   display: flex;
   justify-content: space-between;
+}
+
+
+.header-right-group {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* The row containing the Toggle and Github Icon */
+.header-controls-row {
+  display: flex;
+  align-items: flex;
+  gap: 8px; /* Space between toggle and github icon */
+}
+
+div#header-version-tag {
+  font-size: 14pt;
+  color: #ffe100;
+  font-family: monospace;
+  text-align: center;
 }
 
 .github-link {
@@ -1656,8 +1680,8 @@ div.quest-bound {
 /* Editor Mode Toggle */
 .editor-toggle {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: top;
+  gap: 0px;
 }
 
 .toggle-switch {
