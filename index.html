@@ -67,6 +67,16 @@
             </div>
             <div class="market-row">
               <label class="checkbox-label">
+                <input type="checkbox" id="searchDescriptions" onchange="toggleDescSearch(this.checked)" autocomplete="off">
+                <span>Search Desc</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="showAllItems" onchange="toggleShowAllItems(this.checked)" autocomplete="off">
+                <span>Include All</span>
+              </label>
+            </div>
+            <div class="market-row">
+              <label class="checkbox-label">
                 <input type="checkbox" id="showValuesOnly" onchange="toggleValuesFilter(this.checked)" autocomplete="off">
                 <span>Zeny Values</span>
               </label>

@@ -29,6 +29,8 @@ window.state = {
   selectedAutolootSlot: 1,
   selectedItemId: null,
   showValuesOnly: false,
+  searchDescriptions: false,
+  showAllItems: false
 };
 
 // Ensure all 10 autoloot slots exist
@@ -37,6 +39,39 @@ for (let i = 1; i <= 10; i++) {
 }
 
 document.body.classList.add("viewer-mode");
+
+// ===== ICON CACHE =====
+
+/**
+ * Cache for rendered item icons
+ * Key format: "{itemId}_{size}" (e.g., "12345_24" or "12345_48")
+ */
+window.iconCache = {
+  cache: new Map(),
+  
+  get(id, size) {
+    const key = `${id}_${size}`;
+    return this.cache.get(key) || null;
+  },
+  
+  set(id, size, html) {
+    const key = `${id}_${size}`;
+    this.cache.set(key, html);
+    return html;
+  },
+  
+  clear() {
+    this.cache.clear();
+    console.log('[IconCache] Cache cleared');
+  },
+  
+  getStats() {
+    return {
+      size: this.cache.size,
+      entries: Array.from(this.cache.keys())
+    };
+  }
+};
 
 // ===== INITIALIZATION =====
 
@@ -56,12 +91,15 @@ function initializeData() {
   Promise.all([
     fetchJSON(AUTO_IMPORT_URLS.items),
     fetchJSON(AUTO_IMPORT_URLS.quests),
-    fetchJSON(AUTO_IMPORT_URLS.icons)
+    fetchJSON(AUTO_IMPORT_URLS.icons),
+    fetchJSON(AUTO_IMPORT_URLS.searchIndexName),
+    fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc)
   ])
-    .then(([items, quests, icons]) => {
+    .then(([items, quests, icons, searchName, searchDesc]) => {
       loadItems(items);
       loadQuests(quests);
       loadItemIcons(icons);
+      loadSearchIndices(searchName, searchDesc);
       return loadItemValuesFromStorage();
     })
     .then(() => {
@@ -227,9 +265,29 @@ function loadQuests(quests) {
 function loadItemIcons(icons) {
   if (icons && Array.isArray(icons)) {
     DATA.itemIcons = icons;
+    
+    // Clear icon cache when new icons are loaded
+    iconCache.clear();
+    
     console.log(`[Init] Loaded ${icons.length} item icons`);
   } else {
     console.warn("[Init] No item icons data received from remote");
+  }
+}
+
+function loadSearchIndices(nameIndex, descIndex) {
+  if (nameIndex && typeof nameIndex === 'object') {
+    if (typeof window.SEARCH_INDEX_NAME !== 'undefined') {
+      SEARCH_INDEX_NAME = nameIndex;
+    }
+    console.log(`[Init] Loaded name search index (${Object.keys(nameIndex).length} terms)`);
+  }
+  
+  if (descIndex && typeof descIndex === 'object') {
+    if (typeof window.SEARCH_INDEX_DESC !== 'undefined') {
+      SEARCH_INDEX_DESC = descIndex;
+    }
+    console.log(`[Init] Loaded description search index (${Object.keys(descIndex).length} terms)`);
   }
 }
 
@@ -406,22 +464,35 @@ function getItemIconUrl(id) {
 }
 
 function renderItemIcon(id, size = 24) {
-  // Normalize/validate size: only allow 24 or 48 for now
+  // Normalize/validate size: only allow 24 or 48
   const parsed = Number(size);
   const validSize = parsed === 24 || parsed === 48 ? parsed : 24;
+  
+  // Check cache first
+  const cached = iconCache.get(id, validSize);
+  if (cached) {
+    return cached;
+  }
+  
+  // Generate icon HTML
   const sizeClass = `icon${validSize}`;
+  let html;
 
   if (id === 1) {
-    return `<div class="item-icon-placeholder-zeny ${sizeClass}"></div>`;
+    html = `<div class="item-icon-placeholder-zeny ${sizeClass}"></div>`;
   } else if (id === 2) {
-    return `<div class="item-icon-placeholder-points ${sizeClass}"></div>`;
+    html = `<div class="item-icon-placeholder-points ${sizeClass}"></div>`;
   } else {
     const iconUrl = getItemIconUrl(id);
     if (iconUrl) {
-      return `<img src="${iconUrl}" alt="Item #${id}" title="Item #${id}" class="item-icon pixelated ${sizeClass}" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
+      html = `<img src="${iconUrl}" alt="Item #${id}" title="Item #${id}" class="item-icon pixelated ${sizeClass}" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
+    } else {
+      html = `<div class="item-icon-placeholder ${sizeClass}"></div>`;
     }
-    return `<div class="item-icon-placeholder ${sizeClass}"></div>`;
   }
+  
+  // Store in cache and return
+  return iconCache.set(id, validSize, html);
 }
 
 // ===== TEXT HELPERS =====
@@ -650,13 +721,20 @@ const debouncedQuestFilter = debounce(value => {
 
 const debouncedItemFilter = debounce(value => {
   state.itemSearchFilter = value.toLowerCase();
-  if (window.renderItems) renderItems();
+  if (typeof renderItems === 'function') renderItems();
+  if (state.selectedItemId && typeof renderItemContent === 'function') {
+    renderItemContent();
+  }
 }, 250);
 
 function clearItemSearch() {
+  const input = document.getElementById("itemSearchInput");
+  if (input) input.value = "";
   state.itemSearchFilter = "";
-  document.getElementById("itemSearchInput").value = "";
-  if (window.renderItems) renderItems();
+  if (typeof renderItems === 'function') renderItems();
+  if (state.selectedItemId && typeof renderItemContent === 'function') {
+    renderItemContent();
+  }
 }
 
 function clearQuestSearch() {
@@ -664,6 +742,18 @@ function clearQuestSearch() {
   document.getElementById("questSearchInput").value = "";
   if (window.renderSidebar) renderSidebar();
 }
+
+function toggleDescSearch(checked) {
+  state.searchDescriptions = checked;
+  renderItems();
+}
+
+function toggleShowAllItems(checked) {
+  state.showAllItems = checked;
+  renderItems();
+}
+
+window.toggleShowAllItems = toggleShowAllItems;
 
 // ===== URL NAVIGATION FUNCTIONS =====
 
@@ -997,3 +1087,4 @@ window.render = render;
 window.copyQuestLink = copyQuestLink;
 window.copyItemLink = copyItemLink;
 window.copyAutolootLink = copyAutolootLink;
+window.toggleDescSearch = toggleDescSearch;

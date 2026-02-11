@@ -1,5 +1,19 @@
 // items.js - Item List and Detail Logic
 
+// Search indices
+let SEARCH_INDEX_NAME = {};
+let SEARCH_INDEX_DESC = {};
+
+// Debounced save for item values
+let saveValueTimeout = null;
+
+function debouncedSaveItemValues() {
+  clearTimeout(saveValueTimeout);
+  saveValueTimeout = setTimeout(() => {
+    saveItemValuesToStorage();
+  }, 500);
+}
+
 function renderItemsCore() {
   const container = document.getElementById("itemsList");
   
@@ -8,10 +22,9 @@ function renderItemsCore() {
     return;
   }
 
-  // 1. First, identify every item ID that is actually used in a quest
+  // 1. Identify used items
   const usedItemIds = new Set();
   
-  // Safely iterate through groups
   if (Array.isArray(DATA.groups)) {
     DATA.groups.forEach((group) => {
       if (!group || !Array.isArray(group.subgroups)) return;
@@ -22,10 +35,8 @@ function renderItemsCore() {
         subgroup.quests.forEach((quest) => {
           if (!quest) return;
           
-          // Add the produced item
           if (quest.producesId) usedItemIds.add(Number(quest.producesId));
 
-          // Add all required items
           if (Array.isArray(quest.requirements)) {
             quest.requirements.forEach((req) => {
               if (!req) return;
@@ -46,7 +57,7 @@ function renderItemsCore() {
     });
   }
 
-  // 1b. Add items from autoloot lists
+  // 1b. Add autoloot items
   if (state.autolootData) {
     Object.values(state.autolootData).forEach((autolootList) => {
       if (Array.isArray(autolootList)) {
@@ -57,34 +68,76 @@ function renderItemsCore() {
     });
   }
 
-  // 2. Filter the master item list to only those in our 'used' Set
-  let items = getAllItems().filter((item) => usedItemIds.has(item.id));
+  // 2. Filter items
+  let items = state.showAllItems 
+    ? getAllItems() 
+    : getAllItems().filter((item) => usedItemIds.has(item.id));
 
-  // 3. Apply search filter if active
   if (state.itemSearchFilter) {
-    const q = state.itemSearchFilter;
-    items = items.filter(
-      (item) =>
-        (item.name || "").toLowerCase().includes(q) ||
-        item.id.toString().includes(q),
-    );
+    const q = state.itemSearchFilter.trim();
+    
+    // Check if searching by ID
+    if (/^\d+$/.test(q)) {
+      items = items.filter(item => 
+        item.id.toString().includes(q)
+      );
+    } else {
+      // Parse quoted phrases and individual words
+      const phrases = [];
+      const words = [];
+      
+      let remaining = q.replace(/"([^"]+)"/g, (match, phrase) => {
+        phrases.push(phrase.toLowerCase());
+        return '';
+      });
+      
+      remaining.split(/\s+/).forEach(word => {
+        if (word.length > 0) words.push(word.toLowerCase());
+      });
+      
+      const allTerms = [...phrases, ...words];
+      
+      // Build sets of matching IDs for each term (do this ONCE, not per item)
+      const termMatchSets = allTerms.map(term => {
+        const matchingIds = new Set();
+        
+        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+          if (indexTerm.includes(term)) {
+            SEARCH_INDEX_NAME[indexTerm].forEach(id => matchingIds.add(id));
+          }
+        });
+        
+        if (state.searchDescriptions) {
+          Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
+            if (indexTerm.includes(term)) {
+              SEARCH_INDEX_DESC[indexTerm].forEach(id => matchingIds.add(id));
+            }
+          });
+        }
+        
+        return matchingIds;
+      });
+      
+      // Filter items: must be in ALL term match sets (AND logic)
+      items = items.filter(item => 
+        termMatchSets.every(matchSet => matchSet.has(item.id))
+      );
+    }
   }
 
-  // 4. Apply values filter if active
   if (state.showValuesOnly) {
     items = items.filter((item) => (item.value || 0) > 0);
   }
 
   const totalFound = items.length;
-  const limit = 1500;
+  const limit = 2000; // Increased from 1500
   const displayedItems = items.slice(0, limit);
 
   let html = "";
 
-  // Display a count of used items vs search results
   if (totalFound > 0) {
     html += `<div class="items-search-banner">
-               ${displayedItems.length} items
+               ${displayedItems.length}${totalFound > limit ? `/${totalFound}` : ''} items
              </div>`;
   }
 
@@ -94,19 +147,23 @@ function renderItemsCore() {
             </div>`;
   } else {
     html += displayedItems
-  .map(
-    (item) => `
-  <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
-       onclick="selectItem(${item.id})">
-    <div class="item-row-header">
-      ${renderItemIcon(item.id)}
-      <span style="margin-left: 8px;">${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
-      <span class="item-row-id">#${item.id}</span>
-    </div>
-  </div>
-`,
-  )
-  .join("");
+      .map(
+        (item) => `
+      <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
+           onclick="selectItem(${item.id})">
+        <div class="item-row-header">
+          ${renderItemIcon(item.id)}
+          <span style="margin-left: 8px;">${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
+          <span class="item-row-id">#${item.id}</span>
+        </div>
+      </div>
+    `,
+      )
+      .join("");
+    
+    if (totalFound > limit) {
+      html += `<div class="items-limit-msg">Showing first ${limit} of ${totalFound} items. Use search to narrow results.</div>`;
+    }
   }
 
   container.innerHTML = html;
@@ -139,6 +196,35 @@ function selectItemById(itemId, pushToHistory = true) {
       }
     }, 100);
   }
+}
+
+function highlightSearchTerm(text, searchQuery) {
+  if (!searchQuery || !text) return text;
+  
+  // Parse search query into terms
+  const phrases = [];
+  const words = [];
+  
+  let remaining = searchQuery.replace(/"([^"]+)"/g, (match, phrase) => {
+    phrases.push(phrase);
+    return '';
+  });
+  
+  remaining.split(/\s+/).forEach(word => {
+    if (word.length > 0) words.push(word);
+  });
+  
+  const allTerms = [...phrases, ...words];
+  
+  // Highlight each term
+  let result = text;
+  allTerms.forEach(term => {
+    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+  });
+  
+  return result;
 }
 
 function renderItemContentCore() {
@@ -187,7 +273,9 @@ function renderItemContentCore() {
         <div style="display: flex; align-items: center; gap: 12px;">
           ${renderItemIcon(id, 48)}
           <h2 style="margin: 0;">
-            ${getItemDisplayName(item)}
+            ${state.itemSearchFilter 
+              ? highlightSearchTerm(getItemDisplayName(item), state.itemSearchFilter)
+              : getItemDisplayName(item)}
             <span class="item-id-badge">#${id}</span>
           </h2>
         </div>
@@ -198,7 +286,11 @@ function renderItemContentCore() {
           descriptionHtml
             ? `
           <span class="item-label">Description:</span>
-          <div class="item-description-box">${descriptionHtml}</div>`
+          <div class="item-description-box">${
+            state.itemSearchFilter && state.searchDescriptions
+              ? highlightSearchTerm(descriptionHtml, state.itemSearchFilter)
+              : descriptionHtml
+          }</div>`
             : ""
         }
       </div>
@@ -300,13 +392,12 @@ function renderItemContentCore() {
 
 function updateItemValue(id, value) {
   if (DATA.items[id]) {
-    // Mark that user has edited values (prevents race condition with remote fetch)
     if (window.initState) {
       window.initState.userHasEditedValues = true;
     }
     
     DATA.items[id].value = Number(value) || 0;
-    saveItemValuesToStorage();
+    debouncedSaveItemValues(); // Changed from immediate save
   }
 }
 
@@ -412,3 +503,6 @@ window.selectItem = selectItem;
 window.selectItemById = selectItemById;
 window.updateItemValue = updateItemValue;
 window.navigateToItem = navigateToItem;
+
+window.SEARCH_INDEX_NAME = SEARCH_INDEX_NAME;
+window.SEARCH_INDEX_DESC = SEARCH_INDEX_DESC;
