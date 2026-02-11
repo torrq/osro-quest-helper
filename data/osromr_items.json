@@ -15737,7 +15737,7 @@
   },
   "5474": {
     "name": "AFK Hat",
-    "desc": "A sign that says you are Away From your Keyboard. Whether or not you are telling the truth is another story.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 2^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 70^000000\nLevel Requirement:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "A sign that says you are Away From your Keyboard. Whether or not you are telling the truth is another story.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 2^000000\nPosition:^6666CC Upper^000000\nWeight:^009900 70^000000\nLevel Requirement:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "5475": {
     "name": "Gozarian Hat",
@@ -45415,7 +45415,7 @@
   },
   "19380": {
     "name": "Floating Tai-Chi Spheres",
-    "desc": "A mysterious Yin Yang ball that floats.\nIt has the power of the two contradictory energies.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A mysterious Yin Yang ball that floats.\nIt has the power of the two contradictory energies.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "19381": {
     "name": "Protect Cloth",
@@ -49717,7 +49717,7 @@
   },
   "20607": {
     "name": "Baldur's Wings",
-    "desc": "Wings made after the image of Baldur, the elegant and beautiful god of light.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Wings made after the image of Baldur, the elegant and beautiful god of light.\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\nIncrease resistance to Dark Property attacks by 2%.\nSource:^777777 Anniversary Giveaway^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20613": {
     "name": "Spider Wings",
@@ -61433,7 +61433,7 @@
   },
   "31433": {
     "name": "Celestial Circle",
-    "desc": "Class:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Max Weight + 250\nGives +1 random stat when equipped.\nIncreases damage to Undead monsters by 2%.\nSource:^777777 Anniversary Giveaway^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31434": {
     "name": "Cloud Burst",
@@ -68648,7 +68648,7 @@
   },
   "46586": {
     "name": "Yellow Spirit Aura",
-    "desc": "Spiritual forces are trying to guide you in your journey.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Spiritual forces are trying to guide you in your journey.\nMax Weight + 250\nGives +1 random stat when equipped.\nIncreases damage to Undead monsters by 2%.\nSource:^777777 Anniversary Giveaway^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46587": {
     "name": "Black Rune Aura",
@@ -71091,7 +71091,7 @@
   },
   "48103": {
     "name": "Shiny Angel YLW",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nMax Weight + 250\nGives +1 random stat when equipped.\nIncreases damage to Undead monsters by 2%.\nSource:^777777 Anniversary Giveaway^000000\nClass :^777777 Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48104": {
     "name": "Shiny Crown BLK",
@@ -73245,6 +73245,18 @@
     "name": "King of Shadow Shoulder",
     "desc": "-------------------------\nIncrease damage on Boss monsters by 7%.\nDrop Rate of any items and cards increased by 7%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 King of Shadow Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT & VIT + 1\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
+  "48644": {
+    "name": "Sun God Nika Aura",
+    "desc": "-------------------------\nMax Weight + 700\nMovespeed Rate +7%\nIncrease damage on Boss monsters by 7%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sun God Nika Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDEX + 1, HIT + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48645": {
+    "name": "Sun God Nika Head",
+    "desc": "-------------------------\nMax Weight + 700\nMovespeed Rate +7%\nIncrease damage on Boss monsters by 7%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sun God Nika Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSTR + 1, ATK + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48646": {
+    "name": "Sun God Nika Shroud",
+    "desc": "-------------------------\nMax Weight + 700\nMovespeed Rate +7%\nIncrease damage on Boss monsters by 7%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sun God Nika Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT + 1, MATK + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
   "49000": {
     "name": "Angelic Valkyrie Wings Dark",
     "desc": "-------------------------\nMax Weight + 500\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaxHP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
@@ -73292,6 +73304,10 @@
   "49011": {
     "name": "King of Shadow Cape",
     "desc": "-------------------------\nIncreases resistance to all elemental properties by 5%.\nDrop Rate of any items and cards increased by 10%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 King of Shadow Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncreases resistance to all elemental properties by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49012": {
+    "name": "Sun God Nika Hat",
+    "desc": "-------------------------\nMax Weight + 700\nATK + 2%, MATK + 2%\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sun God Nika Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
   },
   "400020": {
     "name": "Beach Ball",

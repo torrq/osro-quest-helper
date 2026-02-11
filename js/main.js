@@ -5,7 +5,8 @@
 window.DATA = {
   items: {},
   groups: [],
-  itemIcons: []
+  itemIcons: [],
+  newItemIds: new Set()
 };
 
 window.state = {
@@ -30,7 +31,8 @@ window.state = {
   selectedItemId: null,
   showValuesOnly: false,
   searchDescriptions: false,
-  showAllItems: false
+  showAllItems: false,
+  showNewItemsOnly: false
 };
 
 // Ensure all 10 autoloot slots exist
@@ -93,13 +95,15 @@ function initializeData() {
     fetchJSON(AUTO_IMPORT_URLS.quests),
     fetchJSON(AUTO_IMPORT_URLS.icons),
     fetchJSON(AUTO_IMPORT_URLS.searchIndexName),
-    fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc)
+    fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc),
+    fetchJSON(AUTO_IMPORT_URLS.newItems)
   ])
-    .then(([items, quests, icons, searchName, searchDesc]) => {
+    .then(([items, quests, icons, searchName, searchDesc, newItems]) => {
       loadItems(items);
       loadQuests(quests);
       loadItemIcons(icons);
       loadSearchIndices(searchName, searchDesc);
+      loadNewItems(newItems);
       return loadItemValuesFromStorage();
     })
     .then(() => {
@@ -288,6 +292,29 @@ function loadSearchIndices(nameIndex, descIndex) {
       SEARCH_INDEX_DESC = descIndex;
     }
     console.log(`[Init] Loaded description search index (${Object.keys(descIndex).length} terms)`);
+  }
+}
+
+function loadNewItems(newItems) {
+  if (newItems && Array.isArray(newItems)) {
+    DATA.newItemIds = new Set(newItems);
+    
+    // Index new items so they work with text search
+    newItems.forEach(id => {
+      const item = DATA.items[id];
+      if (item && item.name) {
+        const terms = item.name.toLowerCase().split(/\s+/);
+        terms.forEach(term => {
+          if (term.length < 1) return;
+          if (!SEARCH_INDEX_NAME[term]) SEARCH_INDEX_NAME[term] = [];
+          if (!SEARCH_INDEX_NAME[term].includes(id)) {
+            SEARCH_INDEX_NAME[term].push(id);
+          }
+        });
+      }
+    });
+    
+    console.log(`[Init] Loaded and indexed ${newItems.length} new item IDs`);
   }
 }
 

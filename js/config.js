@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 103;
+const VERSION = 105;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
@@ -16,6 +16,7 @@ const AUTO_IMPORT_ON_FIRST_LOAD = true;
 // GitHub Pages URLs (Production)
 const REMOTE_URLS = {
   items: "https://torrq.github.io/osro-quest-helper/data/osromr_items.json",
+  newItems: "https://torrq.github.io/osro-quest-helper/data/osromr_items_new.json",
   values: "https://torrq.github.io/osro-quest-helper/data/osromr_item_values.json",
   quests: "https://torrq.github.io/osro-quest-helper/data/osromr_quests.json",
   icons: "https://torrq.github.io/osro-quest-helper/data/osromr_item_icons.json",
@@ -27,6 +28,7 @@ const REMOTE_URLS = {
 // Run with: python -m http.server 8000
 const LOCAL_URLS = {
   items: "http://127.0.0.1:8000/data/osromr_items.json",
+  newItems: "http://127.0.0.1:8000/data/osromr_items_new.json",
   values: "http://127.0.0.1:8000/data/osromr_item_values.json",
   quests: "http://127.0.0.1:8000/data/osromr_quests.json",
   icons: "http://127.0.0.1:8000/data/osromr_item_icons.json",

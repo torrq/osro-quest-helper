@@ -25,6 +25,7 @@ function renderItemsCore() {
   // 1. Identify used items
   const usedItemIds = new Set();
   
+  // 1a. Add items from Quests
   if (Array.isArray(DATA.groups)) {
     DATA.groups.forEach((group) => {
       if (!group || !Array.isArray(group.subgroups)) return;
@@ -68,21 +69,40 @@ function renderItemsCore() {
     });
   }
 
+  // 1c. Add NEW items (FIX: treat them as "used" so they appear in the main list)
+  if (DATA.newItemIds) {
+    DATA.newItemIds.forEach((id) => {
+      usedItemIds.add(Number(id));
+    });
+  }
+
   // 2. Filter items
+  // If showAllItems is true, show everything.
+  // Otherwise, only show items that are in the usedItemIds whitelist.
   let items = state.showAllItems 
     ? getAllItems() 
     : getAllItems().filter((item) => usedItemIds.has(item.id));
 
+  // Apply value filter
+  if (state.showValuesOnly) {
+    items = items.filter((item) => (item.value || 0) > 0);
+  }
+
+  // Apply "New Only" filter
+  // If checked, we restrict the list to ONLY new items.
+  if (state.showNewItemsOnly) {
+    items = items.filter((item) => DATA.newItemIds.has(item.id));
+  }
+
+  // 3. Apply Search
   if (state.itemSearchFilter) {
     const q = state.itemSearchFilter.trim();
     
-    // Check if searching by ID
     if (/^\d+$/.test(q)) {
       items = items.filter(item => 
         item.id.toString().includes(q)
       );
     } else {
-      // Parse quoted phrases and individual words
       const phrases = [];
       const words = [];
       
@@ -97,7 +117,6 @@ function renderItemsCore() {
       
       const allTerms = [...phrases, ...words];
       
-      // Build sets of matching IDs for each term (do this ONCE, not per item)
       const termMatchSets = allTerms.map(term => {
         const matchingIds = new Set();
         
@@ -118,19 +137,15 @@ function renderItemsCore() {
         return matchingIds;
       });
       
-      // Filter items: must be in ALL term match sets (AND logic)
       items = items.filter(item => 
         termMatchSets.every(matchSet => matchSet.has(item.id))
       );
     }
   }
 
-  if (state.showValuesOnly) {
-    items = items.filter((item) => (item.value || 0) > 0);
-  }
-
+  // 4. Render
   const totalFound = items.length;
-  const limit = 2000; // Increased from 1500
+  const limit = 2000;
   const displayedItems = items.slice(0, limit);
 
   let html = "";
@@ -150,11 +165,12 @@ function renderItemsCore() {
       .map(
         (item) => `
       <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
-           onclick="selectItem(${item.id})">
+          onclick="selectItem(${item.id})">
         <div class="item-row-header">
           ${renderItemIcon(item.id)}
           <span style="margin-left: 8px;">${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
           <span class="item-row-id">#${item.id}</span>
+          ${DATA.newItemIds.has(item.id) ? '<span class="new-item-badge">NEW</span>' : ''}
         </div>
       </div>
     `,
@@ -460,6 +476,13 @@ function findQuestsByItemId(itemId) {
   return results;
 }
 
+function toggleNewItemsFilter(checked) {
+  state.showNewItemsOnly = checked;
+  renderItems();
+}
+
+
+
 // items.js - Navigation Logic Fix
 
 function navigateToItem(itemId) {
@@ -503,6 +526,7 @@ window.selectItem = selectItem;
 window.selectItemById = selectItemById;
 window.updateItemValue = updateItemValue;
 window.navigateToItem = navigateToItem;
+window.toggleNewItemsFilter = toggleNewItemsFilter;
 
 window.SEARCH_INDEX_NAME = SEARCH_INDEX_NAME;
 window.SEARCH_INDEX_DESC = SEARCH_INDEX_DESC;
