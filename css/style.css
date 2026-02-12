@@ -589,7 +589,7 @@ textarea {
   font-size: 16px;
   transition: transform 0.2s;
   cursor: pointer;
-  color: lightgreen;
+  color: rgb(190, 234, 255);
 }
 
 .expand-icon.expanded {
