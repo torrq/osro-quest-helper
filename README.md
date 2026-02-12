@@ -1,4 +1,6 @@
-# OSRO Quests
+<img width="200" height="80" alt="osro_quests_logo_200" src="https://github.com/user-attachments/assets/d1836d94-7e92-4630-9af3-0021eb459730" />
+
+# OSRO Quests 
 
 A web-based quest, material and autoloot management tool for [OSRO Midrate](https://osro.mr). Organize quests, track materials needed for crafting chains, generate @alootid2 commands, and calculate total resource costs with ease.
 
