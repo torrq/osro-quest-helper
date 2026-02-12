@@ -26,13 +26,6 @@ A web-based quest, material and autoloot management tool for [OSRO Midrate](http
 - **Import/Export**: Save your quest data as JSON or import from others
 - **Drag & Drop**: Reorder quests within subgroups for organization
 
-## 🚀 Quick Start
-
-1. Visit [https://torrq.github.io/osro-quest-helper/](https://torrq.github.io/osro-quest-helper/)
-2. Start creating quests or import existing quest data
-3. Track materials and see the complete breakdown tree
-4. Export your quest data to save locally
-
 ## 📊 Quest Editor Features
 
 ### Basic Information
