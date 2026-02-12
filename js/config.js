@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 105;
+const VERSION = 106;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
@@ -21,7 +21,8 @@ const REMOTE_URLS = {
   quests: "https://torrq.github.io/osro-quest-helper/data/osromr_quests.json",
   icons: "https://torrq.github.io/osro-quest-helper/data/osromr_item_icons.json",
   searchIndexName: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_name.json",
-  searchIndexDesc: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_desc.json"
+  searchIndexDesc: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_desc.json",
+  spriteMap: "https://torrq.github.io/osro-quest-helper/data/osromr_sprite_map.json"
 };
 
 // Local Development URLs (for testing with local server)
@@ -33,7 +34,8 @@ const LOCAL_URLS = {
   quests: "http://127.0.0.1:8000/data/osromr_quests.json",
   icons: "http://127.0.0.1:8000/data/osromr_item_icons.json",
   searchIndexName: "http://127.0.0.1:8000/data/osromr_search_index_name.json",
-  searchIndexDesc: "http://127.0.0.1:8000/data/osromr_search_index_desc.json"
+  searchIndexDesc: "http://127.0.0.1:8000/data/osromr_search_index_desc.json",
+  spriteMap: "http://127.0.0.1:8000/data/osromr_sprite_map.json"
 };
 
 // Active URLs based on USE_LOCAL_SERVER toggle

@@ -6,7 +6,8 @@ window.DATA = {
   items: {},
   groups: [],
   itemIcons: [],
-  newItemIds: new Set()
+  newItemIds: new Set(),
+  spriteMap: null
 };
 
 window.state = {
@@ -96,14 +97,16 @@ function initializeData() {
     fetchJSON(AUTO_IMPORT_URLS.icons),
     fetchJSON(AUTO_IMPORT_URLS.searchIndexName),
     fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc),
-    fetchJSON(AUTO_IMPORT_URLS.newItems)
+    fetchJSON(AUTO_IMPORT_URLS.newItems),
+    fetchJSON(AUTO_IMPORT_URLS.spriteMap)
   ])
-    .then(([items, quests, icons, searchName, searchDesc, newItems]) => {
+    .then(([items, quests, icons, searchName, searchDesc, newItems, spriteMap]) => {
       loadItems(items);
       loadQuests(quests);
       loadItemIcons(icons);
       loadSearchIndices(searchName, searchDesc);
       loadNewItems(newItems);
+      loadSpriteMap(spriteMap);
       return loadItemValuesFromStorage();
     })
     .then(() => {
@@ -318,6 +321,15 @@ function loadNewItems(newItems) {
   }
 }
 
+function loadSpriteMap(spriteMap) {
+  if (spriteMap && spriteMap.map) {
+    DATA.spriteMap = spriteMap;
+    console.log(`[Init] Loaded sprite map with ${spriteMap.totalIcons} icons`);
+  } else {
+    console.warn("[Init] No sprite map data received - falling back to individual icons");
+  }
+}
+
 function handleInitError(err) {
   console.error("[Init] Auto-import failed:", err);
   logError("Initialization", err);
@@ -505,14 +517,33 @@ function renderItemIcon(id, size = 24) {
   const sizeClass = `icon${validSize}`;
   let html;
 
+  // Special handling for Zeny (ID 1) and Points (ID 2)
   if (id === 1) {
     html = `<div class="item-icon-placeholder-zeny ${sizeClass}"></div>`;
   } else if (id === 2) {
     html = `<div class="item-icon-placeholder-points ${sizeClass}"></div>`;
+  } else if (DATA.spriteMap && DATA.spriteMap.map[id]) {
+    // Use sprite sheet if available
+    const [col, row] = DATA.spriteMap.map[id];
+    const iconSize = DATA.spriteMap.iconSize;
+    const xPos = col * iconSize;
+    const yPos = row * iconSize;
+    
+    // Calculate scaling for 48px icons (2x upscale)
+    const scale = validSize / iconSize;
+    const bgSize = `${DATA.spriteMap.spriteWidth * scale}px ${DATA.spriteMap.spriteHeight * scale}px`;
+    const bgPos = `-${xPos * scale}px -${yPos * scale}px`;
+    
+    html = `<div class="item-icon sprite-icon ${sizeClass}" ` +
+           `style="background-position: ${bgPos}; background-size: ${bgSize};" ` +
+           `title="Item #${id}"></div>`;
   } else {
+    // Fallback to individual icon file
     const iconUrl = getItemIconUrl(id);
     if (iconUrl) {
-      html = `<img src="${iconUrl}" alt="Item #${id}" title="Item #${id}" class="item-icon pixelated ${sizeClass}" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
+      html = `<img src="${iconUrl}" alt="Item #${id}" title="Item #${id}" ` +
+             `class="item-icon pixelated ${sizeClass}" ` +
+             `onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon-placeholder ${sizeClass}\\'></div>';">`;
     } else {
       html = `<div class="item-icon-placeholder ${sizeClass}"></div>`;
     }
