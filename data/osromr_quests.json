@@ -351,7 +351,7 @@
             },
             {
               "name": "Hwergelmir's Tonic",
-              "producesId": 0,
+              "producesId": 12095,
               "successRate": 100,
               "description": "",
               "accountBound": true,
