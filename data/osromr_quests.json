@@ -6819,6 +6819,1329 @@
                   "amount": 500
                 }
               ]
+            },
+            {
+              "name": "Baby Magician Manual",
+              "producesId": 3462,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3443,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Archer Manual",
+              "producesId": 3463,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3444,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Acolyte Manual",
+              "producesId": 3464,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3445,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Merchant Manual",
+              "producesId": 3465,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3446,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Thief Manual",
+              "producesId": 3466,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3447,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Knight Manual",
+              "producesId": 3467,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3448,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Priest Manual",
+              "producesId": 3468,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3449,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Wizard Manual",
+              "producesId": 3469,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3450,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Blacksmith Manual",
+              "producesId": 3470,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3451,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Hunter Manual",
+              "producesId": 3471,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3452,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Assassin Manual",
+              "producesId": 3472,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3453,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Crusader Manual",
+              "producesId": 3473,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3454,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Monk Manual",
+              "producesId": 3474,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3455,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Rogue Manual",
+              "producesId": 3476,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3457,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Alchemist Manual",
+              "producesId": 3477,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3458,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Artist Manual",
+              "producesId": 3478,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3459,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Lord Knight Manual",
+              "producesId": 3491,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3479,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby High Wizard Manual",
+              "producesId": 3493,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3481,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Whitesmith Manual",
+              "producesId": 3494,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3482,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Sniper Manual",
+              "producesId": 3495,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3483,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Assassin Cross Manual",
+              "producesId": 3496,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3484,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Paladin Manual",
+              "producesId": 3497,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3485,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Champion Manual",
+              "producesId": 3498,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3486,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Professor Manual",
+              "producesId": 3499,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3487,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Stalker Manual",
+              "producesId": 3500,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3488,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Creator Manual",
+              "producesId": 3501,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3489,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Baby Clown &amp; Gypsy Manual",
+              "producesId": 3502,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 3490,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40121,
+                  "amount": 12
+                },
+                {
+                  "type": "item",
+                  "id": 40078,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 500
+                },
+                {
+                  "type": "gold",
+                  "amount": 5000
+                },
+                {
+                  "type": "credit",
+                  "amount": 500
+                }
+              ]
             }
           ]
         },
