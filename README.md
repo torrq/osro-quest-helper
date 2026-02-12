@@ -1,4 +1,4 @@
-<img width="200" height="80" alt="osro_quests_logo_200" src="https://github.com/user-attachments/assets/d1836d94-7e92-4630-9af3-0021eb459730" />
+<img width="200" height="80" alt="osro_quests_logo_200" src="https://github.com/user-attachments/assets/056cbf00-7ca9-4afc-843f-6a9697a72d64" />
 
 # OSRO Quests 
 
