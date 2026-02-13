@@ -561,6 +561,83 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+// ===== COLOR ADJUSTMENT FOR DARK THEME =====
+
+/**
+ * Adjusts hex colors for optimal contrast on dark backgrounds
+ * Preserves hue while ensuring readability
+ */
+function adjustColorForDarkTheme(hexColor) {
+  // Convert hex to RGB
+  const hex = hexColor.replace('#', '');
+  const r = parseInt(hex.substr(0, 2), 16) / 255;
+  const g = parseInt(hex.substr(2, 2), 16) / 255;
+  const b = parseInt(hex.substr(4, 2), 16) / 255;
+  
+  // Convert RGB to HSL
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+  
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  
+  // Adjust lightness for dark theme
+  // Dark colors (l < 0.4) → brighten significantly
+  // Mid colors (0.4-0.6) → brighten moderately
+  // Light colors (> 0.6) → keep bright but not pure white
+  if (l < 0.4) {
+    l = Math.min(0.75, l + 0.45); // Boost dark colors
+  } else if (l < 0.6) {
+    l = Math.min(0.8, l + 0.25); // Moderate boost for mid tones
+  } else if (l > 0.95) {
+    l = 0.9; // Slightly dim pure white for comfort
+  }
+  
+  // Boost saturation slightly for very desaturated colors
+  if (s < 0.3) {
+    s = Math.min(0.5, s + 0.15);
+  }
+  
+  // Convert HSL back to RGB
+  let r2, g2, b2;
+  if (s === 0) {
+    r2 = g2 = b2 = l;
+  } else {
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+    
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r2 = hue2rgb(p, q, h + 1/3);
+    g2 = hue2rgb(p, q, h);
+    b2 = hue2rgb(p, q, h - 1/3);
+  }
+  
+  // Convert back to hex
+  const toHex = (n) => {
+    const hex = Math.round(n * 255).toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  };
+  
+  return `${toHex(r2)}${toHex(g2)}${toHex(b2)}`.toUpperCase();
+}
+
 function parseDescription(desc) {
   if (!desc) return "";
   
@@ -575,10 +652,13 @@ function parseDescription(desc) {
       return "";
     }
     
-    // RO color handling
+    // RO color handling with dark theme adjustment
     return text
       .replace(/\^000000/g, "</span>")
-      .replace(/\^([0-9A-Fa-f]{6})/g, '<span style="color: #$1">');
+      .replace(/\^([0-9A-Fa-f]{6})/g, (match, hexColor) => {
+        const adjusted = adjustColorForDarkTheme(hexColor);
+        return `<span style="color: #${adjusted}">`;
+      });
   } catch (error) {
     console.error('[parseDescription] Error parsing description:', error);
     return String(desc); // Fallback to string representation

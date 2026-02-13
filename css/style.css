@@ -2,11 +2,11 @@
    1. VARIABLES & RESET
    ========================================= */
 :root {
-  --bg: #0a0e14;
+  --bg: #000;
   --bg-dark: #0a0e14; /* Inferred from autocomplete context */
-  --bg-secondary: #1b2130; /* Inferred from item description */
+  --bg-secondary: #11131b; /* Inferred from item description */
   --bg-tertiary: #21262d; /* Inferred/Missing in original, usually a step up from secondary */
-  --panel: #151921;
+  --panel: #0a0a0a;
   --panel-hover: #1a1f2b;
   --panel-bg: #151921;
   --border: #2d3340;
@@ -667,8 +667,9 @@ textarea {
 
 .tree-line {
   font-family: "Consolas", "Monaco", monospace;
-  font-size: 12pt;
+  font-size: 13pt;
   padding: 2px 0;
+  line-height: 1.2;
   color: var(--text-muted);
 }
 
@@ -993,7 +994,7 @@ div.quest-bound {
 .item-description-box {
   background: var(--bg-secondary);
   font-family: "Consolas", "Monaco", monospace;
-  font-size: 11pt;
+  font-size: 12pt;
   white-space: pre-wrap;
   color: var(--text);
   position: relative;
@@ -1001,8 +1002,12 @@ div.quest-bound {
   padding-right: 64px;
   border: 1px solid var(--border);
   border-radius: 4px;
-  line-height: 1.6;
+  line-height: 1.4;
   min-height: 60px;
+}
+
+.item-description-box span {
+  display: inline;
 }
 
 .desc-box-icon {
@@ -1807,10 +1812,6 @@ body.viewer-mode .editor-quest select {
   .main-content {
     padding: 4px 8px;
     padding-bottom: 50px;
-  }
-
-  .item-description-box {
-    padding-right: 12px;
   }
 
   .desc-box-icon {
