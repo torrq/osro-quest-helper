@@ -726,12 +726,17 @@ function parseDescription(desc) {
       return "";
     }
     
-    // RO color handling with dark theme adjustment
+    // Check current theme
+    const currentTheme = localStorage.getItem('osro-theme') || 'dark';
+    const isDarkTheme = currentTheme === 'dark';
+    
+    // RO color handling - only adjust for dark theme
     return text
       .replace(/\^000000/g, "</span>")
       .replace(/\^([0-9A-Fa-f]{6})/g, (match, hexColor) => {
-        const adjusted = adjustColorForDarkTheme(hexColor);
-        return `<span style="color: #${adjusted}">`;
+        // For light theme, use original colors
+        const finalColor = isDarkTheme ? adjustColorForDarkTheme(hexColor) : hexColor;
+        return `<span style="color: #${finalColor}">`;
       });
   } catch (error) {
     console.error('[parseDescription] Error parsing description:', error);
