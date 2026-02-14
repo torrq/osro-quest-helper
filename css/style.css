@@ -1,25 +1,6 @@
 /* =========================================
    1. VARIABLES & RESET
    ========================================= */
-:root {
-  --bg: #000;
-  --bg-dark: #0a0e14; /* Inferred from autocomplete context */
-  --bg-secondary: #11131b; /* Inferred from item description */
-  --bg-tertiary: #21262d; /* Inferred/Missing in original, usually a step up from secondary */
-  --panel: #0a0a0a;
-  --panel-hover: #1a1f2b;
-  --panel-bg: #151921;
-  --border: #2d3340;
-  --border-light: #2d3340;
-  --text: #e6edf3;
-  --text-muted: #8b949e;
-  --accent: #58a6ff;
-  --accent-hover: #79c0ff;
-  --danger: #f85149;
-  --danger-hover: #ff6a6a;
-  --success: #3fb950;
-  --warning: #d29922;
-}
 
 * {
   box-sizing: border-box;
@@ -62,10 +43,10 @@ body {
   border-radius: 50%;
   background: var(--accent);
   border: none;
-  color: #000;
+  color: var(--btn-text);
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 /* =========================================
@@ -82,7 +63,7 @@ body {
 .sidebar-header {
   padding: 4px 4px 4px 4px;
   border-bottom: 1px solid var(--border);
-  background-image: url("../image/osromr.jpg");
+  background-image: var(--header-bg-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,7 +97,7 @@ body {
 
 div#header-version-tag {
   font-size: 14pt;
-  color: #ffe100;
+  color: var(--version-tag);
   font-family: monospace;
   text-align: center;
 }
@@ -171,7 +152,7 @@ div#header-version-tag {
 
 .tab.active {
   background: var(--accent);
-  color: #000;
+  color: var(--tab-active-text);
   border-color: var(--accent);
 }
 
@@ -218,7 +199,7 @@ div#header-version-tag {
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #000;
+  color: var(--tab-active-text);
 }
 
 .btn-primary:hover {
@@ -360,7 +341,7 @@ textarea {
   border-radius: 4px;
   z-index: 1000;
   opacity: 1;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px var(--shadow);
 }
 
 .dropdown:hover .dropdown-content {
@@ -424,7 +405,7 @@ textarea {
   z-index: 1000;
   margin-top: 2px;
   opacity: 1;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
 .autocomplete-item {
@@ -480,7 +461,7 @@ textarea {
 
 .item-selected-badge small {
   margin-left: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--subtle-overlay);
   padding: 2px 5px;
   border-radius: 3px;
   color: var(--text-muted);
@@ -557,7 +538,7 @@ textarea {
 .subgroup-header {
   padding: 2px 0 2px 10px;
   background: var(--bg);
-  border-bottom: 1px solid #222 !important;
+  border-bottom: 1px solid var(--group-border) !important;
   display: flex;
   align-items: center;
   margin-bottom: 0px;
@@ -589,7 +570,7 @@ textarea {
   font-size: 16px;
   transition: transform 0.2s;
   cursor: pointer;
-  color: rgb(190, 234, 255);
+  color: var(--expand-icon);
 }
 
 .expand-icon.expanded {
@@ -861,7 +842,7 @@ textarea {
 .editor-item-row:hover { border-color: var(--border); }
 
 .editor-item-row .autocomplete-dropdown {
-  background: #1a1f2b;
+  background: var(--autocomplete-bg);
   z-index: 9999;
 }
 
@@ -1177,13 +1158,13 @@ div.quest-bound {
 .slot-count {
   font-size: 12px;
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--subtle-overlay);
   padding: 2px 6px;
   border-radius: 10px;
 }
 
 .slot-badge {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--subtle-overlay);
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 11px;
@@ -1197,7 +1178,7 @@ div.quest-bound {
 }
 
 .al-command-box {
-  background: #0d1117;
+  background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 15px;
@@ -1206,8 +1187,8 @@ div.quest-bound {
 
 .al-code-block {
   font-family: "Consolas", "Monaco", monospace;
-  color: #79c0ff;
-  background: rgba(0, 0, 0, 0.3);
+  color: var(--code-text);
+  background: var(--code-block-bg);
   padding: 4px 8px;
   border-radius: 4px;
   margin-bottom: 4px;
@@ -1248,7 +1229,7 @@ div.quest-bound {
   max-height: 300px;
   overflow-y: auto;
   z-index: 500;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 15px -3px var(--shadow);
 }
 
 .al-result-item {
@@ -1448,7 +1429,7 @@ div.quest-bound {
 .btn-toggle-totals {
   background: var(--accent);
   border-color: var(--accent);
-  color: #000;
+  color: var(--tab-active-text);
   font-size: 11px;
   padding: 4px 8px;
   font-weight: 500;
@@ -1733,13 +1714,13 @@ div.quest-bound {
 
 .toggle-switch input:checked + .toggle-slider:before {
   transform: translateX(20px);
-  background-color: #000;
+  background-color: var(--tab-active-text);
 }
 
 .toggle-label {
   font-size: 12px;
   color: var(--text);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 2px 4px var(--shadow-strong);
   user-select: none;
 }
 
@@ -1794,7 +1775,7 @@ body.viewer-mode .editor-quest select {
     max-width: 320px;
     z-index: 999;
     transition: left 0.3s;
-    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 4px 0 12px var(--shadow);
   }
 
   .sidebar.open {
@@ -1852,9 +1833,9 @@ body.viewer-mode .editor-quest select {
 }
 
 .copy-link-btn:hover {
-  background: #4ade80;
+  background: var(--success-hover-bright);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(63, 185, 80, 0.4);
+  box-shadow: 0 4px 12px var(--success-shadow);
 }
 
 .copy-link-btn:active {
@@ -1877,7 +1858,7 @@ body.viewer-mode .editor-quest select {
 
 /* Active Quest Highlighting - Enhanced */
 .quest-item.active {
-  background: rgba(88, 166, 255, 0.15) !important;
+  background: var(--active-quest-bg) !important;
   border-left: 3px solid var(--accent) !important;
   font-weight: 600 !important;
 }
@@ -1901,7 +1882,7 @@ body.viewer-mode .editor-quest select {
 
 .search-highlight {
   background-color: #ffeb3b;
-  color: #000;
+  color: var(--tab-active-text);
   padding: 2px 4px;
   border-radius: 2px;
   font-weight: 500;
@@ -1917,7 +1898,7 @@ body.viewer-mode .editor-quest select {
   margin-left: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(238, 90, 111, 0.3);
+  box-shadow: 0 2px 4px var(--badge-shadow);
 }
 
 .sprite-icon {
@@ -1937,4 +1918,10 @@ body.viewer-mode .editor-quest select {
 .sprite-icon.icon48 {
   width: 48px;
   height: 48px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: top;
+  gap: 0px;
 }

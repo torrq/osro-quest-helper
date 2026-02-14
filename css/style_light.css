@@ -1,0 +1,95 @@
+/* =========================================
+   OSRO Quests - Light Theme
+   Cool professional light mode with blue tint
+   ========================================= */
+
+:root {
+  /* Base backgrounds - cool blue-gray tones */
+  --bg: #f6f8fa;
+  --bg-dark: #eef2f5;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #eef1f4;
+  
+  /* Header background image */
+  --header-bg-image: url("../image/osromr_light.jpg");
+
+  /* Panel colors */
+  --panel: #ffffff;
+  --panel-bg: #f6f8fa;
+  --panel-hover: #e8ecf0;
+  
+  /* Borders */
+  --border: #d0d7de;
+  --border-light: #e1e4e8;
+  --group-border: #d0d7de;
+  --strong-border: #1f2328;
+  
+  /* Text colors */
+  --text: #24292f;
+  --text-muted: #57606a;
+  
+  /* Accent colors - darker blue for light backgrounds */
+  --accent: #0969da;
+  --accent-hover: #0550ae;
+  --accent-bg: rgba(9, 105, 218, 0.1);
+  
+  /* Expand icon */
+  --expand-icon: #0969da;
+  
+  /* Success hover (copy link button) */
+  --success-hover-bright: #2da44e;
+
+  /* Status colors */
+  --danger: #d1242f;
+  --danger-hover: #a40e26;
+  --success: #1a7f37;
+  --success-hover: #2da44e;
+  --success-shadow: rgba(26, 127, 55, 0.3);
+  --warning: #bf8700;
+  --warning-bg: rgba(191, 135, 0, 0.1);
+  
+  /* Shadows and overlays */
+  --shadow: rgba(31, 35, 40, 0.15);
+  --shadow-strong: rgba(31, 35, 40, 0.5);
+  --subtle-overlay: rgba(175, 184, 193, 0.2);
+  
+  /* Button text colors */
+  --btn-text: #ffffff;
+  --tab-active-text: #ffffff;
+  
+  /* Toggle colors */
+  --toggle-knob: #ffffff;
+  --toggle-knob-active: #ffffff;
+  
+  /* Special elements */
+  --version-tag: #ff4213;
+  --active-quest-bg: rgba(9, 105, 218, 0.1);
+  
+  /* Code blocks */
+  --code-bg: #f6f8fa;
+  --code-block-bg: rgba(175, 184, 193, 0.2);
+  --code-text: #0550ae;
+  --autocomplete-bg: #ffffff;
+  
+  /* Item placeholders */
+  --placeholder-bg: #e8ecf0;
+  --placeholder-text: #57606a;
+  --placeholder-border: #d0d7de;
+  --placeholder-icon: #8c959f;
+  
+  --zeny-bg: #ddf4ff;
+  --zeny-border: #54aeff;
+  --zeny-icon: #0969da;
+  
+  --points-bg: #ffeff7;
+  --points-border: #ff80c8;
+  --points-icon: #d1242f;
+  
+  /* Search highlight */
+  --highlight-bg: #fff8c5;
+  --highlight-text: #24292f;
+  
+  /* Badge */
+  --badge-gradient: linear-gradient(135deg, #f85149 0%, #d1242f 100%);
+  --badge-shadow: rgba(209, 36, 47, 0.25);
+}

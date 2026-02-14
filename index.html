@@ -14,24 +14,20 @@
           <h1>
             <img id="osro-quests-logo" src="image/osro_quests_logo_v2.png" width="170" height="69" title="OSRO Quests (Midrate)" alt="OSRO Quests Logo" />
             <div class="header-right-group">
+              <!-- Remove the old editor toggle div, keep only the github link -->
               <div class="header-controls-row">
-                <div class="editor-toggle" title="Toggle editor mode">
+                <div class="theme-toggle" title="Toggle light/dark mode">
                   <label class="toggle-switch">
                     <input
                       type="checkbox"
-                      id="editorModeToggle"
-                      onchange="toggleEditorMode(this.checked)"
+                      id="themeModeToggle"
+                      onchange="toggleTheme(this.checked)"
                     />
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
-                <a
-                  href="https://github.com/torrq/osro-quest-helper"
-                  class="github-link"
-                  title="GitHub Page"
-                  target="_blank"
-                  rel="noopener"
-                >
+                <a href="https://github.com/torrq/osro-quest-helper"
+                  class="github-link" title="GitHub Page" target="_blank" rel="noopener">
                   <img src="image/github.png" alt="GitHub" width="32" height="32" />
                 </a>
               </div>

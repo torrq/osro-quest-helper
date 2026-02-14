@@ -76,6 +76,80 @@ window.iconCache = {
   }
 };
 
+// Secret editor mode activation
+const SECRET_TOGGLE_CONFIG = {
+  taps: 4,           // Number of taps required
+  windowMs: 2000,    // Time window in milliseconds
+};
+
+let secretTapTimestamps = [];
+
+function initSecretEditorToggle() {
+  const versionTag = document.getElementById('header-version-tag');
+  if (!versionTag) return;
+  
+  versionTag.style.cursor = 'default';
+  versionTag.style.userSelect = 'none';
+  
+  versionTag.addEventListener('click', () => {
+    const now = Date.now();
+    secretTapTimestamps.push(now);
+    
+    // Remove taps outside the time window
+    secretTapTimestamps = secretTapTimestamps.filter(
+      time => now - time < SECRET_TOGGLE_CONFIG.windowMs
+    );
+    
+    // Check if we have enough taps
+    if (secretTapTimestamps.length >= SECRET_TOGGLE_CONFIG.taps) {
+      toggleEditorMode(!state.editorMode);
+      secretTapTimestamps = []; // Reset
+      
+      // Visual feedback (optional)
+      versionTag.style.opacity = '0.5';
+      setTimeout(() => versionTag.style.opacity = '1', 100);
+    }
+  });
+}
+
+// ===== THEME MANAGEMENT =====
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('osro-theme') || 'dark';
+  const isDark = savedTheme === 'dark';
+  
+  // Update the toggle checkbox
+  const toggle = document.getElementById('themeModeToggle');
+  if (toggle) {
+    toggle.checked = !isDark; // Unchecked = dark, checked = light
+  }
+  
+  applyTheme(savedTheme);
+}
+
+function toggleTheme(isLight) {
+  const theme = isLight ? 'light' : 'dark';
+  applyTheme(theme);
+  localStorage.setItem('osro-theme', theme);
+}
+
+function applyTheme(theme) {
+  const head = document.head;
+  
+  // Remove existing theme link
+  const existingTheme = document.getElementById('theme-stylesheet');
+  if (existingTheme) {
+    existingTheme.remove();
+  }
+  
+  // Add new theme link
+  const link = document.createElement('link');
+  link.id = 'theme-stylesheet';
+  link.rel = 'stylesheet';
+  link.href = `css/style_${theme}.css`;
+  head.appendChild(link);
+}
+
 // ===== INITIALIZATION =====
 
 // Track initialization state to prevent race conditions
@@ -1203,7 +1277,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // START APPLICATION
   // Trigger initialization only after DOM is fully ready.
+  initTheme();
   initializeData();
+  initSecretEditorToggle();
 });
 
 // ===== PUBLIC API EXPOSURE =====
@@ -1226,3 +1302,4 @@ window.copyQuestLink = copyQuestLink;
 window.copyItemLink = copyItemLink;
 window.copyAutolootLink = copyAutolootLink;
 window.toggleDescSearch = toggleDescSearch;
+window.toggleTheme = toggleTheme;
