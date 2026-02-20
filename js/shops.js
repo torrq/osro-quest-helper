@@ -312,9 +312,9 @@ function renderShopContentCore() {
       </button>
     </div>
     <div class="editor-shop">
-      <span class="item-label">Shop Name:</span>
+      <span class="item-label">Shop Item:</span>
       <div class="form-group">
-        <input type="text" placeholder="Shop Name" value="${shop.name}" onchange="updateShopName(this.value)">
+        <input type="text" placeholder="Shop Item" value="${shop.name}" onchange="updateShopName(this.value)">
       </div>
 
       <div class="form-group">
