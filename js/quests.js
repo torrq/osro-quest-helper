@@ -498,6 +498,7 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
   if (questSources.length === 1 && shopSources.length === 0) {
     // Single quest source, no shops - link to quest instead of item
     const q = questSources[0];
+    const questLocation = findQuestLocation(q);
     let groupIdx = -1, subIdx = -1, questIdx = -1;
     DATA.groups.forEach((group, gi) => {
       group.subgroups.forEach((subgroup, si) => {
@@ -512,14 +513,14 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
     
     lines.push({
       level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="quest-link tree-item-name" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
+      text: `${indent}${connector}${expandIcon}<span class="quest-badge">Quest</span> <a class="quest-link tree-item-name" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-sm">(${questLocation})</span>`,
       visible: isVisible
     });
     walkQuest(questSources[0], depth + 1, effectiveAmount, newPath, itemKey, isExpanded);
   } else if (questSources.length === 0 && shopSources.length === 1) {
     // Only one shop available - link to shop instead of item
     const s = shopSources[0];
-    const location = findShopLocation(s);
+    const shopLocation = findShopLocation(s);
     
     let groupIdx = -1, subIdx = -1, shopIdx = -1;
     DATA.shopGroups.forEach((group, gi) => {
@@ -535,7 +536,7 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
     
     lines.push({
       level: depth,
-      text: `${indent}${connector}<a class="shop-link tree-item-name" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-xs">[Shop: ${location}]</span>`,
+      text: `${indent}${connector}<span class="shop-badge">Shop</span> <a class="shop-link tree-item-name" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-sm">(${shopLocation})</span>`,
       visible: isVisible
     });
   } else if (questSources.length === 0 && shopSources.length > 1) {
@@ -543,40 +544,15 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
     const totalOptions = shopSources.length;
     lines.push({
       level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${totalOptions} OPTIONS]</span>`,
+      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-sm">[${totalOptions} OPTIONS]</span>`,
       visible: isVisible
     });
-    
-    if (isExpanded) {
-      shopSources.forEach((s) => {
-        const optionIndent = "  ".repeat(depth + 1);
-        const location = findShopLocation(s);
-        
-        let groupIdx = -1, subIdx = -1, shopIdx = -1;
-        DATA.shopGroups.forEach((group, gi) => {
-          group.subgroups.forEach((subgroup, si) => {
-            const shi = subgroup.shops.indexOf(s);
-            if (shi !== -1) {
-              groupIdx = gi;
-              subIdx = si;
-              shopIdx = shi;
-            }
-          });
-        });
-        
-        lines.push({
-          level: depth + 1,
-          text: `${optionIndent}<span class="text-muted shop-option">Shop: <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location} → ${s.name}</a></span>`,
-          visible: isExpanded
-        });
-      });
-    }
   } else {
     // Multiple quest sources or mix of quests and shops
     const totalOptions = questSources.length + shopSources.length;
     lines.push({
       level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${totalOptions} OPTIONS]</span>`,
+      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-sm">[${totalOptions} OPTIONS]</span>`,
       visible: isVisible
     });
     
@@ -601,7 +577,7 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
         
         lines.push({
           level: depth + 1,
-          text: `${optionIndent}<span class="text-muted">Quest: <a class="quest-link" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${location} → ${q.name}</a> (${q.successRate}% success)</span>`,
+          text: `${optionIndent}<span class="text-muted"><span class="quest-badge">Quest</span> <a class="quest-link" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${location}</a> (${q.successRate}% success)</span>`,
           visible: isExpanded
         });
         walkQuest(q, depth + 2, effectiveAmount, newPath, optionKey, true);
@@ -626,7 +602,7 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
         
         lines.push({
           level: depth + 1,
-          text: `${optionIndent}<span class="text-muted shop-option">Shop: <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location} → ${s.name}</a></span>`,
+          text: `${optionIndent}<span class="text-muted shop-option"><span class="shop-badge">Shop</span> <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location}</a></span>`,
           visible: isExpanded
         });
       });
