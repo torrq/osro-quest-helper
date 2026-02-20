@@ -388,7 +388,7 @@ function shopRenderRequirementsSection(shop) {
 }
 
 function shopRenderTotalsHeader() {
-  if (!hasNestedShops()) return '<span class="item-label">Totals:</span>';
+  if (!hasNestedShops()) return '<span class="item-label">Requires:</span>';
   
   return `
     <div class="totals-header">

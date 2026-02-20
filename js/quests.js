@@ -519,6 +519,8 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
   } else if (questSources.length === 0 && shopSources.length === 1) {
     // Only one shop available - link to shop instead of item
     const s = shopSources[0];
+    const location = findShopLocation(s);
+    
     let groupIdx = -1, subIdx = -1, shopIdx = -1;
     DATA.shopGroups.forEach((group, gi) => {
       group.subgroups.forEach((subgroup, si) => {
@@ -533,7 +535,7 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
     
     lines.push({
       level: depth,
-      text: `${indent}${connector}<a class="shop-link tree-item-name" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-xs">[FROM SHOP]</span>`,
+      text: `${indent}${connector}<a class="shop-link tree-item-name" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-xs">[Shop: ${location}]</span>`,
       visible: isVisible
     });
   } else if (questSources.length === 0 && shopSources.length > 1) {
