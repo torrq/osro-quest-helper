@@ -1,0 +1,2141 @@
+{
+  "groups": [
+    {
+      "name": "Kafra Point Shop",
+      "subgroups": [
+        {
+          "name": "Vote Points",
+          "shops": [
+            {
+              "name": "Name Passport",
+              "producesId": 40011,
+              "successRate": 100,
+              "description": "A passport that enables players to change their name. Use it at 'Personality Changer'.",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 150
+                }
+              ]
+            },
+            {
+              "name": "Gender Passport",
+              "producesId": 40012,
+              "successRate": 100,
+              "description": "A passport that enables players to change their gender. Use it at 'Personality Changer'.",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 150
+                }
+              ]
+            },
+            {
+              "name": "STR Necklace [1]",
+              "producesId": 42701,
+              "successRate": 100,
+              "description": "A gemmed necklace made out of magical blue crystals. STR +4",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 180
+                }
+              ]
+            },
+            {
+              "name": "AGI Statue [1]",
+              "producesId": 42702,
+              "successRate": 100,
+              "description": "A seal imbued with the power of agility from the stars. AGI+4, FLEE+2",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 180
+                }
+              ]
+            },
+            {
+              "name": "VIT Ring [1]",
+              "producesId": 42703,
+              "successRate": 100,
+              "description": "A gold ring that exudes an air of cutness. VIT +4",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 180
+                }
+              ]
+            },
+            {
+              "name": "INT Earrings [1]",
+              "producesId": 42704,
+              "successRate": 100,
+              "description": "These lovely plush earrings have a faint blue luster. INT +4",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 180
+                }
+              ]
+            },
+            {
+              "name": "DEX Brooch [1]",
+              "producesId": 42705,
+              "successRate": 100,
+              "description": "A sapphire brooch in the shape of a sky-blue Lunatic silhouette. DEX +4",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 180
+                }
+              ]
+            },
+            {
+              "name": "LUK Pendant [1]",
+              "producesId": 42706,
+              "successRate": 100,
+              "description": "A pendant in the shape of a Toad in twilight. LUK +4, CRIT +4",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 180
+                }
+              ]
+            },
+            {
+              "name": "Sealed Valkyrie Armor [1]",
+              "producesId": 43501,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Sealed Valkyrie Shoes [1]",
+              "producesId": 43504,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Sealed Valkyrie Shield [1]",
+              "producesId": 43502,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Sealed Valkyrie Manteau [1]",
+              "producesId": 43503,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "vote_points",
+                  "amount": 300
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Activity Points",
+          "shops": [
+            {
+              "name": "Buff Scroll",
+              "producesId": 43001,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Gym Pass",
+              "producesId": 7776,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Field Manual 100%",
+              "producesId": 14533,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 6
+                }
+              ]
+            },
+            {
+              "name": "Bubble Gum",
+              "producesId": 12210,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "MVP Cake",
+              "producesId": 40124,
+              "successRate": 100,
+              "description": "A piece of cake used to feed MVP pets",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Elite Armor [1]",
+              "producesId": 42822,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Elite Shield [1]",
+              "producesId": 42823,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Elite Manteau [1]",
+              "producesId": 42824,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Elite Boots [1]",
+              "producesId": 42825,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Elite Glove [1]",
+              "producesId": 42826,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Steamed Tongue",
+              "producesId": 12075,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Steamed Desert Scorpions",
+              "producesId": 12090,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Immortal Stew",
+              "producesId": 12085,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Dragon Breath Cocktail",
+              "producesId": 12080,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Hwergelmir's Tonic",
+              "producesId": 12095,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Cooked Nine Tail's Tails",
+              "producesId": 12100,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Kraft Card 10pc Box",
+              "producesId": 12909,
+              "successRate": 100,
+              "description": "A box containing 10 Kafra Name Cards",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "activity_points",
+                  "amount": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Hourly Points",
+          "shops": [
+            {
+              "name": "Convex Mirror",
+              "producesId": 12214,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 96
+                }
+              ]
+            },
+            {
+              "name": "Bowman Scroll 1",
+              "producesId": 12153,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 4
+                }
+              ]
+            },
+            {
+              "name": "Bowman Scroll 5",
+              "producesId": 12157,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 12
+                }
+              ]
+            },
+            {
+              "name": "Bowman Scroll 10",
+              "producesId": 12162,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Fencer Scroll 1",
+              "producesId": 12163,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 4
+                }
+              ]
+            },
+            {
+              "name": "Fencer Scroll 5",
+              "producesId": 12167,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 12
+                }
+              ]
+            },
+            {
+              "name": "Fencer Scroll 10",
+              "producesId": 12172,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Spearman Scroll 1",
+              "producesId": 12173,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 4
+                }
+              ]
+            },
+            {
+              "name": "Spearman Scroll 5",
+              "producesId": 12177,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 12
+                }
+              ]
+            },
+            {
+              "name": "Spearman Scroll 10",
+              "producesId": 12182,
+              "successRate": 100,
+              "description": "",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Tasty Pink Ration",
+              "producesId": 12269,
+              "successRate": 100,
+              "description": "ATK +15 for 10 minutes",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 12
+                }
+              ]
+            },
+            {
+              "name": "Tasty White Ration",
+              "producesId": 12270,
+              "successRate": 100,
+              "description": "MATK +15 for 10 minutes",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 12
+                }
+              ]
+            },
+            {
+              "name": "Spray of Flowers",
+              "producesId": 12310,
+              "successRate": 100,
+              "description": "FLEE +10 for 5 minutes",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 48
+                }
+              ]
+            },
+            {
+              "name": "Steamed Tongue",
+              "producesId": 12202,
+              "successRate": 100,
+              "description": "STR +10",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Steamed Scorpion",
+              "producesId": 12203,
+              "successRate": 100,
+              "description": "AGI +10",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Stew of Immortality",
+              "producesId": 12207,
+              "successRate": 100,
+              "description": "VIT +10",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Dragon Breath Cocktail",
+              "producesId": 12204,
+              "successRate": 100,
+              "description": "INT +10",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Hwergelmir's Tonic",
+              "producesId": 12205,
+              "successRate": 100,
+              "description": "DEX +10",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Cooked Nine Tail's Tails",
+              "producesId": 12206,
+              "successRate": 100,
+              "description": "LUK +10",
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "hourly_points",
+                  "amount": 10
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 13"
+    },
+    {
+      "name": "Donation Ticket Shop",
+      "subgroups": [
+        {
+          "name": "Equipment",
+          "shops": [
+            {
+              "name": "Banryu [3]",
+              "producesId": 41001,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 12
+                }
+              ]
+            },
+            {
+              "name": "Dark Saber [3]",
+              "producesId": 41059,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 16
+                }
+              ]
+            },
+            {
+              "name": "Purple Saber [3]",
+              "producesId": 41058,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 16
+                }
+              ]
+            },
+            {
+              "name": "Traveler Hat [1]",
+              "producesId": 42020,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 18
+                }
+              ]
+            },
+            {
+              "name": "Kakashi Head Protector [1]",
+              "producesId": 42019,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 18
+                }
+              ]
+            },
+            {
+              "name": "Valkyrie Helm [1]",
+              "producesId": 42021,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 25
+                }
+              ]
+            },
+            {
+              "name": "Black Valkyrie Helm [1]",
+              "producesId": 42022,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 25
+                }
+              ]
+            },
+            {
+              "name": "Red Valkyrie Helm [1]",
+              "producesId": 42023,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 25
+                }
+              ]
+            },
+            {
+              "name": "Ice Valkyrie Helm [1]",
+              "producesId": 42029,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 25
+                }
+              ]
+            },
+            {
+              "name": "Geo Valkyrie Helm [1]",
+              "producesId": 42030,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Venom Valkyrie Helm [1]",
+              "producesId": 42031,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Force Valkyrie Helm [1]",
+              "producesId": 46853,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Dragon Wings",
+              "producesId": 42514,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "Black Dragon Wings",
+              "producesId": 42515,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "Red Dragon Wings",
+              "producesId": 42516,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "Ice Dragon Wings",
+              "producesId": 42517,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "Geo Dragon Wings",
+              "producesId": 42518,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "Venom Dragon Wings",
+              "producesId": 42519,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "Force Dragon Wings",
+              "producesId": 46852,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 55
+                }
+              ]
+            },
+            {
+              "name": "3D Glasses [1]",
+              "producesId": 5788,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 50
+                }
+              ]
+            },
+            {
+              "name": "Cyclop's Eye [1]",
+              "producesId": 5135,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 35
+                }
+              ]
+            },
+            {
+              "name": "Red Cyclop's Eye [1]",
+              "producesId": 45552,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "Valkyrie Armor [1]",
+              "producesId": 2357,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 18
+                }
+              ]
+            },
+            {
+              "name": "Valkyrie Shield [1]",
+              "producesId": 2115,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 16
+                }
+              ]
+            },
+            {
+              "name": "Valkyrie Shoes [1]",
+              "producesId": 2421,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Valkyrie Manteau [1]",
+              "producesId": 2524,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 22
+                }
+              ]
+            },
+            {
+              "name": "Sleipnir",
+              "producesId": 2410,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 22
+                }
+              ]
+            },
+            {
+              "name": "Nile Rose [1]",
+              "producesId": 2647,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 16
+                }
+              ]
+            },
+            {
+              "name": "White Valkyrie Helm [1]",
+              "producesId": 46844,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Asprika",
+              "producesId": 2541,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Medal of STR [1]",
+              "producesId": 2720,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Medal of AGI [1]",
+              "producesId": 2721,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Medal of VIT [1]",
+              "producesId": 2722,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Medal of INT [1]",
+              "producesId": 2723,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Medal of DEX [1]",
+              "producesId": 2724,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Medal of LUK [1]",
+              "producesId": 2725,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Sword Barrier",
+              "producesId": 46118,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 150
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Miscelleneous",
+          "shops": [
+            {
+              "name": "VIP Ticket",
+              "producesId": 40069,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "AA Reset Card",
+              "producesId": 40068,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "AS Reset Card",
+              "producesId": 40075,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "name": "Field Manual 100%",
+              "producesId": 14533,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Battle Manual 300%",
+              "producesId": 14545,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 4
+                }
+              ]
+            },
+            {
+              "name": "Miracle Tonic",
+              "producesId": 12259,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Gym Pass",
+              "producesId": 7776,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "name": "Bubble Gum",
+              "producesId": 12210,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Kafra Card Box(30)",
+              "producesId": 14211,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Blessing Scroll 30pc Box",
+              "producesId": 13584,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Increase Agility Scroll Box(30)",
+              "producesId": 13576,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Job Ticket",
+              "producesId": 40005,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Race Ticket",
+              "producesId": 40041,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 60
+                }
+              ]
+            },
+            {
+              "name": "Christmas Loot Box",
+              "producesId": 40043,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Halloween Surprise Box",
+              "producesId": 40040,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Reposition Ticket",
+              "producesId": 40010,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Class Mastery Rune",
+              "producesId": 40044,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 100
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Job Costume Manuals",
+          "shops": [
+            {
+              "name": "Novice Manual",
+              "producesId": 3441,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Swordman Manual",
+              "producesId": 3442,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Magician Manual",
+              "producesId": 3443,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Archer Manual",
+              "producesId": 3444,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Acolyte Manual",
+              "producesId": 3445,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Merchant Manual",
+              "producesId": 3446,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Thief Manual",
+              "producesId": 3447,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Knight Manual",
+              "producesId": 3448,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Priest Manual",
+              "producesId": 3449,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Wizard Manual",
+              "producesId": 3450,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Blacksmith Manual",
+              "producesId": 3451,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Hunter Manual",
+              "producesId": 3452,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Assassin Manual",
+              "producesId": 3453,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Monk Manual",
+              "producesId": 3455,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Sage Manual",
+              "producesId": 3456,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Rogue Manual",
+              "producesId": 3457,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Alchemist Manual",
+              "producesId": 3458,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Artist Manual",
+              "producesId": 3459,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Lord Knight Manual",
+              "producesId": 3479,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "High Priest Manual",
+              "producesId": 3480,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "High Wizard Manual",
+              "producesId": 3481,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Whitesmith Manual",
+              "producesId": 3482,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Sniper Manual",
+              "producesId": 3483,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Assassin Cross Manual",
+              "producesId": 3484,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Paladin Manual",
+              "producesId": 3485,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Champion Manual",
+              "producesId": 3486,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Professor Manual",
+              "producesId": 3487,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Stalker Manual",
+              "producesId": 3488,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Creator Manual",
+              "producesId": 3489,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            },
+            {
+              "name": "Clown &amp; Gypsy Manual",
+              "producesId": 3490,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 70
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 26"
+    },
+    {
+      "name": "Monster Arena Shop",
+      "subgroups": [
+        {
+          "name": "Headgears",
+          "shops": [
+            {
+              "name": "Jedi Hood [1]",
+              "producesId": 42027,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Sith Hood [1]",
+              "producesId": 42028,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Neptune Helm [1]",
+              "producesId": 45103,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Hollow Mask [1]",
+              "producesId": 42301,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 10000
+                }
+              ]
+            },
+            {
+              "name": "Full Hollow Mask [1]",
+              "producesId": 45502,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 15000
+                }
+              ]
+            },
+            {
+              "name": "Darth Maul Mask [1]",
+              "producesId": 42302,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 12000
+                }
+              ]
+            },
+            {
+              "name": "Jaguar Hat [1]",
+              "producesId": 5539,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30000
+                }
+              ]
+            },
+            {
+              "name": "Power of Thor [1]",
+              "producesId": 5495,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Drooping Garm [1]",
+              "producesId": 45181,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Large Majestic Goat [1]",
+              "producesId": 5518,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 25000
+                }
+              ]
+            },
+            {
+              "name": "Gigantic Baphomet Horns [1]",
+              "producesId": 45176,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 25000
+                }
+              ]
+            },
+            {
+              "name": "Cat Ear Beret [1]",
+              "producesId": 18600,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30000
+                }
+              ]
+            },
+            {
+              "name": "Shining Poo Poo Hat [1]",
+              "producesId": 45202,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Miscellaneous",
+          "shops": [
+            {
+              "name": "Buff Scroll",
+              "producesId": 43001,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Slot Enchantment Scroll",
+              "producesId": 40306,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Infusion Stone",
+              "producesId": 40314,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Option Enchantment Scroll",
+              "producesId": 40315,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Scroll of Protection",
+              "producesId": 40071,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "Costume Enchantment Scroll",
+              "producesId": 40313,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Aspersio Scroll",
+              "producesId": 12217,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 50
+                }
+              ]
+            },
+            {
+              "name": "Storm Gust Scroll",
+              "producesId": 14513,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Vermilion Scroll",
+              "producesId": 14514,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Meteor Scroll",
+              "producesId": 14512,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Wind Walk Scroll",
+              "producesId": 12219,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 18"
+    }
+  ]
+}

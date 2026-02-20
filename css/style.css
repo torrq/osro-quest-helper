@@ -220,7 +220,7 @@ div#header-version-tag {
   min-width: 32px;
 }
 
-.btn-indent-quest {
+.btn-indent-quest, .btn-indent-shop {
   margin: 4px 0 4px 32px;
 }
 
@@ -736,7 +736,7 @@ textarea {
    6. QUESTS MODULE
    ========================================= */
 /* Quest Items & Dragging */
-.quest-item {
+.quest-item, .shop-item {
   padding: 3px 0 4px 4px;
   margin: 0;
   background: transparent;
@@ -750,22 +750,22 @@ textarea {
   gap: 5px;
 }
 
-.quest-item:active { cursor: grabbing; }
+.quest-item:active, .shop-item:active { cursor: grabbing; }
 
-.quest-item:hover {
+.quest-item:hover, .shop-item:hover {
   background: var(--panel-hover);
   border-left-color: var(--accent);
   color: var(--text);
 }
 
-.quest-item.active {
+.quest-item.active, .shop-item:active {
   background: var(--panel-hover);
   border-left-color: var(--accent);
   color: var(--accent);
 }
 
-.quest-item.dragging { opacity: 0.5; }
-.quest-item.drag-over { border-top: 2px solid var(--accent); }
+.quest-item.dragging, .shop-item.dragging { opacity: 0.5; }
+.quest-item.drag-over, .shop-item.drag-over { border-top: 2px solid var(--accent); }
 
 .drag-handle {
   cursor: grab;
@@ -773,9 +773,9 @@ textarea {
   font-size: 12px;
 }
 
-.quest-name { flex: 1; }
+.quest-name, .shop-name { flex: 1; }
 
-.quest-link {
+.quest-link, .shop-link {
   color: var(--text);
   text-decoration: none;
   cursor: pointer;
@@ -784,19 +784,19 @@ textarea {
   font-weight: bold;
 }
 
-.quest-link:hover {
+.quest-link:hover, .shop-link:hover {
   color: var(--accent);
   text-decoration: underline;
 }
 
-.quest-path-info {
+.quest-path-info, .shop-path-info {
   color: var(--text-muted);
   font-size: 12px;
   margin-left: auto;
   white-space: nowrap;
 }
 
-.quest-meta-info {
+.quest-meta-info, .shop-meta-info {
   color: var(--warning);
   font-size: 12px;
   margin-left: 0;
@@ -804,7 +804,7 @@ textarea {
   white-space: nowrap;
 }
 
-.quest-name-header {
+.quest-name-header, .shop-name-header {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -863,7 +863,7 @@ textarea {
   padding-left: 8px;
 }
 
-div.quest-bound {
+div.quest-bound, div.shop-bound {
   text-align: center;
 }
 
@@ -1731,10 +1731,12 @@ body.viewer-mode .requirements-section,
 body.viewer-mode .requirements-section + .item-label,
 body.viewer-mode .item-label:has(+ .requirements-section),
 body.viewer-mode .btn-indent-quest,
+body.viewer-mode .btn-indent-shop,
 body.viewer-mode .tab[onclick*="groups"],
 body.viewer-mode .toolbar-actions,
 body.viewer-mode #addBtn,
 body.viewer-mode .quest-bound,
+body.viewer-mode .shop-bound,
 body.viewer-mode .item-selected-badge .clear-btn,
 body.viewer-mode .search-container {
   display: none !important;
@@ -1745,7 +1747,8 @@ body.viewer-mode .quest-item {
   pointer-events: auto;
 }
 
-body.viewer-mode .quest-item .quest-name {
+body.viewer-mode .quest-item .quest-name,
+body.viewer-mode .shop-item .shop-name {
   cursor: pointer;
   pointer-events: all;
 }
@@ -1807,7 +1810,7 @@ body.viewer-mode .editor-quest select {
    ========================================= */
 
 /* Quest header with actions */
-.quest-header-actions {
+.quest-header-actions, .shop-header-actions {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 12px;
@@ -1857,19 +1860,21 @@ body.viewer-mode .editor-quest select {
 }
 
 /* Active Quest Highlighting - Enhanced */
-.quest-item.active {
+.quest-item.active,
+.shop-item.active {
   background: var(--active-quest-bg) !important;
   border-left: 3px solid var(--accent) !important;
   font-weight: 600 !important;
 }
 
-.quest-item.active .quest-name {
+.quest-item.active .quest-name,
+.quest-item.active .shop-name {
   color: var(--accent-hover);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .quest-header-actions {
+  .quest-header-actions, .shop-header-actions {
     flex-direction: column;
     align-items: stretch;
   }
@@ -1922,6 +1927,28 @@ body.viewer-mode .editor-quest select {
 
 .theme-toggle {
   display: flex;
-  align-items: top;
+  align-items: flex-start;
   gap: 0px;
+}
+
+.quest-badge, .shop-badge {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 2px;
+  vertical-align: middle;
+  text-align: center;
+  width: 50px;
+}
+
+.quest-badge {
+  background: #003585;
+  color: white;
+}
+
+.shop-badge {
+  background: #1e6900;
+  color: white;
 }

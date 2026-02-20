@@ -1,5 +1,7 @@
 // groups.js - Group and Subgroup Management Logic
 
+let groupsTabMode = 'quests'; // 'quests' or 'shops'
+
 function renderGroupsListCore() {
   const container = document.getElementById("groupsList");
   
@@ -8,15 +10,22 @@ function renderGroupsListCore() {
     return;
   }
 
-  let html = "";
+  let html = `
+    <div class="groups-tab-selector">
+      <button class="btn ${groupsTabMode === 'quests' ? 'btn-primary' : ''}" onclick="setGroupsTabMode('quests')">Quest Groups</button>
+      <button class="btn ${groupsTabMode === 'shops' ? 'btn-primary' : ''}" onclick="setGroupsTabMode('shops')">Shop Groups</button>
+    </div>
+  `;
 
-  if (!Array.isArray(DATA.groups)) {
-    console.warn('[renderGroupsList] DATA.groups is not an array');
-    container.innerHTML = `<div class="empty-msg-centered">No quest data loaded.</div>`;
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+
+  if (!Array.isArray(groups)) {
+    console.warn('[renderGroupsList] Groups data is not an array');
+    container.innerHTML = html + `<div class="empty-msg-centered">No data loaded.</div>`;
     return;
   }
 
-  DATA.groups.forEach((group, groupIdx) => {
+  groups.forEach((group, groupIdx) => {
     if (!group) return;
     
     const isSelected = state.selectedGroupForEdit === groupIdx;
@@ -35,8 +44,9 @@ function renderGroupsListCore() {
     `;
   });
 
-  if (DATA.groups.length === 0) {
-    html = `<div class="empty-msg-centered">No quest groups yet. Click "+ Group" to create one.</div>`;
+  if (groups.length === 0) {
+    const entityType = groupsTabMode === 'quests' ? 'quest' : 'shop';
+    html += `<div class="empty-msg-centered">No ${entityType} groups yet. Click "+ Group" to create one.</div>`;
   }
 
   container.innerHTML = html;
@@ -66,8 +76,9 @@ function renderGroupContentCore() {
     return;
   }
 
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
   const groupIdx = state.selectedGroupForEdit;
-  const group = DATA.groups[groupIdx];
+  const group = groups[groupIdx];
 
   if (!group) {
     container.innerHTML = `
@@ -79,10 +90,13 @@ function renderGroupContentCore() {
     return;
   }
 
+  const entityType = groupsTabMode === 'quests' ? 'Quest' : 'Shop';
+  const itemsKey = groupsTabMode === 'quests' ? 'quests' : 'shops';
+
   let html = `
     <div class="editor-group">
       <div class="group-edit-top">
-        <h2>Edit Quest Group</h2>
+        <h2>Edit ${entityType} Group</h2>
         <button class="btn btn-danger" onclick="deleteGroup(${groupIdx})">Delete Group</button>
       </div>
       
@@ -101,8 +115,8 @@ function renderGroupContentCore() {
         <span class="item-label">Group Position:</span>
         <div class="ordering-controls">
           <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, -1)" ${groupIdx === 0 ? "disabled" : ""}>↑ Move Up</button>
-          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, 1)" ${groupIdx === DATA.groups.length - 1 ? "disabled" : ""}>↓ Move Down</button>
-          <span class="ordering-info">Position ${groupIdx + 1} of ${DATA.groups.length}</span>
+          <button class="btn btn-sm" onclick="moveGroup(${groupIdx}, 1)" ${groupIdx === groups.length - 1 ? "disabled" : ""}>↓ Move Down</button>
+          <span class="ordering-info">Position ${groupIdx + 1} of ${groups.length}</span>
         </div>
       </div>
       
@@ -121,13 +135,13 @@ function renderGroupContentCore() {
     group.subgroups.forEach((subgroup, subIdx) => {
       if (!subgroup) return;
       
-      const questCount = Array.isArray(subgroup.quests) ? subgroup.quests.length : 0;
+      const itemCount = Array.isArray(subgroup[itemsKey]) ? subgroup[itemsKey].length : 0;
       
       html += `
         <div class="subgroup-edit-card">
           <div class="subgroup-edit-header">
             <input type="text" class="subgroup-edit-name-input" value="${subgroup.name || 'Unnamed Subgroup'}" onchange="updateSubgroupName(${groupIdx}, ${subIdx}, this.value)">
-            <span class="subgroup-quest-count">${questCount} quests</span>
+            <span class="subgroup-quest-count">${itemCount} ${itemsKey}</span>
             <div class="subgroup-ordering-controls">
               <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, -1)" ${subIdx === 0 ? "disabled" : ""} title="Move Up">↑</button>
               <button class="btn btn-sm btn-icon" onclick="moveSubgroup(${groupIdx}, ${subIdx}, 1)" ${subIdx === group.subgroups.length - 1 ? "disabled" : ""} title="Move Down">↓</button>
@@ -149,16 +163,21 @@ function renderGroupContentCore() {
 }
 
 function addGroup() {
+  const itemsKey = groupsTabMode === 'quests' ? 'quests' : 'shops';
   const group = {
     name: "New Group",
     subgroups: [],
   };
-  DATA.groups.push(group);
+  
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  groups.push(group);
 
   if (state.currentTab === "groups") {
-    selectGroupForEdit(DATA.groups.length - 1);
+    selectGroupForEdit(groups.length - 1);
+  } else if (groupsTabMode === 'quests') {
+    state.expandedGroups.add(groups.length - 1);
   } else {
-    state.expandedGroups.add(DATA.groups.length - 1);
+    state.expandedShopGroups.add(groups.length - 1);
   }
 
   render();
@@ -166,10 +185,19 @@ function addGroup() {
 
 function deleteGroup(idx) {
   if (confirm("Delete this group and all its contents?")) {
-    DATA.groups.splice(idx, 1);
-    state.expandedGroups.delete(idx);
-    if (state.selectedGroup === DATA.groups[idx]) {
-      state.selectedQuest = null;
+    const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+    groups.splice(idx, 1);
+    
+    if (groupsTabMode === 'quests') {
+      state.expandedGroups.delete(idx);
+      if (state.selectedGroup === groups[idx]) {
+        state.selectedQuest = null;
+      }
+    } else {
+      state.expandedShopGroups.delete(idx);
+      if (state.selectedShopGroup === groups[idx]) {
+        state.selectedShop = null;
+      }
     }
 
     if (state.selectedGroupForEdit === idx) {
@@ -183,23 +211,26 @@ function deleteGroup(idx) {
 }
 
 function updateGroupName(idx, value) {
-  DATA.groups[idx].name = value;
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  groups[idx].name = value;
   render();
 }
 
 function updateGroupCaption(idx, value) {
-  DATA.groups[idx].caption = value.trim();
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  groups[idx].caption = value.trim();
   render();
 }
 
 function moveGroup(idx, direction) {
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
   const newIdx = idx + direction;
-  if (newIdx < 0 || newIdx >= DATA.groups.length) return;
+  if (newIdx < 0 || newIdx >= groups.length) return;
 
   // Swap groups
-  const temp = DATA.groups[idx];
-  DATA.groups[idx] = DATA.groups[newIdx];
-  DATA.groups[newIdx] = temp;
+  const temp = groups[idx];
+  groups[idx] = groups[newIdx];
+  groups[newIdx] = temp;
 
   // Update selected index
   state.selectedGroupForEdit = newIdx;
@@ -208,21 +239,26 @@ function moveGroup(idx, direction) {
 }
 
 function addSubgroup(groupIdx) {
+  const itemsKey = groupsTabMode === 'quests' ? 'quests' : 'shops';
   const subgroup = {
     name: "New Subgroup",
-    quests: [],
+    [itemsKey]: [],
   };
-  DATA.groups[groupIdx].subgroups.push(subgroup);
+  
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  groups[groupIdx].subgroups.push(subgroup);
   render();
 }
 
 function updateSubgroupName(groupIdx, subIdx, value) {
-  DATA.groups[groupIdx].subgroups[subIdx].name = value;
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  groups[groupIdx].subgroups[subIdx].name = value;
   render();
 }
 
 function moveSubgroup(groupIdx, subIdx, direction) {
-  const group = DATA.groups[groupIdx];
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  const group = groups[groupIdx];
   const newIdx = subIdx + direction;
   if (newIdx < 0 || newIdx >= group.subgroups.length) return;
 
@@ -235,16 +271,38 @@ function moveSubgroup(groupIdx, subIdx, direction) {
 }
 
 function deleteSubgroup(groupIdx, subIdx) {
-  if (confirm("Delete this subgroup and all its quests?")) {
-    const subgroup = DATA.groups[groupIdx].subgroups[subIdx];
-    if (state.selectedSubgroup === subgroup) {
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  const itemsKey = groupsTabMode === 'quests' ? 'quests' : 'shops';
+  
+  if (confirm(`Delete this subgroup and all its ${itemsKey}?`)) {
+    const subgroup = groups[groupIdx].subgroups[subIdx];
+    
+    if (groupsTabMode === 'quests' && state.selectedSubgroup === subgroup) {
       state.selectedQuest = null;
+    } else if (groupsTabMode === 'shops' && state.selectedShopSubgroup === subgroup) {
+      state.selectedShop = null;
     }
-    DATA.groups[groupIdx].subgroups.splice(subIdx, 1);
-    state.expandedSubgroups.delete(`${groupIdx}-${subIdx}`);
+    
+    groups[groupIdx].subgroups.splice(subIdx, 1);
+    
+    const key = `${groupIdx}-${subIdx}`;
+    if (groupsTabMode === 'quests') {
+      state.expandedSubgroups.delete(key);
+    } else {
+      state.expandedShopSubgroups.delete(key);
+    }
+    
     render();
   }
 }
+
+function setGroupsTabMode(mode) {
+  groupsTabMode = mode;
+  state.selectedGroupForEdit = null;
+  render();
+}
+
+// ===== ERROR-WRAPPED RENDER FUNCTIONS =====
 
 // ===== ERROR-WRAPPED RENDER FUNCTIONS =====
 
@@ -276,3 +334,4 @@ window.addSubgroup = addSubgroup;
 window.updateSubgroupName = updateSubgroupName;
 window.moveSubgroup = moveSubgroup;
 window.deleteSubgroup = deleteSubgroup;
+window.setGroupsTabMode = setGroupsTabMode;

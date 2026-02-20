@@ -58,7 +58,40 @@ function renderItemsCore() {
     });
   }
 
-  // 1b. Add autoloot items
+  // 1b. Add items from Shops
+  if (Array.isArray(DATA.shopGroups)) {
+    DATA.shopGroups.forEach((group) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach((subgroup) => {
+        if (!subgroup || !Array.isArray(subgroup.shops)) return;
+        
+        subgroup.shops.forEach((shop) => {
+          if (!shop) return;
+          
+          if (shop.producesId) usedItemIds.add(Number(shop.producesId));
+
+          if (Array.isArray(shop.requirements)) {
+            shop.requirements.forEach((req) => {
+              if (!req) return;
+              
+              if (req.type === "item" && req.id) {
+                usedItemIds.add(Number(req.id));
+              }
+              if (req.type === "gold" && typeof SPECIAL_ITEMS !== 'undefined') {
+                usedItemIds.add(SPECIAL_ITEMS.GOLD);
+              }
+              if (req.type === "credit" && typeof SPECIAL_ITEMS !== 'undefined') {
+                usedItemIds.add(SPECIAL_ITEMS.CREDIT);
+              }
+            });
+          }
+        });
+      });
+    });
+  }
+
+  // 1c. Add autoloot items
   if (state.autolootData) {
     Object.values(state.autolootData).forEach((autolootList) => {
       if (Array.isArray(autolootList)) {
@@ -69,7 +102,7 @@ function renderItemsCore() {
     });
   }
 
-  // 1c. Add NEW items (FIX: treat them as "used" so they appear in the main list)
+  // 1d. Add NEW items (treat them as "used" so they appear in the main list)
   if (DATA.newItemIds) {
     DATA.newItemIds.forEach((id) => {
       usedItemIds.add(Number(id));
@@ -98,37 +131,58 @@ function renderItemsCore() {
   if (state.itemSearchFilter) {
     const q = state.itemSearchFilter.trim();
     
+    // Helper function to strip color codes (^RRGGBB format)
+    const stripColorCodes = (text) => {
+      if (!text) return '';
+      return text.replace(/\^[0-9A-Fa-f]{6}/g, '');
+    };
+    
     if (/^\d+$/.test(q)) {
       items = items.filter(item => 
         item.id.toString().includes(q)
       );
     } else {
-      const phrases = [];
-      const words = [];
+      const includePhrases = [];
+      const includeWords = [];
+      const excludePhrases = [];
+      const excludeWords = [];
       
-      let remaining = q.replace(/"([^"]+)"/g, (match, phrase) => {
-        phrases.push(phrase.toLowerCase());
+      // Extract quoted phrases (both include and exclude)
+      let remaining = q.replace(/-?"([^"]+)"/g, (match, phrase) => {
+        if (match.startsWith('-')) {
+          excludePhrases.push(phrase.toLowerCase());
+        } else {
+          includePhrases.push(phrase.toLowerCase());
+        }
         return '';
       });
       
+      // Process remaining words
       remaining.split(/\s+/).forEach(word => {
-        if (word.length > 0) words.push(word.toLowerCase());
+        if (word.length > 0) {
+          if (word.startsWith('-') && word.length > 1) {
+            excludeWords.push(word.substring(1).toLowerCase());
+          } else if (!word.startsWith('-')) {
+            includeWords.push(word.toLowerCase());
+          }
+        }
       });
       
-      const allTerms = [...phrases, ...words];
-      
-      const termMatchSets = allTerms.map(term => {
+      // For regular words, use index matching
+      const includeMatchSets = includeWords.map(word => {
         const matchingIds = new Set();
+        // Strip punctuation from word for index lookup
+        const cleanWord = word.replace(/[^\w]/g, '');
         
         Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-          if (indexTerm.includes(term)) {
+          if (indexTerm.includes(cleanWord)) {
             SEARCH_INDEX_NAME[indexTerm].forEach(id => matchingIds.add(id));
           }
         });
         
         if (state.searchDescriptions) {
           Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
-            if (indexTerm.includes(term)) {
+            if (indexTerm.includes(cleanWord)) {
               SEARCH_INDEX_DESC[indexTerm].forEach(id => matchingIds.add(id));
             }
           });
@@ -137,9 +191,136 @@ function renderItemsCore() {
         return matchingIds;
       });
       
-      items = items.filter(item => 
-        termMatchSets.every(matchSet => matchSet.has(item.id))
-      );
+      // For phrases, get candidates using all words, then verify exact phrase
+      const includePhraseMatchSets = includePhrases.map(phrase => {
+        const matchingIds = new Set();
+        const phraseWords = phrase.split(/\s+/);
+        
+        // Get candidates that contain all words
+        const wordSets = phraseWords.map(word => {
+          const wordIds = new Set();
+          // Strip punctuation from word for index lookup
+          const cleanWord = word.replace(/[^\w]/g, '');
+          
+          Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+            if (indexTerm.includes(cleanWord)) {
+              SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
+            }
+          });
+          
+          if (state.searchDescriptions) {
+            Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
+              if (indexTerm.includes(cleanWord)) {
+                SEARCH_INDEX_DESC[indexTerm].forEach(id => wordIds.add(id));
+              }
+            });
+          }
+          
+          return wordIds;
+        });
+        
+        // Get items that have all words (candidates)
+        const candidates = Array.from(wordSets[0] || []).filter(id =>
+          wordSets.every(set => set.has(id))
+        );
+        
+        // Verify exact phrase in name or description
+        candidates.forEach(id => {
+          const item = DATA.items[id];
+          if (!item) return;
+          
+          const itemName = stripColorCodes(item.name || '').toLowerCase();
+          const itemDesc = stripColorCodes(item.desc || '').toLowerCase();
+          const nameMatch = itemName.includes(phrase);
+          const descMatch = state.searchDescriptions && itemDesc.includes(phrase);
+          
+          if (nameMatch || descMatch) {
+            matchingIds.add(id);
+          }
+        });
+        
+        return matchingIds;
+      });
+      
+      const allIncludeMatchSets = [...includeMatchSets, ...includePhraseMatchSets];
+      
+      // For exclude terms, also handle phrases and words separately
+      const excludeIds = new Set();
+      
+      // Exclude words
+      excludeWords.forEach(word => {
+        // Strip punctuation from word for index lookup
+        const cleanWord = word.replace(/[^\w]/g, '');
+        
+        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+          if (indexTerm.includes(cleanWord)) {
+            SEARCH_INDEX_NAME[indexTerm].forEach(id => excludeIds.add(id));
+          }
+        });
+        
+        if (state.searchDescriptions) {
+          Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
+            if (indexTerm.includes(cleanWord)) {
+              SEARCH_INDEX_DESC[indexTerm].forEach(id => excludeIds.add(id));
+            }
+          });
+        }
+      });
+      
+      // Exclude phrases (exact match)
+      excludePhrases.forEach(phrase => {
+        const phraseWords = phrase.split(/\s+/);
+        
+        // Get candidates
+        const wordSets = phraseWords.map(word => {
+          const wordIds = new Set();
+          // Strip punctuation from word for index lookup
+          const cleanWord = word.replace(/[^\w]/g, '');
+          
+          Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+            if (indexTerm.includes(cleanWord)) {
+              SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
+            }
+          });
+          
+          if (state.searchDescriptions) {
+            Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
+              if (indexTerm.includes(cleanWord)) {
+                SEARCH_INDEX_DESC[indexTerm].forEach(id => wordIds.add(id));
+              }
+            });
+          }
+          
+          return wordIds;
+        });
+        
+        const candidates = Array.from(wordSets[0] || []).filter(id =>
+          wordSets.every(set => set.has(id))
+        );
+        
+        // Verify exact phrase
+        candidates.forEach(id => {
+          const item = DATA.items[id];
+          if (!item) return;
+          
+          const itemName = stripColorCodes(item.name || '').toLowerCase();
+          const itemDesc = stripColorCodes(item.desc || '').toLowerCase();
+          const nameMatch = itemName.includes(phrase);
+          const descMatch = state.searchDescriptions && itemDesc.includes(phrase);
+          
+          if (nameMatch || descMatch) {
+            excludeIds.add(id);
+          }
+        });
+      });
+      
+      // Filter: must match all include terms AND match no exclude terms
+      items = items.filter(item => {
+        const matchesAllIncludes = allIncludeMatchSets.length === 0 || 
+          allIncludeMatchSets.every(matchSet => matchSet.has(item.id));
+        const matchesNoExcludes = !excludeIds.has(item.id);
+        return matchesAllIncludes && matchesNoExcludes;
+      });
     }
   }
 
@@ -217,26 +398,57 @@ function selectItemById(itemId, pushToHistory = true) {
 function highlightSearchTerm(text, searchQuery) {
   if (!searchQuery || !text) return text;
   
-  // Parse search query into terms
+  // Helper to strip color codes
+  const stripColorCodes = (str) => str.replace(/\^[0-9A-Fa-f]{6}/g, '');
+  
+  // Parse search query into terms (excluding exclusion terms)
   const phrases = [];
   const words = [];
   
-  let remaining = searchQuery.replace(/"([^"]+)"/g, (match, phrase) => {
-    phrases.push(phrase);
+  // Extract quoted phrases (but not those prefixed with -)
+  let remaining = searchQuery.replace(/-?"([^"]+)"/g, (match, phrase) => {
+    if (!match.startsWith('-')) {
+      phrases.push(phrase);
+    }
     return '';
   });
   
+  // Extract words (but not those prefixed with -)
   remaining.split(/\s+/).forEach(word => {
-    if (word.length > 0) words.push(word);
+    if (word.length > 0 && !word.startsWith('-')) {
+      words.push(word);
+    }
   });
   
-  const allTerms = [...phrases, ...words];
-  
-  // Highlight each term
   let result = text;
-  allTerms.forEach(term => {
-    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escaped})`, 'gi');
+  
+  // Highlight full phrases first (so they take precedence over individual words)
+  // Create regex that allows color codes between characters
+  phrases.forEach(phrase => {
+    // Build a pattern that allows ^RRGGBB color codes between any characters
+    const chars = phrase.split('');
+    const pattern = chars
+      .map(char => {
+        const escaped = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return escaped;
+      })
+      .join('(\\^[0-9A-Fa-f]{6})*'); // Allow color codes between chars
+    
+    const regex = new RegExp(`(${pattern})`, 'gi');
+    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+  });
+  
+  // Then highlight individual words (also allowing color codes within)
+  words.forEach(word => {
+    const chars = word.split('');
+    const pattern = chars
+      .map(char => {
+        const escaped = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return escaped;
+      })
+      .join('(\\^[0-9A-Fa-f]{6})*');
+    
+    const regex = new RegExp(`(${pattern})`, 'gi');
     result = result.replace(regex, '<span class="search-highlight">$1</span>');
   });
   
@@ -339,8 +551,11 @@ function renderItemContentCore() {
             <ul class="usage-list">
               ${usage.produces
                 .map(
-                  (u) => `
+                  (u) => {
+                    if (u.type === 'quest') {
+                      return `
                 <li>
+                  <span class="quest-badge">Shop</span>
                   <a class="quest-link"
                      onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
                     ${u.quest.name}
@@ -348,15 +563,24 @@ function renderItemContentCore() {
                   <span class="quest-path-info">
                     (${u.group.name} / ${u.subgroup.name})
                   </span>
-                  <span class="quest-meta-info">
-                    [${u.quest.successRate}% Success]
+                </li>`;
+                    } else if (u.type === 'shop') {
+                      return `
+                <li>
+                  <span class="shop-badge">Shop</span>
+                  <a class="quest-link"
+                     onclick="navigateToShop(${u.groupIdx}, ${u.subIdx}, ${u.shopIdx});">
+                    ${u.shop.name}
+                  </a>
+                  <span class="quest-path-info">
+                    (${u.group.name} / ${u.subgroup.name})
                   </span>
-                </li>
-              `,
+                </li>`;
+                    }
+                  }
                 )
                 .join("")}
-            </ul>
-          `
+            </ul>`
               : ""
           }
 
@@ -367,8 +591,15 @@ function renderItemContentCore() {
             <ul class="usage-list">
               ${usage.requires
                 .map(
-                  (u) => `
+                  (u) => {
+                    const amountText = u.requirement?.amount 
+                      ? `<span class="quest-meta-info">[Needs ${u.requirement.amount}]</span>` 
+                      : '';
+                    
+                    if (u.type === 'quest') {
+                      return `
                 <li>
+                <span class="quest-badge">Quest</span>
                   <a class="quest-link"
                      onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
                     ${u.quest.name}
@@ -376,20 +607,26 @@ function renderItemContentCore() {
                   <span class="quest-path-info">
                     (${u.group.name} / ${u.subgroup.name})
                   </span>
-                  ${
-                    u.amount
-                      ? `
-                    <span class="quest-meta-info">
-                      [Needs ${u.amount}]
-                    </span>`
-                      : ""
+                  ${amountText}
+                </li>`;
+                    } else if (u.type === 'shop') {
+                      return `
+                <li>
+                  <span class="shop-badge">Shop</span>
+                  <a class="quest-link"
+                     onclick="navigateToShop(${u.groupIdx}, ${u.subIdx}, ${u.shopIdx});">
+                    ${u.shop.name}
+                  </a>
+                  <span class="quest-path-info">
+                    (${u.group.name} / ${u.subgroup.name})
+                  </span>
+                  ${amountText}
+                </li>`;
+                    }
                   }
-                </li>
-              `,
                 )
                 .join("")}
-            </ul>
-          `
+            </ul>`
               : ""
           }
         </div>
@@ -418,62 +655,106 @@ function updateItemValue(id, value) {
 }
 
 function findQuestsByItemId(itemId) {
-  const results = { produces: [], requires: [] };
-  
-  if (!Array.isArray(DATA.groups)) {
-    console.warn('[findQuestsByItemId] DATA.groups is not an array');
-    return results;
-  }
-  
-  DATA.groups.forEach((group, gi) => {
-    if (!group || !Array.isArray(group.subgroups)) return;
-    
-    group.subgroups.forEach((subgroup, si) => {
-      if (!subgroup || !Array.isArray(subgroup.quests)) return;
-      
-      subgroup.quests.forEach((quest, qi) => {
-        if (!quest) return;
-        
-        if (quest.producesId === itemId) {
-          results.produces.push({
-            quest,
-            groupIdx: gi,
-            subIdx: si,
-            questIdx: qi,
-            group,
-            subgroup,
-          });
-        }
-        
-        // Find the matching requirement
-        if (Array.isArray(quest.requirements)) {
-          const matchingReq = quest.requirements.find((r) => {
-            if (!r) return false;
-            // Check regular items
-            if (r.type === "item" && r.id === itemId) return true;
-            // Check special currency types
-            if (r.type === "gold" && itemId === SPECIAL_ITEMS.GOLD) return true;
-            if (r.type === "credit" && itemId === SPECIAL_ITEMS.CREDIT)
-              return true;
-            return false;
-          });
+  const produces = [];
+  const requires = [];
 
-          if (matchingReq) {
-            results.requires.push({
+  // Search in Quests
+  if (Array.isArray(DATA.groups)) {
+    DATA.groups.forEach((group, groupIdx) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach((subgroup, subIdx) => {
+        if (!subgroup || !Array.isArray(subgroup.quests)) return;
+        
+        subgroup.quests.forEach((quest, questIdx) => {
+          if (!quest) return;
+          
+          if (quest.producesId === itemId) {
+            produces.push({
+              type: 'quest',
               quest,
-              groupIdx: gi,
-              subIdx: si,
-              questIdx: qi,
               group,
               subgroup,
-              amount: matchingReq.amount, // Store the amount from the requirement
+              groupIdx,
+              subIdx,
+              questIdx
             });
           }
-        }
+
+          if (Array.isArray(quest.requirements)) {
+            quest.requirements.forEach((req) => {
+              const reqId = req.type === "item" ? req.id : 
+                           req.type === "gold" ? SPECIAL_ITEMS?.GOLD :
+                           req.type === "credit" ? SPECIAL_ITEMS?.CREDIT : null;
+              
+              if (reqId === itemId) {
+                requires.push({
+                  type: 'quest',
+                  quest,
+                  group,
+                  subgroup,
+                  groupIdx,
+                  subIdx,
+                  questIdx,
+                  requirement: req
+                });
+              }
+            });
+          }
+        });
       });
     });
-  });
-  return results;
+  }
+
+  // Search in Shops
+  if (Array.isArray(DATA.shopGroups)) {
+    DATA.shopGroups.forEach((group, groupIdx) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach((subgroup, subIdx) => {
+        if (!subgroup || !Array.isArray(subgroup.shops)) return;
+        
+        subgroup.shops.forEach((shop, shopIdx) => {
+          if (!shop) return;
+          
+          if (shop.producesId === itemId) {
+            produces.push({
+              type: 'shop',
+              shop,
+              group,
+              subgroup,
+              groupIdx,
+              subIdx,
+              shopIdx
+            });
+          }
+
+          if (Array.isArray(shop.requirements)) {
+            shop.requirements.forEach((req) => {
+              const reqId = req.type === "item" ? req.id : 
+                           req.type === "gold" ? SPECIAL_ITEMS?.GOLD :
+                           req.type === "credit" ? SPECIAL_ITEMS?.CREDIT : null;
+              
+              if (reqId === itemId) {
+                requires.push({
+                  type: 'shop',
+                  shop,
+                  group,
+                  subgroup,
+                  groupIdx,
+                  subIdx,
+                  shopIdx,
+                  requirement: req
+                });
+              }
+            });
+          }
+        });
+      });
+    });
+  }
+
+  return { produces, requires };
 }
 
 function toggleNewItemsFilter(checked) {

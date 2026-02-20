@@ -460,7 +460,7 @@ function renderMaterialTree() {
   const lines = [];
   const MAX_DEPTH = 10;
 
-  function walk(quest, depth, multiplier, questPath = new Set(), parentKey = "", parentExpanded = true) {
+  function walkQuest(quest, depth, multiplier, questPath = new Set(), parentKey = "", parentExpanded = true) {
     if (questPath.has(quest) || depth > MAX_DEPTH) return;
     const newPath = new Set(questPath).add(quest);
 
@@ -475,50 +475,185 @@ function renderMaterialTree() {
       const isVisible = depth === 0 || parentExpanded;
 
       if (req.type === "item" && questIndex.has(req.id)) {
-        renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, isExpanded, hasChildren, effectiveAmount, immuneBadge, depth, lines, isVisible, newPath, walk);
+        renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, isExpanded, hasChildren, effectiveAmount, immuneBadge, depth, lines, isVisible, newPath, walkQuest);
       } else {
         renderTreeLeafItem(req, effectiveAmount, indent, connector, immuneBadge, depth, lines, isVisible);
       }
     });
   }
 
-  walk(state.selectedQuest, 0, 1, new Set(), "", true);
+  walkQuest(state.selectedQuest, 0, 1, new Set(), "", true);
   return lines.length === 0 ? '<div class="tree-line">No requirements</div>' : 
          lines.filter(l => l.visible).map(l => `<div class="tree-line level-${l.level}">${l.text}</div>`).join("");
 }
 
-function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, isExpanded, hasChildren, effectiveAmount, immuneBadge, depth, lines, isVisible, newPath, walk) {
+function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, isExpanded, hasChildren, effectiveAmount, immuneBadge, depth, lines, isVisible, newPath, walkQuest) {
   const item = getItem(req.id);
-  const quests = questIndex.get(req.id);
+  const sources = questIndex.get(req.id);
+  const questSources = sources.filter(s => s.type === 'quest').map(s => s.source);
+  const shopSources = sources.filter(s => s.type === 'shop').map(s => s.source);
+  
   const expandIcon = hasChildren ? `<span class="tree-expand-icon ${isExpanded ? "expanded" : ""}" onclick="toggleTreeItem('${itemKey}')">▶</span> ` : "";
-
-  if (quests.length === 1) {
+  
+  if (questSources.length === 1 && shopSources.length === 0) {
+    // Single quest source, no shops - link to quest instead of item
+    const q = questSources[0];
+    let groupIdx = -1, subIdx = -1, questIdx = -1;
+    DATA.groups.forEach((group, gi) => {
+      group.subgroups.forEach((subgroup, si) => {
+        const qi = subgroup.quests.indexOf(q);
+        if (qi !== -1) {
+          groupIdx = gi;
+          subIdx = si;
+          questIdx = qi;
+        }
+      });
+    });
+    
     lines.push({
       level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
+      text: `${indent}${connector}${expandIcon}<a class="quest-link tree-item-name" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`,
       visible: isVisible
     });
-    walk(quests[0], depth + 1, effectiveAmount, newPath, itemKey, isExpanded);
-  } else {
+    walkQuest(questSources[0], depth + 1, effectiveAmount, newPath, itemKey, isExpanded);
+  } else if (questSources.length === 0 && shopSources.length === 1) {
+    // Only one shop available - link to shop instead of item
+    const s = shopSources[0];
+    let groupIdx = -1, subIdx = -1, shopIdx = -1;
+    DATA.shopGroups.forEach((group, gi) => {
+      group.subgroups.forEach((subgroup, si) => {
+        const shi = subgroup.shops.indexOf(s);
+        if (shi !== -1) {
+          groupIdx = gi;
+          subIdx = si;
+          shopIdx = shi;
+        }
+      });
+    });
+    
     lines.push({
       level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${quests.length} OPTIONS]</span>`,
+      text: `${indent}${connector}<a class="shop-link tree-item-name" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-xs">[FROM SHOP]</span>`,
       visible: isVisible
     });
-
+  } else if (questSources.length === 0 && shopSources.length > 1) {
+    // Multiple shops - keep item link but show shop options
+    const totalOptions = shopSources.length;
+    lines.push({
+      level: depth,
+      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${totalOptions} OPTIONS]</span>`,
+      visible: isVisible
+    });
+    
     if (isExpanded) {
-      quests.forEach((q, idx) => {
+      shopSources.forEach((s) => {
         const optionIndent = "  ".repeat(depth + 1);
-        const optionKey = `${itemKey}-opt${idx}`;
+        const location = findShopLocation(s);
+        
+        let groupIdx = -1, subIdx = -1, shopIdx = -1;
+        DATA.shopGroups.forEach((group, gi) => {
+          group.subgroups.forEach((subgroup, si) => {
+            const shi = subgroup.shops.indexOf(s);
+            if (shi !== -1) {
+              groupIdx = gi;
+              subIdx = si;
+              shopIdx = shi;
+            }
+          });
+        });
+        
         lines.push({
           level: depth + 1,
-          text: `${optionIndent}<span class="text-muted">Option ${idx + 1}: ${q.name} (${q.successRate}% success)</span>`,
+          text: `${optionIndent}<span class="text-muted shop-option">Shop: <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location} → ${s.name}</a></span>`,
           visible: isExpanded
         });
-        walk(q, depth + 2, effectiveAmount, newPath, optionKey, true);
+      });
+    }
+  } else {
+    // Multiple quest sources or mix of quests and shops
+    const totalOptions = questSources.length + shopSources.length;
+    lines.push({
+      level: depth,
+      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-xs">[${totalOptions} OPTIONS]</span>`,
+      visible: isVisible
+    });
+    
+    if (isExpanded) {
+      // Show quest options with location
+      questSources.forEach((q) => {
+        const optionIndent = "  ".repeat(depth + 1);
+        const optionKey = `${itemKey}-quest-${q.producesId}`;
+        const location = findQuestLocation(q);
+        
+        let groupIdx = -1, subIdx = -1, questIdx = -1;
+        DATA.groups.forEach((group, gi) => {
+          group.subgroups.forEach((subgroup, si) => {
+            const qi = subgroup.quests.indexOf(q);
+            if (qi !== -1) {
+              groupIdx = gi;
+              subIdx = si;
+              questIdx = qi;
+            }
+          });
+        });
+        
+        lines.push({
+          level: depth + 1,
+          text: `${optionIndent}<span class="text-muted">Quest: <a class="quest-link" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${location} → ${q.name}</a> (${q.successRate}% success)</span>`,
+          visible: isExpanded
+        });
+        walkQuest(q, depth + 2, effectiveAmount, newPath, optionKey, true);
+      });
+      
+      // Show shop options with location
+      shopSources.forEach((s) => {
+        const optionIndent = "  ".repeat(depth + 1);
+        const location = findShopLocation(s);
+        
+        let groupIdx = -1, subIdx = -1, shopIdx = -1;
+        DATA.shopGroups.forEach((group, gi) => {
+          group.subgroups.forEach((subgroup, si) => {
+            const shi = subgroup.shops.indexOf(s);
+            if (shi !== -1) {
+              groupIdx = gi;
+              subIdx = si;
+              shopIdx = shi;
+            }
+          });
+        });
+        
+        lines.push({
+          level: depth + 1,
+          text: `${optionIndent}<span class="text-muted shop-option">Shop: <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location} → ${s.name}</a></span>`,
+          visible: isExpanded
+        });
       });
     }
   }
+}
+
+function findQuestLocation(quest) {
+  let location = "";
+  DATA.groups.forEach(group => {
+    group.subgroups.forEach(subgroup => {
+      if (subgroup.quests.includes(quest)) {
+        location = `${group.name} / ${subgroup.name}`;
+      }
+    });
+  });
+  return location;
+}
+
+function findShopLocation(shop) {
+  let location = "";
+  DATA.shopGroups.forEach(group => {
+    group.subgroups.forEach(subgroup => {
+      if (subgroup.shops.includes(shop)) {
+        location = `${group.name} / ${subgroup.name}`;
+      }
+    });
+  });
+  return location;
 }
 
 function renderTreeLeafItem(req, effectiveAmount, indent, connector, immuneBadge, depth, lines, isVisible) {
@@ -558,17 +693,24 @@ function renderSummary() {
 function findMultiQuestItems(questIndex) {
   const multiQuestItems = new Map();
 
-  function scan(quest, questPath = new Set()) {
-    if (questPath.has(quest)) return;
-    const newPath = new Set(questPath).add(quest);
+  function scan(source, sourcePath = new Set()) {
+    if (sourcePath.has(source)) return;
+    const newPath = new Set(sourcePath).add(source);
 
-    quest.requirements.forEach(req => {
+    source.requirements.forEach(req => {
       if (req.type === "item" && questIndex.has(req.id)) {
-        const quests = questIndex.get(req.id);
-        if (quests.length > 1) {
-          multiQuestItems.set(req.id, { name: getItem(req.id).name, quests });
+        const sources = questIndex.get(req.id);
+        if (sources.length > 1) {
+          multiQuestItems.set(req.id, { 
+            name: getItem(req.id).name, 
+            sources  // This is an array of {type, source} objects
+          });
         }
-        scan(quests[0], newPath);
+        // Continue scanning only quest sources
+        const questSources = sources.filter(s => s.type === 'quest');
+        if (questSources.length > 0) {
+          scan(questSources[0].source, newPath);
+        }
       }
     });
   }
@@ -604,17 +746,14 @@ function renderMultiOptionSummary(multiQuestItems, questIndex) {
 
 function generateTabLabel(combo) {
   const labels = [];
-  for (const [, quest] of Object.entries(combo)) {
-    let groupName = "", subgroupName = "";
-    DATA.groups.forEach(group => {
-      group.subgroups.forEach(subgroup => {
-        if (subgroup.quests.includes(quest)) {
-          groupName = group.name;
-          subgroupName = subgroup.name;
-        }
-      });
-    });
-    labels.push(`(${groupName} / ${subgroupName})`);
+  for (const [, sourceObj] of Object.entries(combo)) {
+    if (sourceObj.type === 'quest') {
+      const location = findQuestLocation(sourceObj.source);
+      labels.push(`${location}`);
+    } else if (sourceObj.type === 'shop') {
+      const location = findShopLocation(sourceObj.source);
+      labels.push(`${location} (Shop)`);
+    }
   }
   return labels.join(" | ");
 }
@@ -667,9 +806,21 @@ function calculateFullRequirements(questIndex, questChoices) {
       const effectiveAmount = (Number(req.amount) || 0) * multiplier;
       
       if (req.type === "item" && questIndex.has(req.id)) {
-        const quests = questIndex.get(req.id);
-        const chosenQuest = questChoices[req.id] || quests[0];
-        accumulate(chosenQuest, effectiveAmount, newPath);
+        const sources = questIndex.get(req.id);
+        const chosenSourceObj = questChoices[req.id] || sources[0];
+        
+        // Only recurse if it's a quest
+        if (chosenSourceObj.type === 'quest') {
+          accumulate(chosenSourceObj.source, effectiveAmount, newPath);
+        } else if (chosenSourceObj.type === 'shop') {
+          // For shops, add the shop's requirements directly (don't recurse)
+          const shop = chosenSourceObj.source;
+          shop.requirements.forEach(shopReq => {
+            const shopEffectiveAmount = (Number(shopReq.amount) || 0) * effectiveAmount;
+            totalZeny += calculateZenyValue(shopReq, shopEffectiveAmount);
+            accumulateRequirement(totals, shopReq, shopEffectiveAmount);
+          });
+        }
       } else {
         totalZeny += calculateZenyValue(req, effectiveAmount);
         accumulateRequirement(totals, req, effectiveAmount);
@@ -785,12 +936,15 @@ function renderSummaryItems(entries, totalZeny) {
 function generateCombinations(items) {
   if (items.length === 0) return [{}];
   const [first, ...rest] = items;
-  const [itemId, { quests }] = first;
+  const [itemId, { sources }] = first;
+  
   const restCombos = generateCombinations(rest);
   const result = [];
-  for (const quest of quests) {
+  
+  // Include both quest and shop sources in combinations
+  for (const sourceObj of sources) {
     for (const combo of restCombos) {
-      result.push({ ...combo, [itemId]: quest });
+      result.push({ ...combo, [itemId]: sourceObj });
     }
   }
   return result;
@@ -814,6 +968,7 @@ function buildQuestIndex() {
     return index;
   }
   
+  // Add quests
   DATA.groups.forEach(group => {
     if (!group || !Array.isArray(group.subgroups)) return;
     
@@ -826,10 +981,31 @@ function buildQuestIndex() {
         if (!index.has(quest.producesId)) {
           index.set(quest.producesId, []);
         }
-        index.get(quest.producesId).push(quest);
+        index.get(quest.producesId).push({ type: 'quest', source: quest });
       });
     });
   });
+  
+  // Add shops
+  if (Array.isArray(DATA.shopGroups)) {
+    DATA.shopGroups.forEach(group => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach(subgroup => {
+        if (!subgroup || !Array.isArray(subgroup.shops)) return;
+        
+        subgroup.shops.forEach(shop => {
+          if (!shop || !shop.producesId) return;
+          
+          if (!index.has(shop.producesId)) {
+            index.set(shop.producesId, []);
+          }
+          index.get(shop.producesId).push({ type: 'shop', source: shop });
+        });
+      });
+    });
+  }
+  
   return index;
 }
 

@@ -5,6 +5,7 @@
 window.DATA = {
   items: {},
   groups: [],
+  shopGroups: [],
   itemIcons: [],
   newItemIds: new Set(),
   spriteMap: null
@@ -33,7 +34,14 @@ window.state = {
   showValuesOnly: false,
   searchDescriptions: false,
   showAllItems: false,
-  showNewItemsOnly: false
+  showNewItemsOnly: false,
+  selectedShop: null,
+  selectedShopGroup: null,
+  selectedShopSubgroup: null,
+  selectedGroupForShopEdit: null,
+  shopSearchFilter: "",
+  expandedShopGroups: new Set(),
+  expandedShopSubgroups: new Set()
 };
 
 // Ensure all 10 autoloot slots exist
@@ -168,15 +176,17 @@ function initializeData() {
   Promise.all([
     fetchJSON(AUTO_IMPORT_URLS.items),
     fetchJSON(AUTO_IMPORT_URLS.quests),
+    fetchJSON(AUTO_IMPORT_URLS.shops),
     fetchJSON(AUTO_IMPORT_URLS.icons),
     fetchJSON(AUTO_IMPORT_URLS.searchIndexName),
     fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc),
     fetchJSON(AUTO_IMPORT_URLS.newItems),
     fetchJSON(AUTO_IMPORT_URLS.spriteMap)
   ])
-    .then(([items, quests, icons, searchName, searchDesc, newItems, spriteMap]) => {
+    .then(([items, quests, shops, icons, searchName, searchDesc, newItems, spriteMap]) => {
       loadItems(items);
       loadQuests(quests);
+      loadShops(shops);
       loadItemIcons(icons);
       loadSearchIndices(searchName, searchDesc);
       loadNewItems(newItems);
@@ -341,6 +351,16 @@ function loadQuests(quests) {
   } else {
     console.warn("[Init] No quest data received from remote");
   }
+}
+
+function loadShops(shops) {
+  if (!shops) {
+    console.warn("[Init] No shops data received from remote");
+    DATA.shopGroups = [];
+    return;
+  }
+  DATA.shopGroups = shops.groups || [];
+  console.log(`[Init] Loaded ${DATA.shopGroups.length} shop groups from remote`);
 }
 
 function loadItemIcons(icons) {
@@ -752,6 +772,11 @@ const TAB_ELEMENTS = {
     search: "questsSearch",
     render: ["renderSidebar", "renderQuestContent"]
   },
+  shops: {
+    sidebar: "shopsTreeContainer",
+    search: "shopsSearch",
+    render: ["renderShopsSidebar", "renderShopContent"]
+  },
   items: {
     sidebar: "itemsList",
     search: "itemsSearch",
@@ -795,12 +820,12 @@ function updateTabButtons(tabName) {
 }
 
 function hideAllElements() {
-  ["treeContainer", "itemsList", "groupsList", "autolootList"].forEach(id => {
+  ["treeContainer", "shopsTreeContainer", "itemsList", "groupsList", "autolootList"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.add("hidden");
   });
 
-  ["questsSearch", "itemsSearch", "groupsActions"].forEach(id => {
+  ["questsSearch", "shopsSearch", "itemsSearch", "groupsActions"].forEach(id => {
     document.getElementById(id).classList.add("hidden");
   });
 }
@@ -897,6 +922,25 @@ function exportQuests() {
   downloadJSON({ groups: cleanedGroups }, "osromr_quests.json");
 }
 
+function exportShops() {
+  const cleanedGroups = DATA.shopGroups.map(group => ({
+    ...group,
+    subgroups: group.subgroups.map(subgroup => ({
+      ...subgroup,
+      shops: subgroup.shops.map(shop => ({
+        ...shop,
+        requirements: shop.requirements.map(req => {
+          const cleaned = { ...req };
+          if (!cleaned.immune) delete cleaned.immune;
+          return cleaned;
+        })
+      }))
+    }))
+  }));
+
+  downloadJSON({ groups: cleanedGroups }, "osromr_shops.json");
+}
+
 function exportValues() {
   const values = {};
   Object.entries(DATA.items).forEach(([id, item]) => {
@@ -907,7 +951,7 @@ function exportValues() {
 
 function exportAll() {
   exportQuests();
-  setTimeout(exportValues, 100);
+  setTimeout(exportShops, 100);
 }
 
 function downloadJSON(data, filename) {
@@ -978,6 +1022,7 @@ window.toggleShowAllItems = toggleShowAllItems;
 function handleURLNavigation() {
   const urlParams = new URLSearchParams(window.location.search);
   const questId = urlParams.get('quest');
+  const shopId = urlParams.get('shop');
   const itemId = urlParams.get('item');
   const autolootSlot = urlParams.get('autoloot');
   const tab = urlParams.get('tab');
@@ -994,6 +1039,12 @@ function handleURLNavigation() {
     ensureTab('quests');
     selectQuestById(questId, false);
   } 
+  else if (shopId) {
+    ensureTab('shops');
+    if (window.selectShopById) {
+      window.selectShopById(shopId, false);
+    }
+  }
   else if (itemId) {
     ensureTab('items');
     if (window.selectItemById) {
@@ -1023,6 +1074,7 @@ function updateURL(entityId = null, entityType = null, pushState = true) {
   
   // 1. Clear all tracking parameters first to ensure a clean state
   url.searchParams.delete('quest');
+  url.searchParams.delete('shop');
   url.searchParams.delete('item');
   url.searchParams.delete('autoloot');
   url.searchParams.delete('tab'); // Always clear tab initially
@@ -1299,6 +1351,7 @@ window.clearQuestSearch = clearQuestSearch;
 window.importItemValues = importItemValues;
 window.toggleValuesFilter = toggleValuesFilter;
 window.exportQuests = exportQuests;
+window.exportShops = exportShops;
 window.exportValues = exportValues;
 window.exportAll = exportAll;
 window.saveData = saveData;

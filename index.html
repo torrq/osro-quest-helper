@@ -37,6 +37,7 @@
           </h1>
           <div class="tab-bar">
             <div class="tab active" onclick="switchTab('quests')">Quests</div>
+            <div class="tab" onclick="switchTab('shops')">Shops</div>
             <div class="tab" onclick="switchTab('items')">Items</div>
             <div class="tab" onclick="switchTab('groups')">Groups</div>
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
@@ -50,6 +51,17 @@
                 placeholder="Search quests..."
               />
               <button class="btn btn-sm" onclick="clearQuestSearch()">×</button>
+            </div>
+          </div>
+          <div id="shopsSearch" class="search-section hidden">
+            <div class="search-row">
+              <input
+                type="text"
+                id="shopSearchInput"
+                class="search-input"
+                placeholder="Search shops..."
+              />
+              <button class="btn btn-sm" onclick="clearShopSearch()">×</button>
             </div>
           </div>
           <div id="itemsSearch" class="search-section hidden">
@@ -98,13 +110,14 @@
                   <button onclick="exportAll()">All (2 Files)</button>
                   <hr class="dropdown-divider" />
                   <button onclick="exportQuests()">Quests JSON</button>
-                  <button onclick="exportValues()">Values JSON</button>
+                  <button onclick="exportShops()">Shops JSON</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="tree-container" id="treeContainer"></div>
+        <div class="tree-container hidden" id="shopsTreeContainer"></div>
         <div class="items-list hidden" id="itemsList"></div>
         <div class="groups-list hidden" id="groupsList"></div>
         <div class="autoloot-list hidden" id="autolootList"></div>
@@ -120,6 +133,7 @@
     <script src="js/main.js"></script>
     <script src="js/items.js"></script>
     <script src="js/quests.js"></script>
+    <script src="js/shops.js"></script>
     <script src="js/groups.js"></script>
     <script src="js/autoloot.js"></script>
   </body>

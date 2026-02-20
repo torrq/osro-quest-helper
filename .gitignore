@@ -4,3 +4,5 @@ helpers/itemInfo_EN.lub
 helpers/osromr_items_new.json
 helpers/item.rar
 /helpers/item
+/helpers/.vs
+helpers/osromr_items.json

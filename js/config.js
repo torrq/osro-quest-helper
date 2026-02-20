@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 107;
+const VERSION = 108;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
@@ -19,6 +19,7 @@ const REMOTE_URLS = {
   newItems: "https://torrq.github.io/osro-quest-helper/data/osromr_items_new.json",
   values: "https://torrq.github.io/osro-quest-helper/data/osromr_item_values.json",
   quests: "https://torrq.github.io/osro-quest-helper/data/osromr_quests.json",
+  shops: "https://torrq.github.io/osro-quest-helper/data/osromr_shops.json",
   icons: "https://torrq.github.io/osro-quest-helper/data/osromr_item_icons.json",
   searchIndexName: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_name.json",
   searchIndexDesc: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_desc.json",
@@ -28,14 +29,15 @@ const REMOTE_URLS = {
 // Local Development URLs (for testing with local server)
 // Run with: python -m http.server 8000
 const LOCAL_URLS = {
-  items: "http://127.0.0.1:8000/data/osromr_items.json",
-  newItems: "http://127.0.0.1:8000/data/osromr_items_new.json",
-  values: "http://127.0.0.1:8000/data/osromr_item_values.json",
-  quests: "http://127.0.0.1:8000/data/osromr_quests.json",
-  icons: "http://127.0.0.1:8000/data/osromr_item_icons.json",
-  searchIndexName: "http://127.0.0.1:8000/data/osromr_search_index_name.json",
-  searchIndexDesc: "http://127.0.0.1:8000/data/osromr_search_index_desc.json",
-  spriteMap: "http://127.0.0.1:8000/data/osromr_sprite_map.json"
+  items: "http://127.0.0.1:8298/data/osromr_items.json",
+  newItems: "http://127.0.0.1:8298/data/osromr_items_new.json",
+  values: "http://127.0.0.1:8298/data/osromr_item_values.json",
+  quests: "http://127.0.0.1:8298/data/osromr_quests.json",
+  shops: "http://127.0.0.1:8298/data/osromr_shops.json",
+  icons: "http://127.0.0.1:8298/data/osromr_item_icons.json",
+  searchIndexName: "http://127.0.0.1:8298/data/osromr_search_index_name.json",
+  searchIndexDesc: "http://127.0.0.1:8298/data/osromr_search_index_desc.json",
+  spriteMap: "http://127.0.0.1:8298/data/osromr_sprite_map.json"
 };
 
 // Active URLs based on USE_LOCAL_SERVER toggle
