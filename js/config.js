@@ -8,7 +8,7 @@ const FLAVOR = 'Midrate';
 // === DATA SOURCE CONFIGURATION ===
 
 // Toggle between local development server and production GitHub URLs
-const USE_LOCAL_SERVER = false; 
+const USE_LOCAL_SERVER = true; 
 
 // Auto-import data on page load (disable if you want to manually import)
 const AUTO_IMPORT_ON_FIRST_LOAD = true;

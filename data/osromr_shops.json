@@ -646,6 +646,446 @@
       "caption": "@npc 13"
     },
     {
+      "name": "Cardo",
+      "subgroups": [
+        {
+          "name": "Cardo Shop",
+          "shops": [
+            {
+              "name": "Kafra Card",
+              "producesId": 12211,
+              "accountBound": true,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 6
+                }
+              ]
+            },
+            {
+              "name": "Aloevera",
+              "producesId": 606,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Anodyne",
+              "producesId": 605,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Yggdrasil Berry",
+              "producesId": 607,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Box of Resentment",
+              "producesId": 12030,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Box of Thunder",
+              "producesId": 12028,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Glistening Coat",
+              "producesId": 7139,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Mercenary Blue Potion",
+              "producesId": 12185,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Mercenary Red Potion",
+              "producesId": 12184,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Bowman Scroll 10",
+              "producesId": 12162,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Fencer Scroll 10",
+              "producesId": 12172,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Spearman Scroll 10",
+              "producesId": 12182,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Poison Bottle",
+              "producesId": 678,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Box of Drowsiness",
+              "producesId": 12031,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Box of Gloom",
+              "producesId": 12029,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Box of Storms",
+              "producesId": 12032,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 14
+                }
+              ]
+            },
+            {
+              "name": "Chewy Ricecake",
+              "producesId": 14525,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Buff Scroll",
+              "producesId": 43001,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Fire]",
+              "producesId": 12114,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Earth]",
+              "producesId": 12116,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Water]",
+              "producesId": 12115,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Wind]",
+              "producesId": 12117,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Equipment Repair Spell Book",
+              "producesId": 14587,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 24
+                }
+              ]
+            },
+            {
+              "name": "Box of Sunlight",
+              "producesId": 12033,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Buche De Noel",
+              "producesId": 12354,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Distilled Fighting Spirit",
+              "producesId": 682,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Herb of Incantation",
+              "producesId": 683,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Stat Boost 1",
+              "producesId": 13830,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Stat Boost 2",
+              "producesId": 13831,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Stat Boost 3",
+              "producesId": 13832,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Stat Boost 4",
+              "producesId": 13833,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 120
+                }
+              ]
+            },
+            {
+              "name": "Arunafeltz Desert Sandwich",
+              "producesId": 12321,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Convex Mirror",
+              "producesId": 12214,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Military Ration B",
+              "producesId": 12272,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Military Ration C",
+              "producesId": 12273,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "SP Consumption Reduction Potion",
+              "producesId": 12298,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Abrasive",
+              "producesId": 12458,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Glass of Illusion",
+              "producesId": 12457,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 1200
+                }
+              ]
+            },
+            {
+              "name": "Tyr's Blessing",
+              "producesId": 14601,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "cardo_points",
+                  "amount": 1200
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 13"
+    },
+    {
       "name": "Donation Ticket Shop",
       "subgroups": [
         {

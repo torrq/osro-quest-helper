@@ -382,7 +382,8 @@ const REQ_TYPE_OPTIONS = [
   { value: 'activity_points', label: 'Activity Points' },
   { value: 'monster_arena_points', label: 'MA Points' },
   { value: 'otherworld_points', label: 'Otherworld Points' },
-  { value: 'hall_of_heritage_points', label: 'HoH Points' }
+  { value: 'hall_of_heritage_points', label: 'HoH Points' },
+  { value: 'cardo_points', label: 'Cardo Points'}
 ];
 
 function renderRequirement(req, idx) {
@@ -452,6 +453,7 @@ const CURRENCY_NAMES = {
   monster_arena_points: 'Monster Arena Points',
   otherworld_points: 'Otherworld Points',
   hall_of_heritage_points: 'Hall of Heritage Points',
+  cardo_points: 'Cardo Points',
   event_points: 'Event Points'
 };
 
