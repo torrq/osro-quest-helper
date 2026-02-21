@@ -2,13 +2,13 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 108;
+const VERSION = 109;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
 
 // Toggle between local development server and production GitHub URLs
-const USE_LOCAL_SERVER = true; 
+const USE_LOCAL_SERVER = false; 
 
 // Auto-import data on page load (disable if you want to manually import)
 const AUTO_IMPORT_ON_FIRST_LOAD = true;
