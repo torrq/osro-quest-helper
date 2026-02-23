@@ -3455,6 +3455,456 @@
       "caption": "@npc 32"
     },
     {
+      "name": "Treasure Hunter's Shop",
+      "subgroups": [
+        {
+          "name": "Weapons: Axes",
+          "shops": [
+            {
+              "name": "Sabbath",
+              "producesId": 1365,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Slaughter",
+              "producesId": 1367,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Tomahawk",
+              "producesId": 1368,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Great Axe",
+              "producesId": 1364,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Guillotine",
+              "producesId": 1369,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: One-handed Swords",
+          "shops": [
+            {
+              "name": "Edge",
+              "producesId": 1132,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Scissor Sword",
+              "producesId": 1134,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Nagan",
+              "producesId": 1130,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Immaterial Sword",
+              "producesId": 1141,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Excalibur",
+              "producesId": 1137,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Byeollungum",
+              "producesId": 1140,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Tirfing",
+              "producesId": 1139,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Two-handed Swords",
+          "shops": [
+            {
+              "name": "Dragon Slayer",
+              "producesId": 1166,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Schweizersabel",
+              "producesId": 1167,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Muramasa",
+              "producesId": 1164,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Masamune",
+              "producesId": 1165,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Spears",
+          "shops": [
+            {
+              "name": "Brionac",
+              "producesId": 1470,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Longinus's Spear",
+              "producesId": 1469,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Gelerdria",
+              "producesId": 1414,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Brocca",
+              "producesId": 1415,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Tjungkuletti",
+              "producesId": 1416,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Bows",
+          "shops": [
+            {
+              "name": "Rudra Bow",
+              "producesId": 1720,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Roguemaster's Bow",
+              "producesId": 1719,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Daggers",
+          "shops": [
+            {
+              "name": "Fisherman's Dagger",
+              "producesId": 1249,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Obsidian Dagger",
+              "producesId": 1248,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Kindle Dagger",
+              "producesId": 1247,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Jujube Dagger",
+              "producesId": 13000,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Holy Dagger",
+              "producesId": 1244,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Mailbreaker",
+              "producesId": 1225,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Swordbreaker",
+              "producesId": 1224,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Combat Knife",
+              "producesId": 1228,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Knuckles",
+          "shops": [
+            {
+              "name": "Kaiser Knuckle",
+              "producesId": 1813,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Berserk",
+              "producesId": 1814,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Maces",
+          "shops": [
+            {
+              "name": "Spike",
+              "producesId": 1523,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Slash",
+              "producesId": 1526,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Grand Cross",
+              "producesId": 1528,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Quadrille",
+              "producesId": 1527,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Whips",
+          "shops": [
+            {
+              "name": "Rapture Rose",
+              "producesId": 1963,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Chemeti Whip",
+              "producesId": 1964,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Weapons: Staves",
+          "shops": [
+            {
+              "name": "Mighty Staff",
+              "producesId": 1613,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Wizardry Staff",
+              "producesId": 1473,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Evil Bone Wand",
+              "producesId": 1615,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Soul Staff",
+              "producesId": 1472,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Equipments",
+          "shops": [
+            {
+              "name": "Robe of Casting",
+              "producesId": 2343,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        },
+        {
+          "name": "Castle Drops",
+          "shops": [
+            {
+              "name": "Freya's Jewel",
+              "producesId": 7073,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Thor's Gauntlets",
+              "producesId": 7074,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Iron Maiden",
+              "producesId": 7075,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Wheel of the Unknown",
+              "producesId": 7076,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Silver Ornament",
+              "producesId": 7077,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Wrath of Valkyrie",
+              "producesId": 7078,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Feather of Angel Wing",
+              "producesId": 7079,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Cat Tread",
+              "producesId": 7080,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Woman's Moustache",
+              "producesId": 7081,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Root of Stone",
+              "producesId": 7082,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Spirit of Fish",
+              "producesId": 7083,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Sputum of Bird",
+              "producesId": 7084,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Sinew of Bear",
+              "producesId": 7085,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Breath of Spirit",
+              "producesId": 7087,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Snow Crystal",
+              "producesId": 7088,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Omen of Tempest",
+              "producesId": 7089,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Ripple",
+              "producesId": 7090,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Billow",
+              "producesId": 7091,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Drifting Air",
+              "producesId": 7092,
+              "accountBound": false,
+              "requirements": []
+            },
+            {
+              "name": "Emblem of the Sun God",
+              "producesId": 7086,
+              "accountBound": false,
+              "requirements": []
+            }
+          ]
+        }
+      ],
+      "caption": "@token"
+    },
+    {
       "name": "Branch Merchant",
       "subgroups": [
         {
