@@ -3453,6 +3453,50 @@
         }
       ],
       "caption": "@npc 32"
+    },
+    {
+      "name": "Branch Merchant",
+      "subgroups": [
+        {
+          "name": "Shop",
+          "shops": [
+            {
+              "name": "Poring Box",
+              "producesId": 12109,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Dead Branch",
+              "producesId": 604,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Bloody Branch",
+              "producesId": 12103,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "DB Rooms"
     }
   ]
 }
