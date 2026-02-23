@@ -551,6 +551,25 @@ function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, i
       text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-sm">[${totalOptions} OPTIONS]</span>`,
       visible: isVisible
     });
+
+    if (isExpanded) {
+      shopSources.forEach((s) => {
+        const optionIndent = "  ".repeat(depth + 1);
+        const location = findShopLocation(s);
+        let groupIdx = -1, subIdx = -1, shopIdx = -1;
+        DATA.shopGroups.forEach((group, gi) => {
+          group.subgroups.forEach((subgroup, si) => {
+            const shi = subgroup.shops.indexOf(s);
+            if (shi !== -1) { groupIdx = gi; subIdx = si; shopIdx = shi; }
+          });
+        });
+        lines.push({
+          level: depth + 1,
+          text: `${optionIndent}<span class="text-muted shop-option"><span class="shop-badge">Shop</span> <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location}</a></span>`,
+          visible: isExpanded
+        });
+      });
+    }
   } else {
     // Multiple quest sources or mix of quests and shops
     const totalOptions = questSources.length + shopSources.length;
@@ -683,16 +702,10 @@ function findMultiQuestItems(questIndex) {
       if (req.type === "item" && questIndex.has(req.id)) {
         const sources = questIndex.get(req.id);
         if (sources.length > 1) {
-          multiQuestItems.set(req.id, { 
-            name: getItem(req.id).name, 
-            sources  // This is an array of {type, source} objects
-          });
+          multiQuestItems.set(req.id, { name: getItem(req.id).name, sources });
         }
-        // Continue scanning only quest sources
-        const questSources = sources.filter(s => s.type === 'quest');
-        if (questSources.length > 0) {
-          scan(questSources[0].source, newPath);
-        }
+        // Recurse into quest sources to find nested multi-option items
+        sources.filter(s => s.type === 'quest').forEach(s => scan(s.source, newPath));
       }
     });
   }
@@ -701,9 +714,15 @@ function findMultiQuestItems(questIndex) {
   return multiQuestItems;
 }
 
+function getSourceFingerprint(sources) {
+  // Unique key representing a set of sources — items sharing this are the same choice
+  return sources.map(s =>
+    s.type === 'quest' ? `q:${s.source.producesId}` : `s:${findShopLocation(s.source)}`
+  ).sort().join('||');
+}
+
 function renderMultiOptionSummary(multiQuestItems, questIndex) {
-  const items = Array.from(multiQuestItems.entries());
-  const combinations = generateCombinations(items);
+  const combinations = generateCombinations(multiQuestItems);
   const tabLabels = combinations.map(combo => generateTabLabel(combo));
 
   return `
@@ -713,7 +732,7 @@ function renderMultiOptionSummary(multiQuestItems, questIndex) {
           <div class="summary-tab ${idx === 0 ? "active" : ""}" 
                onclick="switchSummaryTab(${idx})"
                title="${tabLabels[idx]}">
-            Option ${idx + 1} ${tabLabels[idx]}
+            Option ${idx + 1}: ${tabLabels[idx]}
           </div>
         `).join("")}
       </div>
@@ -727,14 +746,18 @@ function renderMultiOptionSummary(multiQuestItems, questIndex) {
 }
 
 function generateTabLabel(combo) {
+  const seen = new Set();
   const labels = [];
   for (const [, sourceObj] of Object.entries(combo)) {
+    let label;
     if (sourceObj.type === 'quest') {
-      const location = findQuestLocation(sourceObj.source);
-      labels.push(`${location}`);
+      label = findQuestLocation(sourceObj.source);
     } else if (sourceObj.type === 'shop') {
-      const location = findShopLocation(sourceObj.source);
-      labels.push(`${location} (Shop)`);
+      label = `${findShopLocation(sourceObj.source)} (Shop)`;
+    }
+    if (label && !seen.has(label)) {
+      seen.add(label);
+      labels.push(label);
     }
   }
   return labels.join(" | ");
@@ -915,21 +938,53 @@ function renderSummaryItems(entries, totalZeny) {
   return html;
 }
 
-function generateCombinations(items) {
-  if (items.length === 0) return [{}];
-  const [first, ...rest] = items;
-  const [itemId, { sources }] = first;
-  
-  const restCombos = generateCombinations(rest);
+function generateGroupedCombinations(groups) {
+  if (groups.length === 0) return [{}];
+  const [first, ...rest] = groups;
+  const restCombos = generateGroupedCombinations(rest);
   const result = [];
-  
-  // Include both quest and shop sources in combinations
-  for (const sourceObj of sources) {
+  for (const sourceObj of first.sources) {
     for (const combo of restCombos) {
-      result.push({ ...combo, [itemId]: sourceObj });
+      const newCombo = { ...combo };
+      for (const itemId of first.itemIds) {
+        newCombo[itemId] = sourceObj;
+      }
+      result.push(newCombo);
     }
   }
   return result;
+}
+
+function generateCombinations(multiQuestItems) {
+  // Group items that share identical source sets into one decision
+  const fingerprintToGroup = new Map();
+  for (const [itemId, { sources }] of multiQuestItems.entries()) {
+    const fp = getSourceFingerprint(sources);
+    if (!fingerprintToGroup.has(fp)) {
+      fingerprintToGroup.set(fp, { sources, itemIds: [] });
+    }
+    fingerprintToGroup.get(fp).itemIds.push(itemId);
+  }
+
+  // Generate combinations across the unique groups only
+  function combineGroups(groups) {
+    if (groups.length === 0) return [{}];
+    const [first, ...rest] = groups;
+    const restCombos = combineGroups(rest);
+    const result = [];
+    for (const sourceObj of first.sources) {
+      for (const combo of restCombos) {
+        const newCombo = { ...combo };
+        for (const itemId of first.itemIds) {
+          newCombo[itemId] = sourceObj; // Same choice applies to all items in this group
+        }
+        result.push(newCombo);
+      }
+    }
+    return result;
+  }
+
+  return combineGroups(Array.from(fingerprintToGroup.values()));
 }
 
 function switchSummaryTab(index) {
