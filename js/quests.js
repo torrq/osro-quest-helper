@@ -135,12 +135,9 @@ function createSubgroupElement(group, subgroup, groupIdx, subIdx, filter) {
   subDiv.appendChild(createSubgroupHeader(subgroup, groupIdx, subIdx, isSubExpanded));
 
   if (isSubExpanded && Array.isArray(subgroup.quests)) {
-    const matchingQuests = filter 
-      ? subgroup.quests.filter(q => q && q.name && q.name.toLowerCase().includes(filter))
-      : subgroup.quests;
-
-    matchingQuests.forEach((quest, questIdx) => {
+    subgroup.quests.forEach((quest, questIdx) => {
       if (!quest) return;
+      if (filter && !(quest.name && quest.name.toLowerCase().includes(filter))) return;
       subDiv.appendChild(createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx));
     });
 

@@ -988,6 +988,11 @@ const debouncedItemFilter = debounce(value => {
   }
 }, 250);
 
+const debouncedShopFilter = debounce(value => {
+  state.shopSearchFilter = value.toLowerCase();
+  if (window.renderShopsSidebar) renderShopsSidebar();
+}, 250);
+
 function clearItemSearch() {
   const input = document.getElementById("itemSearchInput");
   if (input) input.value = "";
@@ -1002,6 +1007,12 @@ function clearQuestSearch() {
   state.questSearchFilter = "";
   document.getElementById("questSearchInput").value = "";
   if (window.renderSidebar) renderSidebar();
+}
+
+function clearShopSearch() {
+  state.shopSearchFilter = "";
+  document.getElementById("shopSearchInput").value = "";
+  if (window.renderShopsSidebar) renderShopsSidebar();
 }
 
 function toggleDescSearch(checked) {
@@ -1299,14 +1310,19 @@ document.addEventListener("DOMContentLoaded", () => {
         versionTag.textContent = `${FLAVOR}`;
   }
 
-  const qInput = document.getElementById("questSearchInput");
   const iInput = document.getElementById("itemSearchInput");
+  if (iInput) {
+    iInput.addEventListener("input", e => debouncedItemFilter(e.target.value));
+  }
 
+  const qInput = document.getElementById("questSearchInput");
   if (qInput) {
     qInput.addEventListener("input", e => debouncedQuestFilter(e.target.value));
   }
-  if (iInput) {
-    iInput.addEventListener("input", e => debouncedItemFilter(e.target.value));
+
+  const sInput = document.getElementById("shopSearchInput");
+  if (sInput) {
+    sInput.addEventListener("input", e => debouncedShopFilter(e.target.value));
   }
   
   // Handle browser back/forward buttons

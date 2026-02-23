@@ -180,13 +180,10 @@ function createShopSubgroupElement(group, subgroup, groupIdx, subIdx, filter) {
   subDiv.appendChild(createShopSubgroupHeader(subgroup, groupIdx, subIdx, isSubExpanded));
 
   if (isSubExpanded && Array.isArray(subgroup.shops)) {
-    const matchingShops = filter 
-      ? subgroup.shops.filter(q => q && q.name && q.name.toLowerCase().includes(filter))
-      : subgroup.shops;
-
-    matchingShops.forEach((shop, shopIdx) => {
-      if (!shop) return;
-      subDiv.appendChild(createShopElement(group, subgroup, shop, groupIdx, subIdx, shopIdx));
+    subgroup.shops.forEach((shop, shopIdx) => {
+        if (!shop) return;
+        if (filter && !(shop.name && shop.name.toLowerCase().includes(filter))) return;
+        subDiv.appendChild(createShopElement(group, subgroup, shop, groupIdx, subIdx, shopIdx));
     });
 
     if (!filter && state.editorMode) {
