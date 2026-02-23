@@ -3029,6 +3029,430 @@
         }
       ],
       "caption": "@npc 26"
+    },
+    {
+      "name": "Battleground Officer",
+      "subgroups": [
+        {
+          "name": "Weapon Shop",
+          "shops": [
+            {
+              "name": "Brave Assassin's Damascus",
+              "producesId": 13036,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Gladiator's Blade",
+              "producesId": 13411,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Assaulter's Katzbalger",
+              "producesId": 1183,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Assaulter Spear",
+              "producesId": 1425,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Warlock's Magic Wand",
+              "producesId": 1632,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Strong Recovery Wand",
+              "producesId": 1634,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Battlefield Morning Star",
+              "producesId": 1543,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Insane Battle Axe",
+              "producesId": 1380,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Huuma Front Shuriken",
+              "producesId": 13305,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Battle Crossbow",
+              "producesId": 1739,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Carnage Katar",
+              "producesId": 1279,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Battlefield Guitar",
+              "producesId": 1924,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Battle Lariat",
+              "producesId": 1978,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Battle Strategy Book",
+              "producesId": 1574,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Brave Battle Fist",
+              "producesId": 1824,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Soldier Revolver",
+              "producesId": 13108,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Soldier Gatling Gun",
+              "producesId": 13172,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Soldier Grenade Launcher",
+              "producesId": 13174,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Lance",
+              "producesId": 1486,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Claymore",
+              "producesId": 1187,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Rapier",
+              "producesId": 13417,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Gladius",
+              "producesId": 13042,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Two-Handed Axe",
+              "producesId": 1382,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Morning Star",
+              "producesId": 1546,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Arc Wand",
+              "producesId": 1640,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Lariat",
+              "producesId": 1981,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Jamadhar",
+              "producesId": 1282,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Hunter Bow",
+              "producesId": 1743,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Claw",
+              "producesId": 1826,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Tablet",
+              "producesId": 1576,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Shotgun",
+              "producesId": 13178,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Rifle",
+              "producesId": 13176,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Glorious Guitar",
+              "producesId": 1927,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Equipment Shop",
+          "shops": [
+            {
+              "name": "Berry Box [10]",
+              "producesId": 40152,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40051,
+                  "amount": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 32"
     }
   ]
 }
