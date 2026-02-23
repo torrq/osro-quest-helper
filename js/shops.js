@@ -413,6 +413,7 @@ const SHOP_SHOP_REQ_TYPE_OPTIONS = [
   { value: 'monster_arena_points', label: 'MA Points' },
   { value: 'otherworld_points', label: 'Otherworld Points' },
   { value: 'hall_of_heritage_points', label: 'HoH Points' },
+  { value: 'token_points', label: 'Token Points' },
   { value: 'cardo_points', label: 'Cardo Points' }
 ];
 
@@ -483,6 +484,7 @@ const SHOP_CURRENCY_NAMES = {
   monster_arena_points: 'Monster Arena Points',
   otherworld_points: 'Otherworld Points',
   hall_of_heritage_points: 'Hall of Heritage Points',
+  token_points: 'Token Points',
   cardo_points: 'Cardo Points',
   event_points: 'Event Points'
 };
