@@ -1086,6 +1086,787 @@
       "caption": "@npc 13"
     },
     {
+      "name": "Monster Arena Shop",
+      "subgroups": [
+        {
+          "name": "Headgears",
+          "shops": [
+            {
+              "name": "Jedi Hood [1]",
+              "producesId": 42027,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Sith Hood [1]",
+              "producesId": 42028,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Neptune Helm [1]",
+              "producesId": 45103,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Hollow Mask [1]",
+              "producesId": 42301,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 10000
+                }
+              ]
+            },
+            {
+              "name": "Full Hollow Mask [1]",
+              "producesId": 45502,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 15000
+                }
+              ]
+            },
+            {
+              "name": "Darth Maul Mask [1]",
+              "producesId": 42302,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 12000
+                }
+              ]
+            },
+            {
+              "name": "Jaguar Hat [1]",
+              "producesId": 5539,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30000
+                }
+              ]
+            },
+            {
+              "name": "Power of Thor [1]",
+              "producesId": 5495,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Drooping Garm [1]",
+              "producesId": 45181,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Large Majestic Goat [1]",
+              "producesId": 5518,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 25000
+                }
+              ]
+            },
+            {
+              "name": "Gigantic Baphomet Horns [1]",
+              "producesId": 45176,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 25000
+                }
+              ]
+            },
+            {
+              "name": "Cat Ear Beret [1]",
+              "producesId": 18600,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30000
+                }
+              ]
+            },
+            {
+              "name": "Shining Poo Poo Hat [1]",
+              "producesId": 45202,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Miscellaneous",
+          "shops": [
+            {
+              "name": "Buff Scroll",
+              "producesId": 43001,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Slot Enchantment Scroll",
+              "producesId": 40306,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Infusion Stone",
+              "producesId": 40314,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Option Enchantment Scroll",
+              "producesId": 40315,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Scroll of Protection",
+              "producesId": 40071,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "Costume Enchantment Scroll",
+              "producesId": 40313,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Aspersio Scroll",
+              "producesId": 12217,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 50
+                }
+              ]
+            },
+            {
+              "name": "Storm Gust Scroll",
+              "producesId": 14513,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Vermilion Scroll",
+              "producesId": 14514,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Meteor Scroll",
+              "producesId": 14512,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Wind Walk Scroll",
+              "producesId": 12219,
+              "successRate": 100,
+              "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "monster_arena_points",
+                  "amount": 30
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 18"
+    },
+    {
+      "name": "Event Manager",
+      "subgroups": [
+        {
+          "name": "Exchange Coins",
+          "shops": [
+            {
+              "name": "Silver Event Coin",
+              "producesId": 40007,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40006,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Gold Event Coin",
+              "producesId": 40008,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Shop: Castle Drops",
+          "shops": [
+            {
+              "name": "Emblem of the Sun God",
+              "producesId": 7086,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Freya's Jewel",
+              "producesId": 7073,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Thor's Gauntlets",
+              "producesId": 7074,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Iron Maiden",
+              "producesId": 7075,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Wheel of the Unknown",
+              "producesId": 7076,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Silver Ornament",
+              "producesId": 7077,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Wrath of Valkyrie",
+              "producesId": 7078,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Feather of Angel Wing",
+              "producesId": 7079,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Cat Tread",
+              "producesId": 7080,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Woman's Moustache",
+              "producesId": 7081,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Root of Stone",
+              "producesId": 7082,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Spirit of Fish",
+              "producesId": 7083,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Sputum of Bird",
+              "producesId": 7084,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Sinew of Bear",
+              "producesId": 7085,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Breath of Spirit",
+              "producesId": 7087,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Snow Crystal",
+              "producesId": 7088,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Omen of Tempest",
+              "producesId": 7089,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Ripple",
+              "producesId": 7090,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Billow",
+              "producesId": 7091,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Drifting Air",
+              "producesId": 7092,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Shop: Rare MVP Cards",
+          "shops": [
+            {
+              "name": "Memory of Thanatos Card",
+              "producesId": 4399,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "High Wizard Card",
+              "producesId": 4365,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "High Priest Card",
+              "producesId": 4363,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Sniper Card",
+              "producesId": 4367,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Whitesmith Card",
+              "producesId": 4361,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Lord Knight Card",
+              "producesId": 4357,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Assassin Cross Card",
+              "producesId": 4359,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Clown Card",
+              "producesId": 4560,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Professor Card",
+              "producesId": 4561,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Champion Card",
+              "producesId": 4562,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Creator Card",
+              "producesId": 4563,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Stalker Card",
+              "producesId": 4564,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Paladin Card",
+              "producesId": 4565,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Gypsy Card",
+              "producesId": 4566,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@go 22"
+    },
+    {
       "name": "Donation Ticket Shop",
       "subgroups": [
         {
@@ -2248,334 +3029,6 @@
         }
       ],
       "caption": "@npc 26"
-    },
-    {
-      "name": "Monster Arena Shop",
-      "subgroups": [
-        {
-          "name": "Headgears",
-          "shops": [
-            {
-              "name": "Jedi Hood [1]",
-              "producesId": 42027,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 20000
-                }
-              ]
-            },
-            {
-              "name": "Sith Hood [1]",
-              "producesId": 42028,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 20000
-                }
-              ]
-            },
-            {
-              "name": "Neptune Helm [1]",
-              "producesId": 45103,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 20000
-                }
-              ]
-            },
-            {
-              "name": "Hollow Mask [1]",
-              "producesId": 42301,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 10000
-                }
-              ]
-            },
-            {
-              "name": "Full Hollow Mask [1]",
-              "producesId": 45502,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 15000
-                }
-              ]
-            },
-            {
-              "name": "Darth Maul Mask [1]",
-              "producesId": 42302,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 12000
-                }
-              ]
-            },
-            {
-              "name": "Jaguar Hat [1]",
-              "producesId": 5539,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30000
-                }
-              ]
-            },
-            {
-              "name": "Power of Thor [1]",
-              "producesId": 5495,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 20000
-                }
-              ]
-            },
-            {
-              "name": "Drooping Garm [1]",
-              "producesId": 45181,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 20000
-                }
-              ]
-            },
-            {
-              "name": "Large Majestic Goat [1]",
-              "producesId": 5518,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 25000
-                }
-              ]
-            },
-            {
-              "name": "Gigantic Baphomet Horns [1]",
-              "producesId": 45176,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 25000
-                }
-              ]
-            },
-            {
-              "name": "Cat Ear Beret [1]",
-              "producesId": 18600,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30000
-                }
-              ]
-            },
-            {
-              "name": "Shining Poo Poo Hat [1]",
-              "producesId": 45202,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30000
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Miscellaneous",
-          "shops": [
-            {
-              "name": "Buff Scroll",
-              "producesId": 43001,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 10
-                }
-              ]
-            },
-            {
-              "name": "Slot Enchantment Scroll",
-              "producesId": 40306,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 300
-                }
-              ]
-            },
-            {
-              "name": "Infusion Stone",
-              "producesId": 40314,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 1000
-                }
-              ]
-            },
-            {
-              "name": "Option Enchantment Scroll",
-              "producesId": 40315,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 5000
-                }
-              ]
-            },
-            {
-              "name": "Scroll of Protection",
-              "producesId": 40071,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 6000
-                }
-              ]
-            },
-            {
-              "name": "Costume Enchantment Scroll",
-              "producesId": 40313,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 5000
-                }
-              ]
-            },
-            {
-              "name": "Aspersio Scroll",
-              "producesId": 12217,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 50
-                }
-              ]
-            },
-            {
-              "name": "Storm Gust Scroll",
-              "producesId": 14513,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Vermilion Scroll",
-              "producesId": 14514,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Meteor Scroll",
-              "producesId": 14512,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Wind Walk Scroll",
-              "producesId": 12219,
-              "successRate": 100,
-              "description": "",
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "monster_arena_points",
-                  "amount": 30
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "caption": "@npc 18"
     }
   ]
 }
