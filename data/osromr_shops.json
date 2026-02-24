@@ -1414,459 +1414,6 @@
       "caption": "@npc 18"
     },
     {
-      "name": "Event Manager",
-      "subgroups": [
-        {
-          "name": "Exchange Coins",
-          "shops": [
-            {
-              "name": "Silver Event Coin",
-              "producesId": 40007,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40006,
-                  "amount": 5
-                }
-              ]
-            },
-            {
-              "name": "Gold Event Coin",
-              "producesId": 40008,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 5
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Shop: Castle Drops",
-          "shops": [
-            {
-              "name": "Emblem of the Sun God",
-              "producesId": 7086,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 5
-                }
-              ]
-            },
-            {
-              "name": "Freya's Jewel",
-              "producesId": 7073,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Thor's Gauntlets",
-              "producesId": 7074,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Iron Maiden",
-              "producesId": 7075,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Wheel of the Unknown",
-              "producesId": 7076,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Silver Ornament",
-              "producesId": 7077,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Wrath of Valkyrie",
-              "producesId": 7078,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Feather of Angel Wing",
-              "producesId": 7079,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Cat Tread",
-              "producesId": 7080,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Woman's Moustache",
-              "producesId": 7081,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Root of Stone",
-              "producesId": 7082,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Spirit of Fish",
-              "producesId": 7083,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Sputum of Bird",
-              "producesId": 7084,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Sinew of Bear",
-              "producesId": 7085,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Breath of Spirit",
-              "producesId": 7087,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Snow Crystal",
-              "producesId": 7088,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Omen of Tempest",
-              "producesId": 7089,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Ripple",
-              "producesId": 7090,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Billow",
-              "producesId": 7091,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            },
-            {
-              "name": "Drifting Air",
-              "producesId": 7092,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40007,
-                  "amount": 3
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Shop: Rare MVP Cards",
-          "shops": [
-            {
-              "name": "Memory of Thanatos Card",
-              "producesId": 4399,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 10
-                }
-              ]
-            },
-            {
-              "name": "High Wizard Card",
-              "producesId": 4365,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 10
-                }
-              ]
-            },
-            {
-              "name": "High Priest Card",
-              "producesId": 4363,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 10
-                }
-              ]
-            },
-            {
-              "name": "Sniper Card",
-              "producesId": 4367,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 15
-                }
-              ]
-            },
-            {
-              "name": "Whitesmith Card",
-              "producesId": 4361,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 15
-                }
-              ]
-            },
-            {
-              "name": "Lord Knight Card",
-              "producesId": 4357,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 15
-                }
-              ]
-            },
-            {
-              "name": "Assassin Cross Card",
-              "producesId": 4359,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 15
-                }
-              ]
-            },
-            {
-              "name": "Clown Card",
-              "producesId": 4560,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Professor Card",
-              "producesId": 4561,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Champion Card",
-              "producesId": 4562,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Creator Card",
-              "producesId": 4563,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Stalker Card",
-              "producesId": 4564,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Paladin Card",
-              "producesId": 4565,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            },
-            {
-              "name": "Gypsy Card",
-              "producesId": 4566,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "item",
-                  "id": 40008,
-                  "amount": 30
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "caption": "@go 22"
-    },
-    {
       "name": "Donation Ticket Shop",
       "subgroups": [
         {
@@ -4223,6 +3770,459 @@
         }
       ],
       "caption": "@token"
+    },
+    {
+      "name": "Event Manager",
+      "subgroups": [
+        {
+          "name": "Exchange Coins",
+          "shops": [
+            {
+              "name": "Silver Event Coin",
+              "producesId": 40007,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40006,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Gold Event Coin",
+              "producesId": 40008,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Shop: Castle Drops",
+          "shops": [
+            {
+              "name": "Emblem of the Sun God",
+              "producesId": 7086,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Freya's Jewel",
+              "producesId": 7073,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Thor's Gauntlets",
+              "producesId": 7074,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Iron Maiden",
+              "producesId": 7075,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Wheel of the Unknown",
+              "producesId": 7076,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Silver Ornament",
+              "producesId": 7077,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Wrath of Valkyrie",
+              "producesId": 7078,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Feather of Angel Wing",
+              "producesId": 7079,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Cat Tread",
+              "producesId": 7080,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Woman's Moustache",
+              "producesId": 7081,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Root of Stone",
+              "producesId": 7082,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Spirit of Fish",
+              "producesId": 7083,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Sputum of Bird",
+              "producesId": 7084,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Sinew of Bear",
+              "producesId": 7085,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Breath of Spirit",
+              "producesId": 7087,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Snow Crystal",
+              "producesId": 7088,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Omen of Tempest",
+              "producesId": 7089,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Ripple",
+              "producesId": 7090,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Billow",
+              "producesId": 7091,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Drifting Air",
+              "producesId": 7092,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40007,
+                  "amount": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Shop: Rare MVP Cards",
+          "shops": [
+            {
+              "name": "Memory of Thanatos Card",
+              "producesId": 4399,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "High Wizard Card",
+              "producesId": 4365,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "High Priest Card",
+              "producesId": 4363,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Sniper Card",
+              "producesId": 4367,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Whitesmith Card",
+              "producesId": 4361,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Lord Knight Card",
+              "producesId": 4357,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Assassin Cross Card",
+              "producesId": 4359,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 15
+                }
+              ]
+            },
+            {
+              "name": "Clown Card",
+              "producesId": 4560,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Professor Card",
+              "producesId": 4561,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Champion Card",
+              "producesId": 4562,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Creator Card",
+              "producesId": 4563,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Stalker Card",
+              "producesId": 4564,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Paladin Card",
+              "producesId": 4565,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Gypsy Card",
+              "producesId": 4566,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40008,
+                  "amount": 30
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@go 22"
     },
     {
       "name": "Branch Merchant",
