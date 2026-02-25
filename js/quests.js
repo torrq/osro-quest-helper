@@ -257,6 +257,9 @@ function renderQuestContentCore() {
   const item = getItem(quest.producesId);
   const descriptionHtml = parseDescription(item.desc);
 
+  // Build once — shared by renderMaterialTree, renderSummary, renderTotalsHeader
+  const questIndex = buildQuestIndex();
+
   container.innerHTML = `
     <div class="editor-quest">
 
@@ -282,11 +285,11 @@ function renderQuestContentCore() {
       ` : ""}
       
       <span class="item-label">Requirements:</span>
-      <div class="material-tree">${renderMaterialTree()}</div>
+      <div class="material-tree">${renderMaterialTree(questIndex)}</div>
 
-      ${renderTotalsHeader()}
+      <div id="totals-header-container">${renderTotalsHeader(questIndex)}</div>
       <div class="summary-section">
-        ${renderSummary()}
+        ${renderSummary(questIndex)}
       </div>
 
       <div class="quest-footer-actions">
@@ -297,9 +300,12 @@ function renderQuestContentCore() {
     </div>
   `;
 
-  document.querySelectorAll(".req-search-input").forEach(input => {
-    setupAutocomplete(input, parseInt(input.getAttribute("data-idx")));
-  });
+  // Autocomplete setup only needed in editor mode (#8)
+  if (state.editorMode) {
+    document.querySelectorAll(".req-search-input").forEach(input => {
+      setupAutocomplete(input, parseInt(input.getAttribute("data-idx")));
+    });
+  }
 }
 
 function renderQuestViewerHeader(quest, item) {
@@ -370,6 +376,8 @@ function renderBoundCheckbox(quest) {
 }
 
 function renderRequirementsSection(quest) {
+  // In viewer mode the material tree is the display; no need for editable cards
+  if (!state.editorMode) return '';
   return `
     <div class="requirements-wrapper">
       <span class="item-label">Requirements: &nbsp;<button class="btn btn-sm btn-primary" onclick="addRequirement()">+ Add</button></span>
@@ -382,8 +390,8 @@ function renderRequirementsSection(quest) {
   `;
 }
 
-function renderTotalsHeader() {
-  if (!hasNestedQuests()) return '<span class="item-label">Value:</span>';
+function renderTotalsHeader(questIndex) {
+  if (!hasNestedQuests(questIndex)) return '<span class="item-label">Value:</span>';
   
   return `
     <div class="totals-header">
@@ -484,13 +492,37 @@ const CURRENCY_NAMES = {
   event_points: 'Event Points'
 };
 
-function renderMaterialTree() {
-  const questIndex = buildQuestIndex();
+function renderMaterialTree(questIndex) {
+
+  const questMeta = new Map();
+  DATA.groups.forEach((g, gi) => {
+    if (!g || !Array.isArray(g.subgroups)) return;
+    g.subgroups.forEach((sg, si) => {
+      if (!sg || !Array.isArray(sg.quests)) return;
+      sg.quests.forEach((q, qi) => {
+        questMeta.set(q, { gi, si, qi, loc: `${g.name} / ${sg.name}` });
+      });
+    });
+  });
+
+  const shopMeta = new Map();
+  if (Array.isArray(DATA.shopGroups)) {
+    DATA.shopGroups.forEach((g, gi) => {
+      if (!g || !Array.isArray(g.subgroups)) return;
+      g.subgroups.forEach((sg, si) => {
+        if (!sg || !Array.isArray(sg.shops)) return;
+        sg.shops.forEach((s, shi) => {
+          shopMeta.set(s, { gi, si, shi, loc: `${g.name} / ${sg.name}` });
+        });
+      });
+    });
+  }
+
   const MAX_DEPTH = 10;
 
   function walkQuest(quest, depth, multiplier, questPath, parentKey) {
     if (questPath.has(quest) || depth > MAX_DEPTH) return '';
-    const newPath = new Set(questPath).add(quest);
+    questPath.add(quest);
     let html = '';
 
     // Three-tier sort (stable within each tier):
@@ -518,11 +550,13 @@ function renderMaterialTree() {
       const immuneHtml = req.immune ? `<span class="mat-immune">IMMUNE</span>` : '';
 
       if (req.type === 'item' && questIndex.has(req.id)) {
-        html += _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, newPath, walkQuest);
+        html += _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, questPath, walkQuest, questMeta, shopMeta);
       } else {
         html += _matLeaf(req, eff, immuneHtml);
       }
     });
+
+    questPath.delete(quest);
     return html;
   }
 
@@ -536,9 +570,6 @@ function _matXbtn(itemKey, expanded) {
   return `<div class="mat-xbtn${expanded ? ' open' : ''}" onclick="toggleTreeItem('${itemKey}')">▶</div>`;
 }
 
-// aside is rendered as a separate sub-line BELOW the flex row so it
-// never competes with the item name or pushes the amount around.
-// asideType: 'loc' → left-aligned location, 'val' → right-aligned zeny value.
 function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune }) {
   const fmtAmt = (typeof amt === 'number' && amt >= 1000)
     ? amt.toLocaleString()
@@ -558,29 +589,7 @@ function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune 
     </div>${subLine}`;
 }
 
-function _matFindQuest(q) {
-  let gi = -1, si = -1, qi = -1;
-  DATA.groups.forEach((g, gIdx) => {
-    g.subgroups.forEach((sg, sIdx) => {
-      const idx = sg.quests.indexOf(q);
-      if (idx !== -1) { gi = gIdx; si = sIdx; qi = idx; }
-    });
-  });
-  return { gi, si, qi };
-}
-
-function _matFindShop(s) {
-  let gi = -1, si = -1, shi = -1;
-  DATA.shopGroups.forEach((g, gIdx) => {
-    g.subgroups.forEach((sg, sIdx) => {
-      const idx = sg.shops.indexOf(s);
-      if (idx !== -1) { gi = gIdx; si = sIdx; shi = idx; }
-    });
-  });
-  return { gi, si, shi };
-}
-
-function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, newPath, walkQuest) {
+function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, questPath, walkQuest, questMeta, shopMeta) {
   const item = getItem(req.id);
   const icon = renderItemIcon(req.id);
   const rawName = item ? (item.name || 'Unknown') : 'Unknown';
@@ -592,25 +601,23 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
   // ---- CASE 1: single quest source, no shops ----
   if (questSources.length === 1 && shopSources.length === 0) {
     const q = questSources[0];
-    const loc = findQuestLocation(q);
-    const { gi, si, qi } = _matFindQuest(q);
+    const meta = questMeta.get(q) || { gi: -1, si: -1, qi: -1, loc: '' };
     const xbtn  = _matXbtn(itemKey, expanded);
     const badge = `<span class="quest-badge">Quest</span>`;
-    const name  = `<a class="item-link tree-item-name" onclick="navigateToQuest(${gi},${si},${qi})">${rawName}</a>`;
+    const name  = `<a class="item-link tree-item-name" onclick="navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${rawName}</a>`;
     const children = expanded
-      ? `<div class="mat-children">${walkQuest(q, depth + 1, eff, newPath, itemKey)}</div>`
+      ? `<div class="mat-children">${walkQuest(q, depth + 1, eff, questPath, itemKey)}</div>`
       : '';
-    return `<div class="mat-node">${_matRow({ xbtn, badge, icon, name, slot, amt: eff, aside: loc, asideType: 'loc', immune: immuneHtml })}${children}</div>`;
+    return `<div class="mat-node">${_matRow({ xbtn, badge, icon, name, slot, amt: eff, aside: meta.loc, asideType: 'loc', immune: immuneHtml })}${children}</div>`;
   }
 
   // ---- CASE 2: single shop source, no quests ----
   if (questSources.length === 0 && shopSources.length === 1) {
-    const s = shopSources[0];
-    const loc = findShopLocation(s);
-    const { gi, si, shi } = _matFindShop(s);
+    const sh = shopSources[0];
+    const meta = shopMeta.get(sh) || { gi: -1, si: -1, shi: -1, loc: '' };
     const badge = `<span class="shop-badge">Shop</span>`;
-    const name  = `<a class="item-link tree-item-name" onclick="navigateToShop(${gi},${si},${shi})">${rawName}</a>`;
-    return `<div class="mat-node">${_matRow({ badge, icon, name, slot, amt: eff, aside: loc, asideType: 'loc', immune: immuneHtml })}</div>`;
+    const name  = `<a class="item-link tree-item-name" onclick="navigateToShop(${meta.gi},${meta.si},${meta.shi})">${rawName}</a>`;
+    return `<div class="mat-node">${_matRow({ badge, icon, name, slot, amt: eff, aside: meta.loc, asideType: 'loc', immune: immuneHtml })}</div>`;
   }
 
   // ---- CASES 3 & 4: multiple options (quests and/or shops) ----
@@ -622,25 +629,23 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
   let optRows = '';
   if (expanded) {
     questSources.forEach(q => {
-      const loc = findQuestLocation(q);
-      const { gi, si, qi } = _matFindQuest(q);
+      const meta = questMeta.get(q) || { gi: -1, si: -1, qi: -1, loc: '?' };
       const optKey = `${itemKey}-q-${q.producesId}`;
-      const sub = walkQuest(q, depth + 2, eff, newPath, optKey);
+      const sub = walkQuest(q, depth + 2, eff, questPath, optKey);
       optRows += `
         <div class="mat-opt-row">
           <span class="quest-badge">Quest</span>
-          <a class="item-link" onclick="navigateToQuest(${gi},${si},${qi})">${loc}</a>
+          <a class="item-link" onclick="navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${meta.loc}</a>
           <span class="mat-aside">${q.successRate}% success</span>
         </div>
         ${sub ? `<div class="mat-children">${sub}</div>` : ''}`;
     });
-    shopSources.forEach(s => {
-      const loc = findShopLocation(s);
-      const { gi, si, shi } = _matFindShop(s);
+    shopSources.forEach(sh => {
+      const meta = shopMeta.get(sh) || { gi: -1, si: -1, shi: -1, loc: '?' };
       optRows += `
         <div class="mat-opt-row">
           <span class="shop-badge">Shop</span>
-          <a class="item-link" onclick="navigateToShop(${gi},${si},${shi})">${loc}</a>
+          <a class="item-link" onclick="navigateToShop(${meta.gi},${meta.si},${meta.shi})">${meta.loc}</a>
         </div>`;
     });
   }
@@ -676,8 +681,6 @@ function _matLeaf(req, eff, immuneHtml) {
   return `<div class="mat-node">${_matRow({ icon, name, slot, amt: eff, aside, asideType, immune: immuneHtml })}</div>`;
 }
 
-// Retained from original — used by _matSourceItem above and also by
-// renderSummary / generateTabLabel further down in this file.
 function findQuestLocation(quest) {
   let location = "";
   DATA.groups.forEach(group => {
@@ -721,10 +724,9 @@ function _fmtSuffix(val, div, suffix) {
 
 // ===== SUMMARY RENDERING =====
 
-function renderSummary() {
+function renderSummary(questIndex) {
   if (!state.showFullTotals) return renderDirectRequirements();
 
-  const questIndex = buildQuestIndex();
   const multiQuestItems = findMultiQuestItems(questIndex);
 
   if (multiQuestItems.size === 0) return renderSingleSummary(questIndex, {});
@@ -765,9 +767,13 @@ function getSourceFingerprint(sources) {
 function renderMultiOptionSummary(multiQuestItems, questIndex) {
   const combinations = generateCombinations(multiQuestItems);
   const tabLabels = combinations.map(combo => generateTabLabel(combo));
+  const truncWarning = combinations._truncated
+    ? `<div class="combinations-warning">⚠ Showing first ${combinations.length} of ${combinations._total} combinations</div>`
+    : '';
 
   return `
     <div class="summary-tabs-container">
+      ${truncWarning}
       <div class="summary-tabs">
         ${combinations.map((combo, idx) => `
           <div class="summary-tab ${idx === 0 ? "active" : ""}" 
@@ -846,7 +852,7 @@ function calculateFullRequirements(questIndex, questChoices) {
 
   function accumulate(quest, multiplier, questPath = new Set()) {
     if (questPath.has(quest)) return;
-    const newPath = new Set(questPath).add(quest);
+    questPath.add(quest);
 
     quest.requirements.forEach(req => {
       const effectiveAmount = (Number(req.amount) || 0) * multiplier;
@@ -857,7 +863,7 @@ function calculateFullRequirements(questIndex, questChoices) {
         
         // Only recurse if it's a quest
         if (chosenSourceObj.type === 'quest') {
-          accumulate(chosenSourceObj.source, effectiveAmount, newPath);
+          accumulate(chosenSourceObj.source, effectiveAmount, questPath);
         } else if (chosenSourceObj.type === 'shop') {
           // For shops, add the shop's requirements directly (don't recurse)
           const shop = chosenSourceObj.source;
@@ -872,6 +878,8 @@ function calculateFullRequirements(questIndex, questChoices) {
         accumulateRequirement(totals, req, effectiveAmount);
       }
     });
+
+    questPath.delete(quest);
   }
 
   accumulate(state.selectedQuest, 1);
@@ -896,8 +904,8 @@ function accumulateRequirement(totals, req, effectiveAmount) {
       name,
       amount: 0,
       type: req.type,
-      itemId: req.type === "item" ? req.id : null,  // ADD THIS
-      slot: req.type === "item" ? (Number(item?.slot) || 0) : 0,  // ADD THIS
+      itemId: req.type === "item" ? req.id : null,
+      slot: req.type === "item" ? (Number(item?.slot) || 0) : 0,
       value: req.type === "item" ? (item?.value || 0) : 0
     };
   }
@@ -936,7 +944,7 @@ function renderSummaryItems(entries, totalZeny) {
     html += `
       <div class="tot-row tot-row--total">
         <span class="tot-label">Total Zeny Value</span>
-        <span class="tot-amt">${totalZeny.toLocaleString()}</span>
+        <span class="tot-amt">${formatZenyCompact(totalZeny)}</span>
       </div>`;
   }
 
@@ -1007,6 +1015,8 @@ function generateGroupedCombinations(groups) {
   return result;
 }
 
+const MAX_COMBINATIONS = 12;  // cap to prevent exponential blowup (#4)
+
 function generateCombinations(multiQuestItems) {
   // Group items that share identical source sets into one decision
   const fingerprintToGroup = new Map();
@@ -1018,17 +1028,18 @@ function generateCombinations(multiQuestItems) {
     fingerprintToGroup.get(fp).itemIds.push(itemId);
   }
 
-  // Generate combinations across the unique groups only
+  // Generate combinations across the unique groups only, capped at MAX_COMBINATIONS
   function combineGroups(groups) {
     if (groups.length === 0) return [{}];
     const [first, ...rest] = groups;
     const restCombos = combineGroups(rest);
     const result = [];
-    for (const sourceObj of first.sources) {
+    outer: for (const sourceObj of first.sources) {
       for (const combo of restCombos) {
+        if (result.length >= MAX_COMBINATIONS) break outer;
         const newCombo = { ...combo };
         for (const itemId of first.itemIds) {
-          newCombo[itemId] = sourceObj; // Same choice applies to all items in this group
+          newCombo[itemId] = sourceObj;
         }
         result.push(newCombo);
       }
@@ -1036,7 +1047,15 @@ function generateCombinations(multiQuestItems) {
     return result;
   }
 
-  return combineGroups(Array.from(fingerprintToGroup.values()));
+  const combinations = combineGroups(Array.from(fingerprintToGroup.values()));
+
+  // Count total possible to detect truncation
+  const total = Array.from(fingerprintToGroup.values())
+    .reduce((acc, g) => acc * g.sources.length, 1);
+  combinations._truncated = total > MAX_COMBINATIONS;
+  combinations._total = total;
+
+  return combinations;
 }
 
 function switchSummaryTab(index) {
@@ -1098,9 +1117,8 @@ function buildQuestIndex() {
   return index;
 }
 
-function hasNestedQuests() {
+function hasNestedQuests(questIndex) {
   if (!state.selectedQuest) return false;
-  const questIndex = buildQuestIndex();
   return state.selectedQuest.requirements.some(
     req => req.type === "item" && questIndex.has(req.id)
   );
@@ -1108,14 +1126,30 @@ function hasNestedQuests() {
 
 function toggleTotals() {
   state.showFullTotals = !state.showFullTotals;
-  renderQuestContent();
+
+  const headerContainer = document.getElementById('totals-header-container');
+  const summarySection  = document.querySelector('.summary-section');
+  if (headerContainer && summarySection) {
+    const questIndex = buildQuestIndex();
+    headerContainer.innerHTML = renderTotalsHeader(questIndex);
+    summarySection.innerHTML  = renderSummary(questIndex);
+  } else {
+    renderQuestContent();
+  }
 }
 
 function toggleTreeItem(itemKey) {
   state.expandedTreeItems.has(itemKey)
     ? state.expandedTreeItems.delete(itemKey)
     : state.expandedTreeItems.add(itemKey);
-  renderQuestContent();
+
+  const treeContainer = document.querySelector('.material-tree');
+  if (treeContainer) {
+    const questIndex = buildQuestIndex();
+    treeContainer.innerHTML = renderMaterialTree(questIndex);
+  } else {
+    renderQuestContent();
+  }
 }
 
 // ===== QUEST EDITING =====
@@ -1230,8 +1264,8 @@ function setupProducesSearch(input) {
 }
 
 function setupAutocomplete(input, idx) {
-  input.addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
+
+  const handleInput = debounce(value => {
     if (value.length < 1) {
       hideAutocomplete(idx);
       return;
@@ -1270,8 +1304,9 @@ function setupAutocomplete(input, idx) {
     }
 
     matches.length > 0 ? showAutocomplete(idx, matches) : hideAutocomplete(idx);
-  });
+  }, 150);
 
+  input.addEventListener("input", e => handleInput(e.target.value.toLowerCase()));
   input.addEventListener("blur", () => setTimeout(() => hideAutocomplete(idx), 200));
 }
 
