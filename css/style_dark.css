@@ -12,7 +12,7 @@
   
   /* Header background image */
   --header-bg-image: url("../image/osromr_dark.jpg");
-  
+
   /* Panel colors */
   --panel: #0d1117;
   --panel-bg: #161b22;
@@ -92,4 +92,13 @@
   /* Badge */
   --badge-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
   --badge-shadow: rgba(238, 90, 111, 0.3);
+
+ /* Material Tree - dark theme connectors */
+  --mat-connector:      #2d3748;   /* subtle dark blue-gray spine */
+  --mat-connector-opts: #2d3748;
+
+  /* ⚠ options badge — amber on dark */
+  --mat-opts-bg:     rgba(210, 153, 34, 0.12);
+  --mat-opts-text:   #d29922;
+  --mat-opts-border: rgba(210, 153, 34, 0.4);
 }

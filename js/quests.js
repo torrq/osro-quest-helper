@@ -136,10 +136,10 @@ function createSubgroupElement(group, subgroup, groupIdx, subIdx, filter) {
 
   if (isSubExpanded && Array.isArray(subgroup.quests)) {
     subgroup.quests.forEach((quest, questIdx) => {
-      if (!quest) return;
-      if (filter && !(quest.name && quest.name.toLowerCase().includes(filter))) return;
-      subDiv.appendChild(createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx));
-    });
+    if (!quest) return;
+    if (filter && !(quest.name && quest.name.toLowerCase().includes(filter))) return;
+    subDiv.appendChild(createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx));
+  });
 
     if (!filter && state.editorMode) {
       subDiv.appendChild(createAddQuestButton(groupIdx, subIdx));
@@ -280,11 +280,11 @@ function renderQuestContentCore() {
       ${renderRequirementsSection(quest)}
 
       ${descriptionHtml ? `
-        <span class="item-label">Item Description:</span>
+        <span class="item-label">Description:</span>
         <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
       ` : ""}
       
-      <span class="item-label">Tree:</span>
+      <span class="item-label">Requirements:</span>
       <div class="material-tree">${renderMaterialTree()}</div>
 
       ${renderTotalsHeader()}
@@ -355,11 +355,11 @@ function renderRequirementsSection(quest) {
 }
 
 function renderTotalsHeader() {
-  if (!hasNestedQuests()) return '<span class="item-label">Totals:</span>';
+  if (!hasNestedQuests()) return '<span class="item-label">Value:</span>';
   
   return `
     <div class="totals-header">
-      <span class="item-label">Totals:</span>
+      <span class="item-label">Value:</span>
       <button class="btn btn-sm btn-toggle-totals" onclick="toggleTotals()">
         ${state.showFullTotals ? "This Quest Only" : "Include Sub-Quests"}
       </button>
@@ -458,178 +458,202 @@ const CURRENCY_NAMES = {
 
 function renderMaterialTree() {
   const questIndex = buildQuestIndex();
-  const lines = [];
   const MAX_DEPTH = 10;
 
-  function walkQuest(quest, depth, multiplier, questPath = new Set(), parentKey = "", parentExpanded = true) {
-    if (questPath.has(quest) || depth > MAX_DEPTH) return;
+  function walkQuest(quest, depth, multiplier, questPath, parentKey) {
+    if (questPath.has(quest) || depth > MAX_DEPTH) return '';
     const newPath = new Set(questPath).add(quest);
+    let html = '';
 
-    quest.requirements.forEach((req, reqIdx) => {
-      const effectiveAmount = (Number(req.amount) || 0) * multiplier;
-      const indent = "  ".repeat(depth);
-      const connector = depth > 0 ? "└─ " : "";
-      const immuneBadge = req.immune ? ' <span class="text-immune">[IMMUNE]</span>' : "";
-      const itemKey = `${parentKey}-${depth}-${reqIdx}`;
-      const isExpanded = state.expandedTreeItems.has(itemKey);
-      const hasChildren = req.type === "item" && questIndex.has(req.id);
-      const isVisible = depth === 0 || parentExpanded;
+    // Three-tier sort (stable within each tier):
+    //   0 — currencies (zeny, gold, credit): known zeny values, grouped first
+    //   1 — plain items and shop-only sources: no expansion
+    //   2 — anything expandable (quest source or multi-option): goes to bottom
+    const sortTier = r => {
+      const CURRENCIES = ['zeny', 'gold', 'credit'];
+      if (CURRENCIES.includes(r.type)) return 0;
+      if (r.type !== 'item' || !questIndex.has(r.id)) return 1;
+      const srcs = questIndex.get(r.id);
+      const hasQuest = srcs.some(s => s.type === 'quest');
+      const isMulti  = srcs.length > 1;
+      return (hasQuest || isMulti) ? 2 : 1;
+    };
 
-      if (req.type === "item" && questIndex.has(req.id)) {
-        renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, isExpanded, hasChildren, effectiveAmount, immuneBadge, depth, lines, isVisible, newPath, walkQuest);
+    const sorted = quest.requirements
+      .map((req, originalIdx) => ({ req, originalIdx }))
+      .sort((a, b) => sortTier(a.req) - sortTier(b.req));
+
+    sorted.forEach(({ req, originalIdx }) => {
+      const eff = (Number(req.amount) || 0) * multiplier;
+      const itemKey = `${parentKey}-${depth}-${originalIdx}`;
+      const expanded = state.expandedTreeItems.has(itemKey);
+      const immuneHtml = req.immune ? `<span class="mat-immune">IMMUNE</span>` : '';
+
+      if (req.type === 'item' && questIndex.has(req.id)) {
+        html += _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, newPath, walkQuest);
       } else {
-        renderTreeLeafItem(req, effectiveAmount, indent, connector, immuneBadge, depth, lines, isVisible);
+        html += _matLeaf(req, eff, immuneHtml);
       }
     });
+    return html;
   }
 
-  walkQuest(state.selectedQuest, 0, 1, new Set(), "", true);
-  return lines.length === 0 ? '<div class="tree-line">No requirements</div>' : 
-         lines.filter(l => l.visible).map(l => `<div class="tree-line level-${l.level}">${l.text}</div>`).join("");
+  const inner = walkQuest(state.selectedQuest, 0, 1, new Set(), '');
+  return inner
+    ? `<div class="mat-tree">${inner}</div>`
+    : '<div class="tree-line">No requirements</div>';
 }
 
-function renderTreeItemWithQuests(req, questIndex, indent, connector, itemKey, isExpanded, hasChildren, effectiveAmount, immuneBadge, depth, lines, isVisible, newPath, walkQuest) {
+function _matXbtn(itemKey, expanded) {
+  return `<div class="mat-xbtn${expanded ? ' open' : ''}" onclick="toggleTreeItem('${itemKey}')">▶</div>`;
+}
+
+// aside is rendered as a separate sub-line BELOW the flex row so it
+// never competes with the item name or pushes the amount around.
+// asideType: 'loc' → left-aligned location, 'val' → right-aligned zeny value.
+function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune }) {
+  const fmtAmt = (typeof amt === 'number' && amt >= 1000)
+    ? amt.toLocaleString()
+    : amt;
+  const subClass = asideType === 'loc' ? 'mat-row-sub mat-row-sub--loc' : 'mat-row-sub mat-row-sub--val';
+  const subLine = aside
+    ? `<div class="${subClass}">${aside}</div>`
+    : '';
+  return `
+    <div class="mat-row">
+      ${xbtn  || '<span class="mat-xbtn-ph"></span>'}
+      ${badge || ''}
+      ${icon  || ''}
+      <span class="mat-name">${name}${slot ? `<span class="mat-slot">${slot}</span>` : ''}</span>
+      <span class="mat-amt"><span class="mat-x">×</span>${fmtAmt}</span>
+      ${immune || ''}
+    </div>${subLine}`;
+}
+
+function _matFindQuest(q) {
+  let gi = -1, si = -1, qi = -1;
+  DATA.groups.forEach((g, gIdx) => {
+    g.subgroups.forEach((sg, sIdx) => {
+      const idx = sg.quests.indexOf(q);
+      if (idx !== -1) { gi = gIdx; si = sIdx; qi = idx; }
+    });
+  });
+  return { gi, si, qi };
+}
+
+function _matFindShop(s) {
+  let gi = -1, si = -1, shi = -1;
+  DATA.shopGroups.forEach((g, gIdx) => {
+    g.subgroups.forEach((sg, sIdx) => {
+      const idx = sg.shops.indexOf(s);
+      if (idx !== -1) { gi = gIdx; si = sIdx; shi = idx; }
+    });
+  });
+  return { gi, si, shi };
+}
+
+function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, newPath, walkQuest) {
   const item = getItem(req.id);
+  const icon = renderItemIcon(req.id);
+  const rawName = item ? (item.name || 'Unknown') : 'Unknown';
+  const slot = item && Number(item.slot) > 0 ? `[${item.slot}]` : '';
   const sources = questIndex.get(req.id);
   const questSources = sources.filter(s => s.type === 'quest').map(s => s.source);
-  const shopSources = sources.filter(s => s.type === 'shop').map(s => s.source);
-  
-  const expandIcon = hasChildren ? `<span class="tree-expand-icon ${isExpanded ? "expanded" : ""}" onclick="toggleTreeItem('${itemKey}')">▶</span> ` : "";
-  
-  if (questSources.length === 1 && shopSources.length === 0) {
-    // Single quest source, no shops - link to quest instead of item
-    const q = questSources[0];
-    const questLocation = findQuestLocation(q);
-    let groupIdx = -1, subIdx = -1, questIdx = -1;
-    DATA.groups.forEach((group, gi) => {
-      group.subgroups.forEach((subgroup, si) => {
-        const qi = subgroup.quests.indexOf(q);
-        if (qi !== -1) {
-          groupIdx = gi;
-          subIdx = si;
-          questIdx = qi;
-        }
-      });
-    });
-    
-    lines.push({
-      level: depth,
-      text: `${indent}${connector}${expandIcon}<span class="quest-badge">Quest</span> <a class="quest-link tree-item-name" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-sm">(${questLocation})</span>`,
-      visible: isVisible
-    });
-    walkQuest(questSources[0], depth + 1, effectiveAmount, newPath, itemKey, isExpanded);
-  } else if (questSources.length === 0 && shopSources.length === 1) {
-    // Only one shop available - link to shop instead of item
-    const s = shopSources[0];
-    const shopLocation = findShopLocation(s);
-    
-    let groupIdx = -1, subIdx = -1, shopIdx = -1;
-    DATA.shopGroups.forEach((group, gi) => {
-      group.subgroups.forEach((subgroup, si) => {
-        const shi = subgroup.shops.indexOf(s);
-        if (shi !== -1) {
-          groupIdx = gi;
-          subIdx = si;
-          shopIdx = shi;
-        }
-      });
-    });
-    
-    lines.push({
-      level: depth,
-      text: `${indent}${connector}<span class="shop-badge">Shop</span> <a class="shop-link tree-item-name" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-muted-sm">(${shopLocation})</span>`,
-      visible: isVisible
-    });
-  } else if (questSources.length === 0 && shopSources.length > 1) {
-    // Multiple shops - keep item link but show shop options
-    const totalOptions = shopSources.length;
-    lines.push({
-      level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-sm">[${totalOptions} OPTIONS]</span>`,
-      visible: isVisible
-    });
+  const shopSources  = sources.filter(s => s.type === 'shop').map(s => s.source);
 
-    if (isExpanded) {
-      shopSources.forEach((s) => {
-        const optionIndent = "  ".repeat(depth + 1);
-        const location = findShopLocation(s);
-        let groupIdx = -1, subIdx = -1, shopIdx = -1;
-        DATA.shopGroups.forEach((group, gi) => {
-          group.subgroups.forEach((subgroup, si) => {
-            const shi = subgroup.shops.indexOf(s);
-            if (shi !== -1) { groupIdx = gi; subIdx = si; shopIdx = shi; }
-          });
-        });
-        lines.push({
-          level: depth + 1,
-          text: `${optionIndent}<span class="text-muted shop-option"><span class="shop-badge">Shop</span> <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location}</a></span>`,
-          visible: isExpanded
-        });
-      });
-    }
-  } else {
-    // Multiple quest sources or mix of quests and shops
-    const totalOptions = questSources.length + shopSources.length;
-    lines.push({
-      level: depth,
-      text: `${indent}${connector}${expandIcon}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item)}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge} <span class="text-warning-sm">[${totalOptions} OPTIONS]</span>`,
-      visible: isVisible
-    });
-    
-    if (isExpanded) {
-      // Show quest options with location
-      questSources.forEach((q) => {
-        const optionIndent = "  ".repeat(depth + 1);
-        const optionKey = `${itemKey}-quest-${q.producesId}`;
-        const location = findQuestLocation(q);
-        
-        let groupIdx = -1, subIdx = -1, questIdx = -1;
-        DATA.groups.forEach((group, gi) => {
-          group.subgroups.forEach((subgroup, si) => {
-            const qi = subgroup.quests.indexOf(q);
-            if (qi !== -1) {
-              groupIdx = gi;
-              subIdx = si;
-              questIdx = qi;
-            }
-          });
-        });
-        
-        lines.push({
-          level: depth + 1,
-          text: `${optionIndent}<span class="text-muted"><span class="quest-badge">Quest</span> <a class="quest-link" onclick="navigateToQuest(${groupIdx}, ${subIdx}, ${questIdx})">${location}</a> (${q.successRate}% success)</span>`,
-          visible: isExpanded
-        });
-        walkQuest(q, depth + 2, effectiveAmount, newPath, optionKey, true);
-      });
-      
-      // Show shop options with location
-      shopSources.forEach((s) => {
-        const optionIndent = "  ".repeat(depth + 1);
-        const location = findShopLocation(s);
-        
-        let groupIdx = -1, subIdx = -1, shopIdx = -1;
-        DATA.shopGroups.forEach((group, gi) => {
-          group.subgroups.forEach((subgroup, si) => {
-            const shi = subgroup.shops.indexOf(s);
-            if (shi !== -1) {
-              groupIdx = gi;
-              subIdx = si;
-              shopIdx = shi;
-            }
-          });
-        });
-        
-        lines.push({
-          level: depth + 1,
-          text: `${optionIndent}<span class="text-muted shop-option"><span class="shop-badge">Shop</span> <a class="shop-link" onclick="navigateToShop(${groupIdx}, ${subIdx}, ${shopIdx})">${location}</a></span>`,
-          visible: isExpanded
-        });
-      });
-    }
+  // ---- CASE 1: single quest source, no shops ----
+  if (questSources.length === 1 && shopSources.length === 0) {
+    const q = questSources[0];
+    const loc = findQuestLocation(q);
+    const { gi, si, qi } = _matFindQuest(q);
+    const xbtn  = _matXbtn(itemKey, expanded);
+    const badge = `<span class="quest-badge">Quest</span>`;
+    const name  = `<a class="item-link tree-item-name" onclick="navigateToQuest(${gi},${si},${qi})">${rawName}</a>`;
+    const children = expanded
+      ? `<div class="mat-children">${walkQuest(q, depth + 1, eff, newPath, itemKey)}</div>`
+      : '';
+    return `<div class="mat-node">${_matRow({ xbtn, badge, icon, name, slot, amt: eff, aside: loc, asideType: 'loc', immune: immuneHtml })}${children}</div>`;
   }
+
+  // ---- CASE 2: single shop source, no quests ----
+  if (questSources.length === 0 && shopSources.length === 1) {
+    const s = shopSources[0];
+    const loc = findShopLocation(s);
+    const { gi, si, shi } = _matFindShop(s);
+    const badge = `<span class="shop-badge">Shop</span>`;
+    const name  = `<a class="item-link tree-item-name" onclick="navigateToShop(${gi},${si},${shi})">${rawName}</a>`;
+    return `<div class="mat-node">${_matRow({ badge, icon, name, slot, amt: eff, aside: loc, asideType: 'loc', immune: immuneHtml })}</div>`;
+  }
+
+  // ---- CASES 3 & 4: multiple options (quests and/or shops) ----
+  const total = questSources.length + shopSources.length;
+  const xbtn  = _matXbtn(itemKey, expanded);
+  const badge  = `<span class="mat-badge-opts">⚠ ${total} opts</span>`;
+  const name   = `<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${rawName}</a>`;
+
+  let optRows = '';
+  if (expanded) {
+    questSources.forEach(q => {
+      const loc = findQuestLocation(q);
+      const { gi, si, qi } = _matFindQuest(q);
+      const optKey = `${itemKey}-q-${q.producesId}`;
+      const sub = walkQuest(q, depth + 2, eff, newPath, optKey);
+      optRows += `
+        <div class="mat-opt-row">
+          <span class="quest-badge">Quest</span>
+          <a class="item-link" onclick="navigateToQuest(${gi},${si},${qi})">${loc}</a>
+          <span class="mat-aside">${q.successRate}% success</span>
+        </div>
+        ${sub ? `<div class="mat-children">${sub}</div>` : ''}`;
+    });
+    shopSources.forEach(s => {
+      const loc = findShopLocation(s);
+      const { gi, si, shi } = _matFindShop(s);
+      optRows += `
+        <div class="mat-opt-row">
+          <span class="shop-badge">Shop</span>
+          <a class="item-link" onclick="navigateToShop(${gi},${si},${shi})">${loc}</a>
+        </div>`;
+    });
+  }
+
+  const children = expanded
+    ? `<div class="mat-children mat-children-opts">${optRows}</div>`
+    : '';
+  return `<div class="mat-node">${_matRow({ xbtn, badge, icon, name, slot, amt: eff, immune: immuneHtml })}${children}</div>`;
 }
 
+function _matLeaf(req, eff, immuneHtml) {
+  let icon = '', name = '', aside = '', asideType = '', slot = '';
+
+  if (req.type === 'zeny') {
+    icon = renderItemIcon(1);
+    name = 'Zeny';
+  } else if (req.type === 'credit') {
+    icon  = renderItemIcon(SPECIAL_ITEMS.CREDIT);
+    name  = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
+    aside = `${(eff * getCreditValue()).toLocaleString()} zeny`;
+    asideType = 'val';
+  } else if (req.type === 'gold') {
+    icon  = renderItemIcon(SPECIAL_ITEMS.GOLD);
+    name  = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+    aside = `${(eff * getGoldValue()).toLocaleString()} zeny`;
+    asideType = 'val';
+  } else if (CURRENCY_NAMES[req.type]) {
+    icon  = renderItemIcon(2);
+    name  = CURRENCY_NAMES[req.type];
+  } else if (req.type === 'item') {
+    const item = getItem(req.id);
+    icon = renderItemIcon(req.id);
+    if (item && Number(item.slot) > 0) slot = `[${item.slot}]`;
+    name = `<a class="item-link" onclick="navigateToItem(${req.id})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>`;
+  }
+
+  return `<div class="mat-node">${_matRow({ icon, name, slot, amt: eff, aside, asideType, immune: immuneHtml })}</div>`;
+}
+
+// Retained from original — used by _matSourceItem above and also by
+// renderSummary / generateTabLabel further down in this file.
 function findQuestLocation(quest) {
   let location = "";
   DATA.groups.forEach(group => {
@@ -652,27 +676,6 @@ function findShopLocation(shop) {
     });
   });
   return location;
-}
-
-function renderTreeLeafItem(req, effectiveAmount, indent, connector, immuneBadge, depth, lines, isVisible) {
-  let text = "";
-  
-  if (req.type === "zeny") {
-    text = `${indent}${connector}<span class="tree-item-name">Zeny</span> × <span class="tree-amount">${effectiveAmount.toLocaleString()}</span>${immuneBadge}`;
-  } else if (req.type === "credit") {
-    const zenyValue = effectiveAmount * getCreditValue();
-    text = `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`;
-  } else if (req.type === "gold") {
-    const zenyValue = effectiveAmount * getGoldValue();
-    text = `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a> × <span class="tree-amount">${effectiveAmount}</span> <span class="text-muted">(${zenyValue.toLocaleString()} zeny)</span>${immuneBadge}`;
-  } else if (CURRENCY_NAMES[req.type]) {
-    text = `${indent}${connector}<span class="tree-item-name">${CURRENCY_NAMES[req.type]}</span> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`;
-  } else if (req.type === "item") {
-    const item = getItem(req.id);
-    text = `${indent}${connector}<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a> × <span class="tree-amount">${effectiveAmount}</span>${immuneBadge}`;
-  }
-
-  if (text) lines.push({ level: depth, text, visible: isVisible });
 }
 
 // ===== SUMMARY RENDERING =====
@@ -876,60 +879,71 @@ function sortTotalEntries(totals) {
 }
 
 function renderSummaryItems(entries, totalZeny) {
-  let html = "";
+  // Only show entries that have a known zeny value
+  const zenyCurrencies = new Set(["zeny", "gold", "credit"]);
+  const valued = entries.filter(e =>
+    zenyCurrencies.has(e.type) || (e.type === "item" && e.value > 0)
+  );
 
-  if (totalZeny > 0) {
-    html += `
-      <div class="summary-item summary-total-row">
-        <span class="summary-name summary-total-label">Total Zeny Value</span>
-        <span class="summary-amount summary-total-amount">${totalZeny.toLocaleString()}</span>
-      </div>
-    `;
+  if (valued.length === 0) {
+    return '<div class="tot-empty">No zeny-valued materials</div>';
   }
 
-  html += entries.map(entry => {
-    const displayAmount = entry.type === "zeny" ? entry.amount.toLocaleString() : entry.amount;
-    let extra = "";
-    
-    if (entry.type === "credit") {
-      extra = ` <span class="text-muted-sm">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
+  // Total zeny row
+  let html = "";
+  if (totalZeny > 0) {
+    html += `
+      <div class="tot-row tot-row--total">
+        <span class="tot-label">Total Zeny Value</span>
+        <span class="tot-amt">${totalZeny.toLocaleString()}</span>
+      </div>`;
+  }
+
+  html += valued.map(entry => {
+    // Icon
+    let iconHtml = "";
+    if (entry.type === "zeny")        iconHtml = renderItemIcon(1);
+    else if (entry.type === "gold")   iconHtml = renderItemIcon(SPECIAL_ITEMS.GOLD);
+    else if (entry.type === "credit") iconHtml = renderItemIcon(SPECIAL_ITEMS.CREDIT);
+    else                              iconHtml = renderItemIcon(entry.itemId);
+
+    // Name (clickable where applicable)
+    const slot = entry.type === "item" && entry.slot > 0
+      ? `<span class="mat-slot">[${entry.slot}]</span>` : "";
+    let nameHtml = "";
+    if (entry.type === "zeny") {
+      nameHtml = `Zeny`;
     } else if (entry.type === "gold") {
-      extra = ` <span class="text-muted-sm">(${(entry.amount * getGoldValue()).toLocaleString()} zeny)</span>`;
-    } else if (entry.type === "item" && entry.value > 0) {
-      extra = ` <span class="text-muted-sm">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
-    }
-
-    // Add slot display for items
-    const slotDisplay = entry.type === "item" && entry.slot > 0 ? ` [${entry.slot}]` : '';
-    
-    iconHtml = '';
-    nameHtml = '';
-
-    // Make item names clickable
-    if(entry.type === "item" && entry.itemId) {
-      iconHtml = renderItemIcon(entry.itemId);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}${slotDisplay}</a>`;
-    } else if (entry.type === "zeny") {
-      iconHtml = renderItemIcon(1);
-      nameHtml = `${entry.name}${slotDisplay}`;
-    } else if(entry.type === "gold") {
-      iconHtml = renderItemIcon(SPECIAL_ITEMS.GOLD);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">${entry.name}${slotDisplay}</a>`;
-    } else if(entry.type === "credit") {
-      iconHtml = renderItemIcon(SPECIAL_ITEMS.CREDIT);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">${entry.name}${slotDisplay}</a>`;
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+    } else if (entry.type === "credit") {
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
     } else {
-      iconHtml = renderItemIcon(2);
-      nameHtml = `${entry.name}${slotDisplay}`;
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}</a>`;
     }
+
+    // Amount (formatted)
+    const fmtAmt = entry.amount >= 1000
+      ? entry.amount.toLocaleString()
+      : entry.amount;
+
+    // Zeny sub-value
+    let zenyVal = 0;
+    if (entry.type === "zeny")        zenyVal = entry.amount;
+    else if (entry.type === "gold")   zenyVal = entry.amount * getGoldValue();
+    else if (entry.type === "credit") zenyVal = entry.amount * getCreditValue();
+    else                              zenyVal = entry.amount * entry.value;
+
+    const subLine = (entry.type !== "zeny" && zenyVal > 0)
+      ? `<div class="mat-row-sub mat-row-sub--val">${zenyVal.toLocaleString()} zeny</div>`
+      : "";
 
     return `
-      <div class="summary-item">
+      <div class="tot-row">
+        <span class="mat-xbtn-ph"></span>
         ${iconHtml}
-        <span class="summary-name">${nameHtml}</span>
-        <span class="summary-amount">${displayAmount}${extra}</span>
-      </div>
-    `;
+        <span class="tot-name">${nameHtml}${slot}</span>
+        <span class="tot-amt"><span class="mat-x">×</span>${fmtAmt}</span>
+      </div>${subLine}`;
   }).join("");
 
   return html;

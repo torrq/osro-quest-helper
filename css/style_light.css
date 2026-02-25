@@ -92,4 +92,13 @@
   /* Badge */
   --badge-gradient: linear-gradient(135deg, #f85149 0%, #d1242f 100%);
   --badge-shadow: rgba(209, 36, 47, 0.25);
+
+  /* Material Tree - warm parchment palette */
+  --mat-connector:      #c4b89a;   /* warm tan spine lines */
+  --mat-connector-opts: #c4b89a;   /* same, dashed for options */
+
+  /* ⚠ options badge — warm amber */
+  --mat-opts-bg:     #fff4e0;
+  --mat-opts-text:   #7a4d00;
+  --mat-opts-border: #c8860a;
 }
