@@ -258,30 +258,27 @@ function renderQuestContentCore() {
   const descriptionHtml = parseDescription(item.desc);
 
   container.innerHTML = `
-    <div class="quest-header-actions">
-      <button class="btn btn-sm copy-link-btn" onclick="copyQuestLink()" title="Copy link to this quest">
-        🔗 Copy Link
-      </button>
-    </div>
     <div class="editor-quest">
-      <span class="item-label">Quest Name:</span>
-      <div class="form-group">
-        <input type="text" placeholder="Quest Name" value="${quest.name}" onchange="updateQuestName(this.value)">
-      </div>
 
-      <div class="form-group">
-        <div class="quest-info-row">
-          ${renderProducesSelector(quest, item)}
-          ${renderSuccessRateInput(quest)}
-          ${renderBoundCheckbox(quest)}
+      ${state.editorMode ? `
+        <span class="item-label">Quest Name:</span>
+        <div class="form-group">
+          <input type="text" placeholder="Quest Name" value="${quest.name}" onchange="updateQuestName(this.value)">
         </div>
-      </div>
+        <div class="form-group">
+          <div class="quest-info-row">
+            ${renderProducesSelector(quest, item)}
+            ${renderSuccessRateInput(quest)}
+            ${renderBoundCheckbox(quest)}
+          </div>
+        </div>
+      ` : renderQuestViewerHeader(quest, item)}
 
       ${renderRequirementsSection(quest)}
 
       ${descriptionHtml ? `
         <span class="item-label">Description:</span>
-        <div class="item-description-box">${quest.producesId ? `<div class="desc-box-icon">${renderItemIcon(quest.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
+        <div class="item-description-box">${descriptionHtml}</div>
       ` : ""}
       
       <span class="item-label">Requirements:</span>
@@ -290,7 +287,12 @@ function renderQuestContentCore() {
       ${renderTotalsHeader()}
       <div class="summary-section">
         ${renderSummary()}
-        <span class="quest-footer-badge">${quest.successRate}% Success Rate</span>
+      </div>
+
+      <div class="quest-footer-actions">
+        <button class="btn btn-sm copy-link-btn" onclick="copyQuestLink()" title="Copy link to this quest">
+          🔗 Copy Link
+        </button>
       </div>
     </div>
   `;
@@ -298,6 +300,31 @@ function renderQuestContentCore() {
   document.querySelectorAll(".req-search-input").forEach(input => {
     setupAutocomplete(input, parseInt(input.getAttribute("data-idx")));
   });
+}
+
+function renderQuestViewerHeader(quest, item) {
+  const icon48  = quest.producesId ? renderItemIcon(quest.producesId, 48) : '';
+  const itemId  = quest.producesId ? `<span class="qvh-id">#${quest.producesId}</span>` : '';
+  const slot    = item && Number(item.slot) > 0 ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
+  const name    = quest.producesId
+    ? `<a class="item-link qvh-item-name" onclick="navigateToItem(${quest.producesId})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>${slot}`
+    : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
+  const rate    = quest.successRate < 100
+    ? `<span class="qvh-rate qvh-rate--partial">${quest.successRate}% Success</span>`
+    : `<span class="qvh-rate qvh-rate--full">100% Success</span>`;
+  const bound   = quest.accountBound
+    ? `<span class="qvh-bound">Account Bound</span>`
+    : '';
+
+  return `
+    <div class="qvh">
+      <div class="qvh-icon">${icon48}</div>
+      <div class="qvh-body">
+        <div class="qvh-title-row">${name}${itemId}</div>
+        <div class="qvh-meta">${rate}${bound}</div>
+      </div>
+    </div>
+  `;
 }
 
 function renderProducesSelector(quest, item) {
@@ -322,6 +349,7 @@ function renderProducesSelector(quest, item) {
 }
 
 function renderSuccessRateInput(quest) {
+  if (!state.editorMode) return '';
   return `
     <div>
       <span class="item-label label-block">Success Rate:</span>
@@ -632,13 +660,9 @@ function _matLeaf(req, eff, immuneHtml) {
   } else if (req.type === 'credit') {
     icon  = renderItemIcon(SPECIAL_ITEMS.CREDIT);
     name  = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
-    aside = `${(eff * getCreditValue()).toLocaleString()} zeny`;
-    asideType = 'val';
   } else if (req.type === 'gold') {
     icon  = renderItemIcon(SPECIAL_ITEMS.GOLD);
     name  = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
-    aside = `${(eff * getGoldValue()).toLocaleString()} zeny`;
-    asideType = 'val';
   } else if (CURRENCY_NAMES[req.type]) {
     icon  = renderItemIcon(2);
     name  = CURRENCY_NAMES[req.type];
@@ -676,6 +700,23 @@ function findShopLocation(shop) {
     });
   });
   return location;
+}
+
+// ===== ZENY FORMATTING =====
+
+function formatZenyCompact(val) {
+  if (val >= 1e12) return _fmtSuffix(val, 1e12, "T");
+  if (val >= 1e9)  return _fmtSuffix(val, 1e9,  "B");
+  if (val >= 1e6)  return _fmtSuffix(val, 1e6,  "M");
+  return val.toLocaleString();
+}
+
+function _fmtSuffix(val, div, suffix) {
+  const raw = val / div;
+  // Up to 2 decimal places, strip trailing zeros
+  const s = raw % 1 === 0 ? raw.toFixed(0)
+          : raw.toFixed(2).replace(/\.?0+$/, "");
+  return s + suffix;
 }
 
 // ===== SUMMARY RENDERING =====
@@ -934,7 +975,7 @@ function renderSummaryItems(entries, totalZeny) {
     else                              zenyVal = entry.amount * entry.value;
 
     const subLine = (entry.type !== "zeny" && zenyVal > 0)
-      ? `<div class="mat-row-sub mat-row-sub--val">${zenyVal.toLocaleString()} zeny</div>`
+      ? `<div class="mat-row-sub mat-row-sub--val">${formatZenyCompact(zenyVal)} zeny</div>`
       : "";
 
     return `

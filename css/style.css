@@ -27,6 +27,7 @@ body {
 
 .main-content {
   overflow-y: auto;
+  margin-top: 12px;
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 80px;
@@ -638,7 +639,7 @@ textarea {
 .material-tree {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 10px 5px 10px 0;
+  padding: 10px 8px;
 }
 
 .material-tree h3 {
@@ -974,13 +975,10 @@ div.quest-bound, div.shop-bound {
 /* Item Description & Helpers */
 .item-description-box {
   background: var(--bg-secondary);
-  font-family: "Consolas", "Monaco", monospace;
-  font-size: 12pt;
-  white-space: pre-wrap;
+  font-size: 16px;
   color: var(--text);
   position: relative;
   padding: 12px;
-  padding-right: 64px;
   border: 1px solid var(--border);
   border-radius: 4px;
   line-height: 1.4;
@@ -1794,8 +1792,7 @@ body.viewer-mode .editor-quest select {
   }
 
   .main-content {
-    padding: 4px 8px;
-    padding-bottom: 50px;
+    padding: 4px 8px 150px 8px;
   }
 
   .desc-box-icon {
@@ -2260,4 +2257,147 @@ body.viewer-mode .editor-quest select {
    in the TREE — the totals list never has expanders, so always hide */
 .summary-section .mat-xbtn-ph {
   display: none;
+}
+
+/* =========================================
+   QUEST VIEWER HEADER  (qvh)
+   ========================================= */
+
+.qvh {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--panel);
+  margin-left: -24px;
+  margin-right: -24px;
+  padding: 10px 24px 10px 30px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.qvh-icon {
+  flex-shrink: 0;
+  /* 48px icon — slight shadow to lift it off the background */
+  filter: drop-shadow(0 1px 3px var(--shadow));
+}
+
+.qvh-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Item name + #ID row */
+.qvh-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.qvh-item-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.qvh-item-name:hover {
+  text-decoration: underline;
+}
+
+.qvh-item-name--none {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Slot pill [N] — inline, immediately after item name */
+.qvh-item-slots {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+  font-size: 18px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-family: "Consolas", "Monaco", monospace;
+}
+
+.qvh-id {
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 18px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+
+/* Quest name — smaller, muted, below the item name */
+.qvh-quest-name {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Meta row: success rate + bound badge */
+.qvh-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.qvh-rate {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.qvh-rate--full {
+  background: rgba(63, 185, 80, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(63, 185, 80, 0.3);
+}
+
+.qvh-rate--partial {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid rgba(210, 153, 34, 0.35);
+}
+
+.qvh-bound {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+/* =========================================
+   COPY LINK FOOTER
+   ========================================= */
+
+.quest-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 12px;
 }
