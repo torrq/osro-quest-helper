@@ -1429,18 +1429,24 @@ div.quest-bound, div.shop-bound {
 .totals-header .item-label { margin: 0; }
 
 .btn-toggle-totals {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--tab-active-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-muted);
   font-size: 11px;
-  padding: 4px 8px;
+  padding: 3px 10px;
   font-weight: 500;
-  margin-bottom: 2px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
 }
 
 .btn-toggle-totals:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
+  color: var(--accent);
+  border-color: var(--accent);
+  background: transparent;
 }
 
 .market-row {
@@ -2395,6 +2401,26 @@ body.viewer-mode .editor-quest select {
   padding: 2px 8px;
   white-space: nowrap;
 }
+
+/* Breadcrumb location row — bottom of the sticky header */
+.qvh-loc {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qvh-loc-sep {
+  opacity: 0.5;
+  font-size: 10px;
+}
+
 /* =========================================
    COPY LINK FOOTER
    ========================================= */

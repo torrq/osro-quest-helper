@@ -391,12 +391,22 @@ function renderShopViewerHeader(shop, item) {
     ? `<span class="qvh-bound">Account Bound</span>`
     : '';
 
+  const loc = findShopLocation(shop);
+  const [locGroup, locSub] = loc ? loc.split(' / ') : ['', ''];
+  const breadcrumb = loc ? `
+    <div class="qvh-loc">
+      <span>${locGroup}</span>
+      <span class="qvh-loc-sep">›</span>
+      <span>${locSub}</span>
+    </div>` : '';
+
   return `
     <div class="qvh">
       <div class="qvh-icon">${icon48}</div>
       <div class="qvh-body">
         <div class="qvh-title-row">${name}${itemId}</div>
         ${bound ? `<div class="qvh-meta">${bound}</div>` : ''}
+        ${breadcrumb}
       </div>
     </div>
   `;
@@ -508,12 +518,20 @@ function shopRenderRequirementsSection(shop) {
 
 function shopRenderTotalsHeader() {
   if (!hasNestedShops()) return '<span class="item-label">Value:</span>';
-  
+
+  // Only show the toggle if including sub-shops actually changes the total
+  const shopIndex = buildShopIndex();
+  const { totalZeny: directZeny } = shopCalculateDirectRequirements();
+  const { totalZeny: fullZeny }   = shopCalculateFullRequirements(shopIndex, {});
+  if (directZeny === fullZeny) return '<span class="item-label">Value:</span>';
+
   return `
     <div class="totals-header">
       <span class="item-label">Value:</span>
-      <button class="btn btn-sm btn-toggle-totals" onclick="shopToggleTotals()">
-        ${state.showFullTotals ? "This Shop Only" : "Include Sub-Shops"}
+      <button class="btn-toggle-totals" onclick="shopToggleTotals()">
+        ${state.showFullTotals
+          ? '<span>⊖</span> This Shop Only'
+          : '<span>⊕</span> Include Sub-Shops'}
       </button>
     </div>
   `;

@@ -332,12 +332,22 @@ function renderQuestViewerHeader(quest, item) {
     ? `<span class="qvh-bound">Account Bound</span>`
     : '';
 
+  const loc = findQuestLocation(quest);
+  const [locGroup, locSub] = loc ? loc.split(' / ') : ['', ''];
+  const breadcrumb = loc ? `
+    <div class="qvh-loc">
+      <span>${locGroup}</span>
+      <span class="qvh-loc-sep">›</span>
+      <span>${locSub}</span>
+    </div>` : '';
+
   return `
     <div class="qvh">
       <div class="qvh-icon">${icon48}</div>
       <div class="qvh-body">
         <div class="qvh-title-row">${name}${itemId}</div>
         <div class="qvh-meta">${rate}${bound}</div>
+        ${breadcrumb}
       </div>
     </div>
   `;
@@ -402,12 +412,19 @@ function renderRequirementsSection(quest) {
 
 function renderTotalsHeader(questIndex) {
   if (!hasNestedQuests(questIndex)) return '<span class="item-label">Value:</span>';
-  
+
+  // Only show the toggle if including sub-quests actually changes the total
+  const { totalZeny: directZeny } = calculateDirectRequirements();
+  const { totalZeny: fullZeny }   = calculateFullRequirements(questIndex, {});
+  if (directZeny === fullZeny) return '<span class="item-label">Value:</span>';
+
   return `
     <div class="totals-header">
       <span class="item-label">Value:</span>
-      <button class="btn btn-sm btn-toggle-totals" onclick="toggleTotals()">
-        ${state.showFullTotals ? "This Quest Only" : "Include Sub-Quests"}
+      <button class="btn-toggle-totals" onclick="toggleTotals()">
+        ${state.showFullTotals
+          ? '<span>⊖</span> This Quest Only'
+          : '<span>⊕</span> Include Sub-Quests'}
       </button>
     </div>
   `;
