@@ -455,6 +455,35 @@ function highlightSearchTerm(text, searchQuery) {
   return result;
 }
 
+function renderItemViewerHeader(id, item) {
+  const icon48  = renderItemIcon(id, 48);
+  const slot    = item && Number(item.slot) > 0 ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
+  const itemId  = `<span class="qvh-id">#${id}</span>`;
+  const displayName = state.itemSearchFilter
+    ? highlightSearchTerm(getItemDisplayName(item), state.itemSearchFilter)
+    : (getItemDisplayName(item) || 'Unknown');
+  const name = `<span class="qvh-item-name">${displayName}</span>`;
+
+  const isNew    = DATA.newItemIds && DATA.newItemIds.has(id);
+  const newBadge = isNew ? `<span class="qvh-rate qvh-rate--full">NEW</span>` : '';
+  const valBadge = item.value > 0
+    ? `<span class="qvh-bound">${formatZenyCompact(item.value)} zeny</span>`
+    : '';
+  const meta = (newBadge || valBadge)
+    ? `<div class="qvh-meta">${newBadge}${valBadge}</div>`
+    : '';
+
+  return `
+    <div class="qvh">
+      <div class="qvh-icon">${icon48}</div>
+      <div class="qvh-body">
+        <div class="qvh-title-row">${name}${slot}${itemId}</div>
+        ${meta}
+      </div>
+    </div>
+  `;
+}
+
 function renderItemContentCore() {
   const container = document.getElementById("mainContent");
   
@@ -474,7 +503,6 @@ function renderItemContentCore() {
   }
 
   const id = state.selectedItemId;
-
   const item = DATA.items[id];
 
   if (!item) {
@@ -492,35 +520,17 @@ function renderItemContentCore() {
 
   container.innerHTML = `
     <div class="editor-item">
-      <div class="quest-header-actions">
-        <button class="btn btn-sm copy-link-btn" onclick="copyItemLink()" title="Copy link to this item">
-          🔗 Copy Link
-        </button>
-      </div>
-      <div class="item-header">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          ${renderItemIcon(id, 48)}
-          <h2 style="margin: 0;">
-            ${state.itemSearchFilter 
-              ? highlightSearchTerm(getItemDisplayName(item), state.itemSearchFilter)
-              : getItemDisplayName(item)}
-            <span class="item-id-badge">#${id}</span>
-          </h2>
-        </div>
-      </div>
+
+      ${renderItemViewerHeader(id, item)}
 
       <div class="panel-section">
-        ${
-          descriptionHtml
-            ? `
+        ${descriptionHtml ? `
           <span class="item-label">Description:</span>
           <div class="item-description-box">${
             state.itemSearchFilter && state.searchDescriptions
               ? highlightSearchTerm(descriptionHtml, state.itemSearchFilter)
               : descriptionHtml
-          }</div>`
-            : ""
-        }
+          }</div>` : ""}
       </div>
 
       <div class="panel-section">
@@ -533,112 +543,71 @@ function renderItemContentCore() {
                    onchange="updateItemValue(${id}, this.value)"
                    class="zeny-input-large">
           </div>
-          <p class="help-text">
-            Set the estimated market value for this item.
-            This is saved to 'osromr_item_values.json'.
-          </p>
         </div>
       </div>
 
-      ${
-        usage.produces.length > 0 || usage.requires.length > 0
-          ? `
+      ${usage.produces.length > 0 || usage.requires.length > 0 ? `
         <div class="usage-section">
-          ${
-            usage.produces.length > 0
-              ? `
+          ${usage.produces.length > 0 ? `
             <h3>Produced By:</h3>
             <ul class="usage-list">
-              ${usage.produces
-                .map(
-                  (u) => {
-                    if (u.type === 'quest') {
-                      return `
-                <li>
-                  <span class="quest-badge">Shop</span>
-                  <a class="quest-link"
-                     onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
-                    ${u.quest.name}
-                  </a>
-                  <span class="quest-path-info">
-                    (${u.group.name} / ${u.subgroup.name})
-                  </span>
-                </li>`;
-                    } else if (u.type === 'shop') {
-                      return `
-                <li>
-                  <span class="shop-badge">Shop</span>
-                  <a class="quest-link"
-                     onclick="navigateToShop(${u.groupIdx}, ${u.subIdx}, ${u.shopIdx});">
-                    ${u.shop.name}
-                  </a>
-                  <span class="quest-path-info">
-                    (${u.group.name} / ${u.subgroup.name})
-                  </span>
-                </li>`;
-                    }
-                  }
-                )
-                .join("")}
-            </ul>`
-              : ""
-          }
+              ${usage.produces.map(u => {
+                if (u.type === 'quest') {
+                  return `
+                    <li>
+                      <span class="quest-badge">Quest</span>
+                      <a class="quest-link" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                    </li>`;
+                } else if (u.type === 'shop') {
+                  return `
+                    <li>
+                      <span class="shop-badge">Shop</span>
+                      <a class="quest-link" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                    </li>`;
+                }
+              }).join("")}
+            </ul>` : ""}
 
-          ${
-            usage.requires.length > 0
-              ? `
+          ${usage.requires.length > 0 ? `
             <h3>Required By:</h3>
             <ul class="usage-list">
-              ${usage.requires
-                .map(
-                  (u) => {
-                    const amountText = u.requirement?.amount 
-                      ? `<span class="quest-meta-info">[Needs ${u.requirement.amount}]</span>` 
-                      : '';
-                    
-                    if (u.type === 'quest') {
-                      return `
-                <li>
-                <span class="quest-badge">Quest</span>
-                  <a class="quest-link"
-                     onclick="navigateToQuest(${u.groupIdx}, ${u.subIdx}, ${u.questIdx});">
-                    ${u.quest.name}
-                  </a>
-                  <span class="quest-path-info">
-                    (${u.group.name} / ${u.subgroup.name})
-                  </span>
-                  ${amountText}
-                </li>`;
-                    } else if (u.type === 'shop') {
-                      return `
-                <li>
-                  <span class="shop-badge">Shop</span>
-                  <a class="quest-link"
-                     onclick="navigateToShop(${u.groupIdx}, ${u.subIdx}, ${u.shopIdx});">
-                    ${u.shop.name}
-                  </a>
-                  <span class="quest-path-info">
-                    (${u.group.name} / ${u.subgroup.name})
-                  </span>
-                  ${amountText}
-                </li>`;
-                    }
-                  }
-                )
-                .join("")}
-            </ul>`
-              : ""
-          }
+              ${usage.requires.map(u => {
+                const amountText = u.requirement?.amount
+                  ? `<span class="quest-meta-info">×${u.requirement.amount}</span>`
+                  : '';
+                if (u.type === 'quest') {
+                  return `
+                    <li>
+                      <span class="quest-badge">Quest</span>
+                      <a class="quest-link" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                      ${amountText}
+                    </li>`;
+                } else if (u.type === 'shop') {
+                  return `
+                    <li>
+                      <span class="shop-badge">Shop</span>
+                      <a class="quest-link" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                      ${amountText}
+                    </li>`;
+                }
+              }).join("")}
+            </ul>` : ""}
         </div>
-      `
-          : `
+      ` : `
         <div class="usage-section">
-          <p class="empty-msg-centered">
-            This item is not used in any quests.
-          </p>
+          <p class="empty-msg-centered">This item is not used in any quests or shops.</p>
         </div>
-      `
-      }
+      `}
+
+      <div class="quest-footer-actions">
+        <button class="btn btn-sm copy-link-btn" onclick="copyItemLink()" title="Copy link to this item">
+          🔗 Copy Link
+        </button>
+      </div>
     </div>
   `;
 }

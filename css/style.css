@@ -833,8 +833,6 @@ textarea {
   margin-bottom: 20px;
 }
 
-.editor-item { margin-top: 10px; }
-
 .editor-item-row {
   display: grid;
   grid-template-columns: 1fr 80px 80px 100px 40px; /* Name, Qty, Success, Bound, Delete */
@@ -1053,8 +1051,6 @@ div.quest-bound, div.shop-bound {
 /* Usage Section */
 .usage-section {
   margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
 }
 
 .usage-section h3 {
@@ -1069,20 +1065,20 @@ div.quest-bound, div.shop-bound {
 .usage-list {
   list-style: none;
   padding: 0;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .usage-list li {
-  padding: 4px 0;
+  padding: 2px 0;
   font-size: 12px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
 }
 
 .usage-list li::before {
-  content: "›";
+  content: "";
   color: var(--accent);
   margin-right: 8px;
   font-weight: bold;
