@@ -886,6 +886,43 @@ function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
+// ── Mobile FAB: hide on scroll-down, show on scroll-up ──────────────────────
+(function () {
+  const THRESHOLD = 8;
+  let lastY = 0;
+  let ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const btn = document.querySelector('.mobile-toggle');
+        if (!btn) { ticking = false; return; }
+
+        const scroller = document.querySelector('.main-content');
+        if (!scroller) { ticking = false; return; }
+
+        const currentY = scroller.scrollTop;
+        const delta = currentY - lastY;
+
+        if (Math.abs(delta) >= THRESHOLD) {
+          const shouldHide = delta > 0 && currentY > 100;
+          btn.classList.toggle('hidden', shouldHide);
+          lastY = currentY;
+        }
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // .main-content exists immediately — attach directly, not to window
+  document.addEventListener('DOMContentLoaded', () => {
+    const scroller = document.querySelector('.main-content');
+    if (scroller) scroller.addEventListener('scroll', onScroll, { passive: true });
+  });
+})();
+
 function toggleEditorMode(enabled) {
   state.editorMode = enabled;
   document.body.classList.toggle("viewer-mode", !enabled);

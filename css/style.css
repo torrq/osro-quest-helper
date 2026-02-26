@@ -47,6 +47,13 @@ body {
   font-size: 24px;
   cursor: pointer;
   box-shadow: 0 4px 12px var(--shadow);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.mobile-toggle.hidden {
+  transform: translateY(80px);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* =========================================
@@ -1802,7 +1809,7 @@ body.viewer-mode .editor-quest select {
   }
 
   .main-content {
-    padding: 0 8px 150px 8px;
+    padding: 0 24px 80px 24px;
   }
 
   .desc-box-icon {
