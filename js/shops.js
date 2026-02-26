@@ -453,9 +453,6 @@ function renderShopRequirementsFlat(shop) {
       const itm = getItem(req.id);
       zenyVal = eff * (itm?.value || 0);
     }
-    const subLine = (req.type !== 'zeny' && zenyVal > 0)
-      ? `<div class="mat-row-sub mat-row-sub--val">${formatZenyCompact(zenyVal)} zeny</div>`
-      : '';
 
     return `
       <div class="mat-node">
@@ -465,7 +462,7 @@ function renderShopRequirementsFlat(shop) {
           <span class="mat-name">${name}${slot ? `<span class="mat-slot">${slot}</span>` : ''}</span>
           <span class="mat-amt"><span class="mat-x">×</span>${fmtAmt}</span>
           ${immuneHtml}
-        </div>${subLine}
+        </div>
       </div>`;
   });
 
