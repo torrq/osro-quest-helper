@@ -1322,30 +1322,35 @@ div.quest-bound, div.shop-bound {
 
 .summary-tabs {
   display: flex;
-  gap: 4px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .summary-tab {
-  padding: 8px 16px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
+  padding: 5px 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
+  font-family: "Consolas", "Monaco", monospace;
+  font-weight: 600;
+  white-space: nowrap;
   transition: all 0.2s;
+  margin-bottom: 4px;
 }
 
 .summary-tab:hover {
   color: var(--text);
-  background: var(--panel-hover);
+  border-color: var(--accent);
 }
 
 .summary-tab.active {
   color: var(--accent);
-  border-bottom-color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .summary-tab-content { display: none; }
@@ -2400,6 +2405,16 @@ body.viewer-mode .editor-quest select {
   margin-top: 24px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
+}
+
+/* "via: ..." source path shown inside the active combination panel */
+.summary-sources {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-light);
+  line-height: 1.4;
 }
 
 /* Truncation warning when multi-source combinations are capped */

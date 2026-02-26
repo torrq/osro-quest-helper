@@ -176,6 +176,8 @@ function createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx) 
   `;
 
   if (state.editorMode) {
+    // Images are draggable by default and intercept the drag if not suppressed
+    questDiv.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
     setupDragAndDrop(questDiv, questIdx, groupIdx, subIdx, subgroup);
   }
 
@@ -188,7 +190,10 @@ function createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx) 
 }
 
 function setupDragAndDrop(questDiv, questIdx, groupIdx, subIdx, subgroup) {
-  questDiv.addEventListener("dragstart", () => {
+  questDiv.addEventListener("dragstart", (e) => {
+    // Set explicit drag image so the whole row drags, not just an inner element
+    e.dataTransfer.setDragImage(questDiv, 0, 0);
+    e.dataTransfer.effectAllowed = 'move';
     state.draggedQuest = questIdx;
     state.draggedFrom = { groupIdx, subIdx };
     questDiv.classList.add("dragging");
@@ -199,7 +204,10 @@ function setupDragAndDrop(questDiv, questIdx, groupIdx, subIdx, subgroup) {
     document.querySelectorAll(".quest-item").forEach(el => el.classList.remove("drag-over"));
   });
 
-  questDiv.addEventListener("dragover", e => e.preventDefault());
+  questDiv.addEventListener("dragover", e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  });
 
   questDiv.addEventListener("dragenter", () => {
     if (state.draggedQuest !== questIdx || 
@@ -287,10 +295,12 @@ function renderQuestContentCore() {
       <span class="item-label">Requirements:</span>
       <div class="material-tree">${renderMaterialTree(questIndex)}</div>
 
-      <div id="totals-header-container">${renderTotalsHeader(questIndex)}</div>
-      <div class="summary-section">
-        ${renderSummary(questIndex)}
-      </div>
+      ${(() => {
+        const summaryHtml = renderSummary(questIndex);
+        if (summaryHtml.includes('tot-empty')) return '';
+        return `<div id="totals-header-container">${renderTotalsHeader(questIndex)}</div>
+      <div class="summary-section">${summaryHtml}</div>`;
+      })()}
 
       <div class="quest-footer-actions">
         <button class="btn btn-sm copy-link-btn" onclick="copyQuestLink()" title="Copy link to this quest">
@@ -766,7 +776,23 @@ function getSourceFingerprint(sources) {
 
 function renderMultiOptionSummary(multiQuestItems, questIndex) {
   const combinations = generateCombinations(multiQuestItems);
-  const tabLabels = combinations.map(combo => generateTabLabel(combo));
+
+  // Deduplicate by total zeny — combos that cost the same are identical to the user
+  const byValue = new Map(); // totalZeny → { combo, label }
+  for (const combo of combinations) {
+    const { totalZeny } = calculateFullRequirements(questIndex, combo);
+    if (!byValue.has(totalZeny)) {
+      byValue.set(totalZeny, { combo, totalZeny, label: generateTabLabel(combo) });
+    }
+  }
+
+  const unique = Array.from(byValue.values()).sort((a, b) => a.totalZeny - b.totalZeny);
+
+  // If deduplication collapsed everything to one option, skip the tabs entirely
+  if (unique.length === 1) {
+    return renderSingleSummary(questIndex, unique[0].combo);
+  }
+
   const truncWarning = combinations._truncated
     ? `<div class="combinations-warning">⚠ Showing first ${combinations.length} of ${combinations._total} combinations</div>`
     : '';
@@ -775,16 +801,16 @@ function renderMultiOptionSummary(multiQuestItems, questIndex) {
     <div class="summary-tabs-container">
       ${truncWarning}
       <div class="summary-tabs">
-        ${combinations.map((combo, idx) => `
+        ${unique.map(({ totalZeny }, idx) => `
           <div class="summary-tab ${idx === 0 ? "active" : ""}" 
-               onclick="switchSummaryTab(${idx})"
-               title="${tabLabels[idx]}">
-            Option ${idx + 1}: ${tabLabels[idx]}
+               onclick="switchSummaryTab(${idx})">
+            ${formatZenyCompact(totalZeny)}
           </div>
         `).join("")}
       </div>
-      ${combinations.map((combo, idx) => `
+      ${unique.map(({ combo, label }, idx) => `
         <div class="summary-tab-content ${idx === 0 ? "active" : ""}" id="summary-tab-${idx}">
+          <div class="summary-sources">via: ${label}</div>
           ${renderSingleSummary(questIndex, combo)}
         </div>
       `).join("")}
@@ -1127,12 +1153,13 @@ function hasNestedQuests(questIndex) {
 function toggleTotals() {
   state.showFullTotals = !state.showFullTotals;
 
+  const questIndex = buildQuestIndex();
+  const summaryHtml = renderSummary(questIndex);
   const headerContainer = document.getElementById('totals-header-container');
   const summarySection  = document.querySelector('.summary-section');
-  if (headerContainer && summarySection) {
-    const questIndex = buildQuestIndex();
+  if (headerContainer && summarySection && !summaryHtml.includes('tot-empty')) {
     headerContainer.innerHTML = renderTotalsHeader(questIndex);
-    summarySection.innerHTML  = renderSummary(questIndex);
+    summarySection.innerHTML  = summaryHtml;
   } else {
     renderQuestContent();
   }
@@ -1314,11 +1341,18 @@ function showAutocomplete(idx, items) {
   const dropdown = document.querySelector(`#autocomplete-${idx}`);
   if (!dropdown) return;
 
-  dropdown.innerHTML = items.map(item => `
-    <div class="autocomplete-item" onclick="selectAutocomplete(${idx}, ${item.id})">
-      ${getItemDisplayName(item)}<span class="autocomplete-item-id">[${item.id}]</span>
-    </div>
-  `).join("");
+  dropdown.innerHTML = '';
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'autocomplete-item';
+    div.innerHTML = `${getItemDisplayName(item)}<span class="autocomplete-item-id">[${item.id}]</span>`;
+    // mousedown + preventDefault keeps focus on the input, avoiding the blur race
+    div.addEventListener('mousedown', e => {
+      e.preventDefault();
+      selectAutocomplete(idx, item.id);
+    });
+    dropdown.appendChild(div);
+  });
   dropdown.classList.add("block");
 }
 

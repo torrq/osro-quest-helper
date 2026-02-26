@@ -221,7 +221,8 @@ function createShopElement(group, subgroup, shop, groupIdx, subIdx, shopIdx) {
   `;
 
   if (state.editorMode) {
-    setupDragAndDrop(shopDiv, shopIdx, groupIdx, subIdx, subgroup);
+    shopDiv.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
+    setupShopDragAndDrop(shopDiv, shopIdx, groupIdx, subIdx, subgroup);
   }
 
   shopDiv.querySelector(".shop-name").onclick = () => {
@@ -232,8 +233,10 @@ function createShopElement(group, subgroup, shop, groupIdx, subIdx, shopIdx) {
   return shopDiv;
 }
 
-function setupDragAndDrop(shopDiv, shopIdx, groupIdx, subIdx, subgroup) {
-  shopDiv.addEventListener("dragstart", () => {
+function setupShopDragAndDrop(shopDiv, shopIdx, groupIdx, subIdx, subgroup) {
+  shopDiv.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setDragImage(shopDiv, 0, 0);
+    e.dataTransfer.effectAllowed = 'move';
     state.draggedShop = shopIdx;
     state.draggedFrom = { groupIdx, subIdx };
     shopDiv.classList.add("dragging");
@@ -244,7 +247,10 @@ function setupDragAndDrop(shopDiv, shopIdx, groupIdx, subIdx, subgroup) {
     document.querySelectorAll(".shop-item").forEach(el => el.classList.remove("drag-over"));
   });
 
-  shopDiv.addEventListener("dragover", e => e.preventDefault());
+  shopDiv.addEventListener("dragover", e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  });
 
   shopDiv.addEventListener("dragenter", () => {
     if (state.draggedShop !== shopIdx || 
@@ -302,42 +308,158 @@ function renderShopContentCore() {
   const item = getItem(shop.producesId);
   const descriptionHtml = parseDescription(item.desc);
 
-  container.innerHTML = `
-    <div class="shop-header-actions">
-      <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
-        🔗 Copy Link
-      </button>
-    </div>
-    <div class="editor-shop">
-      <span class="item-label">Shop Item:</span>
-      <div class="form-group">
-        <input type="text" placeholder="Shop Item" value="${shop.name}" onchange="updateShopName(this.value)">
+  if (state.editorMode) {
+    // ── EDITOR MODE ──────────────────────────────────────────
+    container.innerHTML = `
+      <div class="shop-header-actions">
+        <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
+          🔗 Copy Link
+        </button>
       </div>
+      <div class="editor-shop">
+        <span class="item-label">Shop Item:</span>
+        <div class="form-group">
+          <input type="text" placeholder="Shop Item" value="${shop.name}" onchange="updateShopName(this.value)">
+        </div>
 
-      <div class="form-group">
-        <div class="shop-info-row">
-          ${shopRenderProducesSelector(shop, item)}
-          ${shopRenderBoundCheckbox(shop)}
+        <div class="form-group">
+          <div class="shop-info-row">
+            ${shopRenderProducesSelector(shop, item)}
+            ${shopRenderBoundCheckbox(shop)}
+          </div>
+        </div>
+
+        ${shopRenderRequirementsSection(shop)}
+
+        ${descriptionHtml ? `
+          <span class="item-label">Item Description:</span>
+          <div class="item-description-box">${shop.producesId ? `<div class="desc-box-icon">${renderItemIcon(shop.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
+        ` : ""}
+
+        ${(() => {
+            const summaryHtml = renderShopSummary();
+            if (summaryHtml.includes('tot-empty')) return '';
+            return `${shopRenderTotalsHeader()}
+        <div class="summary-section">${summaryHtml}</div>`;
+        })()}
+      </div>
+    `;
+
+    document.querySelectorAll(".req-search-input").forEach(input => {
+      shopSetupAutocomplete(input, parseInt(input.getAttribute("data-idx")));
+    });
+
+  } else {
+    // ── VIEWER MODE ──────────────────────────────────────────
+    container.innerHTML = `
+      <div class="editor-shop">
+        ${renderShopViewerHeader(shop, item)}
+
+        ${descriptionHtml ? `
+          <span class="item-label">Description:</span>
+          <div class="item-description-box">${descriptionHtml}</div>
+        ` : ""}
+
+        <span class="item-label">Requirements:</span>
+        <div class="material-tree">${renderShopRequirementsFlat(shop)}</div>
+
+        ${(() => {
+            const summaryHtml = renderShopSummary();
+            if (summaryHtml.includes('tot-empty')) return '';
+            return `${shopRenderTotalsHeader()}
+        <div class="summary-section">${summaryHtml}</div>`;
+        })()}
+
+        <div class="quest-footer-actions">
+          <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
+            🔗 Copy Link
+          </button>
         </div>
       </div>
+    `;
+  }
+}
 
-      ${shopRenderRequirementsSection(shop)}
+function renderShopViewerHeader(shop, item) {
+  const icon48 = shop.producesId ? renderItemIcon(shop.producesId, 48) : '';
+  const itemId = shop.producesId ? `<span class="qvh-id">#${shop.producesId}</span>` : '';
+  const slot   = item && Number(item.slot) > 0 ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
+  const name   = shop.producesId
+    ? `<a class="item-link qvh-item-name" onclick="navigateToItem(${shop.producesId})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>${slot}`
+    : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
+  const bound  = shop.accountBound
+    ? `<span class="qvh-bound">Account Bound</span>`
+    : '';
 
-      ${descriptionHtml ? `
-        <span class="item-label">Item Description:</span>
-        <div class="item-description-box">${shop.producesId ? `<div class="desc-box-icon">${renderItemIcon(shop.producesId, 48)}</div>` : ''}${descriptionHtml}</div>
-      ` : ""}
-
-      ${shopRenderTotalsHeader()}
-      <div class="summary-section">
-        ${renderShopSummary()}
+  return `
+    <div class="qvh">
+      <div class="qvh-icon">${icon48}</div>
+      <div class="qvh-body">
+        <div class="qvh-title-row">${name}${itemId}</div>
+        ${bound ? `<div class="qvh-meta">${bound}</div>` : ''}
       </div>
     </div>
   `;
+}
 
-  document.querySelectorAll(".req-search-input").forEach(input => {
-    shopSetupAutocomplete(input, parseInt(input.getAttribute("data-idx")));
+function renderShopRequirementsFlat(shop) {
+  if (!shop.requirements || shop.requirements.length === 0) {
+    return '<div class="tree-line">No requirements</div>';
+  }
+
+  const rows = shop.requirements.map(req => {
+    const eff = Number(req.amount) || 0;
+    // Format amount compactly (1M instead of 1,000,000)
+    const fmtAmt = eff >= 1e6 ? formatZenyCompact(eff) : eff >= 1000 ? eff.toLocaleString() : eff;
+    const immuneHtml = req.immune ? `<span class="mat-immune">IMMUNE</span>` : '';
+
+    let icon = '', name = '', slot = '';
+
+    if (req.type === 'zeny') {
+      icon = renderItemIcon(1);
+      name = 'Zeny';
+    } else if (req.type === 'credit') {
+      icon = renderItemIcon(SPECIAL_ITEMS.CREDIT);
+      name = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
+    } else if (req.type === 'gold') {
+      icon = renderItemIcon(SPECIAL_ITEMS.GOLD);
+      name = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+    } else if (SHOP_CURRENCY_NAMES[req.type]) {
+      icon = renderItemIcon(2);
+      name = SHOP_CURRENCY_NAMES[req.type];
+    } else if (req.type === 'item') {
+      const itm = getItem(req.id);
+      icon = renderItemIcon(req.id);
+      if (itm && Number(itm.slot) > 0) slot = `[${itm.slot}]`;
+      name = `<a class="item-link" onclick="navigateToItem(${req.id})">${itm ? (itm.name || 'Unknown') : 'Unknown'}</a>`;
+    }
+
+    // Zeny sub-value line
+    let zenyVal = 0;
+    if (req.type === 'zeny')        zenyVal = eff;
+    else if (req.type === 'gold')   zenyVal = eff * getGoldValue();
+    else if (req.type === 'credit') zenyVal = eff * getCreditValue();
+    else if (req.type === 'item') {
+      const itm = getItem(req.id);
+      zenyVal = eff * (itm?.value || 0);
+    }
+    const subLine = (req.type !== 'zeny' && zenyVal > 0)
+      ? `<div class="mat-row-sub mat-row-sub--val">${formatZenyCompact(zenyVal)} zeny</div>`
+      : '';
+
+    return `
+      <div class="mat-node">
+        <div class="mat-row">
+          <span class="mat-xbtn-ph"></span>
+          ${icon}
+          <span class="mat-name">${name}${slot ? `<span class="mat-slot">${slot}</span>` : ''}</span>
+          <span class="mat-amt"><span class="mat-x">×</span>${fmtAmt}</span>
+          ${immuneHtml}
+        </div>${subLine}
+      </div>`;
   });
+
+  return `<div class="mat-tree">${rows.join('')}</div>`;
 }
 
 function shopRenderProducesSelector(shop, item) {
@@ -385,11 +507,11 @@ function shopRenderRequirementsSection(shop) {
 }
 
 function shopRenderTotalsHeader() {
-  if (!hasNestedShops()) return '<span class="item-label">Requires:</span>';
+  if (!hasNestedShops()) return '<span class="item-label">Value:</span>';
   
   return `
     <div class="totals-header">
-      <span class="item-label">Totals:</span>
+      <span class="item-label">Value:</span>
       <button class="btn btn-sm btn-toggle-totals" onclick="shopToggleTotals()">
         ${state.showFullTotals ? "This Shop Only" : "Include Sub-Shops"}
       </button>
@@ -581,8 +703,8 @@ function shopCalculateDirectRequirements() {
 
   shop.requirements.forEach(req => {
     const effectiveAmount = Number(req.amount) || 0;
-    totalZeny += calculateZenyValue(req, effectiveAmount);
-    accumulateRequirement(totals, req, effectiveAmount);
+    totalZeny += shopCalculateZenyValue(req, effectiveAmount);
+    shopAccumulateRequirement(totals, req, effectiveAmount);
   });
 
   return { totals, totalZeny };
@@ -615,8 +737,8 @@ function shopCalculateFullRequirements(shopIndex, shopChoices) {
         const chosenShop = shopChoices[req.id] || shops[0];
         shopAccumulate(chosenShop, effectiveAmount, newPath);
       } else {
-        totalZeny += calculateZenyValue(req, effectiveAmount);
-        accumulateRequirement(totals, req, effectiveAmount);
+        totalZeny += shopCalculateZenyValue(req, effectiveAmount);
+        shopAccumulateRequirement(totals, req, effectiveAmount);
       }
     });
   }
@@ -625,7 +747,7 @@ function shopCalculateFullRequirements(shopIndex, shopChoices) {
   return { totals, totalZeny };
 }
 
-function calculateZenyValue(req, amount) {
+function shopCalculateZenyValue(req, amount) {
   if (req.type === "zeny") return amount;
   if (req.type === "credit") return amount * getCreditValue();
   if (req.type === "gold") return amount * getGoldValue();
@@ -633,7 +755,7 @@ function calculateZenyValue(req, amount) {
   return 0;
 }
 
-function accumulateRequirement(totals, req, effectiveAmount) {
+function shopAccumulateRequirement(totals, req, effectiveAmount) {
   const key = req.type === "item" ? `item_${req.id}` : req.type;
   const item = req.type === "item" ? getItem(req.id) : null;
   const name = SHOP_CURRENCY_NAMES[req.type] || (req.type === "item" ? (item?.name || "Unknown") : req.type);
@@ -667,60 +789,66 @@ function shopSortTotalEntries(totals) {
 }
 
 function renderShopSummaryItems(entries, totalZeny) {
+  // Only show entries that have a known zeny value
+  const zenyCurrencies = new Set(["zeny", "gold", "credit"]);
+  const valued = entries.filter(e =>
+    zenyCurrencies.has(e.type) || (e.type === "item" && e.value > 0)
+  );
+
+  if (valued.length === 0) {
+    return '<div class="tot-empty">No zeny-valued materials</div>';
+  }
+
   let html = "";
 
   if (totalZeny > 0) {
     html += `
-      <div class="summary-item summary-total-row">
-        <span class="summary-name summary-total-label">Total Zeny Value</span>
-        <span class="summary-amount summary-total-amount">${totalZeny.toLocaleString()}</span>
-      </div>
-    `;
+      <div class="tot-row tot-row--total">
+        <span class="tot-label">Total Zeny Value</span>
+        <span class="tot-amt">${formatZenyCompact(totalZeny)}</span>
+      </div>`;
   }
 
-  html += entries.map(entry => {
-    const displayAmount = entry.type === "zeny" ? entry.amount.toLocaleString() : entry.amount;
-    let extra = "";
-    
-    if (entry.type === "credit") {
-      extra = ` <span class="text-muted-sm">(${(entry.amount * getCreditValue()).toLocaleString()} zeny)</span>`;
-    } else if (entry.type === "gold") {
-      extra = ` <span class="text-muted-sm">(${(entry.amount * getGoldValue()).toLocaleString()} zeny)</span>`;
-    } else if (entry.type === "item" && entry.value > 0) {
-      extra = ` <span class="text-muted-sm">(${(entry.amount * entry.value).toLocaleString()} zeny)</span>`;
-    }
+  html += valued.map(entry => {
+    const fmtAmt = entry.amount >= 1e6 ? formatZenyCompact(entry.amount)
+                 : entry.amount >= 1000 ? entry.amount.toLocaleString()
+                 : entry.amount;
 
-    // Add slot display for items
-    const slotDisplay = entry.type === "item" && entry.slot > 0 ? ` [${entry.slot}]` : '';
-    
-    iconHtml = '';
-    nameHtml = '';
+    const slot = entry.type === "item" && entry.slot > 0
+      ? `<span class="mat-slot">[${entry.slot}]</span>` : "";
 
-    // Make item names clickable
-    if(entry.type === "item" && entry.itemId) {
-      iconHtml = renderItemIcon(entry.itemId);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}${slotDisplay}</a>`;
-    } else if (entry.type === "zeny") {
+    let iconHtml = "", nameHtml = "";
+    if (entry.type === "zeny") {
       iconHtml = renderItemIcon(1);
-      nameHtml = `${entry.name}${slotDisplay}`;
-    } else if(entry.type === "gold") {
+      nameHtml = "Zeny";
+    } else if (entry.type === "gold") {
       iconHtml = renderItemIcon(SPECIAL_ITEMS.GOLD);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">${entry.name}${slotDisplay}</a>`;
-    } else if(entry.type === "credit") {
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+    } else if (entry.type === "credit") {
       iconHtml = renderItemIcon(SPECIAL_ITEMS.CREDIT);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">${entry.name}${slotDisplay}</a>`;
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
     } else {
-      iconHtml = renderItemIcon(2);
-      nameHtml = `${entry.name}${slotDisplay}`;
+      iconHtml = renderItemIcon(entry.itemId);
+      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}</a>`;
     }
+
+    let zenyVal = 0;
+    if (entry.type === "zeny")        zenyVal = entry.amount;
+    else if (entry.type === "gold")   zenyVal = entry.amount * getGoldValue();
+    else if (entry.type === "credit") zenyVal = entry.amount * getCreditValue();
+    else                              zenyVal = entry.amount * entry.value;
+
+    const subLine = (entry.type !== "zeny" && zenyVal > 0)
+      ? `<div class="mat-row-sub mat-row-sub--val">${formatZenyCompact(zenyVal)} zeny</div>`
+      : "";
 
     return `
-      <div class="summary-item">
+      <div class="tot-row">
+        <span class="mat-xbtn-ph"></span>
         ${iconHtml}
-        <span class="summary-name">${nameHtml}</span>
-        <span class="summary-amount">${displayAmount}${extra}</span>
-      </div>
-    `;
+        <span class="tot-name">${nameHtml}${slot}</span>
+        <span class="tot-amt"><span class="mat-x">×</span>${fmtAmt}</span>
+      </div>${subLine}`;
   }).join("");
 
   return html;
@@ -899,7 +1027,7 @@ function shopSetupAutocomplete(input, idx) {
   input.addEventListener("input", e => {
     const value = e.target.value.toLowerCase();
     if (value.length < 1) {
-      hideAutocomplete(idx);
+      shopHideAutocomplete(idx);
       return;
     }
 
@@ -935,25 +1063,31 @@ function shopSetupAutocomplete(input, idx) {
       }).slice(0, 10);
     }
 
-    matches.length > 0 ? showAutocomplete(idx, matches) : hideAutocomplete(idx);
+    matches.length > 0 ? shopShowAutocomplete(idx, matches) : shopHideAutocomplete(idx);
   });
 
-  input.addEventListener("blur", () => setTimeout(() => hideAutocomplete(idx), 200));
+  input.addEventListener("blur", () => setTimeout(() => shopHideAutocomplete(idx), 200));
 }
 
-function showAutocomplete(idx, items) {
+function shopShowAutocomplete(idx, items) {
   const dropdown = document.querySelector(`#autocomplete-${idx}`);
   if (!dropdown) return;
 
-  dropdown.innerHTML = items.map(item => `
-    <div class="autocomplete-item" onclick="shopSelectAutocomplete(${idx}, ${item.id})">
-      ${getItemDisplayName(item)}<span class="autocomplete-item-id">[${item.id}]</span>
-    </div>
-  `).join("");
+  dropdown.innerHTML = '';
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'autocomplete-item';
+    div.innerHTML = `${getItemDisplayName(item)}<span class="autocomplete-item-id">[${item.id}]</span>`;
+    div.addEventListener('mousedown', e => {
+      e.preventDefault();
+      shopSelectAutocomplete(idx, item.id);
+    });
+    dropdown.appendChild(div);
+  });
   dropdown.classList.add("block");
 }
 
-function hideAutocomplete(idx) {
+function shopHideAutocomplete(idx) {
   const dropdown = document.querySelector(`#autocomplete-${idx}`);
   if (dropdown) dropdown.classList.remove("block");
 }
