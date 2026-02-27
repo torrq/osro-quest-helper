@@ -506,7 +506,6 @@ function renderItemContentCore() {
     return;
   }
 
-  const usage = findQuestsByItemId(+id);
   const descriptionHtml = parseDescription(item.desc);
 
   container.innerHTML = `
@@ -537,62 +536,7 @@ function renderItemContentCore() {
         </div>
       </div>
 
-      ${usage.produces.length > 0 || usage.requires.length > 0 ? `
-        <div class="usage-section">
-          ${usage.produces.length > 0 ? `
-            <h3>Produced By:</h3>
-            <ul class="usage-list">
-              ${usage.produces.map(u => {
-                if (u.type === 'quest') {
-                  return `
-                    <li>
-                      <span class="quest-badge">Quest</span>
-                      <a class="quest-link" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
-                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
-                    </li>`;
-                } else if (u.type === 'shop') {
-                  return `
-                    <li>
-                      <span class="shop-badge">Shop</span>
-                      <a class="quest-link" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
-                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
-                    </li>`;
-                }
-              }).join("")}
-            </ul>` : ""}
-
-          ${usage.requires.length > 0 ? `
-            <h3>Required By:</h3>
-            <ul class="usage-list">
-              ${usage.requires.map(u => {
-                const amountText = u.requirement?.amount
-                  ? `<span class="quest-meta-info">×${u.requirement.amount}</span>`
-                  : '';
-                if (u.type === 'quest') {
-                  return `
-                    <li>
-                      <span class="quest-badge">Quest</span>
-                      <a class="quest-link" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
-                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
-                      ${amountText}
-                    </li>`;
-                } else if (u.type === 'shop') {
-                  return `
-                    <li>
-                      <span class="shop-badge">Shop</span>
-                      <a class="quest-link" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
-                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
-                      ${amountText}
-                    </li>`;
-                }
-              }).join("")}
-            </ul>` : ""}
-        </div>
-      ` : `
-        <div class="usage-section">
-          <p class="empty-msg-centered">This item is not used in any quests or shops.</p>
-        </div>
-      `}
+      ${renderUsageSection(id)}
 
       <div class="quest-footer-actions">
         <button class="btn btn-sm copy-link-btn" onclick="copyItemLink()" title="Copy link to this item">
@@ -614,108 +558,6 @@ function updateItemValue(id, value) {
   }
 }
 
-function findQuestsByItemId(itemId) {
-  const produces = [];
-  const requires = [];
-
-  // Search in Quests
-  if (Array.isArray(DATA.groups)) {
-    DATA.groups.forEach((group, groupIdx) => {
-      if (!group || !Array.isArray(group.subgroups)) return;
-      
-      group.subgroups.forEach((subgroup, subIdx) => {
-        if (!subgroup || !Array.isArray(subgroup.quests)) return;
-        
-        subgroup.quests.forEach((quest, questIdx) => {
-          if (!quest) return;
-          
-          if (quest.producesId === itemId) {
-            produces.push({
-              type: 'quest',
-              quest,
-              group,
-              subgroup,
-              groupIdx,
-              subIdx,
-              questIdx
-            });
-          }
-
-          if (Array.isArray(quest.requirements)) {
-            quest.requirements.forEach((req) => {
-              const reqId = req.type === "item" ? req.id : 
-                           req.type === "gold" ? SPECIAL_ITEMS?.GOLD :
-                           req.type === "credit" ? SPECIAL_ITEMS?.CREDIT : null;
-              
-              if (reqId === itemId) {
-                requires.push({
-                  type: 'quest',
-                  quest,
-                  group,
-                  subgroup,
-                  groupIdx,
-                  subIdx,
-                  questIdx,
-                  requirement: req
-                });
-              }
-            });
-          }
-        });
-      });
-    });
-  }
-
-  // Search in Shops
-  if (Array.isArray(DATA.shopGroups)) {
-    DATA.shopGroups.forEach((group, groupIdx) => {
-      if (!group || !Array.isArray(group.subgroups)) return;
-      
-      group.subgroups.forEach((subgroup, subIdx) => {
-        if (!subgroup || !Array.isArray(subgroup.shops)) return;
-        
-        subgroup.shops.forEach((shop, shopIdx) => {
-          if (!shop) return;
-          
-          if (shop.producesId === itemId) {
-            produces.push({
-              type: 'shop',
-              shop,
-              group,
-              subgroup,
-              groupIdx,
-              subIdx,
-              shopIdx
-            });
-          }
-
-          if (Array.isArray(shop.requirements)) {
-            shop.requirements.forEach((req) => {
-              const reqId = req.type === "item" ? req.id : 
-                           req.type === "gold" ? SPECIAL_ITEMS?.GOLD :
-                           req.type === "credit" ? SPECIAL_ITEMS?.CREDIT : null;
-              
-              if (reqId === itemId) {
-                requires.push({
-                  type: 'shop',
-                  shop,
-                  group,
-                  subgroup,
-                  groupIdx,
-                  subIdx,
-                  shopIdx,
-                  requirement: req
-                });
-              }
-            });
-          }
-        });
-      });
-    });
-  }
-
-  return { produces, requires };
-}
 
 function toggleNewItemsFilter(checked) {
   state.showNewItemsOnly = checked;

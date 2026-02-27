@@ -1440,6 +1440,132 @@ function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = 
 
 window.renderViewerHeader = renderViewerHeader;
 
+// ===== SHARED USAGE LOOKUP & RENDERING =====
+
+function findItemUsage(itemId) {
+  const produces = [];
+  const requires = [];
+
+  if (Array.isArray(DATA.groups)) {
+    DATA.groups.forEach((group, groupIdx) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      group.subgroups.forEach((subgroup, subIdx) => {
+        if (!subgroup || !Array.isArray(subgroup.quests)) return;
+        subgroup.quests.forEach((quest, questIdx) => {
+          if (!quest) return;
+          if (quest.producesId === itemId)
+            produces.push({ type: 'quest', quest, group, subgroup, groupIdx, subIdx, questIdx });
+          if (Array.isArray(quest.requirements)) {
+            quest.requirements.forEach(req => {
+              const rid = req.type === 'item'   ? req.id
+                        : req.type === 'gold'   ? SPECIAL_ITEMS?.GOLD
+                        : req.type === 'credit' ? SPECIAL_ITEMS?.CREDIT : null;
+              if (rid === itemId)
+                requires.push({ type: 'quest', quest, group, subgroup, groupIdx, subIdx, questIdx, requirement: req });
+            });
+          }
+        });
+      });
+    });
+  }
+
+  if (Array.isArray(DATA.shopGroups)) {
+    DATA.shopGroups.forEach((group, groupIdx) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      group.subgroups.forEach((subgroup, subIdx) => {
+        if (!subgroup || !Array.isArray(subgroup.shops)) return;
+        subgroup.shops.forEach((shop, shopIdx) => {
+          if (!shop) return;
+          if (shop.producesId === itemId)
+            produces.push({ type: 'shop', shop, group, subgroup, groupIdx, subIdx, shopIdx });
+          if (Array.isArray(shop.requirements)) {
+            shop.requirements.forEach(req => {
+              const rid = req.type === 'item'   ? req.id
+                        : req.type === 'gold'   ? SPECIAL_ITEMS?.GOLD
+                        : req.type === 'credit' ? SPECIAL_ITEMS?.CREDIT : null;
+              if (rid === itemId)
+                requires.push({ type: 'shop', shop, group, subgroup, groupIdx, subIdx, shopIdx, requirement: req });
+            });
+          }
+        });
+      });
+    });
+  }
+
+  return { produces, requires };
+}
+
+function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } = {}) {
+  if (!itemId) return '';
+  const { produces, requires } = findItemUsage(itemId);
+
+  const isSelf = u =>
+    (u.type === 'quest' && u.quest === excludeQuest) ||
+    (u.type === 'shop'  && u.shop  === excludeShop);
+
+  const showProduces = (excludeQuest !== null || excludeShop !== null)
+    ? produces.filter(u => !isSelf(u))
+    : produces;
+
+  if (showProduces.length === 0 && requires.length === 0) return '';
+
+  function usageRow(u, amountStr = '') {
+    const amtHtml = amountStr
+      ? `<span class="mat-amt"><span class="mat-x">\u00d7</span>${amountStr}</span>` : '';
+    if (u.type === 'quest') {
+      return `
+        <div class="mat-node">
+          <div class="mat-row">
+            <span class="mat-xbtn-ph"></span>
+            <span class="quest-badge">Quest</span>
+            <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a></span>
+            ${amtHtml}
+          </div>
+          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} › ${u.subgroup.name}</div>
+        </div>`;
+    } else {
+      return `
+        <div class="mat-node">
+          <div class="mat-row">
+            <span class="mat-xbtn-ph"></span>
+            <span class="shop-badge">Shop</span>
+            <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a></span>
+            ${amtHtml}
+          </div>
+          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} › ${u.subgroup.name}</div>
+        </div>`;
+    }
+  }
+
+  let html = '<div class="usage-section">';
+
+  if (showProduces.length > 0) {
+    const label = (excludeQuest || excludeShop) ? 'Also Produced By' : 'Produced By';
+    html += `<span class="item-label">${label}:</span><div class="mat-tree">`;
+    html += showProduces.map(u => usageRow(u)).join('');
+    html += '</div>';
+  }
+
+  if (requires.length > 0) {
+    html += `<span class="item-label">Required By:</span><div class="mat-tree">`;
+    html += requires.map(u => {
+      const amt = u.requirement?.amount
+        ? (Number(u.requirement.amount) >= 1000
+            ? Number(u.requirement.amount).toLocaleString()
+            : String(u.requirement.amount))
+        : '';
+      return usageRow(u, amt);
+    }).join('');
+    html += '</div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+window.findItemUsage = findItemUsage;
+window.renderUsageSection = renderUsageSection;
+
 // ===== PUBLIC API EXPOSURE =====
 
 // Explicitly expose functions that may be called from HTML or other scripts

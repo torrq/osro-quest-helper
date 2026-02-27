@@ -370,6 +370,8 @@ function renderShopContentCore() {
         <div class="summary-section">${summaryHtml}</div>`;
         })()}
 
+        ${shop.producesId ? renderUsageSection(shop.producesId, { excludeShop: shop }) : ''}
+
         <div class="quest-footer-actions">
           <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
             🔗 Copy Link
