@@ -3455,6 +3455,764 @@
       "caption": "@npc 32"
     },
     {
+      "name": "Pet Shop",
+      "subgroups": [
+        {
+          "name": "Pet Taming Shop",
+          "shops": [
+            {
+              "name": "Pet Incubator",
+              "producesId": 643,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Armlet of Obedience",
+              "producesId": 639,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 18000
+                }
+              ]
+            },
+            {
+              "name": "Bitter Herb",
+              "producesId": 621,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Book of the Devil",
+              "producesId": 642,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1800
+                }
+              ]
+            },
+            {
+              "name": "Contract in Shadow",
+              "producesId": 641,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100
+                }
+              ]
+            },
+            {
+              "name": "Deadly Noxious Herb",
+              "producesId": 631,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Dew Laden Moss",
+              "producesId": 630,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Earthworm the Dude",
+              "producesId": 623,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 4000
+                }
+              ]
+            },
+            {
+              "name": "Fatty Chubby Earthworm",
+              "producesId": 632,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Forbidden Red Candle",
+              "producesId": 660,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Her Heart",
+              "producesId": 659,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Monster Juice",
+              "producesId": 626,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500
+                }
+              ]
+            },
+            {
+              "name": "No Recipient",
+              "producesId": 636,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100
+                }
+              ]
+            },
+            {
+              "name": "Old Broom",
+              "producesId": 637,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 350
+                }
+              ]
+            },
+            {
+              "name": "Orange Juice",
+              "producesId": 620,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500
+                }
+              ]
+            },
+            {
+              "name": "Orc Trophy",
+              "producesId": 635,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Rainbow Carrot",
+              "producesId": 622,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 2500
+                }
+              ]
+            },
+            {
+              "name": "Rotten Fish",
+              "producesId": 624,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 2500
+                }
+              ]
+            },
+            {
+              "name": "Rusty Iron",
+              "producesId": 625,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100
+                }
+              ]
+            },
+            {
+              "name": "Shining Stone",
+              "producesId": 640,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Silver Knife of Chastity",
+              "producesId": 638,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 12000
+                }
+              ]
+            },
+            {
+              "name": "Singing Flower",
+              "producesId": 629,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300
+                }
+              ]
+            },
+            {
+              "name": "Soft Apron",
+              "producesId": 661,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20000
+                }
+              ]
+            },
+            {
+              "name": "Sweet Milk",
+              "producesId": 627,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 7000
+                }
+              ]
+            },
+            {
+              "name": "Sweet Potato",
+              "producesId": 633,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Unripe Apple",
+              "producesId": 619,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Well-Dried Bone",
+              "producesId": 628,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pet Food Shop",
+          "shops": [
+            {
+              "name": "Apple Juice",
+              "producesId": 531,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Banana Juice",
+              "producesId": 532,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Grape Juice",
+              "producesId": 533,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 250
+                }
+              ]
+            },
+            {
+              "name": "Carrot Juice",
+              "producesId": 534,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Pet Food",
+              "producesId": 537,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Shoot",
+              "producesId": 711,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 16
+                }
+              ]
+            },
+            {
+              "name": "Red Herb",
+              "producesId": 507,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Yellow Herb",
+              "producesId": 508,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "White Herb",
+              "producesId": 509,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Blue Herb",
+              "producesId": 510,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Green Herb",
+              "producesId": 511,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Honey",
+              "producesId": 518,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Green Apple",
+              "producesId": 7821,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Whole Barbecue",
+              "producesId": 7822,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Meat Veg Skewer",
+              "producesId": 7823,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Spirit Liquor",
+              "producesId": 7824,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Pumpkin Pie",
+              "producesId": 6097,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Traditional Cookie",
+              "producesId": 6094,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Sunset on The Rock",
+              "producesId": 6107,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Well Ripened Berry",
+              "producesId": 6106,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pet Equipment Shop",
+          "shops": [
+            {
+              "name": "Backpack",
+              "producesId": 10013,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500
+                }
+              ]
+            },
+            {
+              "name": "Bark Shorts",
+              "producesId": 10017,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Monkey Circlet",
+              "producesId": 10018,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Golden Bell",
+              "producesId": 10016,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Grave Keeper's Sword",
+              "producesId": 10020,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Green Lace",
+              "producesId": 10015,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Monster Oxygen Mask",
+              "producesId": 10002,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Pacifier",
+              "producesId": 10004,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Punisher",
+              "producesId": 10008,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Queen's Hair Ornament",
+              "producesId": 10006,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Red Scarf",
+              "producesId": 10019,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Rocker Glasses",
+              "producesId": 10014,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 2000
+                }
+              ]
+            },
+            {
+              "name": "Silk Ribbon",
+              "producesId": 10007,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Skull Helm",
+              "producesId": 10001,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Stellar Hairpin",
+              "producesId": 10011,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Tiny Egg Shell",
+              "producesId": 10012,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Transparent Head Protector",
+              "producesId": 10003,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Wig",
+              "producesId": 10005,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Wild Flower",
+              "producesId": 10009,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "Fashionable Glasses",
+              "producesId": 10024,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 20
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 37"
+    },
+    {
       "name": "Mithril Gatekeeper",
       "subgroups": [
         {

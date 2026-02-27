@@ -2397,9 +2397,9 @@ body.viewer-mode .editor-quest select {
 
 .qvh-bound {
   font-size: 11px;
-  color: var(--text-muted);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
+  color: var(--warning);
+  background: rgba(250, 217, 33, 0.12);
+  border: 1px solid var(--warning);
   border-radius: 4px;
   padding: 2px 8px;
   white-space: nowrap;
