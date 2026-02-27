@@ -302,6 +302,8 @@ function renderQuestContentCore() {
       <div class="summary-section">${summaryHtml}</div>`;
       })()}
 
+      ${quest.producesId ? renderUsageSection(quest.producesId, { excludeQuest: quest }) : ''}
+
       <div class="quest-footer-actions">
         <button class="btn btn-sm copy-link-btn" onclick="copyQuestLink()" title="Copy link to this quest">
           🔗 Copy Link
