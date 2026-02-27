@@ -163,7 +163,7 @@ function createShopGroupHeader(group, groupIdx, isExpanded) {
   header.className = "group-header clickable";
   header.onclick = () => toggleShopGroup(groupIdx);
   header.innerHTML = `
-    <span class="expand-icon ${isExpanded ? "expanded" : ""}">⯈</span>
+    <span class="expand-icon ${isExpanded ? "expanded" : ""}">▶</span>
     <div class="group-name-container">
       <span class="group-name-readonly">${group.name}</span>
       ${group.caption ? `<span class="group-caption">${group.caption}</span>` : ""}

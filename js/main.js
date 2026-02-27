@@ -1414,9 +1414,6 @@ function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = 
       <a class="qvh-ext-link" href="https://ro.kokotewa.com/db/itm_info?id=${itemId}" target="_blank" rel="noopener">Kokotewa</a>
       <span class="qvh-loc-sep">·</span>
       <a class="qvh-ext-link" href="https://pre.pservero.com/item/${itemId}" target="_blank" rel="noopener">rAthenaDB</a>
-
-
-
     </span>` : '';
 
   // Location breadcrumb + external links share the same row
