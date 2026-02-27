@@ -1392,137 +1392,56 @@ document.addEventListener("DOMContentLoaded", () => {
   initSecretEditorToggle();
 });
 
-// ===== SHARED USAGE LOOKUP & RENDERING =====
-// findItemUsage — replaces items.js findQuestsByItemId, used by items/quests/shops
-function findItemUsage(itemId) {
-  const produces = [];
-  const requires = [];
+// ===== SHARED VIEWER HEADER =====
 
-  if (Array.isArray(DATA.groups)) {
-    DATA.groups.forEach((group, groupIdx) => {
-      if (!group || !Array.isArray(group.subgroups)) return;
-      group.subgroups.forEach((subgroup, subIdx) => {
-        if (!subgroup || !Array.isArray(subgroup.quests)) return;
-        subgroup.quests.forEach((quest, questIdx) => {
-          if (!quest) return;
-          if (quest.producesId === itemId)
-            produces.push({ type: 'quest', quest, group, subgroup, groupIdx, subIdx, questIdx });
-          if (Array.isArray(quest.requirements)) {
-            quest.requirements.forEach(req => {
-              const rid = req.type === 'item' ? req.id
-                        : req.type === 'gold'   ? SPECIAL_ITEMS?.GOLD
-                        : req.type === 'credit' ? SPECIAL_ITEMS?.CREDIT : null;
-              if (rid === itemId)
-                requires.push({ type: 'quest', quest, group, subgroup, groupIdx, subIdx, questIdx, requirement: req });
-            });
-          }
-        });
-      });
-    });
+function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = false } = {}) {
+  const icon48  = itemId ? renderItemIcon(itemId, 48) : '';
+  const idBadge = itemId ? `<span class="qvh-id">#${itemId}</span>` : '';
+  const slot    = item && Number(item.slot) > 0
+    ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
+  const displayName = item ? (item.name || 'Unknown') : 'Unknown';
+  const name = itemId
+    ? `<a class="item-link qvh-item-name" onclick="navigateToItem(${itemId})">${displayName}</a>${slot}`
+    : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
+
+  const metaRow = meta ? `<div class="qvh-meta">${meta}</div>` : '';
+
+  // External links — opt-in per call site
+  const extLinks = (showExtLinks && itemId) ? `
+    <span class="qvh-ext-links">
+    <a class="qvh-ext-link" href="https://ratemyserver.net/index.php?page=item_db&item_id=${itemId}&ird=1" target="_blank" rel="noopener">RateMyServer</a>
+      <span class="qvh-loc-sep">·</span>
+      <a class="qvh-ext-link" href="https://ro.kokotewa.com/db/itm_info?id=${itemId}" target="_blank" rel="noopener">Kokotewa</a>
+      <span class="qvh-loc-sep">·</span>
+      <a class="qvh-ext-link" href="https://pre.pservero.com/item/${itemId}" target="_blank" rel="noopener">rAthenaDB</a>
+
+
+
+    </span>` : '';
+
+  // Location breadcrumb + external links share the same row
+  let bottomRow = '';
+  if (loc || extLinks) {
+    const [locGroup, locSub] = loc ? loc.split(' / ') : ['', ''];
+    const breadcrumb = loc
+      ? `<span>${locGroup}</span><span class="qvh-loc-sep">›</span><span>${locSub}</span>`
+      : '';
+    bottomRow = `<div class="qvh-loc">${breadcrumb}${extLinks}</div>`;
   }
 
-  if (Array.isArray(DATA.shopGroups)) {
-    DATA.shopGroups.forEach((group, groupIdx) => {
-      if (!group || !Array.isArray(group.subgroups)) return;
-      group.subgroups.forEach((subgroup, subIdx) => {
-        if (!subgroup || !Array.isArray(subgroup.shops)) return;
-        subgroup.shops.forEach((shop, shopIdx) => {
-          if (!shop) return;
-          if (shop.producesId === itemId)
-            produces.push({ type: 'shop', shop, group, subgroup, groupIdx, subIdx, shopIdx });
-          if (Array.isArray(shop.requirements)) {
-            shop.requirements.forEach(req => {
-              const rid = req.type === 'item' ? req.id
-                        : req.type === 'gold'   ? SPECIAL_ITEMS?.GOLD
-                        : req.type === 'credit' ? SPECIAL_ITEMS?.CREDIT : null;
-              if (rid === itemId)
-                requires.push({ type: 'shop', shop, group, subgroup, groupIdx, subIdx, shopIdx, requirement: req });
-            });
-          }
-        });
-      });
-    });
-  }
-
-  return { produces, requires };
+  return `
+    <div class="qvh">
+      <div class="qvh-icon">${icon48}</div>
+      <div class="qvh-body">
+        <div class="qvh-title-row">${name}${idBadge}</div>
+        ${metaRow}
+        ${bottomRow}
+      </div>
+    </div>
+  `;
 }
 
-// renderUsageSection — shared HTML renderer, mat-row style
-// excludeQuest / excludeShop: the current quest or shop (omit self from "also produced by")
-function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } = {}) {
-  if (!itemId) return '';
-  const { produces, requires } = findItemUsage(itemId);
-
-  // For quests/shops: split "also produced by" (excluding self) from requires
-  const isSelf = u =>
-    (u.type === 'quest' && u.quest === excludeQuest) ||
-    (u.type === 'shop'  && u.shop  === excludeShop);
-
-  const alsoProduces = produces.filter(u => !isSelf(u));
-  const showProduces = excludeQuest !== null || excludeShop !== null
-    ? alsoProduces   // quest/shop view: only show "also" entries
-    : produces;       // item view: show all
-
-  if (showProduces.length === 0 && requires.length === 0) return '';
-
-  function usageRow(u, amountStr = '') {
-    if (u.type === 'quest') {
-      return `
-        <div class="mat-node">
-          <div class="mat-row">
-            <span class="mat-xbtn-ph"></span>
-            <span class="quest-badge">Quest</span>
-            <span class="mat-name">
-              <a class="item-link tree-item-name" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
-            </span>
-            ${amountStr ? `<span class="mat-amt"><span class="mat-x">×</span>${amountStr}</span>` : ''}
-          </div>
-          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} › ${u.subgroup.name}</div>
-        </div>`;
-    } else {
-      return `
-        <div class="mat-node">
-          <div class="mat-row">
-            <span class="mat-xbtn-ph"></span>
-            <span class="shop-badge">Shop</span>
-            <span class="mat-name">
-              <a class="item-link tree-item-name" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
-            </span>
-            ${amountStr ? `<span class="mat-amt"><span class="mat-x">×</span>${amountStr}</span>` : ''}
-          </div>
-          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} › ${u.subgroup.name}</div>
-        </div>`;
-    }
-  }
-
-  let html = '<div class="usage-section">';
-
-  if (showProduces.length > 0) {
-    const label = (excludeQuest || excludeShop) ? 'Also Produced By' : 'Produced By';
-    html += `<span class="item-label">${label}:</span><div class="mat-tree">`;
-    html += showProduces.map(u => usageRow(u)).join('');
-    html += '</div>';
-  }
-
-  if (requires.length > 0) {
-    html += `<span class="item-label">Required By:</span><div class="mat-tree">`;
-    html += requires.map(u => {
-      const amt = u.requirement?.amount
-        ? (Number(u.requirement.amount) >= 1000
-            ? Number(u.requirement.amount).toLocaleString()
-            : u.requirement.amount)
-        : '';
-      return usageRow(u, amt);
-    }).join('');
-    html += '</div>';
-  }
-
-  html += '</div>';
-  return html;
-}
-
-window.findItemUsage = findItemUsage;
-window.renderUsageSection = renderUsageSection;
+window.renderViewerHeader = renderViewerHeader;
 
 // ===== PUBLIC API EXPOSURE =====
 

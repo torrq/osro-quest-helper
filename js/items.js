@@ -456,32 +456,23 @@ function highlightSearchTerm(text, searchQuery) {
 }
 
 function renderItemViewerHeader(id, item) {
-  const icon48  = renderItemIcon(id, 48);
-  const slot    = item && Number(item.slot) > 0 ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
-  const itemId  = `<span class="qvh-id">#${id}</span>`;
+  // Items tab: name may have search highlights — override display inline
   const displayName = state.itemSearchFilter
     ? highlightSearchTerm(getItemDisplayName(item), state.itemSearchFilter)
     : (getItemDisplayName(item) || 'Unknown');
-  const name = `<span class="qvh-item-name">${displayName}</span>`;
+  // Patch item so renderViewerHeader picks up the highlighted name
+  const itemProxy = { ...item, name: displayName };
 
   const isNew    = DATA.newItemIds && DATA.newItemIds.has(id);
   const newBadge = isNew ? `<span class="qvh-rate qvh-rate--full">NEW</span>` : '';
   const valBadge = item.value > 0
     ? `<span class="qvh-bound">${formatZenyCompact(item.value)} zeny</span>`
     : '';
-  const meta = (newBadge || valBadge)
-    ? `<div class="qvh-meta">${newBadge}${valBadge}</div>`
-    : '';
 
-  return `
-    <div class="qvh">
-      <div class="qvh-icon">${icon48}</div>
-      <div class="qvh-body">
-        <div class="qvh-title-row">${name}${slot}${itemId}</div>
-        ${meta}
-      </div>
-    </div>
-  `;
+  return renderViewerHeader(id, itemProxy, {
+    meta: newBadge + valBadge,
+    showExtLinks: true
+  });
 }
 
 function renderItemContentCore() {
@@ -515,6 +506,7 @@ function renderItemContentCore() {
     return;
   }
 
+  const usage = findQuestsByItemId(+id);
   const descriptionHtml = parseDescription(item.desc);
 
   container.innerHTML = `
@@ -545,7 +537,62 @@ function renderItemContentCore() {
         </div>
       </div>
 
-      ${renderUsageSection(id)}
+      ${usage.produces.length > 0 || usage.requires.length > 0 ? `
+        <div class="usage-section">
+          ${usage.produces.length > 0 ? `
+            <h3>Produced By:</h3>
+            <ul class="usage-list">
+              ${usage.produces.map(u => {
+                if (u.type === 'quest') {
+                  return `
+                    <li>
+                      <span class="quest-badge">Quest</span>
+                      <a class="quest-link" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                    </li>`;
+                } else if (u.type === 'shop') {
+                  return `
+                    <li>
+                      <span class="shop-badge">Shop</span>
+                      <a class="quest-link" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                    </li>`;
+                }
+              }).join("")}
+            </ul>` : ""}
+
+          ${usage.requires.length > 0 ? `
+            <h3>Required By:</h3>
+            <ul class="usage-list">
+              ${usage.requires.map(u => {
+                const amountText = u.requirement?.amount
+                  ? `<span class="quest-meta-info">×${u.requirement.amount}</span>`
+                  : '';
+                if (u.type === 'quest') {
+                  return `
+                    <li>
+                      <span class="quest-badge">Quest</span>
+                      <a class="quest-link" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                      ${amountText}
+                    </li>`;
+                } else if (u.type === 'shop') {
+                  return `
+                    <li>
+                      <span class="shop-badge">Shop</span>
+                      <a class="quest-link" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a>
+                      <span class="quest-path-info">${u.group.name} / ${u.subgroup.name}</span>
+                      ${amountText}
+                    </li>`;
+                }
+              }).join("")}
+            </ul>` : ""}
+        </div>
+      ` : `
+        <div class="usage-section">
+          <p class="empty-msg-centered">This item is not used in any quests or shops.</p>
+        </div>
+      `}
 
       <div class="quest-footer-actions">
         <button class="btn btn-sm copy-link-btn" onclick="copyItemLink()" title="Copy link to this item">
@@ -565,6 +612,109 @@ function updateItemValue(id, value) {
     DATA.items[id].value = Number(value) || 0;
     debouncedSaveItemValues(); // Changed from immediate save
   }
+}
+
+function findQuestsByItemId(itemId) {
+  const produces = [];
+  const requires = [];
+
+  // Search in Quests
+  if (Array.isArray(DATA.groups)) {
+    DATA.groups.forEach((group, groupIdx) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach((subgroup, subIdx) => {
+        if (!subgroup || !Array.isArray(subgroup.quests)) return;
+        
+        subgroup.quests.forEach((quest, questIdx) => {
+          if (!quest) return;
+          
+          if (quest.producesId === itemId) {
+            produces.push({
+              type: 'quest',
+              quest,
+              group,
+              subgroup,
+              groupIdx,
+              subIdx,
+              questIdx
+            });
+          }
+
+          if (Array.isArray(quest.requirements)) {
+            quest.requirements.forEach((req) => {
+              const reqId = req.type === "item" ? req.id : 
+                           req.type === "gold" ? SPECIAL_ITEMS?.GOLD :
+                           req.type === "credit" ? SPECIAL_ITEMS?.CREDIT : null;
+              
+              if (reqId === itemId) {
+                requires.push({
+                  type: 'quest',
+                  quest,
+                  group,
+                  subgroup,
+                  groupIdx,
+                  subIdx,
+                  questIdx,
+                  requirement: req
+                });
+              }
+            });
+          }
+        });
+      });
+    });
+  }
+
+  // Search in Shops
+  if (Array.isArray(DATA.shopGroups)) {
+    DATA.shopGroups.forEach((group, groupIdx) => {
+      if (!group || !Array.isArray(group.subgroups)) return;
+      
+      group.subgroups.forEach((subgroup, subIdx) => {
+        if (!subgroup || !Array.isArray(subgroup.shops)) return;
+        
+        subgroup.shops.forEach((shop, shopIdx) => {
+          if (!shop) return;
+          
+          if (shop.producesId === itemId) {
+            produces.push({
+              type: 'shop',
+              shop,
+              group,
+              subgroup,
+              groupIdx,
+              subIdx,
+              shopIdx
+            });
+          }
+
+          if (Array.isArray(shop.requirements)) {
+            shop.requirements.forEach((req) => {
+              const reqId = req.type === "item" ? req.id : 
+                           req.type === "gold" ? SPECIAL_ITEMS?.GOLD :
+                           req.type === "credit" ? SPECIAL_ITEMS?.CREDIT : null;
+              
+              if (reqId === itemId) {
+                requires.push({
+                  type: 'shop',
+                  shop,
+                  group,
+                  subgroup,
+                  groupIdx,
+                  subIdx,
+                  shopIdx,
+                  requirement: req
+                });
+              }
+            });
+          }
+        });
+      });
+    });
+  }
+
+  return { produces, requires };
 }
 
 function toggleNewItemsFilter(checked) {

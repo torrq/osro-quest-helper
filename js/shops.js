@@ -370,8 +370,6 @@ function renderShopContentCore() {
         <div class="summary-section">${summaryHtml}</div>`;
         })()}
 
-        ${shop.producesId ? renderUsageSection(shop.producesId, { excludeShop: shop }) : ''}
-
         <div class="quest-footer-actions">
           <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
             🔗 Copy Link
@@ -383,35 +381,11 @@ function renderShopContentCore() {
 }
 
 function renderShopViewerHeader(shop, item) {
-  const icon48 = shop.producesId ? renderItemIcon(shop.producesId, 48) : '';
-  const itemId = shop.producesId ? `<span class="qvh-id">#${shop.producesId}</span>` : '';
-  const slot   = item && Number(item.slot) > 0 ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
-  const name   = shop.producesId
-    ? `<a class="item-link qvh-item-name" onclick="navigateToItem(${shop.producesId})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>${slot}`
-    : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
-  const bound  = shop.accountBound
-    ? `<span class="qvh-bound">Account Bound</span>`
-    : '';
-
-  const loc = findShopLocation(shop);
-  const [locGroup, locSub] = loc ? loc.split(' / ') : ['', ''];
-  const breadcrumb = loc ? `
-    <div class="qvh-loc">
-      <span>${locGroup}</span>
-      <span class="qvh-loc-sep">›</span>
-      <span>${locSub}</span>
-    </div>` : '';
-
-  return `
-    <div class="qvh">
-      <div class="qvh-icon">${icon48}</div>
-      <div class="qvh-body">
-        <div class="qvh-title-row">${name}${itemId}</div>
-        ${bound ? `<div class="qvh-meta">${bound}</div>` : ''}
-        ${breadcrumb}
-      </div>
-    </div>
-  `;
+  const bound = shop.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
+  return renderViewerHeader(shop.producesId, item, {
+    meta: bound,
+    loc:  findShopLocation(shop)
+  });
 }
 
 function renderShopRequirementsFlat(shop) {

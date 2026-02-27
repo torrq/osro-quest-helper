@@ -302,8 +302,6 @@ function renderQuestContentCore() {
       <div class="summary-section">${summaryHtml}</div>`;
       })()}
 
-      ${quest.producesId ? renderUsageSection(quest.producesId, { excludeQuest: quest }) : ''}
-
       <div class="quest-footer-actions">
         <button class="btn btn-sm copy-link-btn" onclick="copyQuestLink()" title="Copy link to this quest">
           🔗 Copy Link
@@ -321,38 +319,14 @@ function renderQuestContentCore() {
 }
 
 function renderQuestViewerHeader(quest, item) {
-  const icon48  = quest.producesId ? renderItemIcon(quest.producesId, 48) : '';
-  const itemId  = quest.producesId ? `<span class="qvh-id">#${quest.producesId}</span>` : '';
-  const slot    = item && Number(item.slot) > 0 ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
-  const name    = quest.producesId
-    ? `<a class="item-link qvh-item-name" onclick="navigateToItem(${quest.producesId})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>${slot}`
-    : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
-  const rate    = quest.successRate < 100
+  const rate  = quest.successRate < 100
     ? `<span class="qvh-rate qvh-rate--partial">${quest.successRate}% Success</span>`
     : `<span class="qvh-rate qvh-rate--full">100% Success</span>`;
-  const bound   = quest.accountBound
-    ? `<span class="qvh-bound">Account Bound</span>`
-    : '';
-
-  const loc = findQuestLocation(quest);
-  const [locGroup, locSub] = loc ? loc.split(' / ') : ['', ''];
-  const breadcrumb = loc ? `
-    <div class="qvh-loc">
-      <span>${locGroup}</span>
-      <span class="qvh-loc-sep">›</span>
-      <span>${locSub}</span>
-    </div>` : '';
-
-  return `
-    <div class="qvh">
-      <div class="qvh-icon">${icon48}</div>
-      <div class="qvh-body">
-        <div class="qvh-title-row">${name}${itemId}</div>
-        <div class="qvh-meta">${rate}${bound}</div>
-        ${breadcrumb}
-      </div>
-    </div>
-  `;
+  const bound = quest.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
+  return renderViewerHeader(quest.producesId, item, {
+    meta: rate + bound,
+    loc:  findQuestLocation(quest)
+  });
 }
 
 function renderProducesSelector(quest, item) {
