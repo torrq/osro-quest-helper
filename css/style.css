@@ -1172,17 +1172,317 @@ div.quest-bound, div.shop-bound {
 }
 
 /* Autoloot Main Area */
+/* ---- Autoloot: main layout ---- */
+
 .autoloot-main {
-  padding: 2px;
   max-width: 1200px;
 }
+
+/* Header modifier — no icon column so we pad left directly */
+.qvh--autoloot {
+  padding-left: 20px;
+}
+
+/* Inline slot-name input inside the qvh-meta row */
+.al-slot-name-input {
+  max-width: 320px;
+  padding: 5px 9px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 4px;
+}
+
+.al-slot-name-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Capacity bar */
+.al-capacity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.al-capacity-bar {
+  flex: 1;
+  max-width: 200px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.al-capacity-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.al-capacity-fill--warn { background: var(--warning, #f59e0b); }
+.al-capacity-fill--full { background: var(--danger); }
+
+.al-capacity-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---- Sections ---- */
+
+.al-section {
+  margin-bottom: 24px;
+}
+
+.al-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Import section gets a top border to separate it visually */
+.al-section--import {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.al-overflow-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.75;
+  margin: 6px 0 0 0;
+  font-style: italic;
+}
+
+.al-overflow-hint code {
+  font-family: monospace;
+  background: var(--code-block-bg);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-style: normal;
+}
+
+/* ---- Empty state ---- */
+
+.al-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 24px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  text-align: center;
+  gap: 6px;
+}
+
+.al-empty-icon {
+  font-size: 28px;
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.al-empty-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.al-empty-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+
+/* ---- Item grid ---- */
+
+.al-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 5px;
+}
+
+.al-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 5px 4px 5px 7px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.al-item-card:hover {
+  border-color: var(--accent);
+  background: var(--panel-hover);
+}
+
+.al-item-card-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.al-item-name {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.al-item-name--unknown {
+  color: var(--danger);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.al-item-card-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.al-item-id {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.6;
+  padding-right: 2px;
+}
+
+.al-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  transition: color 0.15s, background 0.15s;
+}
+
+.al-remove-btn:hover {
+  color: var(--danger);
+  background: var(--panel-hover);
+}
+
+/* ---- Search ---- */
+
+.al-search-wrapper {
+  position: relative;
+}
+
+.al-search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.4;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.al-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 34px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.al-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--panel);
+}
+
+.al-search-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 0 0 6px 6px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 500;
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+.al-result-item {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.1s;
+}
+
+.al-result-item:last-child { border-bottom: none; }
+
+.al-result-item:hover {
+  background: var(--panel-hover);
+}
+
+.al-result-item--added {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.al-result-name {
+  flex: 1;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.al-result-id {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.al-result-check {
+  font-size: 11px;
+  color: var(--accent);
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+/* ---- Command box ---- */
 
 .al-command-box {
   background: var(--code-bg);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 25px;
+  border-radius: 5px;
+  padding: 12px;
 }
 
 .al-code-block {
@@ -1190,119 +1490,44 @@ div.quest-bound, div.shop-bound {
   color: var(--code-text);
   background: var(--code-block-bg);
   padding: 4px 8px;
-  border-radius: 4px;
-  margin-bottom: 4px;
+  border-radius: 3px;
+  margin-bottom: 3px;
   white-space: pre-wrap;
   word-break: break-all;
-  font-size: 12pt;
+  font-size: 12px;
   user-select: all;
+  line-height: 1.5;
 }
 
-.al-search-wrapper {
-  position: relative;
-  margin-bottom: 10px;
-}
+.al-code-block:last-child { margin-bottom: 0; }
 
-.al-search-input {
+/* ---- Import ---- */
+
+.al-paste-textarea {
+  display: block;
   width: 100%;
-  padding: 12px;
-  background: var(--panel);
+  min-height: 72px;
+  margin-top: 8px;
+  padding: 9px 11px;
+  background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text);
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 4px;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 12px;
+  resize: vertical;
 }
 
-.al-search-input:focus {
+.al-paste-textarea:focus {
   outline: none;
   border-color: var(--accent);
 }
 
-.al-search-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-top: none;
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 500;
-  box-shadow: 0 10px 15px -3px var(--shadow);
-}
-
-.al-result-item {
-  padding: 10px 15px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
+.al-paste-actions {
   display: flex;
   align-items: center;
-  gap: 0;
-}
-
-.al-result-item:hover {
-  background: var(--accent);
-  color: white;
-}
-
-.al-result-item span {
-  font-family: monospace;
-  margin-right: 10px;
-  opacity: 0.7;
-}
-
-.al-items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 6px;
-}
-
-.al-item-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 6px 4px 6px 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.al-item-card-left {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  gap: 8px;
-}
-
-.al-item-card span {
-  font-size: 11pt;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 170px;
-}
-
-.al-item-card-itemid {
-  color: var(--accent);
-  font-family: monospace;
-}
-
-.al-remove-btn {
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 22pt;
-  line-height: 11pt;
-  padding: 0 4px 4px 6px;
-}
-
-.al-remove-btn:hover { color: var(--danger); }
-
-.al-paste-actions { margin-top: 12px; }
-.al-paste-actions button {
-  margin-right: 6px;
-  font-size: 12pt;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 /* =========================================

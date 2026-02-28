@@ -75,43 +75,51 @@ function renderAutolootMain() {
 
   container.innerHTML = `
     <div class="autoloot-main">
-      ${renderHeader(slot)}
-      ${renderCommandBox(slot, items)}
-      ${renderSearchBox()}
+      ${renderHeader(slot, items)}
       ${renderItemsSection(slot, items)}
+      ${renderSearchBox()}
+      ${renderCommandBox(slot, items)}
       ${renderImportSection()}
+      <div class="quest-footer-actions">
+        <button class="btn btn-sm copy-link-btn" onclick="copyAutolootLink()" title="Copy link to this autoloot slot">
+          🔗 Copy Link
+        </button>
+      </div>
     </div>
   `;
 }
 
-function renderHeader(slot) {
+function renderHeader(slot, items) {
   const slotName = state.autolootNames[slot] || `Autoloot Slot ${slot}`;
-  
+  const used = items.length;
+  const max  = AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT;
+  const pct  = max > 0 ? Math.round((used / max) * 100) : 0;
+  const fillClass = used >= max ? 'al-capacity-fill--full'
+                  : used >= max * 0.8 ? 'al-capacity-fill--warn' : '';
+
   return `
-    <div class="quest-header-actions">
-      <button class="btn btn-sm copy-link-btn" onclick="copyAutolootLink()" title="Copy link to this autoloot slot">
-        🔗 Copy Link
-      </button>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; gap: 15px;">
-      <div style="flex: 1; min-width: 0;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-          <h2 style="margin: 0;">Autoloot Slot #${slot}</h2>
+    <div class="qvh qvh--autoloot">
+      <div class="qvh-body">
+        <div class="qvh-title-row">
+          <span class="qvh-item-name">Autoloot</span>
+          <span class="qvh-id">Slot #${slot}</span>
         </div>
-        <div style="margin-bottom: 5px;">
-          <input 
-            type="text" 
+        <div class="qvh-meta">
+          <input
+            type="text"
             id="slotNameInput"
-            placeholder="Enter slot name..."
+            class="al-slot-name-input"
+            placeholder="Name this slot…"
             value="${slotName}"
             onchange="updateSlotName(${slot}, this.value)"
-            style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 14pt; font-weight: 500; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text); border-radius: 4px;"
           >
         </div>
-        <p style="font-style: italic; color: var(--text-muted); margin: 0 8px; font-size: 0.8em;">
-          Commands are automatically optimized to prevent client overflow errors 
-          (bursts first, then throttles item count).
-        </p>
+        <div class="al-capacity">
+          <div class="al-capacity-bar">
+            <div class="al-capacity-fill ${fillClass}" style="width:${pct}%"></div>
+          </div>
+          <span class="al-capacity-label">${used} / ${max}</span>
+        </div>
       </div>
     </div>
   `;
@@ -120,46 +128,59 @@ function renderHeader(slot) {
 function renderCommandBox(slot, items) {
   const commands = generateCommands(slot, items);
   const commandHtml = commands.length === 0
-    ? '<div style="color:var(--text-muted); font-style:italic;">Slot is empty. Add items below.</div>'
+    ? '<div class="al-empty-hint">Add items above to generate commands.</div>'
     : commands.map(cmd => `<div class="al-code-block">${cmd}</div>`).join("");
 
   return `
-    <div class="al-command-box">
-      <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-        <h4 style="color:var(--accent); text-transform:uppercase; font-size:12px; letter-spacing:1px;">
-          Generated Commands
-        </h4>
-        <button class="btn btn-sm" onclick="copyAllAutoloot()" style="font-size:11px;">
-          Copy All
-        </button>
+    <div class="al-section">
+      <div class="al-section-header">
+        <span class="item-label">Generated Commands</span>
+        ${commands.length > 0 ? `<button class="btn btn-sm" onclick="copyAllAutoloot()">Copy All</button>` : ''}
       </div>
-      ${commandHtml}
+      <div class="al-command-box">
+        ${commandHtml}
+      </div>
+      <p class="al-overflow-hint">Commands are split to prevent client overflow — bursts first, then throttled.</p>
     </div>
   `;
 }
 
 function renderSearchBox() {
   return `
-    <div class="al-search-wrapper">
-      <input type="text" 
-        id="alSearchInput" 
-        class="al-search-input" 
-        placeholder="Search Item Name or ID to add..." 
-        autocomplete="off"
-        oninput="handleAutolootSearch(this.value)">
-      <div id="alSearchResults" class="al-search-dropdown hidden"></div>
+    <div class="al-section">
+      <div class="al-section-header">
+        <span class="item-label">Add Item</span>
+      </div>
+      <div class="al-search-wrapper">
+        <div class="al-search-icon">🔍</div>
+        <input type="text"
+          id="alSearchInput"
+          class="al-search-input"
+          placeholder="Search by name or ID…"
+          autocomplete="off"
+          oninput="handleAutolootSearch(this.value)">
+        <div id="alSearchResults" class="al-search-dropdown hidden"></div>
+      </div>
     </div>
   `;
 }
 
 function renderItemsSection(slot, items) {
+  const gridOrEmpty = items.length > 0
+    ? `<div class="al-items-grid">${items.map(id => renderItemCard(slot, id)).join("")}</div>`
+    : `<div class="al-empty-state">
+         <div class="al-empty-icon">☁</div>
+         <div class="al-empty-title">Slot is empty</div>
+         <div class="al-empty-hint">Use the search below to add items to this slot.</div>
+       </div>`;
+
   return `
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">
-      <h3 style="font-size:16px;">Stored Items (${items.length}/${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT})</h3>
-      ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear Slot</button>` : ""}
-    </div>
-    <div class="al-items-grid">
-      ${items.map(id => renderItemCard(slot, id)).join("")}
+    <div class="al-section">
+      <div class="al-section-header">
+        <span class="item-label">Stored Items</span>
+        ${items.length > 0 ? `<button class="btn btn-danger btn-sm" onclick="clearAutolootSlot(${slot})">Clear All</button>` : ''}
+      </div>
+      ${gridOrEmpty}
     </div>
   `;
 }
@@ -167,38 +188,42 @@ function renderItemsSection(slot, items) {
 function renderItemCard(slot, id) {
   const item = DATA.items[id];
   const name = item?.name || "Unknown Item";
-  const nameStyle = name === "Unknown Item" ? ' class="color-red"' : "";
+  const isUnknown = !item;
   const slotCount = Number(item?.slot) || 0;
   const displayName = slotCount > 0 ? `${name} [${slotCount}]` : name;
+  const nameHtml = isUnknown
+    ? `<span class="al-item-name al-item-name--unknown" title="${displayName}">${displayName}</span>`
+    : `<a class="item-link al-item-name" onclick="navigateToItem(${id})" title="${displayName}">${displayName}</a>`;
 
   return `
     <div class="al-item-card">
       <div class="al-item-card-left">
         ${renderItemIcon(id, 24)}
-        <span title="${displayName}"${nameStyle}>${displayName}</span>
-        <span class="al-item-card-itemid">${id}</span>
+        ${nameHtml}
       </div>
-      <div class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})">×</div>
+      <div class="al-item-card-right">
+        <span class="al-item-id">${id}</span>
+        <button class="al-remove-btn" onclick="removeFromAutoloot(${slot}, ${id})" title="Remove">×</button>
+      </div>
     </div>
   `;
 }
 
 function renderImportSection() {
   return `
-    <div class="al-paste-wrapper">
-      <label class="item-label">Paste @alootid2 commands</label>
+    <div class="al-section al-section--import">
+      <div class="al-section-header">
+        <span class="item-label">Import from Commands</span>
+      </div>
+      <p class="al-overflow-hint">Paste existing <code>@alootid2</code> commands to import their item IDs into this slot.</p>
       <textarea
         id="alootPasteBox"
         class="al-paste-textarea"
-        placeholder="Example: @alootid2 save 1 7451 7507 7510"
+        placeholder="@alootid2 save 1 7451 7507 7510"
       ></textarea>
       <div class="al-paste-actions">
-        <button class="btn btn-primary btn-sm" onclick="importAlootCommands()">
-          Import
-        </button>
-        <span class="help-text">
-          Space-separated item IDs only. Extra spacing is fine.
-        </span>
+        <button class="btn btn-primary btn-sm" onclick="importAlootCommands()">Import</button>
+        <span class="help-text">Space-separated IDs only. Extra spacing is fine.</span>
       </div>
     </div>
   `;
@@ -344,19 +369,18 @@ function sortByRelevance(a, b, lowerQuery) {
 function renderSearchResults(resultsDiv, matches) {
   resultsDiv.innerHTML = matches.map(item => {
     const slotCount = Number(item.slot) || 0;
-    const displayName = slotCount > 0 
+    const displayName = slotCount > 0
       ? `${item.name || 'Unknown'} [${slotCount}]`
       : (item.name || 'Unknown');
-    
+    const alreadyAdded = (state.autolootData[state.selectedAutolootSlot] || []).includes(item.id);
+
     return `
-      <div class="al-result-item" onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
+      <div class="al-result-item ${alreadyAdded ? 'al-result-item--added' : ''}"
+           onclick="addToAutoloot(${state.selectedAutolootSlot}, ${item.id})">
         ${renderItemIcon(item.id, 24)}
-        <div style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;margin-left:8px;">
-          ${displayName}
-        </div>
-        <span style="color:var(--text); font-family:monospace; margin:0 8px 0 8px; font-weight:bold;font-size:14pt;">
-          ${item.id}
-        </span>
+        <span class="al-result-name">${displayName}</span>
+        <span class="al-result-id">${item.id}</span>
+        ${alreadyAdded ? '<span class="al-result-check">✓</span>' : ''}
       </div>
     `;
   }).join("");
