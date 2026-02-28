@@ -217,7 +217,7 @@ function createShopElement(group, subgroup, shop, groupIdx, subIdx, shopIdx) {
   shopDiv.innerHTML = `
     <span class="drag-handle">${state.editorMode ? "⋮⋮" : ""}</span>
     ${iconHtml}
-    <span class="shop-name">${shop.name}</span>
+    <span class="shop-name${shop.accountBound ? ' name-bound' : ''}">${shop.name}</span>
   `;
 
   if (state.editorMode) {
@@ -383,10 +383,11 @@ function renderShopContentCore() {
 }
 
 function renderShopViewerHeader(shop, item) {
-  const bound = shop.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
+  const boundBadge = shop.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
   return renderViewerHeader(shop.producesId, item, {
-    meta: bound,
-    loc:  findShopLocation(shop)
+    meta:  boundBadge,
+    loc:   findShopLocation(shop),
+    bound: !!shop.accountBound
   });
 }
 

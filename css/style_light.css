@@ -15,14 +15,12 @@
 
   /* Panel colors */
   --panel: #ffffff;
-  --panel-bg: #f6f8fa;
   --panel-hover: #e8ecf0;
   
   /* Borders */
   --border: #d0d7de;
   --border-light: #e1e4e8;
   --group-border: #d0d7de;
-  --strong-border: #1f2328;
   
   /* Text colors */
   --text: #24292f;
@@ -47,6 +45,10 @@
   --success-shadow: rgba(26, 127, 55, 0.3);
   --warning: #bf8700;
   --warning-bg: rgba(191, 135, 0, 0.1);
+
+  /* Account Bound name styling — darker gold so it reads on light bg */
+  --bound-text: #2b2b2b;
+  --bound-shadow: rgba(255, 238, 0, 0.966);
   
   /* Shadows and overlays */
   --shadow: rgba(31, 35, 40, 0.15);
@@ -58,8 +60,6 @@
   --tab-active-text: #ffffff;
   
   /* Toggle colors */
-  --toggle-knob: #ffffff;
-  --toggle-knob-active: #ffffff;
   
   /* Special elements */
   --version-tag: #ff4213;

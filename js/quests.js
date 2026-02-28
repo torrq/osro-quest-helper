@@ -172,7 +172,7 @@ function createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx) 
   questDiv.innerHTML = `
     <span class="drag-handle">${state.editorMode ? "⋮⋮" : ""}</span>
     ${iconHtml}
-    <span class="quest-name">${quest.name}</span>
+    <span class="quest-name${quest.accountBound ? ' name-bound' : ''}">${quest.name}</span>
   `;
 
   if (state.editorMode) {
@@ -324,10 +324,11 @@ function renderQuestViewerHeader(quest, item) {
   const rate  = quest.successRate < 100
     ? `<span class="qvh-rate qvh-rate--partial">${quest.successRate}% Success</span>`
     : `<span class="qvh-rate qvh-rate--full">100% Success</span>`;
-  const bound = quest.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
+  const boundBadge = quest.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
   return renderViewerHeader(quest.producesId, item, {
-    meta: rate + bound,
-    loc:  findQuestLocation(quest)
+    meta:  rate + boundBadge,
+    loc:   findQuestLocation(quest),
+    bound: !!quest.accountBound
   });
 }
 

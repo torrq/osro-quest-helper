@@ -1394,14 +1394,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== SHARED VIEWER HEADER =====
 
-function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = false } = {}) {
+function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = false, bound = false } = {}) {
   const icon48  = itemId ? renderItemIcon(itemId, 48) : '';
   const idBadge = itemId ? `<span class="qvh-id">#${itemId}</span>` : '';
   const slot    = item && Number(item.slot) > 0
     ? `<span class="qvh-item-slots">[${item.slot}]</span>` : '';
   const displayName = item ? (item.name || 'Unknown') : 'Unknown';
+  const boundClass  = bound ? ' name-bound' : '';
   const name = itemId
-    ? `<a class="item-link qvh-item-name" onclick="navigateToItem(${itemId})">${displayName}</a>${slot}`
+    ? `<a class="item-link qvh-item-name${boundClass}" onclick="navigateToItem(${itemId})">${displayName}</a>${slot}`
     : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
 
   const metaRow = meta ? `<div class="qvh-meta">${meta}</div>` : '';
@@ -1509,7 +1510,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
 
   if (showProduces.length === 0 && requires.length === 0) return '';
 
-  function usageRow(u, amountStr = '') {
+  function usageRow(u, amountStr) {
     const amtHtml = amountStr
       ? `<span class="mat-amt"><span class="mat-x">\u00d7</span>${amountStr}</span>` : '';
     if (u.type === 'quest') {
@@ -1521,7 +1522,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
             <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a></span>
             ${amtHtml}
           </div>
-          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} › ${u.subgroup.name}</div>
+          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
         </div>`;
     } else {
       return `
@@ -1532,7 +1533,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
             <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a></span>
             ${amtHtml}
           </div>
-          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} › ${u.subgroup.name}</div>
+          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
         </div>`;
     }
   }
@@ -1542,7 +1543,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
   if (showProduces.length > 0) {
     const label = (excludeQuest || excludeShop) ? 'Also Produced By' : 'Produced By';
     html += `<span class="item-label">${label}:</span><div class="mat-tree">`;
-    html += showProduces.map(u => usageRow(u)).join('');
+    html += showProduces.map(u => usageRow(u, '')).join('');
     html += '</div>';
   }
 
@@ -1563,7 +1564,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
   return html;
 }
 
-window.findItemUsage = findItemUsage;
+window.findItemUsage      = findItemUsage;
 window.renderUsageSection = renderUsageSection;
 
 // ===== PUBLIC API EXPOSURE =====
