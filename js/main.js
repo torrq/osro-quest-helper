@@ -325,14 +325,14 @@ function importItemValues() {
       applyItemValues(values);
       saveItemValuesToStorage();
       
-      alert(`Successfully imported ${Object.keys(values).length} item values!`);
+      showToast(`Imported ${Object.keys(values).length} item values`, 'success');
       
       if (state.currentTab === 'items') {
         renderItems();
         if (state.selectedItemId) renderItemContent();
       }
     } catch (err) {
-      alert('Failed to import item values. Please check the file format.');
+      showToast('Failed to import — check the file format', 'error', 5000);
     }
   };
   
@@ -432,7 +432,7 @@ function handleInitError(err) {
                   "Error: " + (err.message || String(err)) + "\n\n" +
                   "The application may not function correctly. Check console for details.";
   
-  alert(message);
+  showToast(message, 'error', 8000);
   
   // Still try to render with whatever data we have
   initState.complete = true;
@@ -520,7 +520,7 @@ function withErrorBoundary(fn, context) {
         showErrorMessage(containerId, context, error, true);
       } else {
         // Fallback: show alert
-        alert(`Error in ${context}: ${error.message}\n\nPlease refresh the page.`);
+        showToast(`Error: ${error.message}`, 'error', 6000);
       }
       
       // Don't throw - allow app to continue
@@ -1232,7 +1232,7 @@ function highlightActiveQuest(questId) {
 // Copy the current quest URL to clipboard
 function copyQuestLink() {
   if (!state.selectedQuest || !state.selectedQuest.producesId) {
-    alert('No quest selected');
+    showToast('No quest selected', 'warning');
     return;
   }
   
@@ -1286,7 +1286,7 @@ function selectAutolootSlotFromHistory(slotNum) {
 // Copy the current item URL to clipboard
 function copyItemLink() {
   if (!state.selectedItemId) {
-    alert('No item selected');
+    showToast('No item selected', 'warning');
     return;
   }
   
@@ -1304,7 +1304,7 @@ function copyItemLink() {
 // Copy the current autoloot slot URL to clipboard
 function copyAutolootLink() {
   if (!state.selectedAutolootSlot) {
-    alert('No autoloot slot selected');
+    showToast('No autoloot slot selected', 'warning');
     return;
   }
   
@@ -1332,6 +1332,37 @@ function showCopyFeedback(selector) {
     }, 2000);
   }
 }
+
+
+function showToast(message, type = 'info', duration = 3000) {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const icons = { success: '✓', error: '✗', warning: '⚠', info: 'ℹ' };
+  const toast = document.createElement('div');
+  toast.className = `toast toast--${type}`;
+  toast.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${message}</span>`;
+  container.appendChild(toast);
+  const dismiss = () => {
+    toast.classList.add('toast-out');
+    toast.addEventListener('animationend', () => toast.remove(), { once: true });
+  };
+  const timer = setTimeout(dismiss, duration);
+  toast.addEventListener('click', () => { clearTimeout(timer); dismiss(); });
+}
+window.showToast = showToast;
+
+function triggerContentFade() {
+  const el = document.getElementById('mainContent');
+  if (!el) return;
+  el.classList.remove('content-fade-in');
+  void el.offsetWidth;
+  el.classList.add('content-fade-in');
+}
+window.triggerContentFade = triggerContentFade;
 
 // ===== EVENT LISTENERS =====
 

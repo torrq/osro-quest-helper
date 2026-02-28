@@ -70,6 +70,7 @@ function selectAutolootSlot(slotNum, pushToHistory = true) {
 
 function renderAutolootMain() {
   const container = document.getElementById("mainContent");
+  if (typeof triggerContentFade === "function") triggerContentFade();
   const slot = state.selectedAutolootSlot;
   const items = state.autolootData[slot] || [];
 
@@ -409,7 +410,7 @@ function addToAutoloot(slot, id) {
   }
   
   if (currentItems.length >= AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT) {
-    alert(`Slot ${slot} is full! Maximum ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} items per slot.`);
+    showToast(`Slot ${slot} is full — max ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} items`, 'warning');
     return;
   }
   
@@ -437,17 +438,16 @@ function removeFromAutoloot(slot, id) {
 }
 
 function clearAutolootSlot(slot) {
-  if (confirm(`Clear all items from Slot ${slot}?`)) {
-    state.autolootData[slot] = [];
-    saveAutoloot();
-  }
+  state.autolootData[slot] = [];
+  saveAutoloot();
+  showToast(`Slot ${slot} cleared`, "info");
 }
 
 function copyAllAutoloot() {
   const blocks = document.querySelectorAll(".al-code-block");
   const text = Array.from(blocks).map(b => b.textContent).join("\n");
   navigator.clipboard.writeText(text);
-  alert("Commands copied to clipboard");
+  showToast("Commands copied", "success");
 }
 
 // ===== IMPORT FUNCTIONALITY =====
@@ -460,14 +460,14 @@ function importAlootCommands() {
 
   const slot = state.selectedAutolootSlot;
   if (!slot) {
-    alert("No autoloot slot selected.");
+    showToast('No autoloot slot selected', 'warning');
     return;
   }
 
   const ids = parseAlootCommands(text);
 
   if (ids.size === 0) {
-    alert("No valid @alootid2 item IDs found.");
+    showToast('No valid @alootid2 item IDs found', 'warning');
     return;
   }
 
@@ -475,7 +475,7 @@ function importAlootCommands() {
   const availableSpace = AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT - currentItems.length;
   
   if (availableSpace <= 0) {
-    alert(`Slot ${slot} is full! Maximum ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} items per slot.`);
+    showToast(`Slot ${slot} is full — max ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} items`, 'warning');
     return;
   }
 
@@ -499,9 +499,7 @@ function importAlootCommands() {
   renderAutolootSidebar();
   renderAutolootMain();
   
-  if (skipped > 0) {
-    alert(`Added ${added} items. ${skipped} items skipped due to ${AUTOLOOT_CONFIG.MAX_ITEMS_PER_SLOT} item limit.`);
-  }
+  showToast(`Imported ${added} item${added !== 1 ? 's' : ''}${skipped > 0 ? ` — ${skipped} skipped (slot full)` : ''}`, skipped > 0 ? 'warning' : 'success');
 }
 
 function parseAlootCommands(text) {

@@ -288,6 +288,7 @@ function createAddShopButton(groupIdx, subIdx) {
 
 function renderShopContentCore() {
   const container = document.getElementById("mainContent");
+  if (typeof triggerContentFade === "function") triggerContentFade();
   
   if (!container) {
     console.warn('[renderShopContent] Container element not found');

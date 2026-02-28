@@ -184,32 +184,27 @@ function addGroup() {
 }
 
 function deleteGroup(idx) {
-  if (confirm("Delete this group and all its contents?")) {
-    const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
-    groups.splice(idx, 1);
-    
-    if (groupsTabMode === 'quests') {
-      state.expandedGroups.delete(idx);
-      if (state.selectedGroup === groups[idx]) {
-        state.selectedQuest = null;
-      }
-    } else {
-      state.expandedShopGroups.delete(idx);
-      if (state.selectedShopGroup === groups[idx]) {
-        state.selectedShop = null;
-      }
-    }
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  const deletedGroupName = groups[idx]?.name || 'Group';
+  groups.splice(idx, 1);
+  showToast(`Deleted "${deletedGroupName}"`, 'info');
 
-    if (state.selectedGroupForEdit === idx) {
-      state.selectedGroupForEdit = null;
-    } else if (state.selectedGroupForEdit > idx) {
-      state.selectedGroupForEdit--;
-    }
-
-    render();
+  if (groupsTabMode === 'quests') {
+    state.expandedGroups.delete(idx);
+    if (state.selectedGroup === groups[idx]) { state.selectedQuest = null; }
+  } else {
+    state.expandedShopGroups.delete(idx);
+    if (state.selectedShopGroup === groups[idx]) { state.selectedShop = null; }
   }
-}
 
+  if (state.selectedGroupForEdit === idx) {
+    state.selectedGroupForEdit = null;
+  } else if (state.selectedGroupForEdit > idx) {
+    state.selectedGroupForEdit--;
+  }
+
+  render();
+}
 function updateGroupName(idx, value) {
   const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
   groups[idx].name = value;
@@ -274,8 +269,7 @@ function deleteSubgroup(groupIdx, subIdx) {
   const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
   const itemsKey = groupsTabMode === 'quests' ? 'quests' : 'shops';
   
-  if (confirm(`Delete this subgroup and all its ${itemsKey}?`)) {
-    const subgroup = groups[groupIdx].subgroups[subIdx];
+  const subgroup = groups[groupIdx].subgroups[subIdx];
     
     if (groupsTabMode === 'quests' && state.selectedSubgroup === subgroup) {
       state.selectedQuest = null;
@@ -283,17 +277,15 @@ function deleteSubgroup(groupIdx, subIdx) {
       state.selectedShop = null;
     }
     
-    groups[groupIdx].subgroups.splice(subIdx, 1);
-    
-    const key = `${groupIdx}-${subIdx}`;
-    if (groupsTabMode === 'quests') {
-      state.expandedSubgroups.delete(key);
-    } else {
-      state.expandedShopSubgroups.delete(key);
-    }
-    
-    render();
+  groups[groupIdx].subgroups.splice(subIdx, 1);
+  const subKey = `${groupIdx}-${subIdx}`;
+  if (groupsTabMode === 'quests') {
+    state.expandedSubgroups.delete(subKey);
+  } else {
+    state.expandedShopSubgroups.delete(subKey);
   }
+  showToast(`Subgroup deleted`, 'info');
+  render();
 }
 
 function setGroupsTabMode(mode) {
