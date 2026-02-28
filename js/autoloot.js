@@ -70,7 +70,6 @@ function selectAutolootSlot(slotNum, pushToHistory = true) {
 
 function renderAutolootMain() {
   const container = document.getElementById("mainContent");
-  if (typeof triggerContentFade === "function") triggerContentFade();
   const slot = state.selectedAutolootSlot;
   const items = state.autolootData[slot] || [];
 

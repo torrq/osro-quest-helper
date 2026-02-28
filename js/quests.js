@@ -245,7 +245,6 @@ function createAddQuestButton(groupIdx, subIdx) {
 
 function renderQuestContentCore() {
   const container = document.getElementById("mainContent");
-  if (typeof triggerContentFade === "function") triggerContentFade();
   
   if (!container) {
     console.warn('[renderQuestContent] Container element not found');

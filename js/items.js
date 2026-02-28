@@ -477,7 +477,6 @@ function renderItemViewerHeader(id, item) {
 
 function renderItemContentCore() {
   const container = document.getElementById("mainContent");
-  if (typeof triggerContentFade === "function") triggerContentFade();
   
   if (!container) {
     console.warn('[renderItemContent] Container element not found');

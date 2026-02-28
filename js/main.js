@@ -1355,15 +1355,6 @@ function showToast(message, type = 'info', duration = 3000) {
 }
 window.showToast = showToast;
 
-function triggerContentFade() {
-  const el = document.getElementById('mainContent');
-  if (!el) return;
-  el.classList.remove('content-fade-in');
-  void el.offsetWidth;
-  el.classList.add('content-fade-in');
-}
-window.triggerContentFade = triggerContentFade;
-
 // ===== EVENT LISTENERS =====
 
 document.addEventListener("DOMContentLoaded", () => {

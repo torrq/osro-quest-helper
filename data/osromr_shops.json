@@ -654,7 +654,7 @@
             {
               "name": "Kafra Card",
               "producesId": 12211,
-              "accountBound": true,
+              "accountBound": false,
               "requirements": [
                 {
                   "type": "cardo_points",
@@ -2468,7 +2468,7 @@
               "producesId": 12259,
               "successRate": 100,
               "description": "",
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "item",
@@ -2580,7 +2580,7 @@
               "producesId": 40043,
               "successRate": 100,
               "description": "",
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "item",
@@ -2594,7 +2594,7 @@
               "producesId": 40040,
               "successRate": 100,
               "description": "",
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "item",
