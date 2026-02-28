@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 111;
+const VERSION = 112;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
