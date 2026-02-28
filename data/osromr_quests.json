@@ -23814,6 +23814,505 @@
         }
       ],
       "caption": "@navi morocc_in 146 99"
+    },
+    {
+      "name": "Crafting",
+      "subgroups": [
+        {
+          "name": "Alchemist",
+          "quests": [
+            {
+              "name": "White Potion",
+              "producesId": 504,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 509,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1093,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Blue Potion",
+              "producesId": 505,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 510,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 911,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1093,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "White Slim Potion",
+              "producesId": 547,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 504,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1061,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1092,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Anodyne",
+              "producesId": 605,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 708,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Aloevera",
+              "producesId": 606,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 518,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 704,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Alcohol",
+              "producesId": 970,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 905,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 1092,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7033,
+                  "amount": 5
+                }
+              ]
+            },
+            {
+              "name": "Bottle Grenade",
+              "producesId": 7135,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1059,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Acid Bottle",
+              "producesId": 7136,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 929,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Plant Bottle",
+              "producesId": 7137,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1032,
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "name": "Marine Sphere Bottle",
+              "producesId": 7138,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1050,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1051,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Glistening Coat",
+              "producesId": 7139,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 950,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1044,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Embryo",
+              "producesId": 7142,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 7140,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7141,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7143,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Fireproof Potion",
+              "producesId": 12118,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 716,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1012,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 1093,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Coldproof Potion",
+              "producesId": 12119,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 717,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 950,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 1093,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Earthproof Potion",
+              "producesId": 12120,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 715,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7126,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 1093,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Thunderproof Potion",
+              "producesId": 12121,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 717,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1057,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 1093,
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Assassin Cross",
+          "quests": [
+            {
+              "name": "Poison Bottle",
+              "producesId": 678,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 657,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 937,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 939,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 952,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 972,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7033,
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sage",
+          "quests": [
+            {
+              "name": "Elemental Converter [Fire]",
+              "producesId": 12114,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 904,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 7433,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Water]",
+              "producesId": 12115,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 946,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 7433,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Earth]",
+              "producesId": 12116,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 947,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 7433,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Elemental Converter [Wind]",
+              "producesId": 12117,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 1013,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 7433,
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "Vanilla Recipes"
     }
   ]
 }
