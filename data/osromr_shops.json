@@ -4161,7 +4161,7 @@
             {
               "name": "Flare Sphere",
               "producesId": 13203,
-              "accountBound": true,
+              "accountBound": false,
               "requirements": [
                 {
                   "type": "zeny",
