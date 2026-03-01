@@ -23819,6 +23819,317 @@
       "name": "Crafting",
       "subgroups": [
         {
+          "name": "Cooking",
+          "quests": [
+            {
+              "name": "Steamed Tongue",
+              "producesId": 12075,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 505,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 526,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 606,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 610,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1015,
+                  "amount": 20
+                },
+                {
+                  "type": "item",
+                  "id": 7455,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7482,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Dragon Breath Cocktail",
+              "producesId": 12080,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 510,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 521,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 526,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 568,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 576,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 607,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 707,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1033,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Hwergelmir's Tonic",
+              "producesId": 12095,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 526,
+                  "amount": 4
+                },
+                {
+                  "type": "item",
+                  "id": 576,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 607,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 645,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 710,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 970,
+                  "amount": 5
+                },
+                {
+                  "type": "item",
+                  "id": 7066,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 7119,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Steamed Desert Scorpions",
+              "producesId": 12090,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 526,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 606,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 610,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 621,
+                  "amount": 3
+                },
+                {
+                  "type": "item",
+                  "id": 904,
+                  "amount": 20
+                },
+                {
+                  "type": "item",
+                  "id": 7125,
+                  "amount": 20
+                },
+                {
+                  "type": "item",
+                  "id": 7455,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7482,
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "name": "Immortal Stew",
+              "producesId": 12085,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 605,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 608,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 609,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 621,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 929,
+                  "amount": 20
+                },
+                {
+                  "type": "item",
+                  "id": 934,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 950,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 7454,
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "name": "Cooked Nine Tail's Tails",
+              "producesId": 12100,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 610,
+                  "amount": 4
+                },
+                {
+                  "type": "item",
+                  "id": 706,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 709,
+                  "amount": 2
+                },
+                {
+                  "type": "item",
+                  "id": 1022,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 1033,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 7100,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 7452,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 7454,
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Acolyte",
+          "quests": [
+            {
+              "name": "Holy Water",
+              "producesId": 523,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 713,
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "Alchemist",
           "quests": [
             {
@@ -24181,6 +24492,101 @@
                   "type": "item",
                   "id": 1093,
                   "amount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Blacksmith",
+          "quests": [
+            {
+              "name": "Flame Heart",
+              "producesId": 994,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 612,
+                  "amount": 10
+                },
+                {
+                  "type": "item",
+                  "id": 990,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Mystic Frozen",
+              "producesId": 995,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 612,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 991,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Rough Wind",
+              "producesId": 996,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 612,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 992,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Great Nature",
+              "producesId": 997,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 612,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 993,
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Star Crumb",
+              "producesId": 1000,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 612,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1001,
+                  "amount": 10
                 }
               ]
             }
