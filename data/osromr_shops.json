@@ -4360,11 +4360,640 @@
         },
         {
           "name": "Talisman Shop",
-          "shops": []
+          "shops": [
+            {
+              "name": "Jedi Talisman",
+              "producesId": 40251,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Sith Talisman",
+              "producesId": 40252,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Alchemist Talisman",
+              "producesId": 40253,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Assassin Talisman",
+              "producesId": 40254,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Crusader Talisman",
+              "producesId": 40255,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Artist Talisman",
+              "producesId": 40256,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Super Novice Talisman",
+              "producesId": 40257,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Blacksmith Talisman",
+              "producesId": 40258,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Rogue Talisman",
+              "producesId": 40259,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Knight Talisman",
+              "producesId": 40260,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Hunter Talisman",
+              "producesId": 40261,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Monk Talisman",
+              "producesId": 40262,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Sage Talisman",
+              "producesId": 40263,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Priest Talisman",
+              "producesId": 40264,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Wizard Talisman",
+              "producesId": 40265,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Ninja Talisman",
+              "producesId": 40266,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Gunslinger Talisman",
+              "producesId": 40267,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Linker Talisman",
+              "producesId": 40268,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            },
+            {
+              "name": "Gladiator Talisman",
+              "producesId": 40269,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500000
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Alchemist Shop",
-          "shops": []
+          "shops": [
+            {
+              "name": "Medicine Bowl",
+              "producesId": 7134,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 8
+                }
+              ]
+            },
+            {
+              "name": "Empty Test Tube",
+              "producesId": 1092,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Zenorc's Fang",
+              "producesId": 1044,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 264
+                }
+              ]
+            },
+            {
+              "name": "Stem",
+              "producesId": 905,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 46
+                }
+              ]
+            },
+            {
+              "name": "Cactus Needle",
+              "producesId": 952,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 82
+                }
+              ]
+            },
+            {
+              "name": "Witch Starsand",
+              "producesId": 1061,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 484
+                }
+              ]
+            },
+            {
+              "name": "Scell",
+              "producesId": 911,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 160
+                }
+              ]
+            },
+            {
+              "name": "Red Gemstone",
+              "producesId": 716,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Blue Gemstone",
+              "producesId": 717,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Heart of Mermaid",
+              "producesId": 950,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 264
+                }
+              ]
+            },
+            {
+              "name": "Large Jellopy",
+              "producesId": 7126,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 840
+                }
+              ]
+            },
+            {
+              "name": "Frill",
+              "producesId": 1012,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 250
+                }
+              ]
+            },
+            {
+              "name": "Moth Dust",
+              "producesId": 1057,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 138
+                }
+              ]
+            },
+            {
+              "name": "Mushroom Spore",
+              "producesId": 921,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 36
+                }
+              ]
+            },
+            {
+              "name": "Poison Spore",
+              "producesId": 7033,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 114
+                }
+              ]
+            },
+            {
+              "name": "Immortal Heart",
+              "producesId": 929,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 374
+                }
+              ]
+            },
+            {
+              "name": "Fang",
+              "producesId": 1063,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 680
+                }
+              ]
+            },
+            {
+              "name": "Detonator",
+              "producesId": 1051,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 450
+                }
+              ]
+            },
+            {
+              "name": "Tendon",
+              "producesId": 1050,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 220
+                }
+              ]
+            },
+            {
+              "name": "Maneater Blossom",
+              "producesId": 1032,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 196
+                }
+              ]
+            },
+            {
+              "name": "Karvodailnirol",
+              "producesId": 972,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 400
+                }
+              ]
+            },
+            {
+              "name": "Detrimindexta",
+              "producesId": 971,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 400
+                }
+              ]
+            },
+            {
+              "name": "Empty Bottle Box",
+              "producesId": 13761,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "White Slim Potion",
+              "producesId": 547,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 25000
+                }
+              ]
+            },
+            {
+              "name": "Marine Sphere Bottle",
+              "producesId": 7138,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Plant Bottle",
+              "producesId": 7137,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Embryo",
+              "producesId": 7142,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10
+                }
+              ]
+            },
+            {
+              "name": "Bottle Grenade",
+              "producesId": 7135,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 12500
+                }
+              ]
+            },
+            {
+              "name": "Acid Bottle",
+              "producesId": 7136,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 12500
+                }
+              ]
+            },
+            {
+              "name": "Elemental Potion Creation Guide",
+              "producesId": 7434,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Slim Potion Creation Guide",
+              "producesId": 7133,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 240000
+                }
+              ]
+            },
+            {
+              "name": "Potion Creation Gude",
+              "producesId": 7144,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Alcohol Creation Guide",
+              "producesId": 7127,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Bottle Grenade Creation Guide",
+              "producesId": 7128,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Acid Bottle Creation Guide",
+              "producesId": 7129,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Plant Bottle Creation Guide",
+              "producesId": 7130,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Marine Sphere Creation Guide",
+              "producesId": 7131,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Glistening Coat Creation Guide",
+              "producesId": 7132,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Smith Shop",
