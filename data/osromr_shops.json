@@ -4997,19 +4997,540 @@
         },
         {
           "name": "Smith Shop",
-          "shops": []
+          "shops": [
+            {
+              "name": "Phracon",
+              "producesId": 1010,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Emveretarcon",
+              "producesId": 1011,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Iron Ore",
+              "producesId": 1002,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50
+                }
+              ]
+            },
+            {
+              "name": "Coal",
+              "producesId": 1003,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Star Dust",
+              "producesId": 1001,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500
+                }
+              ]
+            },
+            {
+              "name": "Wind of Verdure",
+              "producesId": 992,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Green Live",
+              "producesId": 993,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Red Blood",
+              "producesId": 990,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Crystal Blue",
+              "producesId": 991,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Iron",
+              "producesId": 998,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100
+                }
+              ]
+            },
+            {
+              "name": "Steel",
+              "producesId": 999,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Iron Hammer",
+              "producesId": 613,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Golden Hammer",
+              "producesId": 614,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Oridecon Hammer",
+              "producesId": 615,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 5000
+                }
+              ]
+            },
+            {
+              "name": "Hammer of Blacksmith",
+              "producesId": 1005,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "name": "Mini Furnace",
+              "producesId": 612,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 150
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Elemental Shop",
-          "shops": []
+          "shops": [
+            {
+              "name": "Wind of Verdure",
+              "producesId": 992,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Green Live",
+              "producesId": 993,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Red Blood",
+              "producesId": 990,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Crystal Blue",
+              "producesId": 991,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Cobweb",
+              "producesId": 1025,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 184
+                }
+              ]
+            },
+            {
+              "name": "Scorpion Tail",
+              "producesId": 904,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Rainbow Shell",
+              "producesId": 1013,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Horn",
+              "producesId": 947,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Snail's Shell",
+              "producesId": 946,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Blue Gemstone",
+              "producesId": 717,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Red Gemstone",
+              "producesId": 716,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 600
+                }
+              ]
+            },
+            {
+              "name": "Yellow Gemstone",
+              "producesId": 715,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1500
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Poison Shop",
-          "shops": []
+          "shops": [
+            {
+              "name": "Venom Knife",
+              "producesId": 1771,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50
+                }
+              ]
+            },
+            {
+              "name": "Poison Spore",
+              "producesId": 7033,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 114
+                }
+              ]
+            },
+            {
+              "name": "Cactus Needle",
+              "producesId": 952,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 82
+                }
+              ]
+            },
+            {
+              "name": "Bee Sting",
+              "producesId": 939,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Venom Canine",
+              "producesId": 937,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Karvodailnirol",
+              "producesId": 972,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 400
+                }
+              ]
+            },
+            {
+              "name": "Berserk Potion",
+              "producesId": 657,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3000
+                }
+              ]
+            },
+            {
+              "name": "Empty Bottle Box",
+              "producesId": 13761,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Chef Assistant Shop",
-          "shops": []
+          "shops": [
+            {
+              "name": "Red Spice",
+              "producesId": 7456,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Yellow Spice",
+              "producesId": 7452,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000
+                }
+              ]
+            },
+            {
+              "name": "Bread",
+              "producesId": 580,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 150
+                }
+              ]
+            },
+            {
+              "name": "Spicy Sauce",
+              "producesId": 7455,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 700
+                }
+              ]
+            },
+            {
+              "name": "Sweet Sauce",
+              "producesId": 7453,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 700
+                }
+              ]
+            },
+            {
+              "name": "Savory Sauce",
+              "producesId": 7454,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 700
+                }
+              ]
+            },
+            {
+              "name": "Fresh Fish",
+              "producesId": 579,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 250
+                }
+              ]
+            },
+            {
+              "name": "Bag of Grain",
+              "producesId": 577,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Cooking Oil",
+              "producesId": 7457,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 500
+                }
+              ]
+            },
+            {
+              "name": "Pot",
+              "producesId": 7482,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Edible Mushroom",
+              "producesId": 581,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 40
+                }
+              ]
+            }
+          ]
         }
       ],
       "caption": "@npc 36"
