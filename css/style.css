@@ -2346,7 +2346,7 @@ body.viewer-mode .editor-quest select {
 
 /* Location: left-aligned, reads as a caption under the item name */
 .mat-row-sub--loc {
-  text-align: left;
+  text-align: right;
 }
 
 /* Zeny value: right-aligned, mirrors the amount above it */

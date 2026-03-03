@@ -590,11 +590,11 @@ function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune 
   return `
     <div class="mat-row">
       ${xbtn  || '<span class="mat-xbtn-ph"></span>'}
-      ${badge || ''}
       ${icon  || ''}
       <span class="mat-name">${name}${slot ? `<span class="mat-slot">${slot}</span>` : ''}</span>
-      <span class="mat-amt"><span class="mat-x">×</span>${fmtAmt}</span>
+      ${badge || ''}
       ${immune || ''}
+      <span class="mat-amt"><span class="mat-x">×</span>${fmtAmt}</span>
     </div>${subLine}`;
 }
 

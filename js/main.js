@@ -1533,15 +1533,17 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
   if (showProduces.length === 0 && requires.length === 0) return '';
 
   function usageRow(u, amountStr) {
+    const producesId = u.type === 'quest' ? u.quest.producesId : u.shop.producesId;
+    const iconHtml = producesId ? renderItemIcon(producesId, 24) : '<span class="mat-xbtn-ph"></span>';
     const amtHtml = amountStr
       ? `<span class="mat-amt"><span class="mat-x">\u00d7</span>${amountStr}</span>` : '';
     if (u.type === 'quest') {
       return `
         <div class="mat-node">
           <div class="mat-row">
-            <span class="mat-xbtn-ph"></span>
-            <span class="quest-badge">Quest</span>
+            ${iconHtml}
             <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a></span>
+            <span class="quest-badge">Quest</span>
             ${amtHtml}
           </div>
           <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
@@ -1550,9 +1552,9 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
       return `
         <div class="mat-node">
           <div class="mat-row">
-            <span class="mat-xbtn-ph"></span>
-            <span class="shop-badge">Shop</span>
+            ${iconHtml}
             <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a></span>
+            <span class="shop-badge">Shop</span>
             ${amtHtml}
           </div>
           <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
