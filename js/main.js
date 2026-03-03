@@ -1424,7 +1424,7 @@ function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = 
   const displayName = item ? (item.name || 'Unknown') : 'Unknown';
   const boundClass  = bound ? ' name-bound' : '';
   const name = itemId
-    ? `<a class="item-link qvh-item-name${boundClass}" onclick="navigateToItem(${itemId})">${displayName}</a>${slot}`
+    ? `<a class="item-link qvh-item-name${boundClass}" href="${itemUrl(itemId)}" onclick="event.preventDefault(); navigateToItem(${itemId})">${displayName}</a>${slot}`
     : `<span class="qvh-item-name qvh-item-name--none">No item produced</span>`;
 
   const metaRow = meta ? `<div class="qvh-meta">${meta}</div>` : '';
@@ -1542,7 +1542,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
         <div class="mat-node">
           <div class="mat-row">
             ${iconHtml}
-            <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a></span>
+            <span class="mat-name"><a class="item-link tree-item-name" href="${questUrl(u.quest.producesId)}" onclick="event.preventDefault(); navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a></span>
             <span class="quest-badge">Quest</span>
             ${amtHtml}
           </div>
@@ -1553,7 +1553,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
         <div class="mat-node">
           <div class="mat-row">
             ${iconHtml}
-            <span class="mat-name"><a class="item-link tree-item-name" onclick="navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a></span>
+            <span class="mat-name"><a class="item-link tree-item-name" href="${shopUrl(u.shop.producesId)}" onclick="event.preventDefault(); navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a></span>
             <span class="shop-badge">Shop</span>
             ${amtHtml}
           </div>
@@ -1590,6 +1590,14 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
 
 window.findItemUsage      = findItemUsage;
 window.renderUsageSection = renderUsageSection;
+
+
+function questUrl(id) { return `?quest=${id}`; }
+function shopUrl(id)  { return `?shop=${id}`; }
+function itemUrl(id)  { return `?item=${id}`; }
+window.questUrl = questUrl;
+window.shopUrl  = shopUrl;
+window.itemUrl  = itemUrl;
 
 // ===== PUBLIC API EXPOSURE =====
 

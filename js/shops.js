@@ -412,10 +412,10 @@ function renderShopRequirementsFlat(shop) {
       name = 'Zeny';
     } else if (req.type === 'credit') {
       icon = renderItemIcon(SPECIAL_ITEMS.CREDIT);
-      name = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
+      name = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.CREDIT)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
     } else if (req.type === 'gold') {
       icon = renderItemIcon(SPECIAL_ITEMS.GOLD);
-      name = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+      name = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.GOLD)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
     } else if (SHOP_CURRENCY_NAMES[req.type]) {
       icon = renderItemIcon(2);
       name = SHOP_CURRENCY_NAMES[req.type];
@@ -423,7 +423,7 @@ function renderShopRequirementsFlat(shop) {
       const itm = getItem(req.id);
       icon = renderItemIcon(req.id);
       if (itm && Number(itm.slot) > 0) slot = `[${itm.slot}]`;
-      name = `<a class="item-link" onclick="navigateToItem(${req.id})">${itm ? (itm.name || 'Unknown') : 'Unknown'}</a>`;
+      name = `<a class="item-link" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${itm ? (itm.name || 'Unknown') : 'Unknown'}</a>`;
     }
 
     // Zeny sub-value line
@@ -457,7 +457,7 @@ function shopRenderProducesSelector(shop, item) {
       <span class="item-label label-block">Produces Item:</span>
       ${shop.producesId ? `
         <div class="item-selected-badge">
-          <strong><a class="item-link tree-item-name" onclick="navigateToItem(${shop.producesId})">${getItemDisplayName(item)}</a></strong>
+          <strong><a class="item-link tree-item-name" href="${itemUrl(shop.producesId)}" onclick="event.preventDefault(); navigateToItem(${shop.producesId})">${getItemDisplayName(item)}</a></strong>
           ${state.editorMode ? `<button class="clear-btn" onclick="shopUpdateProducesId(null)">×</button>` : ''}
         </div>
       ` : state.editorMode ? `
@@ -572,7 +572,7 @@ function shopRenderItemRequirement(req, idx, item) {
         <div class="item-selected-badge">
           ${iconHtml}
           <strong class="text-ellipsis-max">
-            <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a>
+            <a class="item-link tree-item-name" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a>
           </strong>
           <small>(${req.id})</small>
           <button class="clear-btn ml-auto" onclick="shopUpdateReqId(${idx}, null)">×</button>
@@ -820,13 +820,13 @@ function renderShopSummaryItems(entries, totalZeny) {
       nameHtml = "Zeny";
     } else if (entry.type === "gold") {
       iconHtml = renderItemIcon(SPECIAL_ITEMS.GOLD);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+      nameHtml = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.GOLD)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
     } else if (entry.type === "credit") {
       iconHtml = renderItemIcon(SPECIAL_ITEMS.CREDIT);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
+      nameHtml = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.CREDIT)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
     } else {
       iconHtml = renderItemIcon(entry.itemId);
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}</a>`;
+      nameHtml = `<a class="item-link" href="${itemUrl(entry.itemId)}" onclick="event.preventDefault(); navigateToItem(${entry.itemId})">${entry.name}</a>`;
     }
 
     let zenyVal = 0;

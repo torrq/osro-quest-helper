@@ -341,7 +341,7 @@ function renderProducesSelector(quest, item) {
       <span class="item-label label-block">Produces Item:</span>
       ${quest.producesId ? `
         <div class="item-selected-badge">
-          <strong><a class="item-link tree-item-name" onclick="navigateToItem(${quest.producesId})">${getItemDisplayName(item)}</a></strong>
+          <strong><a class="item-link tree-item-name" href="${itemUrl(quest.producesId)}" onclick="event.preventDefault(); navigateToItem(${quest.producesId})">${getItemDisplayName(item)}</a></strong>
           ${state.editorMode ? `<button class="clear-btn" onclick="updateProducesId(null)">×</button>` : ''}
         </div>
       ` : state.editorMode ? `
@@ -468,7 +468,7 @@ function renderItemRequirement(req, idx, item) {
         <div class="item-selected-badge">
           ${iconHtml}
           <strong class="text-ellipsis-max">
-            <a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a>
+            <a class="item-link tree-item-name" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${getItemDisplayName(item) || "Unknown"}</a>
           </strong>
           <small>(${req.id})</small>
           <button class="clear-btn ml-auto" onclick="updateReqId(${idx}, null)">×</button>
@@ -613,7 +613,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
     const meta = questMeta.get(q) || { gi: -1, si: -1, qi: -1, loc: '' };
     const xbtn  = _matXbtn(itemKey, expanded);
     const badge = `<span class="quest-badge">Quest</span>`;
-    const name  = `<a class="item-link tree-item-name" onclick="navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${rawName}</a>`;
+    const name  = `<a class="item-link tree-item-name" href="${questUrl(q.producesId)}" onclick="event.preventDefault(); navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${rawName}</a>`;
     const children = expanded
       ? `<div class="mat-children">${walkQuest(q, depth + 1, eff, questPath, itemKey)}</div>`
       : '';
@@ -625,7 +625,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
     const sh = shopSources[0];
     const meta = shopMeta.get(sh) || { gi: -1, si: -1, shi: -1, loc: '' };
     const badge = `<span class="shop-badge">Shop</span>`;
-    const name  = `<a class="item-link tree-item-name" onclick="navigateToShop(${meta.gi},${meta.si},${meta.shi})">${rawName}</a>`;
+    const name  = `<a class="item-link tree-item-name" href="${shopUrl(sh.producesId)}" onclick="event.preventDefault(); navigateToShop(${meta.gi},${meta.si},${meta.shi})">${rawName}</a>`;
     return `<div class="mat-node">${_matRow({ badge, icon, name, slot, amt: eff, aside: meta.loc, asideType: 'loc', immune: immuneHtml })}</div>`;
   }
 
@@ -633,7 +633,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
   const total = questSources.length + shopSources.length;
   const xbtn  = _matXbtn(itemKey, expanded);
   const badge  = `<span class="mat-badge-opts">⚠ ${total} opts</span>`;
-  const name   = `<a class="item-link tree-item-name" onclick="navigateToItem(${req.id})">${rawName}</a>`;
+  const name   = `<a class="item-link tree-item-name" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${rawName}</a>`;
 
   let optRows = '';
   if (expanded) {
@@ -644,7 +644,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
       optRows += `
         <div class="mat-opt-row">
           <span class="quest-badge">Quest</span>
-          <a class="item-link" onclick="navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${meta.loc}</a>
+          <a class="item-link" href="${questUrl(q.producesId)}" onclick="event.preventDefault(); navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${meta.loc}</a>
           <span class="mat-aside">${q.successRate}% success</span>
         </div>
         ${sub ? `<div class="mat-children">${sub}</div>` : ''}`;
@@ -654,7 +654,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
       optRows += `
         <div class="mat-opt-row">
           <span class="shop-badge">Shop</span>
-          <a class="item-link" onclick="navigateToShop(${meta.gi},${meta.si},${meta.shi})">${meta.loc}</a>
+          <a class="item-link" href="${shopUrl(sh.producesId)}" onclick="event.preventDefault(); navigateToShop(${meta.gi},${meta.si},${meta.shi})">${meta.loc}</a>
         </div>`;
     });
   }
@@ -673,10 +673,10 @@ function _matLeaf(req, eff, immuneHtml) {
     name = 'Zeny';
   } else if (req.type === 'credit') {
     icon  = renderItemIcon(SPECIAL_ITEMS.CREDIT);
-    name  = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
+    name  = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.CREDIT)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
   } else if (req.type === 'gold') {
     icon  = renderItemIcon(SPECIAL_ITEMS.GOLD);
-    name  = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+    name  = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.GOLD)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
   } else if (CURRENCY_NAMES[req.type]) {
     icon  = renderItemIcon(2);
     name  = CURRENCY_NAMES[req.type];
@@ -684,7 +684,7 @@ function _matLeaf(req, eff, immuneHtml) {
     const item = getItem(req.id);
     icon = renderItemIcon(req.id);
     if (item && Number(item.slot) > 0) slot = `[${item.slot}]`;
-    name = `<a class="item-link" onclick="navigateToItem(${req.id})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>`;
+    name = `<a class="item-link" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>`;
   }
 
   return `<div class="mat-node">${_matRow({ icon, name, slot, amt: eff, aside, asideType, immune: immuneHtml })}</div>`;
@@ -1023,11 +1023,11 @@ function renderSummaryItems(entries, totalZeny) {
     if (entry.type === "zeny") {
       nameHtml = `Zeny`;
     } else if (entry.type === "gold") {
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
+      nameHtml = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.GOLD)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
     } else if (entry.type === "credit") {
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
+      nameHtml = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.CREDIT)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.CREDIT})">Credit</a>`;
     } else {
-      nameHtml = `<a class="item-link" onclick="navigateToItem(${entry.itemId})">${entry.name}</a>`;
+      nameHtml = `<a class="item-link" href="${itemUrl(entry.itemId)}" onclick="event.preventDefault(); navigateToItem(${entry.itemId})">${entry.name}</a>`;
     }
 
     // Amount (formatted)
