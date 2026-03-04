@@ -584,7 +584,8 @@ function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune 
     ? amt.toLocaleString()
     : amt;
   const subClass = asideType === 'loc' ? 'mat-row-sub mat-row-sub--loc' : 'mat-row-sub mat-row-sub--val';
-  const subLine = aside
+  const showAside = aside && (asideType !== 'loc' || state.showLocation);
+  const subLine = showAside
     ? `<div class="${subClass}">${aside}</div>`
     : '';
   return `
