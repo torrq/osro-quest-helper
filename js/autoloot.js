@@ -80,11 +80,6 @@ function renderAutolootMain() {
       ${renderSearchBox()}
       ${renderCommandBox(slot, items)}
       ${renderImportSection()}
-      <div class="quest-footer-actions">
-        <button class="btn btn-sm copy-link-btn" onclick="copyAutolootLink()" title="Copy link to this autoloot slot">
-          🔗 Copy Link
-        </button>
-      </div>
     </div>
   `;
 }

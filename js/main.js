@@ -1304,24 +1304,6 @@ function highlightActiveQuest(questId) {
   }
 }
 
-// Copy the current quest URL to clipboard
-function copyQuestLink() {
-  if (!state.selectedQuest || !state.selectedQuest.producesId) {
-    showToast('No quest selected', 'warning');
-    return;
-  }
-  
-  const url = new URL(window.location);
-  url.searchParams.set('quest', state.selectedQuest.producesId.toString());
-  
-  navigator.clipboard.writeText(url.toString()).then(() => {
-    showCopyFeedback('.copy-link-btn');
-  }).catch(err => {
-    console.error('Failed to copy link:', err);
-    prompt('Copy this link:', url.toString());
-  });
-}
-
 // Select a quest from browser history (back/forward navigation)
 function selectQuestFromHistory(questId) {
   if (!questId) {
@@ -1356,42 +1338,6 @@ function selectAutolootSlotFromHistory(slotNum) {
   if (window.selectAutolootSlot) {
     window.selectAutolootSlot(parseInt(slotNum), false);
   }
-}
-
-// Copy the current item URL to clipboard
-function copyItemLink() {
-  if (!state.selectedItemId) {
-    showToast('No item selected', 'warning');
-    return;
-  }
-  
-  const url = new URL(window.location);
-  url.searchParams.set('item', state.selectedItemId.toString());
-  
-  navigator.clipboard.writeText(url.toString()).then(() => {
-    showCopyFeedback('.copy-link-btn');
-  }).catch(err => {
-    console.error('Failed to copy link:', err);
-    prompt('Copy this link:', url.toString());
-  });
-}
-
-// Copy the current autoloot slot URL to clipboard
-function copyAutolootLink() {
-  if (!state.selectedAutolootSlot) {
-    showToast('No autoloot slot selected', 'warning');
-    return;
-  }
-  
-  const url = new URL(window.location);
-  url.searchParams.set('autoloot', state.selectedAutolootSlot.toString());
-  
-  navigator.clipboard.writeText(url.toString()).then(() => {
-    showCopyFeedback('.copy-link-btn');
-  }).catch(err => {
-    console.error('Failed to copy link:', err);
-    prompt('Copy this link:', url.toString());
-  });
 }
 
 // Show copy feedback animation
@@ -1702,8 +1648,5 @@ window.exportValues = exportValues;
 window.exportAll = exportAll;
 window.saveData = saveData;
 window.render = render;
-window.copyQuestLink = copyQuestLink;
-window.copyItemLink = copyItemLink;
-window.copyAutolootLink = copyAutolootLink;
 window.toggleDescSearch = toggleDescSearch;
 window.toggleTheme = toggleTheme;

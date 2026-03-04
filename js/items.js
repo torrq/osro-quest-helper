@@ -538,11 +538,6 @@ function renderItemContentCore() {
 
       ${renderUsageSection(id)}
 
-      <div class="quest-footer-actions">
-        <button class="btn btn-sm copy-link-btn" onclick="copyItemLink()" title="Copy link to this item">
-          🔗 Copy Link
-        </button>
-      </div>
     </div>
   `;
 }

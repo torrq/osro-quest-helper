@@ -314,11 +314,6 @@ function renderShopContentCore() {
   if (state.editorMode) {
     // ── EDITOR MODE ──────────────────────────────────────────
     container.innerHTML = `
-      <div class="shop-header-actions">
-        <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
-          🔗 Copy Link
-        </button>
-      </div>
       <div class="editor-shop">
         <span class="item-label">Shop Item:</span>
         <div class="form-group">
@@ -381,11 +376,6 @@ function renderShopContentCore() {
 
         ${shop.producesId ? renderUsageSection(shop.producesId, { excludeShop: shop }) : ''}
 
-        <div class="quest-footer-actions">
-          <button class="btn btn-sm copy-link-btn" onclick="copyShopLink()" title="Copy link to this shop">
-            🔗 Copy Link
-          </button>
-        </div>
       </div>
     `;
   }
