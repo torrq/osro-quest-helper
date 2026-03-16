@@ -5083,6 +5083,70 @@
                   "amount": 3000
                 }
               ]
+            },
+            {
+              "name": "Sword Saint Crown [1]",
+              "producesId": 18865,
+              "successRate": 100,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 300000000
+                },
+                {
+                  "type": "activity_points",
+                  "amount": 100
+                },
+                {
+                  "type": "item",
+                  "id": 5165,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 2541,
+                  "amount": 1
+                },
+                {
+                  "type": "item",
+                  "id": 1469,
+                  "amount": 4
+                },
+                {
+                  "type": "item",
+                  "id": 2318,
+                  "amount": 4
+                },
+                {
+                  "type": "item",
+                  "id": 7086,
+                  "amount": 7
+                },
+                {
+                  "type": "item",
+                  "id": 1004,
+                  "amount": 50
+                },
+                {
+                  "type": "item",
+                  "id": 40087,
+                  "amount": 300
+                },
+                {
+                  "type": "item",
+                  "id": 40088,
+                  "amount": 300
+                },
+                {
+                  "type": "gold",
+                  "amount": 3000
+                },
+                {
+                  "type": "credit",
+                  "amount": 300
+                }
+              ]
             }
           ]
         },
