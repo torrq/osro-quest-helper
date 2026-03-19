@@ -646,8 +646,8 @@
           "name": "Instance Points",
           "shops": [
             {
-              "name": "VIP Ticket (1 Day)",
-              "producesId": 40027,
+              "name": "VIP Ticket [1D]",
+              "producesId": 40069,
               "accountBound": false,
               "requirements": [
                 {
