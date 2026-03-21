@@ -861,28 +861,28 @@
                 },
                 {
                   "type": "item",
-                  "id": 42803,
-                  "amount": 1
+                  "id": 42703,
+                  "amount": 2
                 },
                 {
                   "type": "item",
                   "id": 947,
-                  "amount": 1
+                  "amount": 500
                 },
                 {
                   "type": "item",
                   "id": 968,
-                  "amount": 1
+                  "amount": 50
                 },
                 {
                   "type": "item",
                   "id": 7211,
-                  "amount": 1
+                  "amount": 50
                 },
                 {
                   "type": "item",
                   "id": 983,
-                  "amount": 1
+                  "amount": 30
                 },
                 {
                   "type": "gold",
